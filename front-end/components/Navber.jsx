@@ -10,9 +10,9 @@ const Navber = async () => {
   const { headerNews } = await fetchHeaderNews();
 
   return (
-    <div className="bg-bg-surface border-b border-brandborder">
+    <div className="bg-bg-surface border-b border-brandborder shadow-2xs">
       {/* top navbar section */}
-      <section className='topHeader container mx-auto flex items-center justify-between gap-y-1 px-4 py-3 md:gap-y-0 md:px-6'>
+      <section className='topHeader container mx-auto flex items-center justify-between gap-y-1 px-4 py-3.5 md:gap-y-0 md:px-6'>
         <div className="logoSec col-span-2 row-start-1 justify-self-center md:col-span-1 md:row-auto">
           <Link href="/" className='flex items-center gap-2 group transition-transform hover:scale-[1.01]'>
             <Image src="/freeBird-logo.png" alt="Freebirds Digest Logo" width={170} height={55} priority className="w-auto h-[48px] object-contain" />
@@ -29,7 +29,7 @@ const Navber = async () => {
                 <h3 className='line-clamp-2 max-w-[170px] text-xs font-semibold leading-snug group-hover:text-brand transition-colors'>
                   {post.title}
                 </h3>
-                <div className="relative overflow-hidden rounded-lg w-[65px] h-[50px] bg-bg-subtle flex-shrink-0">
+                <div className="relative overflow-hidden rounded-lg w-[65px] h-[50px] bg-bg-subtle flex-shrink-0 border border-brandborder">
                   <Image
                     src={post.featuredImage?.node?.sourceUrl || '/freeBird-logo.png'}
                     alt={post.title}
@@ -53,7 +53,7 @@ const Navber = async () => {
               <h3 className='line-clamp-2 max-w-[130px] text-xs font-semibold group-hover:text-brand transition-colors'>
                 {headerNews[0].title}
               </h3>
-              <div className="relative overflow-hidden rounded-md w-[50px] h-[40px] bg-bg-subtle flex-shrink-0">
+              <div className="relative overflow-hidden rounded-md w-[50px] h-[40px] bg-bg-subtle flex-shrink-0 border border-brandborder">
                 <Image
                   src={headerNews[0].featuredImage?.node?.sourceUrl || '/freeBird-logo.png'}
                   alt={headerNews[0].title}
@@ -73,4 +73,4 @@ const Navber = async () => {
   )
 }
 
-export default Navber
+export default Navber

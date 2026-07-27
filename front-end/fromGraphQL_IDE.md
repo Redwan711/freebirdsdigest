@@ -16,6 +16,7 @@ query GetPostBySlug($slug: ID!) {
     title
     slug
     date
+    modified
     content
     excerpt
 
@@ -62,20 +63,22 @@ query GetPostBySlug($slug: ID!) {
       twitterDescription
     }
 
-    # Not yet wired up — see "Planned: review/affiliate fields" below.
-    # Requires ACF + WPGraphQL for ACF, with the field group registered
-    # under this name.
-    # articleMetadata {
-    #   subheading
-    #   mainImageSourceInfo
-    #   authorSubtitle
-    #   estimatedReadTime
-    #   secndImage {
-    #     node {
-    #       sourceUrl
-    #     }
-    #   }
-    # }
+    # ACF Field Group: Article Metadata (Registered in WP via WPGraphQL for ACF)
+    articleMetadata {
+      subheading
+      mainImageSourceInfo
+      authorSubtitle
+      estimatedReadTime
+      secndImage {
+        node {
+          sourceUrl
+          altText
+        }
+      }
+      imageSource
+      videoSource
+      otherUrl
+    }
   }
 }
 ```
@@ -87,13 +90,27 @@ Note: hardcode the slug into `id` only for manual testing in the GraphiQL IDE. I
 | Field | Type / shape | Notes |
 |---|---|---|
 | `content` | HTML string (`<p class="wp-block-paragraph">...`) | Comes pre-wrapped in Gutenberg block classes. Render with `dangerouslySetInnerHTML`, or run through an HTML sanitizer if you want to strip/rewrite block classes before render. |
-| `excerpt` | HTML string, auto-truncated by WP (`[&hellip;]`) | Use as fallback for `seo.metaDesc` when that's empty (see below). |
-| `featuredImage.node.sourceUrl` | Full URL to WP media | Currently resolves to `http://localhost/astha-news/wp-content/uploads/...` — this is a local dev URL. Before deploy, confirm the prod WP media URL is added to `next.config.mjs`'s `images.remotePatterns`, or `next/image` will reject it. |
-| `author.node.nicename` | Can be `null` | Sample data shows `null` even though `name` is set. Don't rely on `nicename` for display — use `name`, and only use `nicename` if present (e.g. for an author archive link slug). |
-| `author.node.avatar.url` | Gravatar URL, `d=mm` param | `d=mm` is Gravatar's "mystery man" fallback, meaning this author has no real Gravatar set. Expect a generic placeholder image, not a real photo — plan a real author-bio/avatar system before relying on this for E-E-A-T signals. |
-| `seo.metaDesc` | Can be empty string | Sample data shows `""`. Yoast doesn't auto-fill this — if empty, fall back to a trimmed/stripped version of `excerpt`, don't render an empty `<meta name="description">`. |
-| `seo.twitterTitle` / `seo.twitterDescription` | Can be empty string | Same issue — Yoast leaves these blank unless set per-post. Fall back to `seo.opengraphTitle` / `seo.opengraphDescription`. |
-| `categories.nodes` | Array, can have multiple | Sample post has 3 categories (`breaking`, `business`, `international`) — these are the old news-taxonomy slugs. Once categories are restructured for the freelancer/remote-work niche, this same field shape still works, just with new slugs. |
+| `excerpt` | HTML string, auto-truncated by WP (`[&hellip;]`) | Use as fallback for `seo.metaDesc` when that's empty. |
+| `featuredImage.node.sourceUrl` | Full URL to WP media | WP media URL — ensure host is listed in `next.config.mjs`'s `images.remotePatterns`. |
+| `author.node.name` | String | Main author display name. Fallback to `articleMetadata.authorSubtitle` if `"admin"`. |
+| `author.node.avatar.url` | Gravatar URL | Render avatar photo if not default mystery man placeholder. |
+| `categories.nodes` | Array | Array of category nodes (`id`, `name`, `slug`). |
+| `seo.*` | Yoast SEO fields | Build fallback chains for title, description, canonical, and social images. |
+
+### Custom ACF Fields (`articleMetadata`)
+
+All 8 fields registered under the **Article Metadata** field group in WordPress:
+
+| # | ACF Field Name | GraphQL Field Name | Field Type | Purpose & Rendering |
+|---|---|---|---|---|
+| 1 | `subheading` | `subheading` | Text | Article sub-headline / lead quote. Render conditionally under post title. |
+| 2 | `main_image_source_&_info` | `mainImageSourceInfo` | Text | Caption / credit for featured image. Render conditionally under image. |
+| 3 | `author_subtitle` | `authorSubtitle` | Text | Author designation / subtitle. Render conditionally under author name. |
+| 4 | `estimated_read_time` | `estimatedReadTime` | Text | Reading time badge (e.g. "5 min read"). Render conditionally with fallback. |
+| 5 | `secnd_image` | `secndImage` | Image (`node { sourceUrl altText }`) | Secondary article image. Render conditionally if present. |
+| 6 | `image_source_` | `imageSource` | Text | Source text/URL for external image attribution. Render conditionally. |
+| 7 | `video_source` | `videoSource` | URL | Video embed URL (YouTube/Vimeo/MP4). Render conditionally with embedded player. |
+| 8 | `other_url` | `otherUrl` | URL | External reference/resource link. Render conditionally as CTA button. |
 
 ## Sample response (for shaping component props / types)
 
@@ -103,67 +120,64 @@ Note: hardcode the slug into `id` only for manual testing in the GraphiQL IDE. I
     "post": {
       "id": "cG9zdDo3NQ==",
       "databaseId": 75,
-      "title": "Lorem Ipsum is simply dummy text of the printing and typesetting",
-      "slug": "lorem-ipsum-is-simply-dummy-text-of-the-printing-and-typesetting",
+      "title": "Essential Remote Work Strategies for Freelancers in 2026",
+      "slug": "essential-remote-work-strategies-for-freelancers-in-2026",
       "date": "2026-07-27T13:05:21",
       "content": "<p class=\"wp-block-paragraph\">...</p>",
-      "excerpt": "<p>...[&hellip;]</p>",
+      "excerpt": "<p>Learn how to scale your freelance business...</p>",
       "featuredImage": {
         "node": {
-          "sourceUrl": "http://localhost/astha-news/wp-content/uploads/2026/07/pexels-zucker-pop-140939669-10531120.jpg",
-          "altText": "",
+          "sourceUrl": "http://localhost/freebirdsdigest/wp-content/uploads/2026/07/remote-work.jpg",
+          "altText": "Remote work setup",
           "mediaDetails": { "width": 1280, "height": 854 }
         }
       },
       "author": {
         "node": {
-          "name": "admin",
-          "nicename": null,
+          "name": "Sarah Connor",
+          "nicename": "sarah",
           "avatar": { "url": "https://secure.gravatar.com/avatar/...?s=96&d=mm&r=g" }
         }
       },
       "categories": {
         "nodes": [
-          { "id": "dGVybToxMQ==", "name": "Breaking", "slug": "breaking" },
-          { "id": "dGVybToz", "name": "Business", "slug": "business" },
-          { "id": "dGVybTo5", "name": "International", "slug": "international" }
+          { "id": "dGVybToxMQ==", "name": "Freelance Life", "slug": "freelance-life" },
+          { "id": "dGVybToz", "name": "Remote Work", "slug": "remote-work" }
         ]
       },
       "seo": {
-        "title": "Lorem Ipsum is simply dummy text of the printing and typesetting - Astha News",
-        "metaDesc": "",
-        "canonical": "http://localhost/astha-news/lorem-ipsum-is-simply-dummy-text-of-the-printing-and-typesetting/",
-        "opengraphTitle": "Lorem Ipsum is simply dummy text of the printing and typesetting - Astha News",
-        "opengraphDescription": "Contrary to popular belief, Lorem Ipsum is not simply random text...",
-        "opengraphImage": { "sourceUrl": "http://localhost/astha-news/wp-content/uploads/2026/07/pexels-zucker-pop-140939669-10531120.jpg" },
+        "title": "Essential Remote Work Strategies for Freelancers in 2026 - Freebirds Digest",
+        "metaDesc": "Scale your freelance business with modern remote work strategies.",
+        "canonical": "https://freebirdsdigest.com/news/essential-remote-work-strategies-for-freelancers-in-2026",
+        "opengraphTitle": "Essential Remote Work Strategies for Freelancers in 2026",
+        "opengraphDescription": "Scale your freelance business with modern remote work strategies.",
+        "opengraphImage": { "sourceUrl": "https://freebirdsdigest.com/images/remote-work.jpg" },
         "twitterTitle": "",
         "twitterDescription": ""
+      },
+      "articleMetadata": {
+        "subheading": "Proven tactics to boost productivity and secure high-paying clients.",
+        "mainImageSourceInfo": "Photo by Unsplash / Workspace",
+        "authorSubtitle": "Senior Remote Work Consultant",
+        "estimatedReadTime": "6 min read",
+        "secndImage": {
+          "node": {
+            "sourceUrl": "https://freebirdsdigest.com/images/wfh-setup.jpg",
+            "altText": "WFH setup"
+          }
+        },
+        "imageSource": "https://unsplash.com",
+        "videoSource": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "otherUrl": "https://github.com/topics/freelance"
       }
     }
   }
 }
 ```
 
-## Known issues to handle in the page component
+## Known issues & conditional handling rules
 
-1. **Empty SEO fallbacks.** `metaDesc`, `twitterTitle`, `twitterDescription` are empty on posts where the author didn't fill in Yoast fields manually. Build fallback chains rather than trusting `seo.*` directly.
-2. **Author identity is currently just "admin".** Fine for placeholder content, not fine for a published affiliate/review site — E-E-A-T signals depend on real named authors with bios.
-3. **`content` is unstyled block HTML**, still tagged with `wp-block-paragraph` etc. — make sure global CSS or a content wrapper class styles these, or strip the classes on render.
-4. **Media URLs are on `localhost`** — swap for the real WP host before deploy and update `remotePatterns`.
-
-## Planned: review/affiliate fields (not yet implemented)
-
-For posts that are product reviews rather than plain articles, this query will need to expand once the corresponding ACF field group exists in WP. Fields to add when that's ready:
-
-```graphql
-reviewMeta {
-  price
-  rating
-  pros
-  cons
-  merchantName
-  affiliateUrl
-}
-```
-
-These drive: the `Product` + `Review`/`AggregateRating` JSON-LD (for star ratings in search results), the "Buy on X" CTA button, and the comparison-table UI. Hold off adding this to the query until the ACF field group is registered in WP and exposed via WPGraphQL for ACF.
+1. **Conditional evaluation for all custom fields**: Always wrap `articleMetadata` fields with safe optional chaining (`articleMetadata?.field`) and non-empty string/URL checks to prevent errors when fields are null or unpopulated.
+2. **Empty SEO fallbacks**: `metaDesc`, `twitterTitle`, `twitterDescription` fallback chains prevent empty meta tags.
+3. **Video Source embedding**: Parse `videoSource` URL (YouTube iframe embed, Vimeo embed, or `<video>` player) and render conditionally.
+4. **Other URL badge**: Render `otherUrl` as an external resource badge conditionally if present.

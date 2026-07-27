@@ -1,4 +1,4 @@
-import { Inter, Noto_Serif_Bengali, Poppins } from "next/font/google";
+import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Navber from "@/components/Navber";
 import Footer from "@/components/Footer";
@@ -11,17 +11,10 @@ const inter = Inter({
   display: 'swap',
 });
 
-const notoSerifBengali = Noto_Serif_Bengali({
-  subsets: ['bengali'], 
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
-  variable: '--font-noto-bengali',
-  display: 'swap',
-});
-
-const poppins = Poppins({
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
-  variable: '--font-poppins',
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-jakarta',
   display: 'swap',
 });
 
@@ -59,7 +52,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${poppins.variable} ${notoSerifBengali.variable} h-full antialiased`}
+      className={`${inter.variable} ${plusJakartaSans.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-bg-base text-text-main font-inter selection:bg-brand selection:text-white">
         <header>
@@ -75,4 +68,5 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
+
 

@@ -33,8 +33,13 @@
 
 @theme {
   --font-inter: var(--font-inter);
-  --font-poppins: var(--font-poppins);
-  --font-bangali: var(--font-noto-bengali);
+  --font-jakarta: var(--font-jakarta);
+
+  /* Aliases & Fallbacks */
+  --font-heading: var(--font-jakarta);
+  --font-body: var(--font-inter);
+  --font-poppins: var(--font-jakarta);
+  --font-bangali: var(--font-inter);
 
   --color-brand: var(--color-brand-raw);
   --color-brand-dark: var(--color-brand-dark-raw);
@@ -49,4 +54,5 @@
 
 img {
   border-radius: 10px;
-}
+}
+
