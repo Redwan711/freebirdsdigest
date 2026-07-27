@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+
+:root {
+  --theme-red: #E10327;
+  --borderGlob: #3b3b3b1f;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+
+    --theme-red: #E10327; 
+    --borderGlob: #3b3b3b1f;
+  }
+}
+
+
+@theme {
+  --font-bangali: var(--font-noto-bengali);
+  --font-poppins: var(--font-poppins);
+  
+
+  --color-brand: var(--theme-red);
+  --color-brandborder: var(--borderGlob);
+}
+
+img{
+  border-radius: 10px;
+}
