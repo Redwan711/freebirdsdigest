@@ -2,21 +2,20 @@ import Image from "next/image";
 import Link from "next/link";
 import { fetchHeroNews } from "@/lib/hero-news";
 import { fetchPromotionalImage } from "@/lib/promotional-image";
+import { Clock } from "lucide-react";
 
 const fallbackImage = "/prothomalo-bangla_2026-07-09_nxgtx74x_bbm.avif";
 
 function formatHeroDate(dateString) {
-  if (!dateString) {
-    return "";
-  }
+  if (!dateString) return "";
+  const date = new Date(dateString);
+  if (isNaN(date.getTime())) return dateString;
 
-  return new Intl.DateTimeFormat("bn-BD", {
-    day: "2-digit",
-    month: "long",
+  return new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
     year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-  }).format(new Date(dateString));
+  }).format(date);
 }
 
 function cleanText(htmlString = "") {
@@ -40,42 +39,48 @@ const HeroNews = async () => {
   const headerHeroImageAlt =
     promotionalImagePost?.featuredImage?.node?.altText ||
     promotionalImagePost?.title ||
-    "Hero Image";
+    "Hero Banner";
 
   return (
-    <div className="pt-8">
-      <section className="container mx-auto bg-red-50 border border-brandborder rounded-xl overflow-hidden">
-        <div className="headerHeroImage w-full overflow-hidden">
-          <Image
-            src={headerHeroImage}
-            alt={headerHeroImageAlt}
-            width={1248}
-            height={80}
-            className="w-full object-cover"
-            priority
-          />
-        </div>
+    <div className="pt-6">
+      <section className="container mx-auto bg-bg-surface border border-brandborder rounded-2xl overflow-hidden shadow-sm">
+        {headerHeroImage && (
+          <div className="headerHeroImage w-full overflow-hidden max-h-[140px] relative">
+            <Image
+              src={headerHeroImage}
+              alt={headerHeroImageAlt}
+              width={1248}
+              height={140}
+              className="w-full h-auto object-cover"
+              priority
+            />
+          </div>
+        )}
 
-        <section className="mainTopNews w-full bg-background p-6 md:p-8 grid gap-6 lg:grid-cols-[1.3fr_1fr]">
-          <div className="topNews border-r-0 lg:border-r lg:border-gray-300 lg:pr-6">
+        <section className="mainTopNews w-full p-6 md:p-8 grid gap-6 lg:grid-cols-[1.3fr_1fr]">
+          <div className="topNews border-r-0 lg:border-r lg:border-brandborder lg:pr-6">
             {topStory ? (
               <Link
                 href={`/news/${topStory.slug}?pid=${topStory.databaseId}`}
-                className="grid gap-4 lg:grid-cols-[1.1fr_0.9fr]"
+                className="grid gap-5 lg:grid-cols-[1.1fr_0.9fr] group"
               >
-                <div className="font-bangali grid grid-cols-1 gap-3">
-                  <h3 className="text-[18px] font-bold leading-snug md:text-[24px]">
+                <div className="font-inter grid grid-cols-1 gap-3">
+                  <span className="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-brand">
+                    Featured Digest
+                  </span>
+                  <h3 className="text-xl font-extrabold leading-snug md:text-2xl text-text-main group-hover:text-brand transition-colors">
                     {topStory.title}
                   </h3>
-                  <p className="text-[14px] leading-6 text-gray-700 md:text-[16px]">
+                  <p className="text-sm leading-relaxed text-text-muted">
                     {truncateText(cleanText(topStory.excerpt), 160)}
                   </p>
-                  <span className="text-sm text-gray-500">
+                  <span className="text-xs text-text-muted flex items-center gap-1 mt-1">
+                    <Clock className="w-3.5 h-3.5 text-accent" />
                     {formatHeroDate(topStory.date)}
                   </span>
                 </div>                
 
-                <div className="image relative aspect-16/12 overflow-hidden rounded-lg bg-gray-100">
+                <div className="image relative aspect-16/12 overflow-hidden rounded-xl bg-bg-subtle shadow-sm">
                   <Image
                     src={
                       topStory.featuredImage?.node?.sourceUrl || fallbackImage
@@ -85,13 +90,13 @@ const HeroNews = async () => {
                     }
                     fill
                     sizes="(max-width: 1024px) 100vw, 560px"
-                    className="object-cover"
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
               </Link>
             ) : (
-              <p className="font-bangali text-gray-500">
-                Top news is not available right now.
+              <p className="font-inter text-text-muted">
+                Featured digest is currently being prepared.
               </p>
             )}
           </div>
@@ -101,24 +106,24 @@ const HeroNews = async () => {
               <Link
                 href={`/news/${post.slug}?pid=${post.databaseId}`}
                 key={post.id}
-                className="trandingNewsItem flex gap-3 rounded-lg border border-gray-100 bg-white p-3 shadow-sm"
+                className="trandingNewsItem flex gap-3 rounded-xl border border-brandborder bg-bg-subtle/50 p-3 shadow-2xs hover:border-brand/40 transition-all group"
               >
-                <div className="texts font-bangali flex min-w-0 flex-1 flex-col justify-between gap-2">
-                  <h4 className="text-[14px] font-bold leading-snug text-gray-900 md:text-[15px]">
+                <div className="texts font-inter flex min-w-0 flex-1 flex-col justify-between gap-2">
+                  <h4 className="text-sm font-bold leading-snug text-text-main group-hover:text-brand transition-colors line-clamp-2">
                     {post.title}
                   </h4>
-                  <span className="text-sm text-gray-500">
+                  <span className="text-xs text-text-muted">
                     {formatHeroDate(post.date)}
                   </span>
                 </div>
 
-                <div className="relative size-23 shrink-0 overflow-hidden rounded-md bg-gray-100">
+                <div className="relative size-20 shrink-0 overflow-hidden rounded-lg bg-bg-subtle">
                   <Image
                     src={post.featuredImage?.node?.sourceUrl || fallbackImage}
                     alt={post.featuredImage?.node?.altText || post.title}
                     fill
-                    sizes="92px"
-                    className="object-cover"
+                    sizes="80px"
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
               </Link>
@@ -131,3 +136,4 @@ const HeroNews = async () => {
 };
 
 export default HeroNews;
+

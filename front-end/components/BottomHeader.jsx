@@ -40,35 +40,43 @@ const BottomHeader = ({ activeCategories }) => {
 
       <section
         ref={headerRef}
-        className={`w-full z-50 bg-white transition-shadow ${
-          isPinned ? 'fixed top-0 left-0 right-0 shadow-md' : 'relative'
+        className={`w-full z-50 bg-bg-surface/95 backdrop-blur-md transition-all duration-300 ${
+          isPinned ? 'fixed top-0 left-0 right-0 shadow-sm border-b border-brandborder' : 'relative'
         }`}
       >
-        <div className="bottomHeader container mx-auto flex items-center justify-between px-4 py-4 md:px-6 border-b border-brandborder">
+        <div className="bottomHeader container mx-auto flex items-center justify-between px-4 py-3 md:px-6">
           <div className="homeBtn hidden lg:block">
-            <Link href="/" className='flex items-center gap-2 text-black hover:text-red-500 transition-colors'>
-              <Home />
+            <Link 
+              href="/" 
+              className='flex items-center justify-center h-9 w-9 rounded-lg bg-bg-subtle text-text-main hover:bg-brand/10 hover:text-brand transition-colors'
+              aria-label="Home"
+            >
+              <Home className="w-4 h-4" />
             </Link>
           </div>
+
           <div className="navberMenu hidden lg:block">
-            <nav className='flex gap-10 justify-between'>
+            <nav className='flex items-center gap-8 justify-between'>
               {activeCategories.map((category) => (
                 <Link
                   key={category.id}
                   href={`/${category.slug}`}
-                  className="text-black hover:text-red transition-colors font-poppins"
+                  className="text-sm font-medium text-text-main hover:text-brand transition-colors relative group py-1"
                 >
                   {category.name}
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-brand transition-all duration-200 group-hover:w-full" />
                 </Link>
               ))}
               <Link
                 href="/about"
-                className="text-black hover:text-red transition-colors font-poppins"
+                className="text-sm font-medium text-text-main hover:text-brand transition-colors relative group py-1"
               >
                 About Us
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-brand transition-all duration-200 group-hover:w-full" />
               </Link>
             </nav>
           </div>
+          
           <MobileNav categories={activeCategories} />
         </div>
       </section>
@@ -76,4 +84,4 @@ const BottomHeader = ({ activeCategories }) => {
   )
 }
 
-export default BottomHeader
+export default BottomHeader

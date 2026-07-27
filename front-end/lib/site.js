@@ -1,8 +1,9 @@
-export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://asthanews.com").replace(
+export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://freebirdsdigest.com").replace(
   /\/$/,
   ""
 );
 
-export const siteName = "Astha News";
+export const siteName = "Freebirds Digest";
 export const defaultDescription =
-  "বাংলাদেশ ও বিশ্বের সর্বশেষ খবর, বিশ্লেষণ এবং গুরুত্বপূর্ণ আপডেট।";
+  "The premier digest for freelancers, remote workers, and work-from-home professionals. Insights, productivity tips, career advice, and remote work news.";
+

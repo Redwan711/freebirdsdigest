@@ -1,9 +1,15 @@
-import { Noto_Serif_Bengali, Poppins } from "next/font/google";
+import { Inter, Noto_Serif_Bengali, Poppins } from "next/font/google";
 import "./globals.css";
 import Navber from "@/components/Navber";
 import Footer from "@/components/Footer";
 import { defaultDescription, siteName, siteUrl } from "@/lib/site";
 
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700', '800'],
+  variable: '--font-inter',
+  display: 'swap',
+});
 
 const notoSerifBengali = Noto_Serif_Bengali({
   subsets: ['bengali'], 
@@ -11,6 +17,7 @@ const notoSerifBengali = Noto_Serif_Bengali({
   variable: '--font-noto-bengali',
   display: 'swap',
 });
+
 const poppins = Poppins({
   subsets: ['latin'],
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
@@ -21,7 +28,7 @@ const poppins = Poppins({
 export const metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${siteName} | সর্বশেষ বাংলা সংবাদ`,
+    default: `${siteName} | Freelance & Remote Work Insights`,
     template: `%s | ${siteName}`,
   },
   description: defaultDescription,
@@ -30,18 +37,18 @@ export const metadata = {
   },
   openGraph: {
     type: "website",
-    locale: "bn_BD",
+    locale: "en_US",
     url: "/",
     siteName,
-    title: `${siteName} | সর্বশেষ বাংলা সংবাদ`,
+    title: `${siteName} | Freelance & Remote Work Insights`,
     description: defaultDescription,
-    images: [{ url: "/astha-logo.png", alt: siteName }],
+    images: [{ url: "/freeBird-logo.png", alt: siteName }],
   },
   twitter: {
-    card: "summary",
-    title: `${siteName} | সর্বশেষ বাংলা সংবাদ`,
+    card: "summary_large_image",
+    title: `${siteName} | Freelance & Remote Work Insights`,
     description: defaultDescription,
-    images: ["/astha-logo.png"],
+    images: ["/freeBird-logo.png"],
   },
   icons: {
     icon: '/favicon.ico',
@@ -51,20 +58,21 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html
-      lang="bn-BD"
-      className={`${notoSerifBengali.variable} ${poppins.variable} h-full antialiased`}
+      lang="en"
+      className={`${inter.variable} ${poppins.variable} ${notoSerifBengali.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col bg-bg-base text-text-main font-inter selection:bg-brand selection:text-white">
         <header>
           <Navber />
         </header>
-        <main>
+        <main className="flex-1">
           {children}
         </main>
-        <footer className="mt-12">
+        <footer className="mt-16">
           <Footer />
         </footer>
       </body>
     </html>
   );
 }
+

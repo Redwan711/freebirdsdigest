@@ -10,66 +10,67 @@ const Navber = async () => {
   const { headerNews } = await fetchHeaderNews();
 
   return (
-    <div>
-      {/* top navber section */}
-      <section className='topHeader container mx-auto flex gap-y-1 px-4 py-2.5 justify-between md:gap-y-0 md:px-6'>
+    <div className="bg-bg-surface border-b border-brandborder">
+      {/* top navbar section */}
+      <section className='topHeader container mx-auto flex items-center justify-between gap-y-1 px-4 py-3 md:gap-y-0 md:px-6'>
         <div className="logoSec col-span-2 row-start-1 justify-self-center md:col-span-1 md:row-auto">
-          <a href="/" className='flex items-center gap-2 text-black hover:text-red-500 transition-colors'>
-            <Image src="/astha-logo.png" alt="Logo" width={90} height={90} />
-          </a>
+          <Link href="/" className='flex items-center gap-2 group transition-transform hover:scale-[1.01]'>
+            <Image src="/freeBird-logo.png" alt="Freebirds Digest Logo" width={170} height={55} priority className="w-auto h-[48px] object-contain" />
+          </Link>
         </div>
 
-        <div className="gap-10 hidden md:flex">
-          {headerNews.map((post) => (
+        <div className="gap-8 hidden md:flex items-center">
+          {headerNews.slice(0, 2).map((post) => (
             <div key={post.id} className="headerNews">
-              <Link href={`/news/${post.slug}?pid=${post.databaseId}`} className='flex items-center font-bangali text-gray-700 hover:text-red-500 transition-colors gap-2'>
-                <h3 className='line-clamp-2 max-w-[150px] flex-1 font-semibold'>{post.title}</h3>
-                <Image
-                  src={post.featuredImage?.node?.sourceUrl || '/default-image.jpg'}
-                  alt={post.title}
-                  width={180}
-                  height={180}
-                  className="object-cover rounded-sm w-[80px] h-[80px]"
-                />
+              <Link 
+                href={`/news/${post.slug}?pid=${post.databaseId}`} 
+                className='flex items-center font-inter text-text-muted hover:text-brand transition-colors gap-3 group'
+              >
+                <h3 className='line-clamp-2 max-w-[170px] text-xs font-semibold leading-snug group-hover:text-brand transition-colors'>
+                  {post.title}
+                </h3>
+                <div className="relative overflow-hidden rounded-lg w-[65px] h-[50px] bg-bg-subtle flex-shrink-0">
+                  <Image
+                    src={post.featuredImage?.node?.sourceUrl || '/freeBird-logo.png'}
+                    alt={post.title}
+                    fill
+                    sizes="65px"
+                    className="object-cover transition-transform group-hover:scale-105"
+                  />
+                </div>
               </Link>
             </div>
           ))}
         </div>
 
-
         {/* for mobile */}
         {headerNews[0] && (
-          <div className="gap-10 flex md:hidden">
-            <div key={headerNews[0].id} className="headerNews">
-              <Link
-                href={`/news/${headerNews[0].slug}?pid=${headerNews[0].databaseId}`}
-                className='flex items-center font-bangali text-gray-700 hover:text-red-500 transition-colors gap-2'
-              >
-                <h3 className='line-clamp-2 max-w-[150px] flex-1 font-semibold'>{headerNews[0].title}</h3>
+          <div className="flex md:hidden items-center">
+            <Link
+              href={`/news/${headerNews[0].slug}?pid=${headerNews[0].databaseId}`}
+              className='flex items-center font-inter text-text-muted hover:text-brand transition-colors gap-2 group'
+            >
+              <h3 className='line-clamp-2 max-w-[130px] text-xs font-semibold group-hover:text-brand transition-colors'>
+                {headerNews[0].title}
+              </h3>
+              <div className="relative overflow-hidden rounded-md w-[50px] h-[40px] bg-bg-subtle flex-shrink-0">
                 <Image
-                  src={headerNews[0].featuredImage?.node?.sourceUrl || '/default-image.jpg'}
+                  src={headerNews[0].featuredImage?.node?.sourceUrl || '/freeBird-logo.png'}
                   alt={headerNews[0].title}
-                  width={80}
-                  height={80}
-                  className="object-cover rounded-sm w-[60px] h-[60px]"
+                  fill
+                  sizes="50px"
+                  className="object-cover"
                 />
-              </Link>
-            </div>
+              </div>
+            </Link>
           </div>
         )}
-
-
-
-
-
-
-
       </section>
 
-      {/* bottom navber — handles its own pin/fixed behavior */}
+      {/* bottom navbar — handles sticky header behavior */}
       <BottomHeader activeCategories={activeCategories} />
     </div>
   )
 }
 
-export default Navber
+export default Navber

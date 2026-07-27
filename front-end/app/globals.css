@@ -1,29 +1,52 @@
 @import "tailwindcss";
 
-
 :root {
-  --theme-red: #E10327;
-  --borderGlob: #3b3b3b1f;
+  --color-brand-raw: #FF4D2E;
+  --color-brand-dark-raw: #E03619;
+  --color-accent-teal-raw: #0D9488;
+  --color-bg-base-raw: #F8FAFC;
+  --color-bg-surface-raw: #FFFFFF;
+  --color-bg-subtle-raw: #F1F5F9;
+  --color-text-main-raw: #0F172A;
+  --color-text-muted-raw: #64748B;
+  --borderGlob: rgba(15, 23, 42, 0.1);
+
+  /* Maintain backward compatibility for legacy color-brand reference */
+  --theme-red: var(--color-brand-raw);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
+    --color-brand-raw: #FF5C3E;
+    --color-brand-dark-raw: #FF4D2E;
+    --color-accent-teal-raw: #14B8A6;
+    --color-bg-base-raw: #0F172A;
+    --color-bg-surface-raw: #1E293B;
+    --color-bg-subtle-raw: #334155;
+    --color-text-main-raw: #F8FAFC;
+    --color-text-muted-raw: #94A3B8;
+    --borderGlob: rgba(255, 255, 255, 0.12);
 
-    --theme-red: #E10327; 
-    --borderGlob: #3b3b3b1f;
+    --theme-red: var(--color-brand-raw);
   }
 }
 
-
 @theme {
-  --font-bangali: var(--font-noto-bengali);
+  --font-inter: var(--font-inter);
   --font-poppins: var(--font-poppins);
-  
+  --font-bangali: var(--font-noto-bengali);
 
-  --color-brand: var(--theme-red);
+  --color-brand: var(--color-brand-raw);
+  --color-brand-dark: var(--color-brand-dark-raw);
+  --color-accent: var(--color-accent-teal-raw);
+  --color-bg-base: var(--color-bg-base-raw);
+  --color-bg-surface: var(--color-bg-surface-raw);
+  --color-bg-subtle: var(--color-bg-subtle-raw);
+  --color-text-main: var(--color-text-main-raw);
+  --color-text-muted: var(--color-text-muted-raw);
   --color-brandborder: var(--borderGlob);
 }
 
-img{
+img {
   border-radius: 10px;
-}
+}
