@@ -4,6 +4,11 @@ const nextConfig = {
     dangerouslyAllowLocalIP: true,
     remotePatterns: [
       {
+        protocol: "https",
+        hostname: "server.freebirdsdigest.com",
+        pathname: "/**",
+      },
+      {
         protocol: "http",
         hostname: "localhost",
         pathname: "/**",
