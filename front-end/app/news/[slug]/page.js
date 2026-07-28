@@ -3,9 +3,19 @@ import Link from "next/link";
 import { cache } from "react";
 import { fetchAPI } from "@/lib/api";
 import { defaultDescription, siteName, siteUrl } from "@/lib/site";
-import { ArrowLeft, Clock, Calendar, User, Tag, BookOpen, Mail, Sparkles, CheckCircle2, ExternalLink, Video, Link2, Share2, Bookmark } from "lucide-react";
+import {
+  ArrowLeft,
+  Clock,
+  Calendar,
+  Tag,
+  BookOpen,
+  Mail,
+  Sparkles,
+  CheckCircle2,
+} from "lucide-react";
 import ArticleActions from "@/components/ArticleActions";
 import NewsletterForm from "@/components/NewsletterForm";
+import ParsedContent from "@/components/ParsedContent";
 
 const GET_POST_BY_SLUG = `
   query GetPostBySlug($slug: ID!) {
@@ -31,7 +41,6 @@ const GET_POST_BY_SLUG = `
       author {
         node {
           name
-          nicename
           avatar {
             url
           }
@@ -53,23 +62,12 @@ const GET_POST_BY_SLUG = `
         opengraphImage {
           sourceUrl
         }
-        twitterTitle
-        twitterDescription
       }
       articleMetadata {
         subheading
-        mainImageSourceInfo
         authorSubtitle
         estimatedReadTime
-        secndImage {
-          node {
-            sourceUrl
-            altText
-          }
-        }
-        imageSource
-        videoSource
-        otherUrl
+        mainImageSourceInfo
       }
     }
   }
@@ -99,7 +97,6 @@ const GET_POST_BY_DATABASE_ID = `
       author {
         node {
           name
-          nicename
           avatar {
             url
           }
@@ -121,23 +118,12 @@ const GET_POST_BY_DATABASE_ID = `
         opengraphImage {
           sourceUrl
         }
-        twitterTitle
-        twitterDescription
       }
       articleMetadata {
         subheading
-        mainImageSourceInfo
         authorSubtitle
         estimatedReadTime
-        secndImage {
-          node {
-            sourceUrl
-            altText
-          }
-        }
-        imageSource
-        videoSource
-        otherUrl
+        mainImageSourceInfo
       }
     }
   }
@@ -147,7 +133,7 @@ function formatPostDate(dateString) {
   if (!dateString) return "";
 
   const date = new Date(dateString);
-  if (isNaN(date.getTime())) return dateString;
+  if (Number.isNaN(date.getTime())) return dateString;
 
   return new Intl.DateTimeFormat("en-US", {
     month: "short",
@@ -160,29 +146,38 @@ function cleanHtml(htmlString = "") {
   return htmlString.replace(/<[^>]*>/g, "").trim();
 }
 
-function getYouTubeEmbedUrl(url) {
-  if (!url) return null;
-  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-  const match = url.match(regExp);
-  if (match && match[2] && match[2].length === 11) {
-    return `https://www.youtube-nocookie.com/embed/${match[2]}`;
-  }
-  return null;
-}
-
 const fetchPost = cache(async (postSlug, postId) => {
   let data = null;
 
   if (postId) {
-    data = await fetchAPI(GET_POST_BY_DATABASE_ID, {
-      variables: { postId },
-    });
+    try {
+      data = await fetchAPI(GET_POST_BY_DATABASE_ID, {
+        variables: { postId },
+      });
+    } catch (err) {
+      console.error("Failed fetching post by databaseId:", err);
+    }
   }
 
-  if (!data?.post) {
-    data = await fetchAPI(GET_POST_BY_SLUG, {
-      variables: { slug: postSlug },
-    });
+  if (!data?.post && postSlug) {
+    try {
+      const decodedSlug = decodeURIComponent(postSlug);
+      data = await fetchAPI(GET_POST_BY_SLUG, {
+        variables: { slug: decodedSlug },
+      });
+    } catch (err) {
+      console.error("Failed fetching post by decoded slug:", err);
+    }
+  }
+
+  if (!data?.post && postSlug) {
+    try {
+      data = await fetchAPI(GET_POST_BY_SLUG, {
+        variables: { slug: postSlug },
+      });
+    } catch (err) {
+      console.error("Failed fetching post by raw slug:", err);
+    }
   }
 
   return data?.post;
@@ -191,8 +186,8 @@ const fetchPost = cache(async (postSlug, postId) => {
 export async function generateMetadata({ params, searchParams }) {
   const resolvedParams = await params;
   const resolvedSearchParams = await searchParams;
-  const { slug } = resolvedParams;
-  const { pid } = resolvedSearchParams || {};
+  const slug = resolvedParams?.slug;
+  const pid = resolvedSearchParams?.pid;
   const post = await fetchPost(slug, pid);
 
   if (!post) {
@@ -204,7 +199,7 @@ export async function generateMetadata({ params, searchParams }) {
 
   const seo = post.seo || {};
   const pageTitle = seo.title || cleanHtml(post.title);
-  
+
   const description =
     seo.metaDesc ||
     seo.opengraphDescription ||
@@ -214,9 +209,8 @@ export async function generateMetadata({ params, searchParams }) {
   const canonicalPath = seo.canonical || `${siteUrl}/news/${post.slug}`;
   const ogTitle = seo.opengraphTitle || pageTitle;
   const ogDesc = seo.opengraphDescription || description;
-  const image = seo.opengraphImage?.sourceUrl || post.featuredImage?.node?.sourceUrl;
-  const twTitle = seo.twitterTitle || ogTitle;
-  const twDesc = seo.twitterDescription || ogDesc;
+  const image =
+    seo.opengraphImage?.sourceUrl || post.featuredImage?.node?.sourceUrl;
 
   return {
     title: pageTitle,
@@ -230,15 +224,19 @@ export async function generateMetadata({ params, searchParams }) {
       title: ogTitle,
       description: ogDesc,
       publishedTime: post.date,
-      modifiedTime: post.modified || post.date,
       images: image
-        ? [{ url: image, alt: post.featuredImage?.node?.altText || cleanHtml(post.title) }]
+        ? [
+            {
+              url: image,
+              alt: post.featuredImage?.node?.altText || cleanHtml(post.title),
+            },
+          ]
         : undefined,
     },
     twitter: {
       card: "summary_large_image",
-      title: twTitle,
-      description: twDesc,
+      title: ogTitle,
+      description: ogDesc,
       images: image ? [image] : undefined,
     },
   };
@@ -247,7 +245,7 @@ export async function generateMetadata({ params, searchParams }) {
 export default async function PostPage({ params, searchParams }) {
   const resolvedParams = await params;
   const resolvedSearchParams = await searchParams;
-  const postSlug = resolvedParams.slug;
+  const postSlug = resolvedParams?.slug;
   const postId = resolvedSearchParams?.pid;
 
   const post = await fetchPost(postSlug, postId);
@@ -266,9 +264,12 @@ export default async function PostPage({ params, searchParams }) {
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-brand/10 text-brand">
             <BookOpen className="h-8 w-8" />
           </div>
-          <h1 className="text-3xl font-extrabold text-text-main">Article Not Found</h1>
+          <h1 className="text-3xl font-extrabold text-text-main">
+            Article Not Found
+          </h1>
           <p className="mt-3 text-text-muted max-w-md mx-auto">
-            We couldn't locate the post you're looking for. It may have been moved or updated.
+            We couldn't locate the post you're looking for. It may have been
+            moved or updated.
           </p>
           <Link
             href="/"
@@ -281,30 +282,25 @@ export default async function PostPage({ params, searchParams }) {
     );
   }
 
-  // Safely extract ACF Article Metadata fields
+  // ACF Article Metadata fields
   const articleMetadata = post?.articleMetadata ?? {};
   const {
     subheading,
-    mainImageSourceInfo,
     authorSubtitle,
     estimatedReadTime,
-    secndImage,
-    imageSource,
-    videoSource,
-    otherUrl,
+    mainImageSourceInfo,
   } = articleMetadata;
-  const secondImageSourceUrl = secndImage?.node?.sourceUrl;
 
   // Author identity resolution
   const authorNode = post.author?.node;
   const rawAuthorName = authorNode?.name;
-  const isDefaultAdmin = !rawAuthorName || rawAuthorName.toLowerCase() === 'admin';
+  const isDefaultAdmin =
+    !rawAuthorName || rawAuthorName.toLowerCase() === "admin";
   const displayAuthorName = !isDefaultAdmin
     ? rawAuthorName
-    : (authorSubtitle || "Freebirds Editorial Team");
+    : authorSubtitle || "Freebirds Editorial Team";
   const authorAvatarUrl = authorNode?.avatar?.url;
   const cleanExcerptText = cleanHtml(post.excerpt || "");
-  const youtubeEmbedUrl = getYouTubeEmbedUrl(videoSource);
 
   return (
     <main className="mx-auto max-w-7xl px-4 py-8 md:px-6 font-inter">
@@ -323,7 +319,6 @@ export default async function PostPage({ params, searchParams }) {
 
       {/* Main 2-Column Responsive Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        
         {/* Main Article Content Column (8/12 width on Desktop) */}
         <article className="lg:col-span-8 grid gap-8">
           <script
@@ -335,7 +330,6 @@ export default async function PostPage({ params, searchParams }) {
                 headline: cleanHtml(post.title),
                 description: cleanExcerptText,
                 datePublished: post.date,
-                dateModified: post.modified || post.date,
                 mainEntityOfPage: `${siteUrl}/news/${post.slug}`,
                 image: post.featuredImage?.node?.sourceUrl
                   ? [post.featuredImage.node.sourceUrl]
@@ -377,7 +371,7 @@ export default async function PostPage({ params, searchParams }) {
               {post.title}
             </h1>
 
-            {/* ACF Custom Field 1: Subheading (Conditional) */}
+            {/* ACF Field: Subheading */}
             {subheading && (
               <div className="relative overflow-hidden rounded-2xl bg-bg-surface border-l-4 border-brand p-5 shadow-2xs">
                 <p className="text-base sm:text-lg font-medium leading-relaxed text-text-main/90 italic">
@@ -409,10 +403,10 @@ export default async function PostPage({ params, searchParams }) {
                     <CheckCircle2 className="w-4 h-4 text-accent fill-accent/20" />
                   </p>
 
-                  {/* ACF Custom Field 3: Author Subtitle (Conditional) */}
-                  <p className="text-xs text-text-muted">
-                    {authorSubtitle || "Freelance & Remote Work Specialist"}
-                  </p>
+                  {/* ACF Field: Author Subtitle */}
+                  {authorSubtitle && (
+                    <p className="text-xs text-text-muted">{authorSubtitle}</p>
+                  )}
                 </div>
               </div>
 
@@ -422,11 +416,13 @@ export default async function PostPage({ params, searchParams }) {
                   <time dateTime={post.date}>{formatPostDate(post.date)}</time>
                 </span>
 
-                {/* ACF Custom Field 4: Estimated Read Time (Conditional) */}
-                <span className="flex items-center gap-1.5 text-text-muted bg-bg-subtle px-3 py-1.5 rounded-full border border-brandborder">
-                  <Clock className="w-3.5 h-3.5 text-accent" />
-                  {estimatedReadTime ? estimatedReadTime : "4 min read"}
-                </span>
+                {/* ACF Field: Estimated Read Time */}
+                {estimatedReadTime && (
+                  <span className="flex items-center gap-1.5 text-text-muted bg-bg-subtle px-3 py-1.5 rounded-full border border-brandborder">
+                    <Clock className="w-3.5 h-3.5 text-accent" />
+                    {estimatedReadTime}
+                  </span>
+                )}
               </div>
             </div>
           </header>
@@ -445,43 +441,19 @@ export default async function PostPage({ params, searchParams }) {
                 />
               </div>
 
-              {/* ACF Custom Field 2 & 6: Main Image Source Info & Image Source (Conditional) */}
-              {(mainImageSourceInfo || imageSource) && (
-                <figcaption className="bg-bg-surface/90 backdrop-blur-md p-3 text-center text-xs font-medium text-text-muted border-t border-brandborder space-x-2">
-                  {mainImageSourceInfo && <span>{mainImageSourceInfo}</span>}
-                  {imageSource && (
-                    <span className="inline-flex items-center gap-1 text-brand">
-                      • Source: {imageSource.startsWith('http') ? (
-                        <a href={imageSource} target="_blank" rel="noopener noreferrer" className="hover:underline underline-offset-2">
-                          {imageSource}
-                        </a>
-                      ) : (
-                        imageSource
-                      )}
-                    </span>
-                  )}
+              {/* ACF Field: Main Image Source Info */}
+              {mainImageSourceInfo && (
+                <figcaption className="bg-bg-surface/90 backdrop-blur-md p-3 text-center text-xs font-medium text-text-muted border-t border-brandborder">
+                  <span>{mainImageSourceInfo}</span>
                 </figcaption>
               )}
             </figure>
           )}
 
-          {/* Article Body Content — Gutenberg HTML Styling */}
-          <div className="prose prose-lg max-w-none text-text-main prose-headings:font-extrabold prose-headings:text-text-main prose-headings:tracking-tight prose-p:leading-8 prose-p:text-text-main prose-a:text-brand prose-a:font-semibold prose-a:no-underline hover:prose-a:underline prose-strong:text-text-main prose-blockquote:border-l-brand prose-blockquote:text-text-muted [&_.wp-block-paragraph]:mb-6 [&_.wp-block-heading]:mt-10 [&_.wp-block-heading]:mb-4 [&_.wp-block-quote]:border-l-4 [&_.wp-block-quote]:border-brand [&_.wp-block-quote]:pl-5 [&_.wp-block-quote]:py-2 [&_.wp-block-quote]:italic [&_.wp-block-image]:my-8 [&_.wp-block-image_img]:rounded-3xl [&_.wp-block-image_img]:shadow-sm [&_.wp-block-list]:pl-6 [&_.wp-block-list]:list-disc [&_.wp-block-list_li]:mb-2">
-            <div dangerouslySetInnerHTML={{ __html: post.content || "" }} />
+          {/* Article Body Content — Parsed with html-react-parser & styled with @tailwindcss/typography */}
+          <div className="prose prose-lg max-w-none dark:prose-invert text-text-main prose-headings:font-extrabold prose-headings:text-text-main prose-headings:tracking-tight prose-p:leading-8 prose-p:text-text-main prose-a:text-brand prose-a:font-semibold prose-a:no-underline hover:prose-a:underline prose-strong:text-text-main prose-blockquote:border-l-brand prose-blockquote:text-text-muted prose-table:w-full prose-table:border-collapse prose-th:border prose-th:border-brandborder prose-th:p-3 prose-td:border prose-td:border-brandborder prose-td:p-3 [&_.wp-block-paragraph]:mb-6 [&_.wp-block-heading]:mt-10 [&_.wp-block-heading]:mb-4 [&_.wp-block-quote]:border-l-4 [&_.wp-block-quote]:border-brand [&_.wp-block-quote]:pl-5 [&_.wp-block-quote]:py-2 [&_.wp-block-quote]:italic [&_.wp-block-image]:my-8 [&_.wp-block-image_img]:rounded-3xl [&_.wp-block-image_img]:shadow-sm [&_.wp-block-list]:pl-6 [&_.wp-block-list]:list-disc [&_.wp-block-list_li]:mb-2">
+            <ParsedContent html={post.content || ""} />
           </div>
-
-          {/* ACF Custom Field 5: Secondary Image (Conditional) */}
-          {secondImageSourceUrl && (
-            <figure className="my-6 relative aspect-video overflow-hidden rounded-3xl border border-brandborder bg-bg-subtle shadow-sm">
-              <Image
-                src={secondImageSourceUrl}
-                alt={secndImage?.node?.altText || post.title}
-                fill
-                sizes="(max-width: 768px) 100vw, 896px"
-                className="object-cover"
-              />
-            </figure>
-          )}
 
           {/* E-E-A-T Author Bio Card */}
           <div className="rounded-3xl border border-brandborder bg-bg-surface p-6 sm:p-8 shadow-xs flex flex-col sm:flex-row items-center sm:items-start gap-5 text-center sm:text-left">
@@ -509,10 +481,12 @@ export default async function PostPage({ params, searchParams }) {
                 </span>
               </div>
               <p className="text-xs text-text-muted font-medium">
-                {authorSubtitle || "Freelance & Remote Work Specialist at Freebirds Digest"}
+                {authorSubtitle ||
+                  "Freelance & Remote Work Specialist at Freebirds Digest"}
               </p>
               <p className="text-xs sm:text-sm leading-relaxed text-text-muted">
-                Covering digital nomad workflows, freelancing career growth, remote business tools, and work-from-home strategies.
+                Covering digital nomad workflows, freelancing career growth,
+                remote business tools, and work-from-home strategies.
               </p>
             </div>
           </div>
@@ -521,7 +495,9 @@ export default async function PostPage({ params, searchParams }) {
           <footer className="mt-6 pt-6 border-t border-brandborder space-y-8">
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="text-xs font-bold uppercase tracking-wider text-text-muted">Topics:</span>
+                <span className="text-xs font-bold uppercase tracking-wider text-text-muted">
+                  Topics:
+                </span>
                 {post.categories?.nodes?.map((cat) => (
                   <Link
                     key={cat.slug}
@@ -546,7 +522,8 @@ export default async function PostPage({ params, searchParams }) {
                   Elevate your remote work & freelance journey
                 </h3>
                 <p className="text-sm text-text-muted max-w-xl">
-                  Join thousands of remote professionals receiving actionable guides, tool recommendations, and career insights every week.
+                  Join thousands of remote professionals receiving actionable
+                  guides, tool recommendations, and career insights every week.
                 </p>
               </div>
 
@@ -557,7 +534,6 @@ export default async function PostPage({ params, searchParams }) {
 
         {/* Pinned / Sticky Side Panel Column (4/12 width on Desktop) */}
         <aside className="lg:col-span-4 space-y-6 lg:sticky lg:top-24 self-start">
-          
           {/* Article Overview & Quick Meta Card */}
           <div className="rounded-3xl border border-brandborder bg-bg-surface p-6 shadow-sm space-y-5">
             <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-brand border-b border-brandborder pb-3">
@@ -595,74 +571,42 @@ export default async function PostPage({ params, searchParams }) {
             {/* Key Meta Badges */}
             <div className="space-y-2 text-xs">
               <div className="flex items-center justify-between text-text-muted py-1 border-b border-brandborder/50">
-                <span className="flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5 text-brand" /> Published:</span>
-                <span className="font-semibold text-text-main">{formatPostDate(post.date)}</span>
+                <span className="flex items-center gap-1.5">
+                  <Calendar className="w-3.5 h-3.5 text-brand" /> Published:
+                </span>
+                <span className="font-semibold text-text-main">
+                  {formatPostDate(post.date)}
+                </span>
               </div>
-              <div className="flex items-center justify-between text-text-muted py-1 border-b border-brandborder/50">
-                <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5 text-accent" /> Read Time:</span>
-                <span className="font-semibold text-text-main">{estimatedReadTime || "4 min read"}</span>
-              </div>
+              {estimatedReadTime && (
+                <div className="flex items-center justify-between text-text-muted py-1 border-b border-brandborder/50">
+                  <span className="flex items-center gap-1.5">
+                    <Clock className="w-3.5 h-3.5 text-accent" /> Read Time:
+                  </span>
+                  <span className="font-semibold text-text-main">
+                    {estimatedReadTime}
+                  </span>
+                </div>
+              )}
               {post.categories?.nodes?.[0] && (
                 <div className="flex items-center justify-between text-text-muted py-1">
-                  <span className="flex items-center gap-1.5"><Tag className="w-3.5 h-3.5 text-brand" /> Category:</span>
-                  <span className="font-semibold text-accent">{post.categories.nodes[0].name}</span>
+                  <span className="flex items-center gap-1.5">
+                    <Tag className="w-3.5 h-3.5 text-brand" /> Category:
+                  </span>
+                  <span className="font-semibold text-accent">
+                    {post.categories.nodes[0].name}
+                  </span>
                 </div>
               )}
             </div>
 
-            {/* External Resource CTA Button if present */}
-            {otherUrl && (
-              <a
-                href={otherUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full flex items-center justify-center gap-2 rounded-xl bg-accent/10 border border-accent/30 p-2.5 text-xs font-bold text-accent hover:bg-accent hover:text-white transition-all shadow-2xs"
-              >
-                <Link2 className="w-3.5 h-3.5" />
-                <span>Reference Link</span>
-                <ExternalLink className="w-3 h-3" />
-              </a>
-            )}
-
-            {/* Quick Actions (Share/Bookmark) */}
+            {/* Quick Actions */}
             <div className="pt-2 border-t border-brandborder flex justify-center">
               <ArticleActions title={post.title} />
             </div>
           </div>
 
-          {/* ACF Custom Field 7: Video Source (Moved exclusively to Side Panel) */}
-          {videoSource && (
-            <div className="overflow-hidden rounded-3xl border border-brandborder bg-bg-surface shadow-sm">
-              <div className="p-4 bg-bg-subtle border-b border-brandborder flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand">
-                <Video className="w-4 h-4" />
-                <span>Featured Video Resource</span>
-              </div>
-              {youtubeEmbedUrl ? (
-                <div className="relative aspect-video w-full bg-black">
-                  <iframe
-                    src={youtubeEmbedUrl}
-                    title="Featured Video"
-                    className="w-full h-full border-0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
-                </div>
-              ) : (
-                <div className="p-5 text-center">
-                  <a
-                    href={videoSource}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-xl bg-brand/10 text-brand px-4 py-2.5 text-xs font-bold hover:bg-brand hover:text-white transition-all"
-                  >
-                    <Video className="w-4 h-4" /> Watch Video Resource <ExternalLink className="w-3.5 h-3.5" />
-                  </a>
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* Sticky Key Highlights / Excerpt Box (Side Panel Only) */}
+          {/* Key Highlights / Excerpt Box */}
           {cleanExcerptText && (
             <div className="rounded-3xl border border-brandborder bg-gradient-to-br from-brand/5 via-bg-surface to-accent/5 p-6 shadow-xs space-y-3">
               <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-brand">
@@ -684,13 +628,12 @@ export default async function PostPage({ params, searchParams }) {
               Get Freelance Digest Weekly
             </h4>
             <p className="text-xs text-text-muted">
-              Remote work tips, tools, and insights delivered straight to your inbox.
+              Remote work tips, tools, and insights delivered straight to your
+              inbox.
             </p>
             <NewsletterForm />
           </div>
-
         </aside>
-
       </div>
     </main>
   );

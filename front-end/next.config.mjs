@@ -6,17 +6,20 @@ const nextConfig = {
       {
         protocol: "http",
         hostname: "localhost",
-        pathname: "/astha-news/wp-content/uploads/**",
+        pathname: "/**",
       },
       {
-        protocol: "https",
-        hostname: "www.prothomalo.com",
+        protocol: "http",
+        hostname: "127.0.0.1",
         pathname: "/**",
       },
       {
         protocol: "https",
-        hostname: "prothomalo.com",
-        pathname: "/**",
+        hostname: "**",
+      },
+      {
+        protocol: "http",
+        hostname: "**",
       },
     ],
   },
