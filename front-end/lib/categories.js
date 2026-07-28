@@ -14,17 +14,36 @@ const GET_ALL_CATEGORIES = `
   }
 `;
 
-const NAVIGATION_CATEGORY_SLUGS = new Set([
-  'breaking',
-  'business',
-  'health',
-  'international',
-  'last-updates',
-  'politics',
-  'sports',
+const NAVIGATION_CATEGORY_SLUGS = [
+  'feature-story',
+  'financial',
+  'lifestyle',
+  'personal',
+  'platform',
   'technology',
-  'trending',
-]);
+];
+
+const NAV_SLUG_SET = new Set(NAVIGATION_CATEGORY_SLUGS);
+
+export function filterNavCategories(categories = []) {
+  if (!Array.isArray(categories)) return [];
+  const navMatches = categories.filter((cat) => NAV_SLUG_SET.has(cat?.slug));
+  if (navMatches.length > 0) {
+    return navMatches;
+  }
+  return categories.filter(
+    (cat) =>
+      ![
+        'top-news',
+        'header-news',
+        'trending',
+        'main-new-preview',
+        'side-panel-news',
+        'promotional-image',
+        'uncategorized',
+      ].includes(cat?.slug)
+  );
+}
 
 export const fetchAllCategories = cache(async () => {
   const data = await fetchAPI(GET_ALL_CATEGORIES);
@@ -34,11 +53,18 @@ export const fetchAllCategories = cache(async () => {
 
 export async function fetchNavigationCategories() {
   const allCategories = await fetchAllCategories();
+  const categoryMap = new Map(allCategories.map((cat) => [cat.slug, cat]));
 
-  return allCategories.filter(
-    (category) =>
-      category.slug !== 'uncategorized' &&
-      category.count > 0 &&
-      NAVIGATION_CATEGORY_SLUGS.has(category.slug)
-  );
+  return NAVIGATION_CATEGORY_SLUGS.map((slug) => {
+    return (
+      categoryMap.get(slug) || {
+        id: slug,
+        slug,
+        name: slug
+          .replace(/-/g, ' ')
+          .replace(/\b\w/g, (char) => char.toUpperCase()),
+        count: 0,
+      }
+    );
+  });
 }

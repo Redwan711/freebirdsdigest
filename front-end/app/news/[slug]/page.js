@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { cache } from "react";
 import { fetchAPI } from "@/lib/api";
+import { filterNavCategories } from "@/lib/categories";
 import { defaultDescription, siteName, siteUrl } from "@/lib/site";
 import {
   ArrowLeft,
@@ -314,6 +315,9 @@ export default async function PostPage({ params, searchParams }) {
   const authorAvatarUrl = authorNode?.avatar?.url;
   const cleanExcerptText = cleanHtml(post.excerpt || "");
 
+  // Filter categories to only show public navigation menu categories
+  const displayCategories = filterNavCategories(post.categories?.nodes ?? []);
+
   return (
     <main className="mx-auto max-w-7xl px-4 py-8 md:px-6 font-inter">
       {/* Top Navigation & Action Bar */}
@@ -364,9 +368,9 @@ export default async function PostPage({ params, searchParams }) {
 
           {/* Article Hero Header */}
           <header className="space-y-5">
-            {/* Categories Badges */}
+            {/* Categories Badges — Only public nav categories */}
             <div className="flex flex-wrap gap-2 text-xs font-semibold">
-              {post.categories?.nodes?.map((category) => (
+              {displayCategories.map((category) => (
                 <Link
                   key={category.slug}
                   href={`/${category.slug}`}
@@ -405,8 +409,14 @@ export default async function PostPage({ params, searchParams }) {
                     />
                   </div>
                 ) : (
-                  <div className="flex h-11 w-11 shrink-0 aspect-square items-center justify-center rounded-full bg-gradient-to-br from-brand/20 to-accent/20 text-brand font-extrabold text-base border border-brand/20 shadow-xs">
-                    {displayAuthorName.charAt(0)}
+                  <div className="relative h-11 w-11 shrink-0 aspect-square overflow-hidden rounded-full border-2 border-brand/30 bg-bg-subtle p-2 shadow-xs flex items-center justify-center">
+                    <Image
+                      src="/free_Bird icon.png"
+                      alt={displayAuthorName}
+                      width={28}
+                      height={28}
+                      className="object-contain"
+                    />
                   </div>
                 )}
                 <div className="min-w-0">
@@ -481,8 +491,14 @@ export default async function PostPage({ params, searchParams }) {
                 />
               </div>
             ) : (
-              <div className="flex h-16 w-16 shrink-0 aspect-square items-center justify-center rounded-full bg-gradient-to-br from-brand/20 to-accent/20 text-brand font-extrabold text-2xl border border-brand/20 shadow-sm">
-                {displayAuthorName.charAt(0)}
+              <div className="relative h-16 w-16 shrink-0 aspect-square overflow-hidden rounded-full border-2 border-brand/30 bg-bg-subtle p-3 shadow-sm flex items-center justify-center">
+                <Image
+                  src="/free_Bird icon.png"
+                  alt={displayAuthorName}
+                  width={40}
+                  height={40}
+                  className="object-contain"
+                />
               </div>
             )}
             <div className="space-y-2 min-w-0 flex-1">
@@ -512,7 +528,7 @@ export default async function PostPage({ params, searchParams }) {
                 <span className="text-xs font-bold uppercase tracking-wider text-text-muted">
                   Topics:
                 </span>
-                {post.categories?.nodes?.map((cat) => (
+                {displayCategories.map((cat) => (
                   <Link
                     key={cat.slug}
                     href={`/${cat.slug}`}
@@ -567,8 +583,14 @@ export default async function PostPage({ params, searchParams }) {
                   />
                 </div>
               ) : (
-                <div className="flex h-10 w-10 shrink-0 aspect-square items-center justify-center rounded-full bg-gradient-to-br from-brand/20 to-accent/20 text-brand font-extrabold text-sm border border-brand/20 shadow-xs">
-                  {displayAuthorName.charAt(0)}
+                <div className="relative h-10 w-10 shrink-0 aspect-square overflow-hidden rounded-full border-2 border-brand/30 bg-bg-subtle p-1.5 shadow-xs flex items-center justify-center">
+                  <Image
+                    src="/free_Bird icon.png"
+                    alt={displayAuthorName}
+                    width={24}
+                    height={24}
+                    className="object-contain"
+                  />
                 </div>
               )}
               <div className="min-w-0 flex-1">
@@ -602,13 +624,13 @@ export default async function PostPage({ params, searchParams }) {
                   </span>
                 </div>
               )}
-              {post.categories?.nodes?.[0] && (
+              {displayCategories[0] && (
                 <div className="flex items-center justify-between text-text-muted py-1">
                   <span className="flex items-center gap-1.5">
                     <Tag className="w-3.5 h-3.5 text-brand" /> Category:
                   </span>
                   <span className="font-semibold text-accent">
-                    {post.categories.nodes[0].name}
+                    {displayCategories[0].name}
                   </span>
                 </div>
               )}
