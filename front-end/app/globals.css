@@ -178,6 +178,8 @@ img {
   background: transparent !important;
   display: block !important;
   clear: both !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
 }
 
 .prose img {
@@ -187,8 +189,41 @@ img {
   display: block !important;
   border-radius: 1.5rem !important;
   margin-top: 1.5rem !important;
-  margin-bottom: 1.2rem !important;
+  margin-bottom: 2rem !important;
   padding: 0 !important;
   border: 1px solid var(--borderGlob);
   clear: both !important;
+}
+
+/* Table & Table Figure Vertical Spacing */
+.prose figure.wp-block-table,
+.prose figure:has(table) {
+  margin-top: 0.75rem !important;
+  margin-bottom: 0.75rem !important;
+  border: none !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+.prose table {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 0.75rem !important;
+  margin-bottom: 0.75rem !important;
+  border-collapse: collapse !important;
+}
+
+.prose td,
+.prose th {
+  min-width: 90px;
+}
+
+.prose pre,
+.prose code {
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  word-break: break-word !important;
 }

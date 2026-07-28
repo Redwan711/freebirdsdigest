@@ -15,7 +15,7 @@ const Navber = async () => {
       <section className='topHeader container mx-auto flex items-center justify-between gap-y-1 px-4 py-3.5 md:gap-y-0 md:px-6'>
         <div className="logoSec col-span-2 row-start-1 justify-self-center md:col-span-1 md:row-auto">
           <a href="/" className='flex items-center gap-2 group transition-transform hover:scale-[1.01]'>
-            <Image src="/freeBird-logo.png" alt="Freebirds Digest Logo" width={170} height={55} priority className="w-auto h-[48px] object-contain" />
+            <Image src="/freeBird-logo.png" alt="Freebirds Digest Logo" width={170} height={55} priority className="w-auto h-[38px] sm:h-[48px] object-contain max-w-full" />
           </a>
         </div>
 

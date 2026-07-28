@@ -107,7 +107,7 @@ All 8 fields registered under the **Article Metadata** field group in WordPress:
 | 2 | `main_image_source_&_info` | `mainImageSourceInfo` | Text | Caption / credit for featured image. Render conditionally under image. |
 | 3 | `author_subtitle` | `authorSubtitle` | Text | Author designation / subtitle. Render conditionally under author name. |
 | 4 | `estimated_read_time` | `estimatedReadTime` | Text | Reading time badge (e.g. "5 min read"). Render conditionally with fallback. |
-| 5 | `secnd_image` | `secndImage` | Image (`node { sourceUrl altText }`) | Secondary article image. Render conditionally if present. |
+| 5 | (don't need it anymore)`secnd_image` | `secndImage` | Image (`node { sourceUrl altText }`) | Secondary article image. Render conditionally if present. |
 | 6 | `image_source_` | `imageSource` | Text | Source text/URL for external image attribution. Render conditionally. |
 | 7 | `video_source` | `videoSource` | URL | Video embed URL (YouTube/Vimeo/MP4). Render conditionally with embedded player. |
 | 8 | `other_url` | `otherUrl` | URL | External reference/resource link. Render conditionally as CTA button. |
@@ -180,4 +180,4 @@ All 8 fields registered under the **Article Metadata** field group in WordPress:
 1. **Conditional evaluation for all custom fields**: Always wrap `articleMetadata` fields with safe optional chaining (`articleMetadata?.field`) and non-empty string/URL checks to prevent errors when fields are null or unpopulated.
 2. **Empty SEO fallbacks**: `metaDesc`, `twitterTitle`, `twitterDescription` fallback chains prevent empty meta tags.
 3. **Video Source embedding**: Parse `videoSource` URL (YouTube iframe embed, Vimeo embed, or `<video>` player) and render conditionally.
-4. **Other URL badge**: Render `otherUrl` as an external resource badge conditionally if present.
+4. **Other URL badge**: Render `otherUrl` as an external resource badge conditionally if present.

@@ -13,6 +13,9 @@ import {
   Mail,
   Sparkles,
   CheckCircle2,
+  Video,
+  ExternalLink,
+  Link as LinkIcon,
 } from "lucide-react";
 import ArticleActions from "@/components/ArticleActions";
 import NewsletterForm from "@/components/NewsletterForm";
@@ -69,6 +72,8 @@ const GET_POST_BY_SLUG = `
         authorSubtitle
         estimatedReadTime
         mainImageSourceInfo
+        videoSource
+        otherUrl
       }
     }
   }
@@ -125,6 +130,8 @@ const GET_POST_BY_DATABASE_ID = `
         authorSubtitle
         estimatedReadTime
         mainImageSourceInfo
+        videoSource
+        otherUrl
       }
     }
   }
@@ -156,6 +163,26 @@ function cleanHtml(htmlString = "") {
     .replace(/&gt;/gi, ">")
     .replace(/\s+/g, " ")
     .trim();
+}
+
+function getVideoEmbedUrl(url) {
+  if (!url) return "";
+  const ytMatch = url.match(
+    /(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/
+  );
+  if (ytMatch && ytMatch[1]) {
+    return `https://www.youtube-nocookie.com/embed/${ytMatch[1]}`;
+  }
+  const vimeoMatch = url.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+  if (vimeoMatch && vimeoMatch[1]) {
+    return `https://player.vimeo.com/video/${vimeoMatch[1]}`;
+  }
+  return url;
+}
+
+function isDirectVideo(url) {
+  if (!url) return false;
+  return /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(url);
 }
 
 const fetchPost = cache(async (postSlug, postId) => {
@@ -301,6 +328,8 @@ export default async function PostPage({ params, searchParams }) {
     authorSubtitle,
     estimatedReadTime,
     mainImageSourceInfo,
+    videoSource,
+    otherUrl,
   } = articleMetadata;
 
   // Author identity resolution
@@ -397,8 +426,8 @@ export default async function PostPage({ params, searchParams }) {
             )}
 
             {/* Author & Meta Bar */}
-            <div className="flex flex-wrap items-center justify-between gap-4 border-y border-brandborder py-4 text-sm text-text-muted">
-              <div className="flex items-center gap-3">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-y border-brandborder py-4 text-sm text-text-muted min-w-0 max-w-full overflow-hidden">
+              <div className="flex items-center gap-3 min-w-0 flex-1 overflow-hidden">
                 {authorAvatarUrl && !authorAvatarUrl.includes("d=mm") ? (
                   <div className="relative h-11 w-11 shrink-0 aspect-square overflow-hidden rounded-full border-2 border-brand/30 shadow-xs">
                     <Image
@@ -419,7 +448,7 @@ export default async function PostPage({ params, searchParams }) {
                     />
                   </div>
                 )}
-                <div className="min-w-0">
+                <div className="min-w-0 flex-1 overflow-hidden">
                   <p className="font-bold text-text-main flex items-center gap-1.5 text-sm sm:text-base">
                     <span className="truncate">{displayAuthorName}</span>
                     <CheckCircle2 className="w-4 h-4 text-accent fill-accent/20 shrink-0" />
@@ -427,23 +456,23 @@ export default async function PostPage({ params, searchParams }) {
 
                   {/* ACF Field: Author Subtitle */}
                   {authorSubtitle && (
-                    <p className="text-xs text-text-muted truncate">
+                    <p className="text-xs text-text-muted line-clamp-2 break-words">
                       {authorSubtitle}
                     </p>
                   )}
                 </div>
               </div>
 
-              <div className="flex items-center gap-4 text-xs sm:text-sm font-semibold">
+              <div className="flex flex-wrap items-center gap-2.5 sm:gap-4 text-xs sm:text-sm font-semibold shrink-0">
                 <span className="flex items-center gap-1.5 text-text-muted bg-bg-subtle px-3 py-1.5 rounded-full border border-brandborder">
-                  <Calendar className="w-3.5 h-3.5 text-brand" />
+                  <Calendar className="w-3.5 h-3.5 text-brand shrink-0" />
                   <time dateTime={post.date}>{formatPostDate(post.date)}</time>
                 </span>
 
                 {/* ACF Field: Estimated Read Time */}
                 {estimatedReadTime && (
                   <span className="flex items-center gap-1.5 text-text-muted bg-bg-subtle px-3 py-1.5 rounded-full border border-brandborder">
-                    <Clock className="w-3.5 h-3.5 text-accent" />
+                    <Clock className="w-3.5 h-3.5 text-accent shrink-0" />
                     {estimatedReadTime}
                   </span>
                 )}
@@ -642,6 +671,33 @@ export default async function PostPage({ params, searchParams }) {
             </div>
           </div>
 
+          {/* ACF Field #7: videoSource (Featured Video Embed Player) */}
+          {videoSource && (
+            <div className="rounded-3xl border border-brandborder bg-bg-surface p-5 shadow-sm space-y-3">
+              <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-brand border-b border-brandborder pb-3">
+                <Video className="w-4 h-4" />
+                <span>Featured Video</span>
+              </div>
+              <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-bg-subtle border border-brandborder">
+                {isDirectVideo(videoSource) ? (
+                  <video
+                    controls
+                    src={videoSource}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <iframe
+                    src={getVideoEmbedUrl(videoSource)}
+                    title="Featured Article Video"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full border-0"
+                  />
+                )}
+              </div>
+            </div>
+          )}
+
           {/* Key Highlights / Excerpt Box */}
           {cleanExcerptText && (
             <div className="rounded-3xl border border-brandborder bg-gradient-to-br from-brand/5 via-bg-surface to-accent/5 p-6 shadow-xs space-y-3">
@@ -652,6 +708,25 @@ export default async function PostPage({ params, searchParams }) {
               <p className="text-xs leading-relaxed text-text-main font-medium">
                 {cleanExcerptText}
               </p>
+            </div>
+          )}
+
+          {/* ACF Field #8: otherUrl (External Resource Link Button) */}
+          {otherUrl && (
+            <div className="rounded-3xl border border-brandborder bg-gradient-to-br from-accent/5 via-bg-surface to-brand/5 p-5 shadow-xs space-y-3">
+              <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-accent border-b border-brandborder/50 pb-2">
+                <LinkIcon className="w-4 h-4" />
+                <span>External Resource</span>
+              </div>
+              <a
+                href={otherUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-between gap-2 rounded-2xl bg-accent px-5 py-3 text-xs font-bold text-white transition-all hover:bg-accent/90 hover:scale-[1.01] shadow-xs group"
+              >
+                <span className="truncate">Visit Resource Link</span>
+                <ExternalLink className="w-4 h-4 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </a>
             </div>
           )}
 
