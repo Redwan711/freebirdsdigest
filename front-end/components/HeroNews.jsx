@@ -53,8 +53,8 @@ const HeroNews = async () => {
     "Hero Banner";
 
   return (
-    <div className="pt-6">
-      <section className="container mx-auto bg-bg-surface border border-brandborder rounded-2xl overflow-hidden shadow-sm">
+    <div className="container mx-auto px-4 md:px-6 pt-6">
+      <section className="bg-bg-surface border border-brandborder rounded-3xl overflow-hidden shadow-xs">
         {headerHeroImage && (
           <div className="headerHeroImage w-full overflow-hidden max-h-[140px] relative">
             <Image
@@ -79,9 +79,9 @@ const HeroNews = async () => {
                   <span className="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-brand">
                     Featured Digest
                   </span>
-                  <h3 className="text-xl font-extrabold leading-snug md:text-2xl text-text-main group-hover:text-brand transition-colors">
+                  <h1 className="text-xl font-extrabold leading-snug md:text-2xl text-text-main group-hover:text-brand transition-colors">
                     {topStory.title}
-                  </h3>
+                  </h1>
                   <p className="text-sm leading-relaxed text-text-muted">
                     {truncateText(cleanText(topStory.excerpt), 160)}
                   </p>

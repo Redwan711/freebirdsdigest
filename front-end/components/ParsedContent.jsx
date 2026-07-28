@@ -47,15 +47,15 @@ export default function ParsedContent({ html }) {
 
       elements.push(
         <div
-          key={`img-wrap-${match.index}`}
-          className="my-6 w-full overflow-hidden rounded-3xl border border-brandborder bg-bg-subtle shadow-sm"
+          key={`img-block-${match.index}`}
+          className="block w-full clear-both"
         >
           <Image
             src={src}
             alt={alt}
             width={Number.isNaN(parsedWidth) ? 1200 : parsedWidth}
             height={Number.isNaN(parsedHeight) ? 675 : parsedHeight}
-            className={`w-full h-auto object-cover rounded-3xl ${className}`}
+            className={`block w-full h-auto object-cover rounded-3xl border border-brandborder/60 shadow-sm ${className}`}
             style={{ width: "100%", height: "auto" }}
             loading="lazy"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 75vw, 896px"

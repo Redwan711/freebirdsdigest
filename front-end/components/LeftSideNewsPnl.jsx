@@ -43,8 +43,8 @@ const LeftSideNewsPnl = async () => {
     const posts = await fetchSidePanelNews();
 
     return (
-        <aside className="leftSideNewsPnl flex flex-col gap-4 font-inter">
-            <section className="sidebarCard bg-bg-surface p-4 rounded-2xl border border-brandborder shadow-xs">
+        <aside className="leftSideNewsPnl flex flex-col gap-4 font-inter xl:sticky xl:top-24 self-start">
+            <section className="sidebarCard bg-bg-surface p-5 rounded-3xl border border-brandborder shadow-2xs">
                 <div className="mb-4 flex items-center justify-between gap-3 border-b border-brandborder pb-3">
                     <div>
                         <p className="text-xs font-bold uppercase tracking-wider text-brand">Latest Reads</p>

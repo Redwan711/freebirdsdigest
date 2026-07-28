@@ -58,9 +58,9 @@ export default function RootLayout({ children }) {
         <header>
           <Navber />
         </header>
-        <main className="flex-1">
+        <div className="flex-1">
           {children}
-        </main>
+        </div>
         <footer className="mt-16">
           <Footer />
         </footer>

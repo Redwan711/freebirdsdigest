@@ -61,7 +61,12 @@ img {
   max-width: none;
 }
 
-.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
   font-weight: 800;
   letter-spacing: -0.025em;
   color: var(--color-text-main-raw);
@@ -69,9 +74,20 @@ img {
   margin-bottom: 1rem;
 }
 
-.prose h1 { font-size: 2.25rem; line-height: 2.5rem; }
-.prose h2 { font-size: 1.75rem; line-height: 2rem; }
-.prose h3 { font-size: 1.35rem; line-height: 1.75rem; }
+.prose h1 {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
+.prose h2 {
+  font-size: 1.75rem;
+  line-height: 2rem;
+}
+
+.prose h3 {
+  font-size: 1.35rem;
+  line-height: 1.75rem;
+}
 
 .prose p {
   line-height: 1.8;
@@ -154,16 +170,25 @@ img {
 
 /* Post Content Full Width Images & Figures */
 .prose figure,
-.prose .wp-block-image,
+.prose .wp-block-image {
+  margin-top: 2rem !important;
+  margin-bottom: 2rem !important;
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  display: block !important;
+  clear: both !important;
+}
+
 .prose img {
   width: 100% !important;
   max-width: 100% !important;
   height: auto !important;
-  display: block;
-  border-radius: 1.5rem;
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
+  display: block !important;
+  border-radius: 1.5rem !important;
+  margin-top: 1.5rem !important;
+  margin-bottom: 1.2rem !important;
+  padding: 0 !important;
+  border: 1px solid var(--borderGlob);
+  clear: both !important;
 }
-
-
-

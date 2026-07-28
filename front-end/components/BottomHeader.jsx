@@ -46,13 +46,13 @@ const BottomHeader = ({ activeCategories }) => {
       >
         <div className="bottomHeader container mx-auto flex items-center justify-between px-4 py-3 md:px-6">
           <div className="homeBtn hidden lg:block">
-            <Link 
+            <a 
               href="/" 
               className='flex items-center justify-center h-9 w-9 rounded-lg bg-bg-subtle text-text-main hover:bg-brand/10 hover:text-brand transition-colors'
               aria-label="Home"
             >
               <Home className="w-4 h-4" />
-            </Link>
+            </a>
           </div>
 
           <div className="navberMenu hidden lg:block">

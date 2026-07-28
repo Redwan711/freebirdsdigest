@@ -46,7 +46,7 @@ const RightSideNewsPnl = async () => {
     const gridStories = posts.slice(3, 9);
 
     return (
-        <div className='rightSideNewsPnl font-inter grid gap-6'>
+        <div className='rightSideNewsPnl font-inter grid gap-6 rounded-3xl border border-brandborder bg-bg-surface p-5 sm:p-8 shadow-2xs'>
 
             <section className="top1sec grid grid-cols-1 items-center gap-6 border-b border-brandborder pb-6 font-inter sm:grid-cols-2">
                 <Link href={mainStory ? `/news/${mainStory.slug}?pid=${mainStory.databaseId}` : "#"} className="group overflow-hidden rounded-2xl bg-bg-subtle aspect-16/10">
@@ -141,7 +141,7 @@ const RightSideNewsPnl = async () => {
                     <Link 
                         key={story.id} 
                         href={`/news/${story.slug}?pid=${story.databaseId}`} 
-                        className="group flex flex-col gap-2.5 rounded-xl border border-brandborder p-3 bg-bg-surface hover:border-brand/40 transition-all shadow-2xs"
+                        className="group flex flex-col gap-2.5 rounded-xl border border-brandborder/60 p-3 bg-bg-subtle/70 hover:bg-bg-subtle hover:border-brand/40 transition-all shadow-2xs"
                     >
                         <div className="image overflow-hidden rounded-lg bg-bg-subtle aspect-16/10">
                             <Image
