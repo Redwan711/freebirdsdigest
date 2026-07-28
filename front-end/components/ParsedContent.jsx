@@ -16,7 +16,7 @@ export default function ParsedContent({ html }) {
     const textBefore = html.substring(lastIndex, match.index);
     if (textBefore) {
       elements.push(
-        <span
+        <div
           key={`text-${lastIndex}`}
           dangerouslySetInnerHTML={{ __html: textBefore }}
         />
@@ -42,23 +42,25 @@ export default function ParsedContent({ html }) {
     const className = getAttr("class") || getAttr("className") || "";
 
     if (src) {
-      const parsedWidth = width ? Number.parseInt(width, 10) : 800;
-      const parsedHeight = height ? Number.parseInt(height, 10) : 450;
+      const parsedWidth = width ? Number.parseInt(width, 10) : 1200;
+      const parsedHeight = height ? Number.parseInt(height, 10) : 675;
 
       elements.push(
-        <Image
-          key={`img-${match.index}`}
-          src={src}
-          alt={alt}
-          width={Number.isNaN(parsedWidth) ? 800 : parsedWidth}
-          height={Number.isNaN(parsedHeight) ? 450 : parsedHeight}
-          className={
-            className ||
-            "rounded-2xl max-w-full h-auto object-cover my-6 shadow-sm"
-          }
-          loading="lazy"
-          sizes="(max-width: 768px) 100vw, 800px"
-        />
+        <div
+          key={`img-wrap-${match.index}`}
+          className="my-6 w-full overflow-hidden rounded-3xl border border-brandborder bg-bg-subtle shadow-sm"
+        >
+          <Image
+            src={src}
+            alt={alt}
+            width={Number.isNaN(parsedWidth) ? 1200 : parsedWidth}
+            height={Number.isNaN(parsedHeight) ? 675 : parsedHeight}
+            className={`w-full h-auto object-cover rounded-3xl ${className}`}
+            style={{ width: "100%", height: "auto" }}
+            loading="lazy"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 75vw, 896px"
+          />
+        </div>
       );
     }
 
@@ -68,7 +70,7 @@ export default function ParsedContent({ html }) {
   const remainingText = html.substring(lastIndex);
   if (remainingText) {
     elements.push(
-      <span
+      <div
         key={`text-${lastIndex}`}
         dangerouslySetInnerHTML={{ __html: remainingText }}
       />

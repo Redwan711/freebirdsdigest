@@ -143,7 +143,18 @@ function formatPostDate(dateString) {
 }
 
 function cleanHtml(htmlString = "") {
-  return htmlString.replace(/<[^>]*>/g, "").trim();
+  if (!htmlString) return "";
+  return htmlString
+    .replace(/<[^>]*>/g, "")
+    .replace(/\[\s*&hellip;\s*\]|\[\s*\.\.\.\s*\]|&hellip;|&#8230;/gi, "")
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&amp;/gi, "&")
+    .replace(/&quot;/gi, '"')
+    .replace(/&#039;/gi, "'")
+    .replace(/&lt;/gi, "<")
+    .replace(/&gt;/gi, ">")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 const fetchPost = cache(async (postSlug, postId) => {
@@ -296,9 +307,10 @@ export default async function PostPage({ params, searchParams }) {
   const rawAuthorName = authorNode?.name;
   const isDefaultAdmin =
     !rawAuthorName || rawAuthorName.toLowerCase() === "admin";
-  const displayAuthorName = !isDefaultAdmin
-    ? rawAuthorName
-    : authorSubtitle || "Freebirds Editorial Team";
+  const displayAuthorName =
+    !isDefaultAdmin && rawAuthorName
+      ? rawAuthorName
+      : "Freebirds Editorial Team";
   const authorAvatarUrl = authorNode?.avatar?.url;
   const cleanExcerptText = cleanHtml(post.excerpt || "");
 
@@ -384,28 +396,30 @@ export default async function PostPage({ params, searchParams }) {
             <div className="flex flex-wrap items-center justify-between gap-4 border-y border-brandborder py-4 text-sm text-text-muted">
               <div className="flex items-center gap-3">
                 {authorAvatarUrl && !authorAvatarUrl.includes("d=mm") ? (
-                  <div className="relative h-11 w-11 overflow-hidden rounded-full border-2 border-brand/30 shadow-xs">
+                  <div className="relative h-11 w-11 shrink-0 aspect-square overflow-hidden rounded-full border-2 border-brand/30 shadow-xs">
                     <Image
                       src={authorAvatarUrl}
                       alt={displayAuthorName}
                       fill
-                      className="object-cover"
+                      className="object-cover rounded-full"
                     />
                   </div>
                 ) : (
-                  <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-brand/20 to-accent/20 text-brand font-extrabold text-base border border-brand/20 shadow-xs">
+                  <div className="flex h-11 w-11 shrink-0 aspect-square items-center justify-center rounded-full bg-gradient-to-br from-brand/20 to-accent/20 text-brand font-extrabold text-base border border-brand/20 shadow-xs">
                     {displayAuthorName.charAt(0)}
                   </div>
                 )}
-                <div>
+                <div className="min-w-0">
                   <p className="font-bold text-text-main flex items-center gap-1.5 text-sm sm:text-base">
-                    {displayAuthorName}
-                    <CheckCircle2 className="w-4 h-4 text-accent fill-accent/20" />
+                    <span className="truncate">{displayAuthorName}</span>
+                    <CheckCircle2 className="w-4 h-4 text-accent fill-accent/20 shrink-0" />
                   </p>
 
                   {/* ACF Field: Author Subtitle */}
                   {authorSubtitle && (
-                    <p className="text-xs text-text-muted">{authorSubtitle}</p>
+                    <p className="text-xs text-text-muted truncate">
+                      {authorSubtitle}
+                    </p>
                   )}
                 </div>
               </div>
@@ -450,7 +464,7 @@ export default async function PostPage({ params, searchParams }) {
             </figure>
           )}
 
-          {/* Article Body Content — Parsed with html-react-parser & styled with @tailwindcss/typography */}
+          {/* Article Body Content — Parsed with full width inline images */}
           <div className="prose prose-lg max-w-none dark:prose-invert text-text-main prose-headings:font-extrabold prose-headings:text-text-main prose-headings:tracking-tight prose-p:leading-8 prose-p:text-text-main prose-a:text-brand prose-a:font-semibold prose-a:no-underline hover:prose-a:underline prose-strong:text-text-main prose-blockquote:border-l-brand prose-blockquote:text-text-muted prose-table:w-full prose-table:border-collapse prose-th:border prose-th:border-brandborder prose-th:p-3 prose-td:border prose-td:border-brandborder prose-td:p-3 [&_.wp-block-paragraph]:mb-6 [&_.wp-block-heading]:mt-10 [&_.wp-block-heading]:mb-4 [&_.wp-block-quote]:border-l-4 [&_.wp-block-quote]:border-brand [&_.wp-block-quote]:pl-5 [&_.wp-block-quote]:py-2 [&_.wp-block-quote]:italic [&_.wp-block-image]:my-8 [&_.wp-block-image_img]:rounded-3xl [&_.wp-block-image_img]:shadow-sm [&_.wp-block-list]:pl-6 [&_.wp-block-list]:list-disc [&_.wp-block-list_li]:mb-2">
             <ParsedContent html={post.content || ""} />
           </div>
@@ -458,20 +472,20 @@ export default async function PostPage({ params, searchParams }) {
           {/* E-E-A-T Author Bio Card */}
           <div className="rounded-3xl border border-brandborder bg-bg-surface p-6 sm:p-8 shadow-xs flex flex-col sm:flex-row items-center sm:items-start gap-5 text-center sm:text-left">
             {authorAvatarUrl && !authorAvatarUrl.includes("d=mm") ? (
-              <div className="relative h-16 w-16 overflow-hidden rounded-full border-2 border-brand/30 shrink-0 shadow-sm">
+              <div className="relative h-16 w-16 shrink-0 aspect-square overflow-hidden rounded-full border-2 border-brand/30 shadow-sm">
                 <Image
                   src={authorAvatarUrl}
                   alt={displayAuthorName}
                   fill
-                  className="object-cover"
+                  className="object-cover rounded-full"
                 />
               </div>
             ) : (
-              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-brand/20 to-accent/20 text-brand font-extrabold text-2xl border border-brand/20 shadow-sm">
+              <div className="flex h-16 w-16 shrink-0 aspect-square items-center justify-center rounded-full bg-gradient-to-br from-brand/20 to-accent/20 text-brand font-extrabold text-2xl border border-brand/20 shadow-sm">
                 {displayAuthorName.charAt(0)}
               </div>
             )}
-            <div className="space-y-2">
+            <div className="space-y-2 min-w-0 flex-1">
               <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
                 <h4 className="text-base sm:text-lg font-extrabold text-text-main">
                   {displayAuthorName}
@@ -544,25 +558,25 @@ export default async function PostPage({ params, searchParams }) {
             {/* Author Info */}
             <div className="flex items-center gap-3">
               {authorAvatarUrl && !authorAvatarUrl.includes("d=mm") ? (
-                <div className="relative h-10 w-10 overflow-hidden rounded-full border-2 border-brand/30 shadow-xs">
+                <div className="relative h-10 w-10 shrink-0 aspect-square overflow-hidden rounded-full border-2 border-brand/30 shadow-xs">
                   <Image
                     src={authorAvatarUrl}
                     alt={displayAuthorName}
                     fill
-                    className="object-cover"
+                    className="object-cover rounded-full"
                   />
                 </div>
               ) : (
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-brand/20 to-accent/20 text-brand font-extrabold text-sm border border-brand/20">
+                <div className="flex h-10 w-10 shrink-0 aspect-square items-center justify-center rounded-full bg-gradient-to-br from-brand/20 to-accent/20 text-brand font-extrabold text-sm border border-brand/20 shadow-xs">
                   {displayAuthorName.charAt(0)}
                 </div>
               )}
-              <div>
-                <p className="font-bold text-text-main text-sm flex items-center gap-1">
-                  {displayAuthorName}
-                  <CheckCircle2 className="w-3.5 h-3.5 text-accent" />
+              <div className="min-w-0 flex-1">
+                <p className="font-bold text-text-main text-sm flex items-center gap-1.5">
+                  <span className="truncate">{displayAuthorName}</span>
+                  <CheckCircle2 className="w-3.5 h-3.5 text-accent shrink-0" />
                 </p>
-                <p className="text-[11px] text-text-muted">
+                <p className="text-[11px] text-text-muted truncate">
                   {authorSubtitle || "Remote Work Specialist"}
                 </p>
               </div>

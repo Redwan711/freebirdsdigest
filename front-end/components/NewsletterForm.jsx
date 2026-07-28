@@ -38,6 +38,7 @@ export default function NewsletterForm() {
             type="submit"
             className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand px-6 py-3 text-sm font-bold text-white transition-transform hover:scale-[1.02] active:scale-[0.98] shadow-md cursor-pointer flex-shrink-0"
           >
+            {/* this feature will be available soon  after we make the proper plan for it*/}
             <span>Subscribe</span>
             <ArrowRight className="w-4 h-4" />
           </button>
