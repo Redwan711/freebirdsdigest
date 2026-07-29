@@ -14,7 +14,7 @@ const Navber = async () => {
 
   return (
     <div className="bg-bg-surface border-b border-brandborder shadow-2xs">
-      {/* top navbar section */}
+      {/* top navbar section, it's here if u want to change */}
       <section className='topHeader container mx-auto px-4 py-3.5 md:px-6'>
         {/* Top Header Row: Logo on Left, Desktop News Posts / Mobile Menu Toggle on Right */}
         <div className="flex items-center justify-between gap-4">
