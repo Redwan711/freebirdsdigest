@@ -40,12 +40,12 @@ const BottomHeader = ({ activeCategories }) => {
 
       <section
         ref={headerRef}
-        className={`w-full z-50 bg-bg-surface/95 backdrop-blur-md transition-all duration-300 ${
+        className={`w-full z-50 bg-bg-surface/95 backdrop-blur-md transition-all duration-300 hidden lg:block ${
           isPinned ? 'fixed top-0 left-0 right-0 shadow-sm border-b border-brandborder' : 'relative'
         }`}
       >
         <div className="bottomHeader container mx-auto flex items-center justify-between px-4 py-3 md:px-6">
-          <div className="homeBtn hidden lg:block">
+          <div className="homeBtn">
             <a 
               href="/" 
               className='flex items-center justify-center h-9 w-9 rounded-lg bg-bg-subtle text-text-main hover:bg-brand/10 hover:text-brand transition-colors'
@@ -55,7 +55,7 @@ const BottomHeader = ({ activeCategories }) => {
             </a>
           </div>
 
-          <div className="navberMenu hidden lg:block">
+          <div className="navberMenu">
             <nav className='flex items-center gap-8 justify-between'>
               {activeCategories.map((category) => (
                 <Link
@@ -76,8 +76,6 @@ const BottomHeader = ({ activeCategories }) => {
               </Link>
             </nav>
           </div>
-          
-          <MobileNav categories={activeCategories} />
         </div>
       </section>
     </>
