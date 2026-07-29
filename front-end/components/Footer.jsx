@@ -37,18 +37,18 @@ const Footer = async () => {
             <div className="py-14">
                 <div className="container mx-auto px-4 md:px-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10">
-                        
+
                         {/* Column 1: Brand & Bio (4/12) */}
                         <div className="lg:col-span-4 space-y-4">
                             {/* White Background Pill Container to make dark logo 100% visible */}
                             <Link href="/" className="inline-block transition-transform hover:scale-[1.01]">
                                 <div className="bg-white/95 px-4 py-2.5 rounded-2xl border border-slate-700/60 inline-block shadow-sm">
-                                    <Image 
-                                        src="/freeBird-logo.png" 
-                                        alt="Freebirds Digest Logo" 
-                                        width={180} 
-                                        height={55} 
-                                        className="w-auto h-[42px] object-contain" 
+                                    <Image
+                                        src="/freeBird-logo.png"
+                                        alt="Freebirds Digest Logo"
+                                        width={180}
+                                        height={55}
+                                        className="w-auto h-[42px] object-contain"
                                     />
                                 </div>
                             </Link>
@@ -69,7 +69,7 @@ const Footer = async () => {
                             <ul className="space-y-2.5 text-sm text-slate-400 font-medium">
                                 {activeCategories.map((category) => (
                                     <li key={category.id}>
-                                        <Link 
+                                        <Link
                                             href={`/${category.slug}`}
                                             className="hover:text-brand transition-colors flex items-center gap-1.5 group"
                                         >
@@ -118,7 +118,7 @@ const Footer = async () => {
                             <p className="text-xs text-slate-400">
                                 Join our social channels to get instant updates on remote jobs and freelance guides.
                             </p>
-                            
+
                             {/* Social Icons — Inverted & styled white pills so icons are 100% visible */}
                             <div className="flex items-center gap-3">
                                 <a href="https://www.facebook.com" target='_blank' rel="noreferrer" className='p-2.5 rounded-xl bg-white/10 hover:bg-brand border border-slate-700 text-white transition-all hover:scale-110 shadow-xs'>

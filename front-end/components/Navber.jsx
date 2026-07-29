@@ -22,8 +22,8 @@ const Navber = async () => {
         <div className="gap-8 hidden md:flex items-center">
           {headerNews.slice(0, 2).map((post) => (
             <div key={post.id} className="headerNews">
-              <Link 
-                href={`/news/${post.slug}?pid=${post.databaseId}`} 
+              <Link
+                href={`/news/${post.slug}?pid=${post.databaseId}`}
                 className='flex items-center font-inter text-text-muted hover:text-brand transition-colors gap-3 group'
               >
                 <h3 className='line-clamp-2 max-w-[170px] text-xs font-semibold leading-snug group-hover:text-brand transition-colors'>
@@ -31,7 +31,7 @@ const Navber = async () => {
                 </h3>
                 <div className="relative overflow-hidden rounded-lg w-[65px] h-[50px] bg-bg-subtle flex-shrink-0 border border-brandborder">
                   <Image
-                    src={post.featuredImage?.node?.sourceUrl || '/freeBird-logo.png'}
+                    src={post.featuredImage?.node?.sourceUrl || '/freeBird-logo-.png'}
                     alt={post.title}
                     fill
                     sizes="65px"
@@ -55,7 +55,7 @@ const Navber = async () => {
               </h3>
               <div className="relative overflow-hidden rounded-md w-[50px] h-[40px] bg-bg-subtle flex-shrink-0 border border-brandborder">
                 <Image
-                  src={headerNews[0].featuredImage?.node?.sourceUrl || '/freeBird-logo.png'}
+                  src={headerNews[0].featuredImage?.node?.sourceUrl || '/freeBird-logo-.png'}
                   alt={headerNews[0].title}
                   fill
                   sizes="50px"

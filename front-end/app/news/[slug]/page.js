@@ -20,6 +20,7 @@ import {
 import ArticleActions from "@/components/ArticleActions";
 import NewsletterForm from "@/components/NewsletterForm";
 import ParsedContent from "@/components/ParsedContent";
+import SponsorsAdPnl from "@/components/SponsorsAdPnl";
 
 const GET_POST_BY_SLUG = `
   query GetPostBySlug($slug: ID!) {
@@ -265,11 +266,11 @@ export async function generateMetadata({ params, searchParams }) {
       publishedTime: post.date,
       images: image
         ? [
-            {
-              url: image,
-              alt: post.featuredImage?.node?.altText || cleanHtml(post.title),
-            },
-          ]
+          {
+            url: image,
+            alt: post.featuredImage?.node?.altText || cleanHtml(post.title),
+          },
+        ]
         : undefined,
     },
     twitter: {
@@ -348,7 +349,7 @@ export default async function PostPage({ params, searchParams }) {
   const displayCategories = filterNavCategories(post.categories?.nodes ?? []);
 
   return (
-    <main className="mx-auto max-w-7xl px-4 py-8 md:px-6 font-inter">
+    <main className="mx-auto max-w-7xl xl:max-w-[1440px] 2xl:max-w-[1536px] px-4 py-8 md:px-6 font-inter">
       {/* Top Navigation & Action Bar */}
       <div className="mb-6 flex flex-wrap items-center justify-between gap-4 border-b border-brandborder/60 pb-4">
         <Link
@@ -362,237 +363,10 @@ export default async function PostPage({ params, searchParams }) {
         <ArticleActions title={post.title} />
       </div>
 
-      {/* Main 2-Column Responsive Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        {/* Main Article Content Column (8/12 width on Desktop) */}
-        <article className="lg:col-span-8 grid gap-8">
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "BlogPosting",
-                headline: cleanHtml(post.title),
-                description: cleanExcerptText,
-                datePublished: post.date,
-                mainEntityOfPage: `${siteUrl}/news/${post.slug}`,
-                image: post.featuredImage?.node?.sourceUrl
-                  ? [post.featuredImage.node.sourceUrl]
-                  : undefined,
-                author: {
-                  "@type": "Person",
-                  name: displayAuthorName,
-                },
-                publisher: {
-                  "@type": "Organization",
-                  name: siteName,
-                  logo: {
-                    "@type": "ImageObject",
-                    url: `${siteUrl}/freeBird-logo.png`,
-                  },
-                },
-              }).replace(/</g, "\\u003c"),
-            }}
-          />
-
-          {/* Article Hero Header */}
-          <header className="space-y-5">
-            {/* Categories Badges — Only public nav categories */}
-            <div className="flex flex-wrap gap-2 text-xs font-semibold">
-              {displayCategories.map((category) => (
-                <Link
-                  key={category.slug}
-                  href={`/${category.slug}`}
-                  className="inline-flex items-center gap-1 rounded-full bg-accent/10 text-accent border border-accent/20 px-3.5 py-1.5 transition-all hover:bg-accent hover:text-white shadow-2xs"
-                >
-                  <Tag className="w-3 h-3" />
-                  {category.name}
-                </Link>
-              ))}
-            </div>
-
-            {/* Article Title */}
-            <h1 className="text-3xl font-extrabold tracking-tight text-text-main sm:text-4xl md:text-5xl md:leading-[1.16]">
-              {post.title}
-            </h1>
-
-            {/* ACF Field: Subheading */}
-            {subheading && (
-              <div className="relative overflow-hidden rounded-2xl bg-bg-surface border-l-4 border-brand p-5 shadow-2xs">
-                <p className="text-base sm:text-lg font-medium leading-relaxed text-text-main/90 italic">
-                  "{cleanHtml(subheading)}"
-                </p>
-              </div>
-            )}
-
-            {/* Author & Meta Bar */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-y border-brandborder py-4 text-sm text-text-muted min-w-0 max-w-full overflow-hidden">
-              <div className="flex items-center gap-3 min-w-0 flex-1 overflow-hidden">
-                {authorAvatarUrl && !authorAvatarUrl.includes("d=mm") ? (
-                  <div className="relative h-11 w-11 shrink-0 aspect-square overflow-hidden rounded-full border-2 border-brand/30 shadow-xs">
-                    <Image
-                      src={authorAvatarUrl}
-                      alt={displayAuthorName}
-                      fill
-                      className="object-cover rounded-full"
-                    />
-                  </div>
-                ) : (
-                  <div className="relative h-11 w-11 shrink-0 aspect-square overflow-hidden rounded-full border-2 border-brand/30 bg-bg-subtle p-2 shadow-xs flex items-center justify-center">
-                    <Image
-                      src="/free_Bird icon.png"
-                      alt={displayAuthorName}
-                      width={28}
-                      height={28}
-                      className="object-contain"
-                    />
-                  </div>
-                )}
-                <div className="min-w-0 flex-1 overflow-hidden">
-                  <p className="font-bold text-text-main flex items-center gap-1.5 text-sm sm:text-base">
-                    <span className="truncate">{displayAuthorName}</span>
-                    <CheckCircle2 className="w-4 h-4 text-accent fill-accent/20 shrink-0" />
-                  </p>
-
-                  {/* ACF Field: Author Subtitle */}
-                  {authorSubtitle && (
-                    <p className="text-xs text-text-muted line-clamp-2 break-words">
-                      {authorSubtitle}
-                    </p>
-                  )}
-                </div>
-              </div>
-
-              <div className="flex flex-wrap items-center gap-2.5 sm:gap-4 text-xs sm:text-sm font-semibold shrink-0">
-                <span className="flex items-center gap-1.5 text-text-muted bg-bg-subtle px-3 py-1.5 rounded-full border border-brandborder">
-                  <Calendar className="w-3.5 h-3.5 text-brand shrink-0" />
-                  <time dateTime={post.date}>{formatPostDate(post.date)}</time>
-                </span>
-
-                {/* ACF Field: Estimated Read Time */}
-                {estimatedReadTime && (
-                  <span className="flex items-center gap-1.5 text-text-muted bg-bg-subtle px-3 py-1.5 rounded-full border border-brandborder">
-                    <Clock className="w-3.5 h-3.5 text-accent shrink-0" />
-                    {estimatedReadTime}
-                  </span>
-                )}
-              </div>
-            </div>
-          </header>
-
-          {/* Featured Main Image Frame */}
-          {post.featuredImage?.node?.sourceUrl && (
-            <figure className="group relative overflow-hidden rounded-3xl border border-brandborder bg-bg-subtle shadow-md">
-              <div className="relative aspect-video w-full overflow-hidden">
-                <Image
-                  src={post.featuredImage.node.sourceUrl}
-                  alt={post.featuredImage.node.altText || post.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 896px"
-                  priority
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-              </div>
-
-              {/* ACF Field: Main Image Source Info */}
-              {mainImageSourceInfo && (
-                <figcaption className="bg-bg-surface/90 backdrop-blur-md p-3 text-center text-xs font-medium text-text-muted border-t border-brandborder">
-                  <span>{mainImageSourceInfo}</span>
-                </figcaption>
-              )}
-            </figure>
-          )}
-
-          {/* Article Body Content — Parsed with full width inline images & compact list spacing */}
-          <div className="prose prose-lg max-w-none dark:prose-invert text-text-main prose-headings:font-extrabold prose-headings:text-text-main prose-headings:tracking-tight prose-p:leading-8 prose-p:text-text-main prose-a:text-brand prose-a:font-semibold prose-a:no-underline hover:prose-a:underline prose-strong:text-text-main prose-blockquote:border-l-brand prose-blockquote:text-text-muted prose-table:w-full prose-table:border-collapse prose-th:border prose-th:border-brandborder prose-th:p-3 prose-td:border prose-td:border-brandborder prose-td:p-3 [&_.wp-block-paragraph]:mb-6 [&_.wp-block-heading]:mt-10 [&_.wp-block-heading]:mb-4 [&_.wp-block-quote]:border-l-4 [&_.wp-block-quote]:border-brand [&_.wp-block-quote]:pl-5 [&_.wp-block-quote]:py-2 [&_.wp-block-quote]:italic [&_.wp-block-image]:my-8 [&_.wp-block-image_img]:rounded-3xl [&_.wp-block-image_img]:shadow-sm [&_.wp-block-list]:pl-6 [&_.wp-block-list]:list-disc [&_li]:mb-1 [&_li]:mt-0.5 [&_li_p]:my-0">
-            <ParsedContent html={post.content || ""} />
-          </div>
-
-          {/* E-E-A-T Author Bio Card */}
-          <div className="rounded-3xl border border-brandborder bg-bg-surface p-6 sm:p-8 shadow-xs flex flex-col sm:flex-row items-center sm:items-start gap-5 text-center sm:text-left">
-            {authorAvatarUrl && !authorAvatarUrl.includes("d=mm") ? (
-              <div className="relative h-16 w-16 shrink-0 aspect-square overflow-hidden rounded-full border-2 border-brand/30 shadow-sm">
-                <Image
-                  src={authorAvatarUrl}
-                  alt={displayAuthorName}
-                  fill
-                  className="object-cover rounded-full"
-                />
-              </div>
-            ) : (
-              <div className="relative h-16 w-16 shrink-0 aspect-square overflow-hidden rounded-full border-2 border-brand/30 bg-bg-subtle p-3 shadow-sm flex items-center justify-center">
-                <Image
-                  src="/free_Bird icon.png"
-                  alt={displayAuthorName}
-                  width={40}
-                  height={40}
-                  className="object-contain"
-                />
-              </div>
-            )}
-            <div className="space-y-2 min-w-0 flex-1">
-              <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
-                <h4 className="text-base sm:text-lg font-extrabold text-text-main">
-                  {displayAuthorName}
-                </h4>
-                <span className="inline-flex items-center gap-1 rounded-full bg-accent/10 px-2.5 py-0.5 text-xs font-bold text-accent border border-accent/20">
-                  <CheckCircle2 className="w-3 h-3" /> Verified Author
-                </span>
-              </div>
-              <p className="text-xs text-text-muted font-medium">
-                {authorSubtitle ||
-                  "Freelance & Remote Work Specialist at Freebirds Digest"}
-              </p>
-              <p className="text-xs sm:text-sm leading-relaxed text-text-muted">
-                Covering digital nomad workflows, freelancing career growth,
-                remote business tools, and work-from-home strategies.
-              </p>
-            </div>
-          </div>
-
-          {/* Article Footer & In-article Newsletter Box */}
-          <footer className="mt-6 pt-6 border-t border-brandborder space-y-8">
-            <div className="flex flex-wrap items-center justify-between gap-4">
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="text-xs font-bold uppercase tracking-wider text-text-muted">
-                  Topics:
-                </span>
-                {displayCategories.map((cat) => (
-                  <Link
-                    key={cat.slug}
-                    href={`/${cat.slug}`}
-                    className="text-xs font-semibold text-text-muted hover:text-brand bg-bg-subtle px-3 py-1 rounded-full border border-brandborder transition-colors"
-                  >
-                    #{cat.name}
-                  </Link>
-                ))}
-              </div>
-
-              <ArticleActions title={post.title} />
-            </div>
-
-            {/* Interactive Remote Worker Newsletter Subscription Box */}
-            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand/10 via-bg-surface to-accent/10 border border-brandborder p-8 shadow-sm space-y-6">
-              <div className="space-y-2">
-                <div className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-brand">
-                  <Mail className="w-4 h-4" /> Freebirds Digest Newsletter
-                </div>
-                <h3 className="text-xl sm:text-2xl font-extrabold text-text-main">
-                  Elevate your remote work & freelance journey
-                </h3>
-                <p className="text-sm text-text-muted max-w-xl">
-                  Join thousands of remote professionals receiving actionable
-                  guides, tool recommendations, and career insights every week.
-                </p>
-              </div>
-
-              <NewsletterForm />
-            </div>
-          </footer>
-        </article>
-
-        {/* Pinned / Sticky Side Panel Column (4/12 width on Desktop) */}
-        <aside className="lg:col-span-4 space-y-6 lg:sticky lg:top-24 self-start">
+      {/* Main 3-Column Responsive Layout */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 xl:gap-8 items-start">
+        {/* Left Column: Pinned / Sticky News Side Panel (3/12 width on Desktop) */}
+        <aside className="order-2 lg:order-1 lg:col-span-3 space-y-6 lg:sticky lg:top-24 self-start">
           {/* Article Overview & Quick Meta Card */}
           <div className="rounded-3xl border border-brandborder bg-bg-surface p-6 shadow-sm space-y-5">
             <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-brand border-b border-brandborder pb-3">
@@ -614,7 +388,7 @@ export default async function PostPage({ params, searchParams }) {
               ) : (
                 <div className="relative h-10 w-10 shrink-0 aspect-square overflow-hidden rounded-full border-2 border-brand/30 bg-bg-subtle p-1.5 shadow-xs flex items-center justify-center">
                   <Image
-                    src="/free_Bird icon.png"
+                    src="/free_Bird icon-.png"
                     alt={displayAuthorName}
                     width={24}
                     height={24}
@@ -745,6 +519,238 @@ export default async function PostPage({ params, searchParams }) {
             <NewsletterForm />
           </div>
         </aside>
+
+        {/* Center Column: Main Article Content (6/12 width on Desktop) */}
+        <article className="mainNewsBody bg-bg-surface p-6 sm:p-8 rounded-3xl border border-brandborder shadow-xs order-1 lg:order-2 lg:col-span-6 grid gap-8 min-w-0">
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "BlogPosting",
+                headline: cleanHtml(post.title),
+                description: cleanExcerptText,
+                datePublished: post.date,
+                mainEntityOfPage: `${siteUrl}/news/${post.slug}`,
+                image: post.featuredImage?.node?.sourceUrl
+                  ? [post.featuredImage.node.sourceUrl]
+                  : undefined,
+                author: {
+                  "@type": "Person",
+                  name: displayAuthorName,
+                },
+                publisher: {
+                  "@type": "Organization",
+                  name: siteName,
+                  logo: {
+                    "@type": "ImageObject",
+                    url: `${siteUrl}/freeBird-logo.png`,
+                  },
+                },
+              }).replace(/</g, "\\u003c"),
+            }}
+          />
+
+          {/* Article Hero Header */}
+          <header className="space-y-5">
+            {/* Categories Badges — Only public nav categories */}
+            <div className="flex flex-wrap gap-2 text-xs font-semibold">
+              {displayCategories.map((category) => (
+                <Link
+                  key={category.slug}
+                  href={`/${category.slug}`}
+                  className="inline-flex items-center gap-1 rounded-full bg-accent/10 text-accent border border-accent/20 px-3.5 py-1.5 transition-all hover:bg-accent hover:text-white shadow-2xs"
+                >
+                  <Tag className="w-3 h-3" />
+                  {category.name}
+                </Link>
+              ))}
+            </div>
+
+            {/* Article Title */}
+            <h1 className="text-3xl font-extrabold tracking-tight text-text-main sm:text-4xl md:text-5xl md:leading-[1.16]">
+              {post.title}
+            </h1>
+
+            {/* ACF Field: Subheading */}
+            {subheading && (
+              <div className="relative overflow-hidden rounded-2xl bg-bg-surface border-l-4 border-brand p-5 shadow-2xs">
+                <p className="text-base sm:text-lg font-medium leading-relaxed text-text-main/90 italic">
+                  "{cleanHtml(subheading)}"
+                </p>
+              </div>
+            )}
+
+            {/* Author & Meta Bar */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-y border-brandborder py-4 text-sm text-text-muted min-w-0 max-w-full overflow-hidden">
+              <div className="flex items-center gap-3 min-w-0 flex-1 overflow-hidden">
+                {authorAvatarUrl && !authorAvatarUrl.includes("d=mm") ? (
+                  <div className="relative h-11 w-11 shrink-0 aspect-square overflow-hidden rounded-full border-2 border-brand/30 shadow-xs">
+                    <Image
+                      src={authorAvatarUrl}
+                      alt={displayAuthorName}
+                      fill
+                      className="object-cover rounded-full"
+                    />
+                  </div>
+                ) : (
+                  <div className="relative h-11 w-11 shrink-0 aspect-square overflow-hidden rounded-full border-2 border-brand/30 bg-bg-subtle p-2 shadow-xs flex items-center justify-center">
+                    <Image
+                      src="/free_Bird icon-.png"
+                      alt={displayAuthorName}
+                      width={28}
+                      height={28}
+                      className="object-contain"
+                    />
+                  </div>
+                )}
+                <div className="min-w-0 flex-1 overflow-hidden">
+                  <p className="font-bold text-text-main flex items-center gap-1.5 text-sm sm:text-base">
+                    <span className="truncate">{displayAuthorName}</span>
+                    <CheckCircle2 className="w-4 h-4 text-accent fill-accent/20 shrink-0" />
+                  </p>
+
+                  {/* ACF Field: Author Subtitle */}
+                  {authorSubtitle && (
+                    <p className="text-xs text-text-muted line-clamp-2 break-words">
+                      {authorSubtitle}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2.5 sm:gap-4 text-xs sm:text-sm font-semibold shrink-0">
+                <span className="flex items-center gap-1.5 text-text-muted bg-bg-subtle px-3 py-1.5 rounded-full border border-brandborder">
+                  <Calendar className="w-3.5 h-3.5 text-brand shrink-0" />
+                  <time dateTime={post.date}>{formatPostDate(post.date)}</time>
+                </span>
+
+                {/* ACF Field: Estimated Read Time */}
+                {estimatedReadTime && (
+                  <span className="flex items-center gap-1.5 text-text-muted bg-bg-subtle px-3 py-1.5 rounded-full border border-brandborder">
+                    <Clock className="w-3.5 h-3.5 text-accent shrink-0" />
+                    {estimatedReadTime}
+                  </span>
+                )}
+              </div>
+            </div>
+          </header>
+
+          {/* Featured Main Image Frame */}
+          {post.featuredImage?.node?.sourceUrl && (
+            <figure className="group relative overflow-hidden rounded-3xl border border-brandborder bg-bg-subtle shadow-md">
+              <div className="relative aspect-video w-full overflow-hidden">
+                <Image
+                  src={post.featuredImage.node.sourceUrl}
+                  alt={post.featuredImage.node.altText || post.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 896px"
+                  priority
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              </div>
+
+              {/* ACF Field: Main Image Source Info */}
+              {mainImageSourceInfo && (
+                <figcaption className="bg-bg-surface/90 backdrop-blur-md p-3 text-center text-xs font-medium text-text-muted border-t border-brandborder">
+                  <span>{mainImageSourceInfo}</span>
+                </figcaption>
+              )}
+            </figure>
+          )}
+
+          {/* Article Body Content — Parsed with full width inline images & compact list spacing */}
+          <div className="prose prose-lg max-w-none dark:prose-invert text-text-main prose-headings:font-extrabold prose-headings:text-text-main prose-headings:tracking-tight prose-p:leading-8 prose-p:text-text-main prose-a:text-brand prose-a:font-semibold prose-a:no-underline hover:prose-a:underline prose-strong:text-text-main prose-blockquote:border-l-brand prose-blockquote:text-text-muted prose-table:w-full prose-table:border-collapse prose-th:border prose-th:border-brandborder prose-th:p-3 prose-td:border prose-td:border-brandborder prose-td:p-3 [&_.wp-block-paragraph]:mb-6 [&_.wp-block-heading]:mt-10 [&_.wp-block-heading]:mb-4 [&_.wp-block-quote]:border-l-4 [&_.wp-block-quote]:border-brand [&_.wp-block-quote]:pl-5 [&_.wp-block-quote]:py-2 [&_.wp-block-quote]:italic [&_.wp-block-image]:my-8 [&_.wp-block-image_img]:rounded-3xl [&_.wp-block-image_img]:shadow-sm [&_.wp-block-list]:pl-6 [&_.wp-block-list]:list-disc [&_li]:mb-1 [&_li]:mt-0.5 [&_li_p]:my-0">
+            <ParsedContent html={post.content || ""} />
+          </div>
+
+          {/* E-E-A-T Author Bio Card */}
+          <div className="rounded-3xl border border-brandborder bg-bg-surface p-6 sm:p-8 shadow-xs flex flex-col sm:flex-row items-center sm:items-start gap-5 text-center sm:text-left">
+            {authorAvatarUrl && !authorAvatarUrl.includes("d=mm") ? (
+              <div className="relative h-16 w-16 shrink-0 aspect-square overflow-hidden rounded-full border-2 border-brand/30 shadow-sm">
+                <Image
+                  src={authorAvatarUrl}
+                  alt={displayAuthorName}
+                  fill
+                  className="object-cover rounded-full"
+                />
+              </div>
+            ) : (
+              <div className="relative h-16 w-16 shrink-0 aspect-square overflow-hidden rounded-full border-2 border-brand/30 bg-bg-subtle p-3 shadow-sm flex items-center justify-center">
+                <Image
+                  src="/free_Bird icon-.png"
+                  alt={displayAuthorName}
+                  width={40}
+                  height={40}
+                  className="object-contain"
+                />
+              </div>
+            )}
+            <div className="space-y-2 min-w-0 flex-1">
+              <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
+                <h4 className="text-base sm:text-lg font-extrabold text-text-main">
+                  {displayAuthorName}
+                </h4>
+                <span className="inline-flex items-center gap-1 rounded-full bg-accent/10 px-2.5 py-0.5 text-xs font-bold text-accent border border-accent/20">
+                  <CheckCircle2 className="w-3 h-3" /> Verified Author
+                </span>
+              </div>
+              <p className="text-xs text-text-muted font-medium">
+                {authorSubtitle ||
+                  "Freelance & Remote Work Specialist at Freebirds Digest"}
+              </p>
+              <p className="text-xs sm:text-sm leading-relaxed text-text-muted">
+                Covering digital nomad workflows, freelancing career growth,
+                remote business tools, and work-from-home strategies.
+              </p>
+            </div>
+          </div>
+
+          {/* Article Footer & In-article Newsletter Box */}
+          <footer className="mt-6 pt-6 border-t border-brandborder space-y-8">
+            <div className="flex flex-wrap items-center justify-between gap-4">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="text-xs font-bold uppercase tracking-wider text-text-muted">
+                  Topics:
+                </span>
+                {displayCategories.map((cat) => (
+                  <Link
+                    key={cat.slug}
+                    href={`/${cat.slug}`}
+                    className="text-xs font-semibold text-text-muted hover:text-brand bg-bg-subtle px-3 py-1 rounded-full border border-brandborder transition-colors"
+                  >
+                    #{cat.name}
+                  </Link>
+                ))}
+              </div>
+
+              <ArticleActions title={post.title} />
+            </div>
+
+            {/* Interactive Remote Worker Newsletter Subscription Box */}
+            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand/10 via-bg-surface to-accent/10 border border-brandborder p-8 shadow-sm space-y-6">
+              <div className="space-y-2">
+                <div className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-brand">
+                  <Mail className="w-4 h-4" /> Freebirds Digest Newsletter
+                </div>
+                <h3 className="text-xl sm:text-2xl font-extrabold text-text-main">
+                  Elevate your remote work & freelance journey
+                </h3>
+                <p className="text-sm text-text-muted max-w-xl">
+                  Join thousands of remote professionals receiving actionable
+                  guides, tool recommendations, and career insights every week.
+                </p>
+              </div>
+
+              <NewsletterForm />
+            </div>
+          </footer>
+        </article>
+
+        {/* Right Column: Pinned / Sticky Sponsors Ad Panel Column (3/12 width on Desktop) */}
+        <div className="sponsors w-full order-3 lg:order-3 lg:col-span-3 lg:sticky lg:top-24 self-start">
+          <SponsorsAdPnl />
+        </div>
       </div>
     </main>
   );
