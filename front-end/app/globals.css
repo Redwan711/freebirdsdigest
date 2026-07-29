@@ -15,12 +15,13 @@
   --theme-red: var(--color-brand-raw);
 }
 
+/* System Dark Mode (default fallback if no manual theme preference set) */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --color-brand-raw: #FF5C3E;
     --color-brand-dark-raw: #FF4D2E;
     --color-accent-teal-raw: #14B8A6;
-    --color-bg-base-raw: #0F172A;
+    --color-bg-base-raw: #0B1120;
     --color-bg-surface-raw: #1E293B;
     --color-bg-subtle-raw: #334155;
     --color-text-main-raw: #F8FAFC;
@@ -30,12 +31,48 @@
     --theme-red: var(--color-brand-raw);
   }
 
-  .header-logo-dark-invert {
+  :root:not([data-theme="light"]) .header-logo-dark-invert {
     filter: brightness(0) invert(1) !important;
   }
 }
 
-/* Support for Browser Dark Mode Extensions (Brave Native Dark, Dark Reader, Night Eye, Chrome Force Dark, etc.) */
+/* Explicit Manual Light Theme Override */
+:root[data-theme="light"] {
+  --color-brand-raw: #FF4D2E;
+  --color-brand-dark-raw: #E03619;
+  --color-accent-teal-raw: #0D9488;
+  --color-bg-base-raw: #F8FAFC;
+  --color-bg-surface-raw: #FFFFFF;
+  --color-bg-subtle-raw: #F1F5F9;
+  --color-text-main-raw: #0F172A;
+  --color-text-muted-raw: #64748B;
+  --borderGlob: rgba(15, 23, 42, 0.1);
+
+  --theme-red: var(--color-brand-raw);
+}
+
+/* Explicit Manual Dark Theme Override & Browser Dark Mode Extensions (Brave Native Dark, Dark Reader, Night Eye, Chrome Force Dark, etc.) */
+:root.dark,
+:root[data-theme="dark"],
+html[native-dark-active],
+html[data-darkreader-scheme="dark"],
+html[data-darkreader-inline-theme],
+html[data-darkmode="true"],
+body[data-darkreader-scheme="dark"] {
+  --color-brand-raw: #FF5C3E;
+  --color-brand-dark-raw: #FF4D2E;
+  --color-accent-teal-raw: #14B8A6;
+  --color-bg-base-raw: #0B1120;
+  --color-bg-surface-raw: #1E293B;
+  --color-bg-subtle-raw: #334155;
+  --color-text-main-raw: #F8FAFC;
+  --color-text-muted-raw: #94A3B8;
+  --borderGlob: rgba(255, 255, 255, 0.12);
+
+  --theme-red: var(--color-brand-raw);
+}
+
+/* Support for Header Logo Dark Mode Invert across OS and Extensions */
 html[native-dark-active] .header-logo-dark-invert,
 html[data-darkreader-scheme="dark"] .header-logo-dark-invert,
 html[data-darkreader-inline-theme] .header-logo-dark-invert,

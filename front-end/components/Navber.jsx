@@ -5,6 +5,7 @@ import { fetchHeaderNews } from '@/lib/headerNews';
 import { getHeaderLogoClass } from '@/lib/logoTheme';
 import BottomHeader from './BottomHeader';
 import MobileNav from './MobileNav';
+import ThemeToggle from './ThemeToggle';
 
 const Navber = async () => {
 
@@ -19,12 +20,12 @@ const Navber = async () => {
         <div className="flex items-center justify-between gap-4">
           <div className="logoSec shrink-0">
             <a href="/" className='flex items-center gap-2 group transition-transform hover:scale-[1.01]'>
-              <Image src="/freeBird-logo.png" alt="Freebirds Digest Logo" width={170} height={55} priority className={getHeaderLogoClass("w-auto h-[38px] sm:h-[48px] object-contain max-w-full")} />
+              <Image src="/freeBird-logo-new.png" alt="Freebirds Digest Logo" width={170} height={55} priority className={getHeaderLogoClass("w-auto h-[38px] sm:h-[48px] object-contain max-w-full")} />
             </a>
           </div>
 
-          {/* Desktop News Posts (Hidden on Mobile & Tablet) */}
-          <div className="gap-8 hidden lg:flex items-center">
+          {/* Desktop News Posts & Theme Toggle */}
+          <div className="gap-6 hidden lg:flex items-center">
             {headerNews.slice(0, 2).map((post) => (
               <div key={post.id} className="headerNews">
                 <Link
@@ -36,7 +37,7 @@ const Navber = async () => {
                   </h3>
                   <div className="relative overflow-hidden rounded-lg w-[65px] h-[50px] bg-bg-subtle flex-shrink-0 border border-brandborder">
                     <Image
-                      src={post.featuredImage?.node?.sourceUrl || '/freeBird-logo.png'}
+                      src={post.featuredImage?.node?.sourceUrl || '/freeBird-logo-new.png'}
                       alt={post.title}
                       fill
                       sizes="65px"
@@ -46,10 +47,14 @@ const Navber = async () => {
                 </Link>
               </div>
             ))}
+
+            {/* Desktop Theme Toggle */}
+            <ThemeToggle />
           </div>
 
-          {/* Mobile & Tablet Menu Toggle — Right Top on Non-Desktop Screens */}
-          <div className="flex lg:hidden items-center">
+          {/* Mobile & Tablet Menu Controls — Right Top on Non-Desktop Screens */}
+          <div className="flex lg:hidden items-center gap-2">
+            <ThemeToggle />
             <MobileNav categories={activeCategories} />
           </div>
         </div>
@@ -68,7 +73,7 @@ const Navber = async () => {
                 </h3>
                 <div className="relative overflow-hidden rounded-md w-[45px] h-[36px] sm:w-[52px] sm:h-[40px] bg-bg-subtle shrink-0 border border-brandborder">
                   <Image
-                    src={post.featuredImage?.node?.sourceUrl || '/freeBird-logo.png'}
+                    src={post.featuredImage?.node?.sourceUrl || '/freeBird-logo-new.png'}
                     alt={post.title}
                     fill
                     sizes="52px"

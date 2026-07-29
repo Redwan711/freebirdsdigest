@@ -44,7 +44,7 @@ const Footer = async () => {
                             <Link href="/" className="inline-block transition-transform hover:scale-[1.01]">
                                 <div className="bg-white/95 px-4 py-2.5 rounded-2xl border border-slate-700/60 inline-block shadow-sm">
                                     <Image
-                                        src="/freeBird-logo.png"
+                                        src="/freeBird-logo-new.png"
                                         alt="Freebirds Digest Logo"
                                         width={180}
                                         height={55}

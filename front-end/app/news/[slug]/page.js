@@ -544,7 +544,7 @@ export default async function PostPage({ params, searchParams }) {
                   name: siteName,
                   logo: {
                     "@type": "ImageObject",
-                    url: `${siteUrl}/freeBird-logo.png`,
+                    url: `${siteUrl}/freeBird-logo-new.png`,
                   },
                 },
               }).replace(/</g, "\\u003c"),

@@ -35,13 +35,13 @@ export const metadata = {
     siteName,
     title: `${siteName} | Freelance & Remote Work Insights`,
     description: defaultDescription,
-    images: [{ url: "/freeBird-logo.png", alt: siteName }],
+    images: [{ url: "/freeBird-logo-new.png", alt: siteName }],
   },
   twitter: {
     card: "summary_large_image",
     title: `${siteName} | Freelance & Remote Work Insights`,
     description: defaultDescription,
-    images: ["/freeBird-logo.png"],
+    images: ["/freeBird-logo-new.png"],
   },
   icons: {
     icon: '/favicon.ico',

@@ -3,6 +3,7 @@
 import { Home, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import ThemeToggle from "./ThemeToggle";
 
 export default function MobileNav({ categories }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -77,6 +78,11 @@ export default function MobileNav({ categories }) {
             >
               About Us
             </Link>
+
+            <div className="mt-3 pt-3 border-t border-brandborder flex items-center justify-between px-3.5">
+              <span className="text-xs font-semibold text-text-muted">Appearance</span>
+              <ThemeToggle />
+            </div>
           </nav>
         </>
       )}
