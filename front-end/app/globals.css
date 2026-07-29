@@ -29,6 +29,22 @@
 
     --theme-red: var(--color-brand-raw);
   }
+
+  .header-logo-dark-invert {
+    filter: brightness(0) invert(1) !important;
+  }
+}
+
+/* Support for Browser Dark Mode Extensions (Brave Native Dark, Dark Reader, Night Eye, Chrome Force Dark, etc.) */
+html[native-dark-active] .header-logo-dark-invert,
+html[data-darkreader-scheme="dark"] .header-logo-dark-invert,
+html[data-darkreader-inline-theme] .header-logo-dark-invert,
+html[data-darkmode="true"] .header-logo-dark-invert,
+html[data-theme="dark"] .header-logo-dark-invert,
+html.dark .header-logo-dark-invert,
+body[data-darkreader-scheme="dark"] .header-logo-dark-invert,
+body.dark .header-logo-dark-invert {
+  filter: brightness(0) invert(1) !important;
 }
 
 @theme {

@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link';
 import { fetchNavigationCategories } from '@/lib/categories';
 import { fetchHeaderNews } from '@/lib/headerNews';
+import { getHeaderLogoClass } from '@/lib/logoTheme';
 import BottomHeader from './BottomHeader';
 import MobileNav from './MobileNav';
 
@@ -18,7 +19,7 @@ const Navber = async () => {
         <div className="flex items-center justify-between gap-4">
           <div className="logoSec shrink-0">
             <a href="/" className='flex items-center gap-2 group transition-transform hover:scale-[1.01]'>
-              <Image src="/freeBird-logo.png" alt="Freebirds Digest Logo" width={170} height={55} priority className="w-auto h-[38px] sm:h-[48px] object-contain max-w-full" />
+              <Image src="/freeBird-logo.png" alt="Freebirds Digest Logo" width={170} height={55} priority className={getHeaderLogoClass("w-auto h-[38px] sm:h-[48px] object-contain max-w-full")} />
             </a>
           </div>
 
