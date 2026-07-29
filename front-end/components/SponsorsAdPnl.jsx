@@ -58,7 +58,8 @@ export default async function SponsorsAdPnl() {
                 adTitleIfAny ||
                 post.title;
 
-              const titleText = adTitleIfAny || post.title || "Featured Sponsor";
+              const titleText = adTitleIfAny || "Featured Sponsor";
+              //const titleText = adTitleIfAny || post.title || "Featured Sponsor";
               const targetUrl = redirectionLink || "#";
 
               return (
@@ -90,7 +91,7 @@ export default async function SponsorsAdPnl() {
 
                   <div className="space-y-1">
                     <div className="flex items-center justify-between gap-1">
-                      <h4 className="text-xs font-extrabold text-text-main group-hover:text-brand transition-colors line-clamp-1">
+                      <h4 className="text-xs font-semibold text-text-main group-hover:text-brand transition-colors line-clamp-1">
                         {titleText}
                       </h4>
                       <ExternalLink className="w-3 h-3 text-text-muted group-hover:text-brand shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
