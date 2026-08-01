@@ -374,6 +374,9 @@ export default async function PostPage({ params, searchParams }) {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 xl:gap-8 items-start">
         {/* Left Column: Pinned / Sticky News Side Panel (3/12 width on Desktop) */}
         <aside className="order-2 lg:order-1 lg:col-span-3 space-y-6 lg:sticky lg:top-24 self-start">
+          {/* Table of Contents Section */}
+          <TableOfContents headings={headings} />
+
           {/* Article Overview & Quick Meta Card */}
           <div className="rounded-3xl border border-brandborder bg-bg-surface p-6 shadow-sm space-y-5">
             <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-brand border-b border-brandborder pb-3">
@@ -478,9 +481,6 @@ export default async function PostPage({ params, searchParams }) {
               </div>
             </div>
           )}
-
-          {/* Table of Contents Section */}
-          <TableOfContents headings={headings} />
 
           {/* ACF Field #8: otherUrl (External Resource Link Button) */}
           {otherUrl && (
