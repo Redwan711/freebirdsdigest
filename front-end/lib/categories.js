@@ -15,12 +15,11 @@ const GET_ALL_CATEGORIES = `
 `;
 
 const NAVIGATION_CATEGORY_SLUGS = [
-  'feature-story',
-  'financial',
-  'lifestyle',
-  'personal',
-  'platform',
+  'featured',
+  'finance',
   'technology',
+  'lifestyle',
+  'news',
 ];
 
 const NAV_SLUG_SET = new Set(NAVIGATION_CATEGORY_SLUGS);
