@@ -116,15 +116,12 @@ export default function TableOfContents({ headings = [] }) {
           <AlignLeft className="w-4 h-4 text-brand transition-transform group-hover:scale-110" />
           <span>Table of Contents</span>
         </div>
-        <span className="text-[10px] font-bold bg-brand/10 text-brand px-2.5 py-0.5 rounded-full border border-brand/20">
-          {headings.length} {headings.length === 1 ? "Section" : "Sections"}
-        </span>
       </div>
 
       {isExpanded && (
         <nav
           ref={navRef}
-          className="space-y-1 pt-1 max-h-[380px] overflow-y-auto pr-1 text-xs scroll-smooth"
+          className="space-y-0.5 pt-0.5 max-h-95 overflow-y-auto pr-1 text-xs scroll-smooth"
         >
           {headings.map((heading) => {
             const isActive = activeId === heading.id;
@@ -139,7 +136,7 @@ export default function TableOfContents({ headings = [] }) {
                 href={`#${heading.id}`}
                 data-toc-id={heading.id}
                 onClick={(e) => scrollToHeading(e, heading.id)}
-                className={`group relative flex items-center justify-between rounded-xl py-2.5 pr-3 text-xs transition-all duration-200 ${indentClass} ${
+                className={`group relative flex items-center justify-between rounded-xl py-2 pr-3 text-xs transition-all duration-200 ${indentClass} ${
                   isActive
                     ? "bg-brand/10 font-bold text-brand shadow-2xs translate-x-1"
                     : "text-text-muted hover:bg-bg-subtle hover:text-text-main font-medium hover:translate-x-1"
@@ -149,7 +146,7 @@ export default function TableOfContents({ headings = [] }) {
                   <span className="absolute left-0 top-1.5 bottom-1.5 w-1 rounded-r-full bg-brand shadow-xs" />
                 )}
 
-                <span className="line-clamp-2 leading-relaxed flex-1">
+                <span className="min-w-0 flex-1 truncate leading-tight">
                   {heading.text}
                 </span>
 

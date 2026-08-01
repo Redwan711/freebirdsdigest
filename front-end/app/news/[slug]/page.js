@@ -377,84 +377,6 @@ export default async function PostPage({ params, searchParams }) {
           {/* Table of Contents Section */}
           <TableOfContents headings={headings} />
 
-          {/* Article Overview & Quick Meta Card */}
-          <div className="rounded-3xl border border-brandborder bg-bg-surface p-6 shadow-sm space-y-5">
-            <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-brand border-b border-brandborder pb-3">
-              <Sparkles className="w-4 h-4" />
-              <span>Article Overview</span>
-            </div>
-
-            {/* Author Info */}
-            <div className="flex items-center gap-3">
-              {authorAvatarUrl && !authorAvatarUrl.includes("d=mm") ? (
-                <div className="relative h-10 w-10 shrink-0 aspect-square overflow-hidden rounded-full border-2 border-brand/30 shadow-xs">
-                  <Image
-                    src={authorAvatarUrl}
-                    alt={displayAuthorName}
-                    fill
-                    className="object-cover rounded-full"
-                  />
-                </div>
-              ) : (
-                <div className="relative h-10 w-10 shrink-0 aspect-square overflow-hidden rounded-full border-2 border-brand/30 bg-bg-subtle p-1.5 shadow-xs flex items-center justify-center">
-                  <Image
-                    src="/free_Bird icon-.png"
-                    alt={displayAuthorName}
-                    width={24}
-                    height={24}
-                    className="object-contain"
-                  />
-                </div>
-              )}
-              <div className="min-w-0 flex-1">
-                <p className="font-bold text-text-main text-sm flex items-center gap-1.5">
-                  <span className="truncate">{displayAuthorName}</span>
-                  <CheckCircle2 className="w-3.5 h-3.5 text-accent shrink-0" />
-                </p>
-                <p className="text-[11px] text-text-muted truncate">
-                  {authorSubtitle || "Remote Work Specialist"}
-                </p>
-              </div>
-            </div>
-
-            {/* Key Meta Badges */}
-            <div className="space-y-2 text-xs">
-              <div className="flex items-center justify-between text-text-muted py-1 border-b border-brandborder/50">
-                <span className="flex items-center gap-1.5">
-                  <Calendar className="w-3.5 h-3.5 text-brand" /> Published:
-                </span>
-                <span className="font-semibold text-text-main">
-                  {formatPostDate(post.date)}
-                </span>
-              </div>
-              {estimatedReadTime && (
-                <div className="flex items-center justify-between text-text-muted py-1 border-b border-brandborder/50">
-                  <span className="flex items-center gap-1.5">
-                    <Clock className="w-3.5 h-3.5 text-accent" /> Read Time:
-                  </span>
-                  <span className="font-semibold text-text-main">
-                    {estimatedReadTime}
-                  </span>
-                </div>
-              )}
-              {displayCategories[0] && (
-                <div className="flex items-center justify-between text-text-muted py-1">
-                  <span className="flex items-center gap-1.5">
-                    <Tag className="w-3.5 h-3.5 text-brand" /> Category:
-                  </span>
-                  <span className="font-semibold text-accent">
-                    {displayCategories[0].name}
-                  </span>
-                </div>
-              )}
-            </div>
-
-            {/* Quick Actions */}
-            <div className="pt-2 border-t border-brandborder flex justify-center">
-              <ArticleActions title={post.title} />
-            </div>
-          </div>
-
           {/* ACF Field #7: videoSource (Featured Video Embed Player) */}
           {videoSource && (
             <div className="rounded-3xl border border-brandborder bg-bg-surface p-5 shadow-sm space-y-3">
@@ -500,21 +422,6 @@ export default async function PostPage({ params, searchParams }) {
               </a>
             </div>
           )}
-
-          {/* Sidebar Compact Newsletter Box */}
-          <div className="rounded-3xl border border-brandborder bg-bg-surface p-6 shadow-sm space-y-4">
-            <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-brand">
-              <Mail className="w-4 h-4" /> Newsletter
-            </div>
-            <h4 className="text-base font-extrabold text-text-main">
-              Get Freelance Digest Weekly
-            </h4>
-            <p className="text-xs text-text-muted">
-              Remote work tips, tools, and insights delivered straight to your
-              inbox.
-            </p>
-            <NewsletterForm />
-          </div>
         </aside>
 
         {/* Center Column: Main Article Content (6/12 width on Desktop) */}
