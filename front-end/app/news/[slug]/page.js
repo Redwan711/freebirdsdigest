@@ -21,6 +21,8 @@ import ArticleActions from "@/components/ArticleActions";
 import NewsletterForm from "@/components/NewsletterForm";
 import ParsedContent from "@/components/ParsedContent";
 import SponsorsAdPnl from "@/components/SponsorsAdPnl";
+import TableOfContents from "@/components/TableOfContents";
+import { parseHeadingsAndInjectIds } from "@/lib/toc";
 
 const GET_POST_BY_SLUG = `
   query GetPostBySlug($slug: ID!) {
@@ -348,6 +350,11 @@ export default async function PostPage({ params, searchParams }) {
   // Filter categories to only show public navigation menu categories
   const displayCategories = filterNavCategories(post.categories?.nodes ?? []);
 
+  // Parse H1-H4 headings & inject unique IDs for Table of Contents
+  const { modifiedHtml, headings } = parseHeadingsAndInjectIds(
+    post.content || ""
+  );
+
   return (
     <main className="mx-auto max-w-7xl xl:max-w-[1440px] 2xl:max-w-[1536px] px-4 py-8 md:px-6 font-inter">
       {/* Top Navigation & Action Bar */}
@@ -472,18 +479,8 @@ export default async function PostPage({ params, searchParams }) {
             </div>
           )}
 
-          {/* Key Highlights / Excerpt Box */}
-          {cleanExcerptText && (
-            <div className="rounded-3xl border border-brandborder bg-gradient-to-br from-brand/5 via-bg-surface to-accent/5 p-6 shadow-xs space-y-3">
-              <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-brand">
-                <Sparkles className="w-4 h-4" />
-                <span>Key Takeaways</span>
-              </div>
-              <p className="text-xs leading-relaxed text-text-main font-medium">
-                {cleanExcerptText}
-              </p>
-            </div>
-          )}
+          {/* Table of Contents Section */}
+          <TableOfContents headings={headings} />
 
           {/* ACF Field #8: otherUrl (External Resource Link Button) */}
           {otherUrl && (
@@ -660,8 +657,8 @@ export default async function PostPage({ params, searchParams }) {
           )}
 
           {/* Article Body Content — Parsed with full width inline images & compact list spacing */}
-          <div className="prose prose-lg max-w-none dark:prose-invert text-text-main prose-headings:font-extrabold prose-headings:text-text-main prose-headings:tracking-tight prose-p:leading-8 prose-p:text-text-main prose-a:text-brand prose-a:font-semibold prose-a:no-underline hover:prose-a:underline prose-strong:text-text-main prose-blockquote:border-l-brand prose-blockquote:text-text-muted prose-table:w-full prose-table:border-collapse prose-th:border prose-th:border-brandborder prose-th:p-3 prose-td:border prose-td:border-brandborder prose-td:p-3 [&_.wp-block-paragraph]:mb-6 [&_.wp-block-heading]:mt-10 [&_.wp-block-heading]:mb-4 [&_.wp-block-quote]:border-l-4 [&_.wp-block-quote]:border-brand [&_.wp-block-quote]:pl-5 [&_.wp-block-quote]:py-2 [&_.wp-block-quote]:italic [&_.wp-block-image]:my-8 [&_.wp-block-image_img]:rounded-3xl [&_.wp-block-image_img]:shadow-sm [&_.wp-block-list]:pl-6 [&_.wp-block-list]:list-disc [&_li]:mb-1 [&_li]:mt-0.5 [&_li_p]:my-0">
-            <ParsedContent html={post.content || ""} />
+          <div className="prose prose-lg max-w-none dark:prose-invert text-text-main prose-headings:font-extrabold prose-headings:text-text-main prose-headings:tracking-tight prose-headings:scroll-mt-24 prose-p:leading-8 prose-p:text-text-main prose-a:text-brand prose-a:font-semibold prose-a:no-underline hover:prose-a:underline prose-strong:text-text-main prose-blockquote:border-l-brand prose-blockquote:text-text-muted prose-table:w-full prose-table:border-collapse prose-th:border prose-th:border-brandborder prose-th:p-3 prose-td:border prose-td:border-brandborder prose-td:p-3 [&_.wp-block-paragraph]:mb-6 [&_.wp-block-heading]:mt-10 [&_.wp-block-heading]:mb-4 [&_.wp-block-quote]:border-l-4 [&_.wp-block-quote]:border-brand [&_.wp-block-quote]:pl-5 [&_.wp-block-quote]:py-2 [&_.wp-block-quote]:italic [&_.wp-block-image]:my-8 [&_.wp-block-image_img]:rounded-3xl [&_.wp-block-image_img]:shadow-sm [&_.wp-block-list]:pl-6 [&_.wp-block-list]:list-disc [&_li]:mb-1 [&_li]:mt-0.5 [&_li_p]:my-0">
+            <ParsedContent html={modifiedHtml} />
           </div>
 
           {/* E-E-A-T Author Bio Card */}
