@@ -68,6 +68,13 @@ const BottomHeader = ({ activeCategories }) => {
                 </Link>
               ))}
               <Link
+                href="/reviews"
+                className="text-sm font-medium text-text-main hover:text-brand transition-colors relative group py-1"
+              >
+                Reviews
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-brand transition-all duration-200 group-hover:w-full" />
+              </Link>
+              <Link
                 href="/contribute"
                 className="text-sm font-medium text-text-main hover:text-brand transition-colors relative group py-1"
               >
