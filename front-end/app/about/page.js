@@ -316,13 +316,6 @@ export default function AboutPage() {
                 <span>Explore Our Content</span>
                 <ArrowRight className="h-4 w-4" />
               </a>
-              <a
-                href="mailto:hello@freebirdsdigest.com"
-                className="inline-flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-800/80 px-6 py-3 text-sm font-bold text-slate-200 transition-all hover:bg-slate-700 hover:text-white"
-              >
-                <Mail className="h-4 w-4 text-brand" />
-                <span>Contact Editorial Team</span>
-              </a>
             </div>
           </div>
 
