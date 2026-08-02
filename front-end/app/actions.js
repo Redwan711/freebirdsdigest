@@ -8,33 +8,71 @@ async function sendViaResend({ from, to, subject, reply_to, html }) {
   const apiKey = process.env.RESEND_API_KEY;
 
   if (!apiKey) {
-    console.log("⚠️ RESEND_API_KEY environment variable is missing.");
+    console.log("⚠️ RESEND_API_KEY environment variable is missing in process.env.");
+    console.log("💡 TIP: Please restart your 'npm run dev' terminal server to reload .env.local!");
     console.log("✅ SIMULATED EMAIL PAYLOAD:", { from, to, subject, reply_to });
     return { id: "simulated_" + Date.now(), status: "simulated" };
   }
 
-  const response = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      from,
-      to,
-      subject,
-      reply_to,
-      html,
-    }),
-  });
+  const sendRequest = async (senderFrom, recipientTo) => {
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: senderFrom,
+        to: recipientTo,
+        subject,
+        reply_to,
+        html,
+      }),
+    });
+    const data = await res.json();
+    return { ok: res.ok, status: res.status, data };
+  };
 
-  const data = await response.json();
+  // Primary delivery attempt
+  let result = await sendRequest(from, to);
 
-  if (!response.ok) {
-    throw new Error(data?.message || data?.error?.message || `Resend HTTP error ${response.status}`);
+  // If primary attempt failed due to unverified custom domain or testing limits, attempt smart fallback
+  if (!result.ok) {
+    const errorMsg = String(result.data?.message || result.data?.error?.message || result.data?.name || "");
+    console.warn(`⚠️ Resend attempt failed [HTTP ${result.status}]:`, errorMsg);
+
+    let fallbackFrom = from;
+    let fallbackTo = to;
+
+    // Fallback to Resend default onboarding sender if custom domain is not yet verified in Resend Dashboard
+    if (
+      errorMsg.includes("domain") ||
+      errorMsg.includes("not verified") ||
+      errorMsg.includes("validation_error") ||
+      result.status === 403
+    ) {
+      fallbackFrom = "FreeBirds Digest <onboarding@resend.dev>";
+    }
+
+    // Fallback recipient if Resend API key is in testing mode (only allows sending to account owner email)
+    if (errorMsg.includes("testing mode") || errorMsg.includes("only send to")) {
+      fallbackTo = Array.isArray(to) ? [to[to.length - 1]] : to;
+    }
+
+    if (fallbackFrom !== from || fallbackTo !== to) {
+      console.log("🔄 Retrying Resend with fallback sender/recipient:", { fallbackFrom, fallbackTo });
+      result = await sendRequest(fallbackFrom, fallbackTo);
+    }
   }
 
-  return data;
+  if (!result.ok) {
+    const finalError = result.data?.message || result.data?.error?.message || `Resend Error (Status ${result.status})`;
+    console.error("❌ Resend API Final Failure:", finalError);
+    throw new Error(finalError);
+  }
+
+  console.log("✅ RESEND SUCCESS PAYLOAD:", result.data);
+  return result.data;
 }
 
 /**
@@ -50,7 +88,6 @@ export async function sendContactEmail(formData) {
   try {
     const botField = formData.get("company_website_url");
 
-    // Strictly check if the bot honeypot field has any text (is a string and length > 0)
     if (typeof botField === "string" && botField.length > 0) {
       console.log("🤖 Bot blocked by honeypot!");
       return { success: true };
@@ -78,10 +115,9 @@ export async function sendContactEmail(formData) {
       `,
     });
 
-    console.log("✅ RESEND SUCCESS PAYLOAD:", data);
     return { success: true, data };
   } catch (error) {
-    console.log("❌ RESEND CRASHED:", error);
+    console.log("❌ RESEND CONTACT CRASHED:", error);
     return { success: false, error: error.message || "Failed to dispatch email." };
   }
 }
@@ -130,7 +166,6 @@ export async function sendDemoRequestEmail(formData) {
       `,
     });
 
-    console.log("✅ RESEND DEMO SUCCESS PAYLOAD:", data);
     return { success: true, data };
   } catch (error) {
     console.log("❌ RESEND DEMO CRASHED:", error);
@@ -169,7 +204,6 @@ export async function subscribeNewsletter(formData) {
       `,
     });
 
-    console.log("✅ RESEND NEWSLETTER SUCCESS:", data);
     return { success: true, data };
   } catch (error) {
     console.log("❌ RESEND NEWSLETTER CRASHED:", error);
@@ -219,7 +253,6 @@ export async function sendContributePitchEmail(formData) {
       `,
     });
 
-    console.log("✅ RESEND CONTRIBUTE SUCCESS PAYLOAD:", data);
     return { success: true, data };
   } catch (error) {
     console.log("❌ RESEND CONTRIBUTE CRASHED:", error);

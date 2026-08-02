@@ -417,7 +417,7 @@ export default function ContributePage() {
         {/* ═══════════════════════════════════════════════════════════
             EDITORIAL GUIDELINES — DOs & DON'Ts
         ═══════════════════════════════════════════════════════════ */}
-        <section id="guidelines" className="my-16 scroll-mt-10">
+        <section id="guidelines" className="my-16 scroll-mt-24">
           <div className="max-w-2xl space-y-2 mb-8">
             <span className="text-xs font-bold uppercase tracking-widest text-brand">
               Quality Standards
@@ -518,7 +518,7 @@ export default function ContributePage() {
         {/* ═══════════════════════════════════════════════════════════
             PITCH SUBMISSION FORM SECTION
         ═══════════════════════════════════════════════════════════ */}
-        <section id="pitch-form" className="my-16 scroll-mt-10">
+        <section id="pitch-form" className="my-16 scroll-mt-24">
           <div className="rounded-3xl border border-brandborder bg-bg-surface p-8 sm:p-12 shadow-sm space-y-8">
             <div className="max-w-2xl space-y-2 border-b border-brandborder pb-6">
               <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand">
