@@ -66,6 +66,8 @@ query GetPostBySlug($slug: ID!) {
     # ACF Field Group: Article Metadata (Registered in WP via WPGraphQL for ACF)
     articleMetadata {
       subheading
+      topq
+      topa
       mainImageSourceInfo
       authorSubtitle
       estimatedReadTime
@@ -99,18 +101,20 @@ Note: hardcode the slug into `id` only for manual testing in the GraphiQL IDE. I
 
 ### Custom ACF Fields (`articleMetadata`)
 
-All 8 fields registered under the **Article Metadata** field group in WordPress:
+All 10 fields registered under the **Article Metadata** field group in WordPress:
 
 | # | ACF Field Name | GraphQL Field Name | Field Type | Purpose & Rendering |
 |---|---|---|---|---|
 | 1 | `subheading` | `subheading` | Text | Article sub-headline / lead quote. Render conditionally under post title. |
-| 2 | `main_image_source_&_info` | `mainImageSourceInfo` | Text | Caption / credit for featured image. Render conditionally under image. |
-| 3 | `author_subtitle` | `authorSubtitle` | Text | Author designation / subtitle. Render conditionally under author name. |
-| 4 | `estimated_read_time` | `estimatedReadTime` | Text | Reading time badge (e.g. "5 min read"). Render conditionally with fallback. |
-| 5 | (don't need it anymore)`secnd_image` | `secndImage` | Image (`node { sourceUrl altText }`) | Secondary article image. Render conditionally if present. |
-| 6 | `image_source_` | `imageSource` | Text | Source text/URL for external image attribution. Render conditionally. |
-| 7 | `video_source` | `videoSource` | URL | Video embed URL (YouTube/Vimeo/MP4). Render conditionally with embedded player. |
-| 8 | `other_url` | `otherUrl` | URL | External reference/resource link. Render conditionally as CTA button. |
+| 2 | `topq` | `topq` | Text | Key Question (TopQ). Render conditionally on top of featured image. |
+| 3 | `topa` | `topa` | Text | Key Answer (TopA). Render conditionally on top of featured image. |
+| 4 | `main_image_source_&_info` | `mainImageSourceInfo` | Text | Caption / credit for featured image. Render conditionally under image. |
+| 5 | `author_subtitle` | `authorSubtitle` | Text | Author designation / subtitle. Render conditionally under author name. |
+| 6 | `estimated_read_time` | `estimatedReadTime` | Text | Reading time badge (e.g. "5 min read"). Render conditionally with fallback. |
+| 7 | `secnd_image` | `secndImage` | Image (`node { sourceUrl altText }`) | Secondary article image. Render conditionally if present. |
+| 8 | `image_source_` | `imageSource` | Text | Source text/URL for external image attribution. Render conditionally. |
+| 9 | `video_source` | `videoSource` | URL | Video embed URL (YouTube/Vimeo/MP4). Render conditionally in sticky sidebar with embedded player. |
+| 10 | `other_url` | `otherUrl` | URL | External reference/resource link. Render conditionally in sticky sidebar as CTA button. |
 
 ## Sample response (for shaping component props / types)
 

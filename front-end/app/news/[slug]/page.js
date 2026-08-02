@@ -72,9 +72,18 @@ const GET_POST_BY_SLUG = `
       }
       articleMetadata {
         subheading
+        topq
+        topa
         authorSubtitle
         estimatedReadTime
         mainImageSourceInfo
+        secndImage {
+          node {
+            sourceUrl
+            altText
+          }
+        }
+        imageSource
         videoSource
         otherUrl
       }
@@ -130,9 +139,18 @@ const GET_POST_BY_DATABASE_ID = `
       }
       articleMetadata {
         subheading
+        topq
+        topa
         authorSubtitle
         estimatedReadTime
         mainImageSourceInfo
+        secndImage {
+          node {
+            sourceUrl
+            altText
+          }
+        }
+        imageSource
         videoSource
         otherUrl
       }
@@ -328,12 +346,19 @@ export default async function PostPage({ params, searchParams }) {
   const articleMetadata = post?.articleMetadata ?? {};
   const {
     subheading,
+    topq,
+    topa,
+    topQ,
+    topA,
     authorSubtitle,
     estimatedReadTime,
     mainImageSourceInfo,
     videoSource,
     otherUrl,
   } = articleMetadata;
+
+  const topQuestion = topq || topQ;
+  const topAnswer = topa || topA;
 
   // Author identity resolution
   const authorNode = post.author?.node;
@@ -457,18 +482,31 @@ export default async function PostPage({ params, searchParams }) {
 
           {/* Article Hero Header */}
           <header className="space-y-5">
-            {/* Categories Badges — Only public nav categories */}
-            <div className="flex flex-wrap gap-2 text-xs font-semibold">
-              {displayCategories.map((category) => (
-                <Link
-                  key={category.slug}
-                  href={`/${category.slug}`}
-                  className="inline-flex items-center gap-1 rounded-full bg-accent/10 text-accent border border-accent/20 px-3.5 py-1.5 transition-all hover:bg-accent hover:text-white shadow-2xs"
-                >
-                  <Tag className="w-3 h-3" />
-                  {category.name}
-                </Link>
-              ))}
+            {/* Top Meta Bar: Categories & Estimated Read Time Badge */}
+            <div className="flex flex-wrap items-center justify-between gap-3 text-xs font-semibold">
+              <div className="flex flex-wrap gap-2">
+                {displayCategories.map((category) => (
+                  <Link
+                    key={category.slug}
+                    href={`/${category.slug}`}
+                    className="inline-flex items-center gap-1 rounded-full bg-accent/10 text-accent border border-accent/20 px-3.5 py-1.5 transition-all hover:bg-accent hover:text-white shadow-2xs"
+                  >
+                    <Tag className="w-3 h-3" />
+                    {category.name}
+                  </Link>
+                ))}
+              </div>
+
+              {/* ACF Field: Estimated Read Time (Rendered at Top Right above Article Title) */}
+              {(estimatedReadTime || post.content) && (
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-bg-subtle text-text-muted border border-brandborder px-3.5 py-1.5 font-semibold text-xs shadow-2xs">
+                  <Clock className="w-3.5 h-3.5 text-accent shrink-0" />
+                  <span>
+                    {estimatedReadTime ||
+                      `${Math.max(1, Math.ceil((post.content || "").replace(/<[^>]*>/g, "").trim().split(/\s+/).length / 200))} min read`}
+                  </span>
+                </span>
+              )}
             </div>
 
             {/* Article Title */}
@@ -528,17 +566,38 @@ export default async function PostPage({ params, searchParams }) {
                   <Calendar className="w-3.5 h-3.5 text-brand shrink-0" />
                   <time dateTime={post.date}>{formatPostDate(post.date)}</time>
                 </span>
-
-                {/* ACF Field: Estimated Read Time */}
-                {estimatedReadTime && (
-                  <span className="flex items-center gap-1.5 text-text-muted bg-bg-subtle px-3 py-1.5 rounded-full border border-brandborder">
-                    <Clock className="w-3.5 h-3.5 text-accent shrink-0" />
-                    {estimatedReadTime}
-                  </span>
-                )}
               </div>
             </div>
           </header>
+
+          {/* ACF Fields #2 & #3: topq & topa (Top Question & Top Answer — Rendered on top of feature image) */}
+          {(topQuestion || topAnswer) && (
+            <div className="rounded-3xl border border-brand/20 bg-gradient-to-br from-brand/5 via-bg-surface to-accent/5 p-5 sm:p-6 shadow-xs space-y-4">
+              <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-brand border-b border-brandborder/60 pb-3">
+                <Sparkles className="w-4 h-4 text-brand shrink-0" />
+                <span>Key Takeaway </span>
+              </div>
+              {topQuestion && (
+                <div className="space-y-1">
+                  <div className="flex items-start gap-2.5">
+                    <span className="inline-flex items-center justify-center shrink-0 w-6 h-6 rounded-full bg-brand text-white font-extrabold text-xs">
+                      Q
+                    </span>
+                    <h3 className="text-base sm:text-lg font-bold text-text-main leading-snug pt-0.5">
+                      {cleanHtml(topQuestion)}
+                    </h3>
+                  </div>
+                </div>
+              )}
+              {topAnswer && (
+                <div className="space-y-1 pl-8 border-l-2 border-brand/30 ml-3">
+                  <p className="text-sm sm:text-base font-medium text-text-muted leading-relaxed">
+                    {cleanHtml(topAnswer)}
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
 
           {/* Featured Main Image Frame */}
           {post.featuredImage?.node?.sourceUrl && (
