@@ -48,7 +48,7 @@ export default async function SponsorsAdPnl() {
           </div>
         ) : (
           <div className="grid gap-4">
-            {displaySponsors.slice(0, 1).map((post) => {
+            {displaySponsors.map((post) => {
               const sponsoreData = post.sponsore || post.sponsors || {};
               const { redirectionLink, adTitleIfAny, adImage } = sponsoreData;
 
