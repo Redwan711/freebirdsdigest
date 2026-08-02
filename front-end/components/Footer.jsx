@@ -93,6 +93,11 @@ const Footer = async () => {
                                     </Link>
                                 </li>
                                 <li>
+                                    <Link href="/contribute" className="hover:text-brand transition-colors">
+                                        Write for Us
+                                    </Link>
+                                </li>
+                                <li>
                                     <Link href="/privacy-policy" className="hover:text-brand transition-colors">
                                         Privacy Policy
                                     </Link>

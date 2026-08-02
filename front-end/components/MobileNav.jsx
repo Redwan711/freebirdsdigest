@@ -72,6 +72,13 @@ export default function MobileNav({ categories }) {
               </Link>
             ))}
             <Link
+              href="/contribute"
+              onClick={closeMenu}
+              className="block rounded-xl px-3.5 py-3 font-poppins text-sm font-semibold text-text-main hover:bg-brand/10 hover:text-brand transition-colors"
+            >
+              Contribute
+            </Link>
+            <Link
               href="/about"
               onClick={closeMenu}
               className="block rounded-xl px-3.5 py-3 font-poppins text-sm font-semibold text-text-main hover:bg-brand/10 hover:text-brand transition-colors"
