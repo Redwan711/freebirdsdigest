@@ -7,6 +7,6 @@
  * @returns {string} Combined CSS class string including dark-mode invert filters.
  */
 export function getHeaderLogoClass(baseClass = "") {
-  const darkInvertClass = "header-logo-dark-invert dark:brightness-0 dark:invert transition-all duration-300";
+  const darkInvertClass = "header-logo-dark-invert transition-all duration-300";
   return baseClass ? `${baseClass} ${darkInvertClass}`.trim() : darkInvertClass;
 }

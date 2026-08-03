@@ -39,9 +39,7 @@ export default function ThemeToggle({ className = "" }) {
     setTheme(initialTheme);
 
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      applyTheme(savedTheme);
-    }
+    applyTheme(savedTheme || initialTheme);
 
     // MutationObserver to automatically detect when a browser extension injects dark mode attributes
     const observer = new MutationObserver(() => {

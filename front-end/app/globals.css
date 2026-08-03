@@ -88,6 +88,13 @@ body.dark .header-logo-dark-invert {
   filter: brightness(0) invert(1) !important;
 }
 
+/* Explicit Light Theme Override for Header Logo */
+html[data-theme="light"] .header-logo-dark-invert,
+:root[data-theme="light"] .header-logo-dark-invert,
+body[data-theme="light"] .header-logo-dark-invert {
+  filter: none !important;
+}
+
 @theme {
   --font-inter: var(--font-inter);
   --font-jakarta: var(--font-jakarta);
