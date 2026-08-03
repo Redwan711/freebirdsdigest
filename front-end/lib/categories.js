@@ -39,6 +39,7 @@ export function filterNavCategories(categories = []) {
         'main-new-preview',
         'side-panel-news',
         'promotional-image',
+        'bottom-page-ads',
         'uncategorized',
       ].includes(cat?.slug)
   );

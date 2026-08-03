@@ -18,6 +18,7 @@ import {
   Link as LinkIcon,
 } from "lucide-react";
 import ArticleActions from "@/components/ArticleActions";
+import BottomPageAd from "@/components/BottomPageAd";
 import NewsletterForm from "@/components/NewsletterForm";
 import ParsedContent from "@/components/ParsedContent";
 import SponsorsAdPnl from "@/components/SponsorsAdPnl";
@@ -396,7 +397,7 @@ export default async function PostPage({ params, searchParams }) {
       </div>
 
       {/* Main 3-Column Responsive Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 xl:gap-8 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-4 xl:gap-5 items-start">
         {/* Left Column: Pinned / Sticky News Side Panel (3/12 width on Desktop) */}
         <aside className="order-2 lg:order-1 lg:col-span-3 space-y-6 lg:sticky lg:top-24 self-start">
           {/* Table of Contents Section */}
@@ -510,7 +511,7 @@ export default async function PostPage({ params, searchParams }) {
             </div>
 
             {/* Article Title */}
-            <h1 className="text-3xl font-extrabold tracking-tight text-text-main sm:text-4xl md:text-5xl md:leading-[1.16]">
+            <h1 className="text-2xl font-extrabold tracking-tight text-text-main sm:text-3xl lg:text-4xl leading-tight font-jakarta">
               {post.title}
             </h1>
 
@@ -707,6 +708,9 @@ export default async function PostPage({ params, searchParams }) {
 
               <NewsletterForm />
             </div>
+
+            {/* Bottom Page Ad Banner (Inside Post Body Footer) */}
+            <BottomPageAd />
           </footer>
         </article>
 
