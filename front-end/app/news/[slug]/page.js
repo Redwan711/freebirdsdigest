@@ -397,9 +397,9 @@ export default async function PostPage({ params, searchParams }) {
       </div>
 
       {/* Main 3-Column Responsive Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-4 xl:gap-5 items-start">
+      <div className="flex flex-col lg:grid lg:grid-cols-12 gap-6 lg:gap-4 xl:gap-5 items-start">
         {/* Left Column: Pinned / Sticky News Side Panel (3/12 width on Desktop) */}
-        <aside className="order-2 lg:order-1 lg:col-span-3 space-y-6 lg:sticky lg:top-24 self-start">
+        <aside className="w-full order-2 lg:order-1 lg:col-span-3 space-y-6 lg:sticky lg:top-24 self-start">
           {/* Table of Contents Section */}
           <TableOfContents headings={headings} />
 
@@ -450,36 +450,37 @@ export default async function PostPage({ params, searchParams }) {
           )}
         </aside>
 
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BlogPosting",
+              headline: cleanHtml(post.title),
+              description: cleanExcerptText,
+              datePublished: post.date,
+              mainEntityOfPage: `${siteUrl}/news/${post.slug}`,
+              image: post.featuredImage?.node?.sourceUrl
+                ? [post.featuredImage.node.sourceUrl]
+                : undefined,
+              author: {
+                "@type": "Person",
+                name: displayAuthorName,
+              },
+              publisher: {
+                "@type": "Organization",
+                name: siteName,
+                logo: {
+                  "@type": "ImageObject",
+                  url: `${siteUrl}/freeBird-logo-new.png`,
+                },
+              },
+            }).replace(/</g, "\\u003c"),
+          }}
+        />
+
         {/* Center Column: Main Article Content (6/12 width on Desktop) */}
-        <article className="mainNewsBody bg-bg-surface p-6 sm:p-8 rounded-3xl border border-brandborder shadow-xs order-1 lg:order-2 lg:col-span-6 grid gap-8 min-w-0">
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "BlogPosting",
-                headline: cleanHtml(post.title),
-                description: cleanExcerptText,
-                datePublished: post.date,
-                mainEntityOfPage: `${siteUrl}/news/${post.slug}`,
-                image: post.featuredImage?.node?.sourceUrl
-                  ? [post.featuredImage.node.sourceUrl]
-                  : undefined,
-                author: {
-                  "@type": "Person",
-                  name: displayAuthorName,
-                },
-                publisher: {
-                  "@type": "Organization",
-                  name: siteName,
-                  logo: {
-                    "@type": "ImageObject",
-                    url: `${siteUrl}/freeBird-logo-new.png`,
-                  },
-                },
-              }).replace(/</g, "\\u003c"),
-            }}
-          />
+        <article className="mainNewsBody w-full max-w-full bg-bg-surface p-4 sm:p-8 rounded-3xl border border-brandborder shadow-xs order-1 lg:order-2 lg:col-span-6 flex flex-col gap-8 min-w-0">
 
           {/* Article Hero Header */}
           <header className="space-y-5">
