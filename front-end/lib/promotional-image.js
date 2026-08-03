@@ -6,10 +6,23 @@ const GET_PROMOTIONAL_IMAGE = `
       nodes {
         id
         title
+        slug
+        databaseId
         featuredImage {
           node {
             sourceUrl
             altText
+          }
+        }
+        sponsore {
+          redirectionLink
+          adTitleIfAny
+          adTextIfAny
+          adImage {
+            node {
+              sourceUrl
+              altText
+            }
           }
         }
       }

@@ -41,31 +41,77 @@ function truncateText(text, maxLength = 140) {
   return `${text.slice(0, maxLength).trimEnd()}...`;
 }
 
+function formatRedirectionUrl(url) {
+  if (!url || typeof url !== "string") return null;
+  const trimmed = url.trim();
+  if (!trimmed) return null;
+  if (trimmed.startsWith("http://") || trimmed.startsWith("https://") || trimmed.startsWith("/")) {
+    return trimmed;
+  }
+  return `https://${trimmed}`;
+}
+
 const HeroNews = async () => {
   const { topNews, trendingNews } = await fetchHeroNews();
   const promotionalImagePost = await fetchPromotionalImage();
   const topStory = topNews[0];
+  const sponsoreData = promotionalImagePost?.sponsore || promotionalImagePost?.sponsors || {};
+  const rawRedirectionLink = sponsoreData.redirectionLink || promotionalImagePost?.redirectionLink;
+  const redirectionLink = formatRedirectionUrl(rawRedirectionLink);
+
   const headerHeroImage =
-    promotionalImagePost?.featuredImage?.node?.sourceUrl || fallbackImage;
+    sponsoreData.adImage?.node?.sourceUrl ||
+    sponsoreData.adImage?.sourceUrl ||
+    (typeof sponsoreData.adImage === "string" ? sponsoreData.adImage : null) ||
+    promotionalImagePost?.featuredImage?.node?.sourceUrl ||
+    fallbackImage;
+
   const headerHeroImageAlt =
+    sponsoreData.adImage?.node?.altText ||
     promotionalImagePost?.featuredImage?.node?.altText ||
+    sponsoreData.adTitleIfAny ||
     promotionalImagePost?.title ||
     "Hero Banner";
+
+  const postLink = promotionalImagePost?.slug
+    ? `/news/${promotionalImagePost.slug}?pid=${promotionalImagePost.databaseId}`
+    : null;
+
+  const finalLink = redirectionLink || postLink;
+  const isExternal = Boolean(redirectionLink);
 
   return (
     <div className="container mx-auto px-4 md:px-6 pt-6">
       <section className="bg-bg-surface border border-brandborder rounded-3xl overflow-hidden shadow-xs">
         {headerHeroImage && (
-          <div className="headerHeroImage w-full overflow-hidden max-h-[140px] relative">
-            <Image
-              src={headerHeroImage}
-              alt={headerHeroImageAlt}
-              width={1248}
-              height={140}
-              className="w-full h-auto object-cover"
-              priority
-            />
-          </div>
+          finalLink ? (
+            <a
+              href={finalLink}
+              target={isExternal ? "_blank" : undefined}
+              rel={isExternal ? "noopener noreferrer" : undefined}
+              className="headerHeroImage block w-full overflow-hidden max-h-[140px] relative transition-opacity hover:opacity-95"
+            >
+              <Image
+                src={headerHeroImage}
+                alt={headerHeroImageAlt}
+                width={1248}
+                height={140}
+                className="w-full h-auto object-cover"
+                priority
+              />
+            </a>
+          ) : (
+            <div className="headerHeroImage w-full overflow-hidden max-h-[140px] relative">
+              <Image
+                src={headerHeroImage}
+                alt={headerHeroImageAlt}
+                width={1248}
+                height={140}
+                className="w-full h-auto object-cover"
+                priority
+              />
+            </div>
+          )
         )}
 
         <section className="mainTopNews w-full p-6 md:p-8 grid gap-6 lg:grid-cols-[1.3fr_1fr]">
