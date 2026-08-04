@@ -21,6 +21,7 @@ import ArticleActions from "@/components/ArticleActions";
 import BottomPageAd from "@/components/BottomPageAd";
 import NewsletterForm from "@/components/NewsletterForm";
 import ParsedContent from "@/components/ParsedContent";
+import RecommendedNews from "@/components/RecommendedNews";
 import SponsorsAdPnl from "@/components/SponsorsAdPnl";
 import TableOfContents from "@/components/TableOfContents";
 import { parseHeadingsAndInjectIds } from "@/lib/toc";
@@ -159,6 +160,62 @@ const GET_POST_BY_DATABASE_ID = `
   }
 `;
 
+const GET_RECOMMENDED_POSTS_BY_CATEGORY = `
+  query GetRecommendedPostsByCategory($categoryName: String!) {
+    posts(where: { categoryName: $categoryName }, first: 6) {
+      nodes {
+        id
+        databaseId
+        slug
+        title
+        date
+        excerpt
+        featuredImage {
+          node {
+            sourceUrl
+            altText
+          }
+        }
+        categories {
+          nodes {
+            id
+            name
+            slug
+          }
+        }
+      }
+    }
+  }
+`;
+
+const GET_LATEST_RECOMMENDED_POSTS = `
+  query GetLatestRecommendedPosts {
+    posts(first: 6) {
+      nodes {
+        id
+        databaseId
+        slug
+        title
+        date
+        excerpt
+        featuredImage {
+          node {
+            sourceUrl
+            altText
+          }
+        }
+        categories {
+          nodes {
+            id
+            name
+            slug
+          }
+        }
+      }
+    }
+  }
+`;
+
 function formatPostDate(dateString) {
   if (!dateString) return "";
 
@@ -243,6 +300,46 @@ const fetchPost = cache(async (postSlug, postId) => {
 
   return data?.post;
 });
+
+const fetchRecommendedPosts = cache(
+  async (categorySlug, currentPostId, currentDatabaseId) => {
+    let recommendedNodes = [];
+
+    if (categorySlug) {
+      try {
+        const data = await fetchAPI(GET_RECOMMENDED_POSTS_BY_CATEGORY, {
+          variables: { categoryName: categorySlug },
+        });
+        const nodes = data?.posts?.nodes ?? [];
+        recommendedNodes = nodes.filter(
+          (p) =>
+            p.id !== currentPostId &&
+            String(p.databaseId) !== String(currentDatabaseId)
+        );
+      } catch (err) {
+        console.error("Failed fetching recommended posts by category:", err);
+      }
+    }
+
+    if (recommendedNodes.length < 3) {
+      try {
+        const fallbackData = await fetchAPI(GET_LATEST_RECOMMENDED_POSTS);
+        const fallbackNodes = fallbackData?.posts?.nodes ?? [];
+        const extraNodes = fallbackNodes.filter(
+          (p) =>
+            p.id !== currentPostId &&
+            String(p.databaseId) !== String(currentDatabaseId) &&
+            !recommendedNodes.some((existing) => existing.id === p.id)
+        );
+        recommendedNodes = [...recommendedNodes, ...extraNodes];
+      } catch (err) {
+        console.error("Failed fetching latest fallback recommended posts:", err);
+      }
+    }
+
+    return recommendedNodes.slice(0, 3);
+  }
+);
 
 export async function generateMetadata({ params, searchParams }) {
   const resolvedParams = await params;
@@ -375,6 +472,15 @@ export default async function PostPage({ params, searchParams }) {
 
   // Filter categories to only show public navigation menu categories
   const displayCategories = filterNavCategories(post.categories?.nodes ?? []);
+
+  // Fetch recommended news posts (same category or latest fallback)
+  const primaryCategorySlug =
+    displayCategories?.[0]?.slug || post.categories?.nodes?.[0]?.slug;
+  const recommendedPosts = await fetchRecommendedPosts(
+    primaryCategorySlug,
+    post.id,
+    post.databaseId
+  );
 
   // Parse H1-H4 headings & inject unique IDs for Table of Contents
   const { modifiedHtml, headings } = parseHeadingsAndInjectIds(
@@ -691,6 +797,9 @@ export default async function PostPage({ params, searchParams }) {
 
               <ArticleActions title={post.title} />
             </div>
+
+            {/* 3 Recommended News Articles */}
+            <RecommendedNews posts={recommendedPosts} />
 
             {/* Interactive Remote Worker Newsletter Subscription Box */}
             <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand/10 via-bg-surface to-accent/10 border border-brandborder p-8 shadow-sm space-y-6">
