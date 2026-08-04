@@ -11,7 +11,6 @@ import {
   Tag,
   BookOpen,
   Mail,
-  Sparkles,
   CheckCircle2,
   Video,
   ExternalLink,
@@ -53,9 +52,145 @@ const GET_POST_BY_SLUG = `
       author {
         node {
           name
-          nickname
           slug
-          username
+          avatar {
+            url
+          }
+        }
+      }
+      categories {
+        nodes {
+          id
+          name
+          slug
+        }
+      }
+      seo {
+        title
+        metaDesc
+        canonical
+        opengraphTitle
+        opengraphDescription
+        opengraphImage {
+          sourceUrl
+        }
+      }
+      articleMetadata {
+        subheading
+        topq
+        topa
+        authorSubtitle
+        authorSerial
+        estimatedReadTime
+        mainImageSourceInfo
+        secndImage {
+          node {
+            sourceUrl
+            altText
+          }
+        }
+        imageSource
+        videoSource
+        otherUrl
+      }
+    }
+  }
+`;
+
+const GET_POST_BY_SLUG_ALT = `
+  query GetPostBySlugAlt($slug: ID!) {
+    post(id: $slug, idType: SLUG) {
+      id
+      databaseId
+      slug
+      title
+      date
+      modified
+      content
+      excerpt
+      featuredImage {
+        node {
+          sourceUrl
+          altText
+          mediaDetails {
+            width
+            height
+          }
+        }
+      }
+      author {
+        node {
+          name
+          slug
+          avatar {
+            url
+          }
+        }
+      }
+      categories {
+        nodes {
+          id
+          name
+          slug
+        }
+      }
+      seo {
+        title
+        metaDesc
+        canonical
+        opengraphTitle
+        opengraphDescription
+        opengraphImage {
+          sourceUrl
+        }
+      }
+      articleMetadata {
+        subheading
+        topq
+        topa
+        authorSubtitle
+        author_serial
+        estimatedReadTime
+        mainImageSourceInfo
+        secndImage {
+          node {
+            sourceUrl
+            altText
+          }
+        }
+        imageSource
+        videoSource
+        otherUrl
+      }
+    }
+  }
+`;
+
+const GET_POST_BY_SLUG_FALLBACK = `
+  query GetPostBySlugFallback($slug: ID!) {
+    post(id: $slug, idType: SLUG) {
+      id
+      databaseId
+      slug
+      title
+      date
+      modified
+      content
+      excerpt
+      featuredImage {
+        node {
+          sourceUrl
+          altText
+          mediaDetails {
+            width
+            height
+          }
+        }
+      }
+      author {
+        node {
+          name
+          slug
           avatar {
             url
           }
@@ -123,9 +258,145 @@ const GET_POST_BY_DATABASE_ID = `
       author {
         node {
           name
-          nickname
           slug
-          username
+          avatar {
+            url
+          }
+        }
+      }
+      categories {
+        nodes {
+          id
+          name
+          slug
+        }
+      }
+      seo {
+        title
+        metaDesc
+        canonical
+        opengraphTitle
+        opengraphDescription
+        opengraphImage {
+          sourceUrl
+        }
+      }
+      articleMetadata {
+        subheading
+        topq
+        topa
+        authorSubtitle
+        authorSerial
+        estimatedReadTime
+        mainImageSourceInfo
+        secndImage {
+          node {
+            sourceUrl
+            altText
+          }
+        }
+        imageSource
+        videoSource
+        otherUrl
+      }
+    }
+  }
+`;
+
+const GET_POST_BY_DATABASE_ID_ALT = `
+  query GetPostByDatabaseIdAlt($postId: ID!) {
+    post(id: $postId, idType: DATABASE_ID) {
+      id
+      databaseId
+      slug
+      title
+      date
+      modified
+      content
+      excerpt
+      featuredImage {
+        node {
+          sourceUrl
+          altText
+          mediaDetails {
+            width
+            height
+          }
+        }
+      }
+      author {
+        node {
+          name
+          slug
+          avatar {
+            url
+          }
+        }
+      }
+      categories {
+        nodes {
+          id
+          name
+          slug
+        }
+      }
+      seo {
+        title
+        metaDesc
+        canonical
+        opengraphTitle
+        opengraphDescription
+        opengraphImage {
+          sourceUrl
+        }
+      }
+      articleMetadata {
+        subheading
+        topq
+        topa
+        authorSubtitle
+        author_serial
+        estimatedReadTime
+        mainImageSourceInfo
+        secndImage {
+          node {
+            sourceUrl
+            altText
+          }
+        }
+        imageSource
+        videoSource
+        otherUrl
+      }
+    }
+  }
+`;
+
+const GET_POST_BY_DATABASE_ID_FALLBACK = `
+  query GetPostByDatabaseIdFallback($postId: ID!) {
+    post(id: $postId, idType: DATABASE_ID) {
+      id
+      databaseId
+      slug
+      title
+      date
+      modified
+      content
+      excerpt
+      featuredImage {
+        node {
+          sourceUrl
+          altText
+          mediaDetails {
+            width
+            height
+          }
+        }
+      }
+      author {
+        node {
+          name
+          slug
           avatar {
             url
           }
@@ -282,7 +553,19 @@ const fetchPost = cache(async (postSlug, postId) => {
         variables: { postId },
       });
     } catch (err) {
-      console.error("Failed fetching post by databaseId:", err);
+      try {
+        data = await fetchAPI(GET_POST_BY_DATABASE_ID_ALT, {
+          variables: { postId },
+        });
+      } catch (err2) {
+        try {
+          data = await fetchAPI(GET_POST_BY_DATABASE_ID_FALLBACK, {
+            variables: { postId },
+          });
+        } catch (err3) {
+          console.error("Failed fetching post by databaseId:", err3);
+        }
+      }
     }
   }
 
@@ -293,7 +576,21 @@ const fetchPost = cache(async (postSlug, postId) => {
         variables: { slug: decodedSlug },
       });
     } catch (err) {
-      console.error("Failed fetching post by decoded slug:", err);
+      try {
+        const decodedSlug = decodeURIComponent(postSlug);
+        data = await fetchAPI(GET_POST_BY_SLUG_ALT, {
+          variables: { slug: decodedSlug },
+        });
+      } catch (err2) {
+        try {
+          const decodedSlug = decodeURIComponent(postSlug);
+          data = await fetchAPI(GET_POST_BY_SLUG_FALLBACK, {
+            variables: { slug: decodedSlug },
+          });
+        } catch (err3) {
+          console.error("Failed fetching post by decoded slug:", err3);
+        }
+      }
     }
   }
 
@@ -303,7 +600,19 @@ const fetchPost = cache(async (postSlug, postId) => {
         variables: { slug: postSlug },
       });
     } catch (err) {
-      console.error("Failed fetching post by raw slug:", err);
+      try {
+        data = await fetchAPI(GET_POST_BY_SLUG_ALT, {
+          variables: { slug: postSlug },
+        });
+      } catch (err2) {
+        try {
+          data = await fetchAPI(GET_POST_BY_SLUG_FALLBACK, {
+            variables: { slug: postSlug },
+          });
+        } catch (err3) {
+          console.error("Failed fetching post by raw slug:", err3);
+        }
+      }
     }
   }
 
@@ -458,6 +767,8 @@ export default async function PostPage({ params, searchParams }) {
     topQ,
     topA,
     authorSubtitle,
+    authorSerial,
+    author_serial,
     estimatedReadTime,
     mainImageSourceInfo,
     videoSource,
@@ -466,11 +777,13 @@ export default async function PostPage({ params, searchParams }) {
 
   const topQuestion = topq || topQ;
   const topAnswer = topa || topA;
+  const rawAuthorSerial = authorSerial || author_serial;
 
-  // Author identity resolution via authors.json matching & error handling
+  // Author identity resolution via authors.json matching (Author Serial ID priority) & error handling
   const syncedAuthor = syncPostAuthor(
     post.author?.node,
-    articleMetadata?.authorSubtitle
+    authorSubtitle,
+    rawAuthorSerial
   );
   const cleanExcerptText = cleanHtml(post.excerpt || "");
 
@@ -690,13 +1003,9 @@ export default async function PostPage({ params, searchParams }) {
             </div>
           </header>
 
-          {/* ACF Fields #2 & #3: topq & topa (Top Question & Top Answer — Rendered on top of feature image) */}
+          {/* ACF Fields #2 & #3: topq & topa (Rendered on top of feature image) */}
           {(topQuestion || topAnswer) && (
-            <div className="rounded-3xl border border-brand/20 bg-gradient-to-br from-brand/5 via-bg-surface to-accent/5 p-5 sm:p-6 shadow-xs space-y-4">
-              <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-brand border-b border-brandborder/60 pb-3">
-                <Sparkles className="w-4 h-4 text-brand shrink-0" />
-                <span>Key Takeaway </span>
-              </div>
+            <div className="mb-4 space-y-4">
               {topQuestion && (
                 <div className="space-y-1">
                   <div className="flex items-start gap-2.5">

@@ -70,6 +70,7 @@ query GetPostBySlug($slug: ID!) {
       topa
       mainImageSourceInfo
       authorSubtitle
+      authorSerial
       estimatedReadTime
       secndImage {
         node {
