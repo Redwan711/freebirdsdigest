@@ -16,14 +16,17 @@ import {
   Video,
   ExternalLink,
   Link as LinkIcon,
+  Globe,
 } from "lucide-react";
 import ArticleActions from "@/components/ArticleActions";
 import BottomPageAd from "@/components/BottomPageAd";
 import NewsletterForm from "@/components/NewsletterForm";
 import ParsedContent from "@/components/ParsedContent";
 import RecommendedNews from "@/components/RecommendedNews";
+import { TwitterIcon, LinkedinIcon, GithubIcon } from "@/components/SocialIcons";
 import SponsorsAdPnl from "@/components/SponsorsAdPnl";
 import TableOfContents from "@/components/TableOfContents";
+import { syncPostAuthor } from "@/lib/authors";
 import { parseHeadingsAndInjectIds } from "@/lib/toc";
 
 const GET_POST_BY_SLUG = `
@@ -50,6 +53,9 @@ const GET_POST_BY_SLUG = `
       author {
         node {
           name
+          nickname
+          slug
+          username
           avatar {
             url
           }
@@ -117,6 +123,9 @@ const GET_POST_BY_DATABASE_ID = `
       author {
         node {
           name
+          nickname
+          slug
+          username
           avatar {
             url
           }
@@ -458,16 +467,11 @@ export default async function PostPage({ params, searchParams }) {
   const topQuestion = topq || topQ;
   const topAnswer = topa || topA;
 
-  // Author identity resolution
-  const authorNode = post.author?.node;
-  const rawAuthorName = authorNode?.name;
-  const isDefaultAdmin =
-    !rawAuthorName || rawAuthorName.toLowerCase() === "admin";
-  const displayAuthorName =
-    !isDefaultAdmin && rawAuthorName
-      ? rawAuthorName
-      : "Freebirds Editorial Team";
-  const authorAvatarUrl = authorNode?.avatar?.url;
+  // Author identity resolution via authors.json matching & error handling
+  const syncedAuthor = syncPostAuthor(
+    post.author?.node,
+    articleMetadata?.authorSubtitle
+  );
   const cleanExcerptText = cleanHtml(post.excerpt || "");
 
   // Filter categories to only show public navigation menu categories
@@ -571,7 +575,7 @@ export default async function PostPage({ params, searchParams }) {
                 : undefined,
               author: {
                 "@type": "Person",
-                name: displayAuthorName,
+                name: syncedAuthor.name,
               },
               publisher: {
                 "@type": "Organization",
@@ -634,11 +638,11 @@ export default async function PostPage({ params, searchParams }) {
             {/* Author & Meta Bar */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-y border-brandborder py-4 text-sm text-text-muted min-w-0 max-w-full overflow-hidden">
               <div className="flex items-center gap-3 min-w-0 flex-1 overflow-hidden">
-                {authorAvatarUrl && !authorAvatarUrl.includes("d=mm") ? (
+                {syncedAuthor.avatar ? (
                   <div className="relative h-11 w-11 shrink-0 aspect-square overflow-hidden rounded-full border-2 border-brand/30 shadow-xs">
                     <Image
-                      src={authorAvatarUrl}
-                      alt={displayAuthorName}
+                      src={syncedAuthor.avatar}
+                      alt={syncedAuthor.name}
                       fill
                       className="object-cover rounded-full"
                     />
@@ -647,7 +651,7 @@ export default async function PostPage({ params, searchParams }) {
                   <div className="relative h-11 w-11 shrink-0 aspect-square overflow-hidden rounded-full border-2 border-brand/30 bg-bg-subtle p-2 shadow-xs flex items-center justify-center">
                     <Image
                       src="/free_Bird icon-.png"
-                      alt={displayAuthorName}
+                      alt={syncedAuthor.name}
                       width={28}
                       height={28}
                       className="object-contain"
@@ -656,14 +660,22 @@ export default async function PostPage({ params, searchParams }) {
                 )}
                 <div className="min-w-0 flex-1 overflow-hidden">
                   <p className="font-bold text-text-main flex items-center gap-1.5 text-sm sm:text-base">
-                    <span className="truncate">{displayAuthorName}</span>
+                    {syncedAuthor.slug ? (
+                      <Link
+                        href={`/author/${syncedAuthor.slug}`}
+                        className="truncate hover:text-brand transition-colors"
+                      >
+                        {syncedAuthor.name}
+                      </Link>
+                    ) : (
+                      <span className="truncate">{syncedAuthor.name}</span>
+                    )}
                     <CheckCircle2 className="w-4 h-4 text-accent fill-accent/20 shrink-0" />
                   </p>
 
-                  {/* ACF Field: Author Subtitle */}
-                  {authorSubtitle && (
+                  {syncedAuthor.role && (
                     <p className="text-xs text-text-muted line-clamp-2 break-words">
-                      {authorSubtitle}
+                      {syncedAuthor.role}
                     </p>
                   )}
                 </div>
@@ -737,11 +749,11 @@ export default async function PostPage({ params, searchParams }) {
 
           {/* E-E-A-T Author Bio Card */}
           <div className="rounded-3xl border border-brandborder bg-bg-surface p-6 sm:p-8 shadow-xs flex flex-col sm:flex-row items-center sm:items-start gap-5 text-center sm:text-left">
-            {authorAvatarUrl && !authorAvatarUrl.includes("d=mm") ? (
+            {syncedAuthor.avatar ? (
               <div className="relative h-16 w-16 shrink-0 aspect-square overflow-hidden rounded-full border-2 border-brand/30 shadow-sm">
                 <Image
-                  src={authorAvatarUrl}
-                  alt={displayAuthorName}
+                  src={syncedAuthor.avatar}
+                  alt={syncedAuthor.name}
                   fill
                   className="object-cover rounded-full"
                 />
@@ -750,7 +762,7 @@ export default async function PostPage({ params, searchParams }) {
               <div className="relative h-16 w-16 shrink-0 aspect-square overflow-hidden rounded-full border-2 border-brand/30 bg-bg-subtle p-3 shadow-sm flex items-center justify-center">
                 <Image
                   src="/free_Bird icon-.png"
-                  alt={displayAuthorName}
+                  alt={syncedAuthor.name}
                   width={40}
                   height={40}
                   className="object-contain"
@@ -759,21 +771,89 @@ export default async function PostPage({ params, searchParams }) {
             )}
             <div className="space-y-2 min-w-0 flex-1">
               <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
-                <h4 className="text-base sm:text-lg font-extrabold text-text-main">
-                  {displayAuthorName}
-                </h4>
+                {syncedAuthor.slug ? (
+                  <Link
+                    href={`/author/${syncedAuthor.slug}`}
+                    className="text-base sm:text-lg font-extrabold text-text-main hover:text-brand transition-colors font-jakarta"
+                  >
+                    {syncedAuthor.name}
+                  </Link>
+                ) : (
+                  <h4 className="text-base sm:text-lg font-extrabold text-text-main font-jakarta">
+                    {syncedAuthor.name}
+                  </h4>
+                )}
                 <span className="inline-flex items-center gap-1 rounded-full bg-accent/10 px-2.5 py-0.5 text-xs font-bold text-accent border border-accent/20">
                   <CheckCircle2 className="w-3 h-3" /> Verified Author
                 </span>
               </div>
-              <p className="text-xs text-text-muted font-medium">
-                {authorSubtitle ||
-                  "Freelance & Remote Work Specialist at Freebirds Digest"}
-              </p>
+
+              {syncedAuthor.role && (
+                <p className="text-xs text-text-muted font-bold">
+                  {syncedAuthor.role}
+                </p>
+              )}
+
               <p className="text-xs sm:text-sm leading-relaxed text-text-muted">
-                Covering digital nomad workflows, freelancing career growth,
-                remote business tools, and work-from-home strategies.
+                {syncedAuthor.description || syncedAuthor.bio}
               </p>
+
+              {/* Social Links & Full Profile Button */}
+              <div className="pt-2 flex flex-wrap items-center justify-center sm:justify-start gap-3">
+                {syncedAuthor.socials?.twitter && (
+                  <a
+                    href={syncedAuthor.socials.twitter}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-text-muted hover:text-brand p-1 transition-colors"
+                    title="Twitter"
+                  >
+                    <TwitterIcon className="w-4 h-4" />
+                  </a>
+                )}
+                {syncedAuthor.socials?.linkedin && (
+                  <a
+                    href={syncedAuthor.socials.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-text-muted hover:text-brand p-1 transition-colors"
+                    title="LinkedIn"
+                  >
+                    <LinkedinIcon className="w-4 h-4" />
+                  </a>
+                )}
+                {syncedAuthor.socials?.github && (
+                  <a
+                    href={syncedAuthor.socials.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-text-muted hover:text-brand p-1 transition-colors"
+                    title="GitHub"
+                  >
+                    <GithubIcon className="w-4 h-4" />
+                  </a>
+                )}
+                {syncedAuthor.socials?.website && (
+                  <a
+                    href={syncedAuthor.socials.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-text-muted hover:text-brand p-1 transition-colors"
+                    title="Website"
+                  >
+                    <Globe className="w-4 h-4" />
+                  </a>
+                )}
+
+                {syncedAuthor.slug && (
+                  <Link
+                    href={`/author/${syncedAuthor.slug}`}
+                    className="sm:ml-auto inline-flex items-center gap-1 rounded-full bg-brand/10 px-3 py-1 text-xs font-bold text-brand hover:bg-brand hover:text-white transition-all border border-brand/20"
+                  >
+                    Author Profile & Articles →
+                  </Link>
+                )}
+              </div>
             </div>
           </div>
 

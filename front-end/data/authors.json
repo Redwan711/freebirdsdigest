@@ -1,0 +1,97 @@
+[
+  {
+    "id": "1",
+    "nickname": "alexmorgan",
+    "slug": "alex-morgan",
+    "name": "Alex Morgan",
+    "gender": "male",
+    "avatar": "/authors/alex-morgan.jpg",
+    "role": "Senior Tech & AI Editor",
+    "location": "Austin, TX",
+    "bio": "Specializing in AI automation, software workflows, and emerging developer tools for modern remote teams.",
+    "description": "Alex Morgan is a veteran software journalist and tech editor with over 8 years of experience covering developer tooling, cloud infrastructure, and artificial intelligence. He works closely with engineering teams to analyze productivity trends, AI-driven automation, and open-source tools that empower remote workforce efficiency.",
+    "socials": {
+      "twitter": "https://twitter.com/alexmorgan_tech",
+      "linkedin": "https://linkedin.com/in/alexmorgan-tech",
+      "github": "https://github.com/alexmorgan-tech",
+      "website": "https://alexmorgan.dev"
+    },
+    "topics": ["AI & Automation", "Developer Tools", "Software Engineering"]
+  },
+  {
+    "id": "2",
+    "nickname": "sophiachen",
+    "slug": "sophia-chen",
+    "name": "Sophia Chen",
+    "gender": "female",
+    "avatar": "/authors/sophia-chen.jpg",
+    "role": "Remote Work Strategist & HR Analyst",
+    "location": "San Francisco, CA",
+    "bio": "Advising enterprise companies and global distributed teams on async communication, culture, and remote performance.",
+    "description": "Sophia Chen is a remote work researcher and organizational culture consultant. Having managed distributed teams across 4 continents, Sophia writes actionable guides on asynchronous collaboration, remote onboarding frameworks, and mental wellness for digital nomads.",
+    "socials": {
+      "twitter": "https://twitter.com/sophiachen_rw",
+      "linkedin": "https://linkedin.com/in/sophiachen-rw",
+      "github": "",
+      "website": "https://sophiachen.co"
+    },
+    "topics": ["Remote Work Strategy", "Company Culture", "Async Productivity"]
+  },
+  {
+    "id": "3",
+    "nickname": "marcusvance",
+    "slug": "marcus-vance",
+    "name": "Marcus Vance",
+    "gender": "male",
+    "avatar": "/authors/marcus-vance.jpg",
+    "role": "Digital Nomad & Global Finance Columnist",
+    "location": "Lisbon, Portugal",
+    "bio": "Exploring cross-border taxation, global banking, offshore compliance, and digital nomad residency programs.",
+    "description": "Marcus Vance is a global tax consultant and financial journalist based in Lisbon. He helps freelancers, solopreneurs, and digital nomads navigate international tax treaties, multi-currency banking solutions, and visa programs across Europe and Southeast Asia.",
+    "socials": {
+      "twitter": "https://twitter.com/marcusvance_fin",
+      "linkedin": "https://linkedin.com/in/marcusvance-fin",
+      "github": "",
+      "website": "https://marcusvance.com"
+    },
+    "topics": ["Nomad Finances", "Digital Taxes", "Remote Living"]
+  },
+  {
+    "id": "4",
+    "nickname": "elenarostova",
+    "slug": "elena-rostova",
+    "name": "Elena Rostova",
+    "gender": "female",
+    "avatar": "/authors/elena-rostova.jpg",
+    "role": "Freelance Career Growth Specialist",
+    "location": "Berlin, Germany",
+    "bio": "Helping independent creators, copywriters, and designers scale client retainers and build high-ticket freelance practices.",
+    "description": "Elena Rostova is a seasoned freelance business coach and creative director. She has empowered over 500 independent professionals to escape low-paying marketplaces, master cold outreach, structure high-ticket retainer contracts, and build resilient personal brands.",
+    "socials": {
+      "twitter": "https://twitter.com/elena_rostova",
+      "linkedin": "https://linkedin.com/in/elena-rostova",
+      "github": "",
+      "website": "https://elenarostova.design"
+    },
+    "topics": ["Freelance Business", "Client Acquisition", "Design & Copy"]
+  },
+  {
+    "id": "5",
+    "nickname": "admin",
+    "slug": "david-miller",
+    "name": "David Miller",
+    "gender": "male",
+    "avatar": "/authors/david-miller.jpg",
+    "role": "Editor-in-Chief & Founder",
+    "location": "New York, NY",
+    "bio": "Founding editor at Freebirds Digest, passionate about distributed work ecosystems and future of employment.",
+    "description": "David Miller is the Editor-in-Chief and founder of Freebirds Digest. With a background in investigative journalism and tech publishing, David curates high-impact news, industry reports, and in-depth analytical pieces for remote professionals worldwide.",
+    "socials": {
+      "twitter": "https://twitter.com/davidmiller_fd",
+      "linkedin": "https://linkedin.com/in/davidmiller-fd",
+      "github": "https://github.com/davidmiller-fd",
+      "website": "https://freebirdsdigest.com"
+    },
+    "topics": ["Editorial & Publishing", "Future of Work", "Tech Trends"]
+  }
+]
