@@ -39,11 +39,11 @@ function formatSidebarDate(dateString) {
     }).format(date);
 }
 
-const LeftSideNewsPnl = async () => {
-    const posts = await fetchSidePanelNews();
+const LeftSideNewsPnl = async ({ posts: initialPosts }) => {
+    const posts = initialPosts || (await fetchSidePanelNews());
 
     return (
-        <aside className="leftSideNewsPnl flex flex-col gap-4 font-inter xl:sticky xl:top-24 self-start">
+        <aside className="leftSideNewsPnl flex flex-col gap-4 font-inter self-start">
             <section className="sidebarCard bg-bg-surface p-5 rounded-3xl border border-brandborder shadow-2xs">
                 <div className="mb-4 flex items-center justify-between gap-3 border-b border-brandborder pb-3">
                     <div>
@@ -105,4 +105,4 @@ const LeftSideNewsPnl = async () => {
     );
 };
 
-export default LeftSideNewsPnl;
+export default LeftSideNewsPnl;

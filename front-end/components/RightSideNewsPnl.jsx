@@ -138,9 +138,9 @@ const RightSideNewsPnl = async () => {
 
             <section className="grid6sec grid grid-cols-1 gap-6 font-inter sm:grid-cols-2 lg:grid-cols-3">
                 {gridStories.map((story) => (
-                    <Link 
-                        key={story.id} 
-                        href={`/news/${story.slug}?pid=${story.databaseId}`} 
+                    <Link
+                        key={story.id}
+                        href={`/news/${story.slug}?pid=${story.databaseId}`}
                         className="group flex flex-col gap-2.5 rounded-xl border border-brandborder/60 p-3 bg-bg-subtle/70 hover:bg-bg-subtle hover:border-brand/40 transition-all shadow-2xs"
                     >
                         <div className="image overflow-hidden rounded-lg bg-bg-subtle aspect-16/10">

@@ -135,7 +135,7 @@ const HeroNews = async () => {
                     <Clock className="w-3.5 h-3.5 text-accent" />
                     {formatHeroDate(topStory.date)}
                   </span>
-                </div>                
+                </div>
 
                 <div className="image relative aspect-16/12 overflow-hidden rounded-xl bg-bg-subtle shadow-sm">
                   <Image
