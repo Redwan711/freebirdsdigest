@@ -2,7 +2,7 @@ import { fetchAPI } from "./api";
 
 const GET_RECENT_POSTS = `
   query GetRecentPosts {
-    posts(first: 60) {
+    posts(first: 30) {
       nodes {
         id
         databaseId
