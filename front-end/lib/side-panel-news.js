@@ -25,7 +25,7 @@ const GET_SIDE_PANEL_NEWS = `
         }
       }
     }
-    allRecentPosts: posts(first: 60) {
+    allRecentPosts: posts(first: 100) {
       nodes {
         id
         databaseId
@@ -68,7 +68,7 @@ export async function fetchSidePanelNews() {
       }
     }
 
-    return combined;
+    return combined.sort((a, b) => new Date(b.date) - new Date(a.date));
   } catch (err) {
     console.error("Failed fetching side panel news:", err);
     return [];

@@ -66,10 +66,9 @@ const Home = async () => {
     return false;
   };
 
-  // 1. Left side bar: shows ALL recent news (first 24), even if showing in other sections, ONLY filtering out sponsored/ad categories
+  // 1. Left side bar: shows ALL non-sponsored news, even if showing in other sections
   const leftSidePosts = sidePanelCandidates
-    .filter((p) => !isSponsoredPost(p))
-    .slice(0, 24);
+    .filter((p) => !isSponsoredPost(p));
 
   // 2. RecentNewsFeed (bottom of center column): shows all recent posts EXCEPT those already showing in HeroNews & RightSideNewsPnl, filtering out sponsored/ad categories
   const extraRecentPosts = allRecentPosts.filter(

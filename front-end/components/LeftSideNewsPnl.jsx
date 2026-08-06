@@ -46,15 +46,8 @@ const LeftSideNewsPnl = async ({ posts: initialPosts }) => {
         <aside className="leftSideNewsPnl flex flex-col gap-4 font-inter self-start">
             <section className="sidebarCard bg-bg-surface p-5 rounded-3xl border border-brandborder shadow-2xs">
                 <div className="mb-4 flex items-center justify-between gap-3 border-b border-brandborder pb-3">
-                    <div>
-                        <p className="text-xs font-bold uppercase tracking-wider text-brand">Latest Reads</p>
-                        <h3 className="mt-0.5 text-base font-extrabold text-text-main">Recent Digests</h3>
-                    </div>
-                    {posts.length > 0 && (
-                        <span className="rounded-full bg-brand/10 px-2.5 py-0.5 text-xs font-bold text-brand">
-                            {posts.length}
-                        </span>
-                    )}
+                    <p className="text-xs font-bold uppercase tracking-wider text-brand">Latest Reads</p>
+                    <h3 className="text-sm font-extrabold text-text-main">Recent Digests</h3>
                 </div>
 
                 {posts.length === 0 ? (
