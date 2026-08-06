@@ -1,81 +1,95 @@
-import Image from "next/image";
+"use client";
 
-export default function ParsedContent({ html }) {
-  if (!html) return null;
+/**
+ * Checks if an <img> tag at imgIndex in the HTML string is nested inside a container element 
+ * with class containing 'not-prose'.
+ */
+const isInsideNotProse = (html, imgIndex) => {
+  const notProseRegex = /<([a-z0-9]+)\b[^>]*\bclass\s*=\s*["'][^"']*\bnot-prose\b[^"']*["'][^>]*>/gi;
+  let match;
 
-  // Regex to match <img> tags with attributes
+  while ((match = notProseRegex.exec(html)) !== null) {
+    const openTagIndex = match.index;
+    if (openTagIndex > imgIndex) break;
+
+    const tagName = match[1].toLowerCase();
+    const htmlBetween = html.substring(openTagIndex, imgIndex);
+
+    const openTagCount = (htmlBetween.match(new RegExp(`<${tagName}\\b[^>]*>`, "gi")) || []).length;
+    const closeTagCount = (htmlBetween.match(new RegExp(`</${tagName}\\s*>`, "gi")) || []).length;
+
+    if (openTagCount > closeTagCount) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
+/**
+ * Process HTML string by transforming editorial <img> tags to styled responsive image elements,
+ * while leaving <img> tags inside .not-prose containers untouched.
+ */
+export function processArticleHtml(html) {
+  if (!html) return "";
+
   const imgRegex = /<img\s+([^>]*)\/?>/gi;
-  const elements = [];
+  let result = "";
   let lastIndex = 0;
   let match;
 
-  while (true) {
-    match = imgRegex.exec(html);
-    if (match === null) break;
+  while ((match = imgRegex.exec(html)) !== null) {
+    const imgIndex = match.index;
+    const fullImgTag = match[0];
 
-    const textBefore = html.substring(lastIndex, match.index);
-    if (textBefore) {
-      elements.push(
-        <div
-          key={`text-${lastIndex}`}
-          dangerouslySetInnerHTML={{ __html: textBefore }}
-        />
-      );
-    }
+    // Append everything before this <img> tag
+    result += html.substring(lastIndex, imgIndex);
 
-    const attrString = match[1];
+    if (isInsideNotProse(html, imgIndex)) {
+      // Keep original <img> inside .not-prose containers untouched
+      result += fullImgTag;
+    } else {
+      const attrString = match[1];
 
-    // Helper function to parse HTML attributes safely
-    const getAttr = (name) => {
-      const attrRegex = new RegExp(
-        `${name}=(?:"([^"]*)"|'([^']*)'|([^\\s>]+))`,
-        "i"
-      );
-      const attrMatch = attrString.match(attrRegex);
-      return attrMatch ? attrMatch[1] || attrMatch[2] || attrMatch[3] : null;
-    };
+      const getAttr = (name) => {
+        const attrRegex = new RegExp(
+          `${name}=(?:"([^"]*)"|'([^']*)'|([^\\s>]+))`,
+          "i"
+        );
+        const attrMatch = attrString.match(attrRegex);
+        return attrMatch ? attrMatch[1] || attrMatch[2] || attrMatch[3] : null;
+      };
 
-    const src = getAttr("src");
-    const alt = getAttr("alt") || "";
-    const width = getAttr("width");
-    const height = getAttr("height");
-    const className = getAttr("class") || getAttr("className") || "";
+      const src = getAttr("src");
+      const alt = getAttr("alt") || "";
+      const width = getAttr("width") || "1200";
+      const height = getAttr("height") || "675";
+      const className = getAttr("class") || getAttr("className") || "";
 
-    if (src) {
-      const parsedWidth = width ? Number.parseInt(width, 10) : 1200;
-      const parsedHeight = height ? Number.parseInt(height, 10) : 675;
-
-      elements.push(
-        <div
-          key={`img-block-${match.index}`}
-          className="block w-full clear-both"
-        >
-          <Image
-            src={src}
-            alt={alt}
-            width={Number.isNaN(parsedWidth) ? 1200 : parsedWidth}
-            height={Number.isNaN(parsedHeight) ? 675 : parsedHeight}
-            className={`block w-full h-auto object-cover rounded-3xl border border-brandborder/60 shadow-sm ${className}`}
-            style={{ width: "100%", height: "auto" }}
-            loading="lazy"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 75vw, 896px"
-          />
-        </div>
-      );
+      if (src) {
+        const styledImg = `<img src="${src}" alt="${alt}" width="${width}" height="${height}" loading="lazy" class="block w-full h-auto object-cover rounded-3xl border border-brandborder/60 shadow-sm my-8 ${className}" style="width: 100%; height: auto;" />`;
+        result += styledImg;
+      } else {
+        result += fullImgTag;
+      }
     }
 
     lastIndex = imgRegex.lastIndex;
   }
 
-  const remainingText = html.substring(lastIndex);
-  if (remainingText) {
-    elements.push(
-      <div
-        key={`text-${lastIndex}`}
-        dangerouslySetInnerHTML={{ __html: remainingText }}
-      />
-    );
-  }
+  result += html.substring(lastIndex);
+  return result;
+}
 
-  return <>{elements}</>;
+export default function ParsedContent({ html }) {
+  if (!html) return null;
+  const processedHtml = processArticleHtml(html);
+
+  return (
+    <div
+      className="parsed-article-content"
+      dangerouslySetInnerHTML={{ __html: processedHtml }}
+      suppressHydrationWarning
+    />
+  );
 }
