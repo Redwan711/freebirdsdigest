@@ -107,7 +107,7 @@ export default function TableOfContents({ headings = [] }) {
   if (!headings || headings.length === 0) return null;
 
   return (
-    <div className="rounded-3xl border border-brandborder bg-bg-surface p-5 shadow-xs space-y-3">
+    <div className="rounded-3xl border border-brandborder bg-bg-surface p-4 sm:p-4.5 xl:p-5 shadow-xs space-y-3">
       <div
         className="flex items-center justify-between text-xs font-extrabold uppercase tracking-wider text-brand border-b border-brandborder/60 pb-3 cursor-pointer select-none group"
         onClick={() => setIsExpanded(!isExpanded)}

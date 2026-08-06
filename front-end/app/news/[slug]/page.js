@@ -820,9 +820,9 @@ export default async function PostPage({ params, searchParams }) {
       </div>
 
       {/* Main 3-Column Responsive Layout */}
-      <div className="flex flex-col lg:grid lg:grid-cols-12 gap-6 lg:gap-4 xl:gap-5 items-start">
-        {/* Left Column: Pinned / Sticky News Side Panel (3/12 width on Desktop) */}
-        <aside className="w-full order-2 lg:order-1 lg:col-span-3 space-y-6 lg:sticky lg:top-24 self-start">
+      <div className="flex flex-col lg:grid lg:grid-cols-[250px_1fr_250px] xl:grid-cols-[270px_1fr_270px] gap-6 lg:gap-4 xl:gap-5 items-start">
+        {/* Left Column: Pinned / Sticky News Side Panel */}
+        <aside className="w-full order-2 lg:order-1 space-y-6 lg:sticky lg:top-24 self-start">
           {/* Table of Contents Section */}
           <TableOfContents headings={headings} />
 
@@ -902,8 +902,8 @@ export default async function PostPage({ params, searchParams }) {
           }}
         />
 
-        {/* Center Column: Main Article Content (6/12 width on Desktop) */}
-        <article className="mainNewsBody w-full max-w-full bg-bg-surface p-4 sm:p-8 rounded-3xl border border-brandborder shadow-xs order-1 lg:order-2 lg:col-span-6 flex flex-col gap-8 min-w-0">
+        {/* Center Column: Main Article Content */}
+        <article className="mainNewsBody w-full max-w-full bg-bg-surface p-4 sm:p-8 rounded-3xl border border-brandborder shadow-xs order-1 lg:order-2 flex flex-col gap-8 min-w-0">
 
           {/* Article Hero Header */}
           <header className="space-y-5">
@@ -1213,8 +1213,8 @@ export default async function PostPage({ params, searchParams }) {
           </footer>
         </article>
 
-        {/* Right Column: Pinned / Sticky Sponsors Ad Panel Column (3/12 width on Desktop) */}
-        <div className="sponsors w-full order-3 lg:order-3 lg:col-span-3 lg:sticky lg:top-24 self-start">
+        {/* Right Column: Pinned / Sticky Sponsors Ad Panel Column */}
+        <div className="sponsors w-full order-3 lg:order-3 lg:sticky lg:top-24 self-start">
           <SponsorsAdPnl />
         </div>
       </div>

@@ -15,7 +15,7 @@ export default async function SponsorsAdPnl() {
 
   return (
     <aside className="sponsorsAdPnl flex flex-col gap-4 font-inter 2xl:sticky 2xl:top-24 self-start">
-      <section className="bg-bg-surface p-5 rounded-3xl border border-brandborder shadow-2xs space-y-4">
+      <section className="bg-bg-surface p-4 sm:p-4.5 xl:p-5 rounded-3xl border border-brandborder shadow-2xs space-y-4">
         {/* Sponsored Parent Header
         <div className="flex items-center justify-between border-b border-brandborder pb-3">
           <div>
