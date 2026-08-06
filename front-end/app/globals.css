@@ -270,14 +270,23 @@ img {
 }
 
 .prose table {
-  display: block !important;
   width: 100% !important;
   max-width: 100% !important;
-  overflow-x: auto !important;
-  -webkit-overflow-scrolling: touch;
   margin-top: 0.75rem !important;
   margin-bottom: 0.75rem !important;
+}
+
+.prose :not(.not-prose) > table,
+.prose :not(.not-prose) table:not(.not-prose *) {
+  display: block !important;
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch;
   border-collapse: collapse !important;
+}
+
+.prose .not-prose table {
+  display: table !important;
+  width: 100% !important;
 }
 
 .prose td,
