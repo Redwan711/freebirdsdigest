@@ -1,7 +1,7 @@
 import authors from "@/data/authors.json";
 
 /**
- * Get all 5 author profiles from JSON
+ * Get all 10 author profiles from JSON
  */
 export function getAllAuthors() {
   return authors || [];
@@ -73,6 +73,7 @@ export function syncPostAuthor(
 ) {
   const defaultFallback = {
     name: "Freebirds Editorial Team",
+    email: "editorial@freebirdsdigest.com",
     avatar: null,
     isDefaultIcon: true,
     role: customArticleSubtitle || "Editorial Team at Freebirds Digest",
@@ -94,6 +95,7 @@ export function syncPostAuthor(
     if (matchedAuthor) {
       return {
         name: matchedAuthor.name,
+        email: matchedAuthor.email || "",
         avatar: matchedAuthor.avatar,
         isDefaultIcon: false,
         role: customArticleSubtitle || matchedAuthor.role,

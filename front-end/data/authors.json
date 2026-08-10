@@ -1,97 +1,182 @@
 [
   {
     "id": "1",
-    "nickname": "alexmorgan",
-    "slug": "alex-morgan",
-    "name": "Alex Morgan",
+    "nickname": "ethancaldwell",
+    "slug": "ethan-caldwell",
+    "name": "Ethan Caldwell",
+    "email": "ethan@freebirdsdigest.com",
     "gender": "male",
-    "avatar": "/alex-morgan.jpg",
-    "role": "Senior Tech & AI Editor",
-    "location": "Austin, TX",
-    "bio": "Specializing in AI automation, software workflows, and emerging developer tools for modern remote teams.",
-    "description": "Alex Morgan is a veteran software journalist and tech editor with over 8 years of experience covering developer tooling, cloud infrastructure, and artificial intelligence. He works closely with engineering teams to analyze productivity trends, AI-driven automation, and open-source tools that empower remote workforce efficiency.",
+    "avatar": "/Ethan James Caldwell.png",
+    "role": "Senior Technology Analyst & Writer",
+    "location": "Toronto, Canada",
+    "bio": "Specializing in emerging tech, Big Tech strategy, cloud infrastructure, and software market trends.",
+    "description": "Ethan Caldwell is a technology news analyst and writer with over a decade of experience analyzing software ecosystems, cloud computing, and digital transformation. He combines market intelligence and technology forecasting to provide actionable insights for enterprise leaders and software professionals.",
     "socials": {
-      "twitter": "https://twitter.com/alexmorgan_tech",
-      "linkedin": "https://linkedin.com/in/alexmorgan-tech",
-      "github": "https://github.com/alexmorgan-tech",
-      "website": "https://alexmorgan.dev"
+      "twitter": "https://x.com/ethancaldwell_tech",
+      "linkedin": "https://linkedin.com/in/ethancaldwell-tech"
     },
-    "topics": ["AI & Automation", "Developer Tools", "Software Engineering"]
+    "topics": ["Technology News", "Big Tech", "Software Trends", "Cloud Infrastructure"]
   },
   {
     "id": "2",
-    "nickname": "sophiachen",
-    "slug": "sophia-chen",
-    "name": "Sophia Chen",
+    "nickname": "linamoretti",
+    "slug": "lina-moretti",
+    "name": "Dr. Lina Moretti",
+    "email": "lina@freebirdsdigest.com",
     "gender": "female",
-    "avatar": "/sophia-chen.jpg",
-    "role": "Remote Work Strategist & HR Analyst",
-    "location": "San Francisco, CA",
-    "bio": "Advising enterprise companies and global distributed teams on async communication, culture, and remote performance.",
-    "description": "Sophia Chen is a remote work researcher and organizational culture consultant. Having managed distributed teams across 4 continents, Sophia writes actionable guides on asynchronous collaboration, remote onboarding frameworks, and mental wellness for digital nomads.",
+    "avatar": "/Dr. Lina Sofia Moretti.png",
+    "role": "AI Research Writer & Generative AI Analyst",
+    "location": "Milan, Italy",
+    "bio": "Focusing on generative AI, machine learning applications, ethical technology adoption, and digital workflows.",
+    "description": "Dr. Lina Sofia Moretti is an artificial intelligence researcher and technology writer specializing in generative AI, machine learning applications, and responsible technology adoption. With an academic background in computer science, she translates complex AI developments into practical frameworks for modern digital teams.",
     "socials": {
-      "twitter": "https://twitter.com/sophiachen_rw",
-      "linkedin": "https://linkedin.com/in/sophiachen-rw",
-      "github": "",
-      "website": "https://sophiachen.co"
+      "twitter": "https://x.com/linamoretti_ai",
+      "linkedin": "https://linkedin.com/in/dr-lina-moretti"
     },
-    "topics": ["Remote Work Strategy", "Company Culture", "Async Productivity"]
+    "topics": ["Generative AI", "Machine Learning", "AI Ethics", "Workplace Innovation"]
   },
   {
     "id": "3",
-    "nickname": "marcusvance",
-    "slug": "marcus-vance",
-    "name": "Marcus Vance",
+    "nickname": "marcuslee",
+    "slug": "marcus-lee",
+    "name": "Marcus Lee",
+    "email": "marcus@freebirdsdigest.com",
     "gender": "male",
-    "avatar": "/marcus-vance.jpg",
-    "role": "Digital Nomad & Global Finance Columnist",
-    "location": "Lisbon, Portugal",
-    "bio": "Exploring cross-border taxation, global banking, offshore compliance, and digital nomad residency programs.",
-    "description": "Marcus Vance is a global tax consultant and financial journalist based in Lisbon. He helps freelancers, solopreneurs, and digital nomads navigate international tax treaties, multi-currency banking solutions, and visa programs across Europe and Southeast Asia.",
+    "avatar": "/Marcus Daniel Lee.png",
+    "role": "Consumer Tech Analyst & Product Reviewer",
+    "location": "Singapore",
+    "bio": "Reviewing SaaS platforms, smartphones, productivity hardware, and digital tools for professionals.",
+    "description": "Marcus Lee is a technology product reviewer and consumer tech analyst with over 10 years of hands-on testing experience. He evaluates hardware devices, mobile ecosystems, and enterprise software platforms based on real-world performance, value, and usability.",
     "socials": {
-      "twitter": "https://twitter.com/marcusvance_fin",
-      "linkedin": "https://linkedin.com/in/marcusvance-fin",
-      "github": "",
-      "website": "https://marcusvance.com"
+      "twitter": "https://x.com/marcuslee_tech",
+      "linkedin": "https://linkedin.com/in/marcus-lee-tech"
     },
-    "topics": ["Nomad Finances", "Digital Taxes", "Remote Living"]
+    "topics": ["SaaS Reviews", "Consumer Tech", "Hardware Gear", "Productivity Tools"]
   },
   {
     "id": "4",
-    "nickname": "elenarostova",
-    "slug": "elena-rostova",
-    "name": "Elena Rostova",
+    "nickname": "sofiabennett",
+    "slug": "sofia-bennett",
+    "name": "Sofia Bennett",
+    "email": "sofia@freebirdsdigest.com",
     "gender": "female",
-    "avatar": "/elena-rostova.jpg",
-    "role": "Freelance Career Growth Specialist",
-    "location": "Berlin, Germany",
-    "bio": "Helping independent creators, copywriters, and designers scale client retainers and build high-ticket freelance practices.",
-    "description": "Elena Rostova is a seasoned freelance business coach and creative director. She has empowered over 500 independent professionals to escape low-paying marketplaces, master cold outreach, structure high-ticket retainer contracts, and build resilient personal brands.",
+    "avatar": "/Sofia Elizabeth Bennett.png",
+    "role": "Solopreneurship Expert & Creator Economy Strategist",
+    "location": "London, United Kingdom",
+    "bio": "Helping freelancers, solo founders, and digital creators build sustainable online businesses.",
+    "description": "Sofia Bennett is a digital entrepreneurship strategist and writer covering the creator economy, independent careers, and solo founder growth strategies. She delivers practical guides on client acquisition, service pricing, and building resilient digital brands.",
     "socials": {
-      "twitter": "https://twitter.com/elena_rostova",
-      "linkedin": "https://linkedin.com/in/elena-rostova",
-      "github": "",
-      "website": "https://elenarostova.design"
+      "twitter": "https://x.com/sofiabennett_biz",
+      "linkedin": "https://linkedin.com/in/sofia-bennett-creator"
     },
-    "topics": ["Freelance Business", "Client Acquisition", "Design & Copy"]
+    "topics": ["Solopreneurship", "Creator Economy", "Digital Business", "Personal Branding"]
   },
   {
     "id": "5",
-    "nickname": "admin",
-    "slug": "david-miller",
-    "name": "David Miller",
+    "nickname": "danielokafor",
+    "slug": "daniel-okafor",
+    "name": "Daniel Okafor",
+    "email": "daniel@freebirdsdigest.com",
     "gender": "male",
-    "avatar": "/david-miller.jpg",
-    "role": "Editor-in-Chief & Founder",
-    "location": "New York, NY",
-    "bio": "Founding editor at Freebirds Digest, passionate about distributed work ecosystems and future of employment.",
-    "description": "David Miller is the Editor-in-Chief and founder of Freebirds Digest. With a background in investigative journalism and tech publishing, David curates high-impact news, industry reports, and in-depth analytical pieces for remote professionals worldwide.",
+    "avatar": "/Daniel Chukwuemeka Okafor.png",
+    "role": "Personal Finance Writer & Income Analyst",
+    "location": "Lagos, Nigeria",
+    "bio": "Guiding independent workers on irregular income budgeting, taxes, pricing, and long-term wealth.",
+    "description": "Daniel Okafor is a personal finance writer and digital income analyst specializing in wealth management for freelancers and independent workers. He breaks down complex financial topics like irregular income management, global tax obligations, and long-term savings strategies.",
     "socials": {
-      "twitter": "https://twitter.com/davidmiller_fd",
-      "linkedin": "https://linkedin.com/in/davidmiller-fd",
-      "github": "https://github.com/davidmiller-fd",
-      "website": "https://freebirdsdigest.com"
+      "twitter": "https://x.com/danielokafor_fin",
+      "linkedin": "https://linkedin.com/in/daniel-okafor-fin"
     },
-    "topics": ["Editorial & Publishing", "Future of Work", "Tech Trends"]
+    "topics": ["Personal Finance", "Digital Income", "Freelance Taxes", "Money Management"]
+  },
+  {
+    "id": "6",
+    "nickname": "mayarodriguez",
+    "slug": "maya-rodriguez",
+    "name": "Maya Rodriguez",
+    "email": "maya@freebirdsdigest.com",
+    "gender": "female",
+    "avatar": "/Maya Isabella Rodriguez.png",
+    "role": "Digital Wellbeing & Workplace Lifestyle Researcher",
+    "location": "Barcelona, Spain",
+    "bio": "Researching healthy digital habits, notification management, remote mental health, and work-life balance.",
+    "description": "Maya Rodriguez is a digital wellbeing researcher and technology lifestyle writer. Grounded in behavioral science, she explores the psychological impact of technology and helps remote professionals establish healthier digital routines, combat burnout, and maintain personal balance.",
+    "socials": {
+      "twitter": "https://x.com/mayarodriguez_well",
+      "linkedin": "https://linkedin.com/in/maya-rodriguez-wellbeing"
+    },
+    "topics": ["Digital Wellbeing", "Remote Mental Health", "Workplace Balance", "Digital Habits"]
+  },
+  {
+    "id": "7",
+    "nickname": "alexeipetrov",
+    "slug": "alexei-petrov",
+    "name": "Alexei Petrov",
+    "email": "alexei@freebirdsdigest.com",
+    "gender": "male",
+    "avatar": "/Alexei Mikhail Petrov.png",
+    "role": "Cybersecurity Analyst & Privacy Researcher",
+    "location": "Sofia, Bulgaria",
+    "bio": "Covering online security protocols, data privacy protection, digital safety, and threat intelligence.",
+    "description": "Alexei Petrov is a cybersecurity analyst and technology researcher with more than a decade of experience in threat intelligence and digital risk management. He produces practical security guides to help remote professionals, freelancers, and small businesses protect their digital assets.",
+    "socials": {
+      "twitter": "https://x.com/alexeipetrov_sec",
+      "linkedin": "https://linkedin.com/in/alexei-petrov-sec"
+    },
+    "topics": ["Cybersecurity", "Data Privacy", "Digital Risk", "Encryption & VPNs"]
+  },
+  {
+    "id": "8",
+    "nickname": "hannahkim",
+    "slug": "hannah-kim",
+    "name": "Hannah Kim",
+    "email": "hannah@freebirdsdigest.com",
+    "gender": "female",
+    "avatar": "/Hannah Ji-Won Kim.png",
+    "role": "Future of Work Researcher & Remote Work Analyst",
+    "location": "Seoul, South Korea",
+    "bio": "Investigating distributed work culture, AI collaboration, async frameworks, and workplace technology.",
+    "description": "Hannah Kim is a future of work researcher exploring how technology, automation, and remote collaboration reshape modern careers. She analyzes distributed team dynamics, asynchronous productivity tools, and organizational evolution in global companies.",
+    "socials": {
+      "twitter": "https://x.com/hannahkim_work",
+      "linkedin": "https://linkedin.com/in/hannah-kim-work"
+    },
+    "topics": ["Future of Work", "Remote Culture", "Async Productivity", "Workplace Tech"]
+  },
+  {
+    "id": "9",
+    "nickname": "julianfoster",
+    "slug": "julian-foster",
+    "name": "Julian Foster",
+    "email": "julian@freebirdsdigest.com",
+    "gender": "male",
+    "avatar": "/Julian Foster.png",
+    "role": "Startup Strategy Writer & Business Model Analyst",
+    "location": "Austin, Texas, USA",
+    "bio": "Analyzing startup idea validation, venture scaling, business model strategy, and SaaS economics.",
+    "description": "Julian Foster is a startup strategy editor and business analyst with 17 years of experience in entrepreneurship research. With an MBA from UT Austin, he writes on business model design, venture funding trends, and sustainable scaling strategies for startup founders.",
+    "socials": {
+      "twitter": "https://x.com/julianfoster_biz",
+      "linkedin": "https://linkedin.com/in/julian-foster-strategy"
+    },
+    "topics": ["Startup Strategy", "Business Models", "Venture Growth", "Entrepreneurship"]
+  },
+  {
+    "id": "10",
+    "nickname": "norawilliams",
+    "slug": "nora-williams",
+    "name": "Nora Williams",
+    "email": "nora@freebirdsdigest.com",
+    "gender": "female",
+    "avatar": "/Nora Elizabeth Williams.png",
+    "role": "Technology Lifestyle Writer & Productivity Tools Reviewer",
+    "location": "Melbourne, Australia",
+    "bio": "Evaluating smart devices, digital workflow apps, organization tools, and daily productivity routines.",
+    "description": "Nora Williams is a technology lifestyle writer and gear analyst covering apps, smart devices, and digital workflows. She helps modern professionals find and integrate tools that enhance everyday productivity and simplify digital routines.",
+    "socials": {
+      "twitter": "https://x.com/norawilliams_tech",
+      "linkedin": "https://linkedin.com/in/nora-williams-tech"
+    },
+    "topics": ["Tech Lifestyle", "Productivity Apps", "Smart Office", "Digital Workflows"]
   }
 ]
