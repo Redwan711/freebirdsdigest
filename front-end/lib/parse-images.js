@@ -34,13 +34,24 @@ export function extractImagesFromContent(htmlContent) {
     const attrsStr = match[1];
 
     const srcMatch = attrsStr.match(/(?:src|data-src)=["']([^"']+)["']/i);
-    if (!srcMatch || !srcMatch[1]) continue;
+    let url = srcMatch && srcMatch[1] ? srcMatch[1].trim() : "";
 
-    let url = srcMatch[1].trim();
+    // If src is missing or a base64/SVG data URI placeholder, check srcset / data-srcset
+    if (!url || url.startsWith("data:")) {
+      const srcsetMatch = attrsStr.match(/(?:srcset|data-srcset)=["']([^"']+)["']/i);
+      if (srcsetMatch && srcsetMatch[1]) {
+        const candidate = srcsetMatch[1].split(",")[0].trim().split(/\s+/)[0];
+        if (candidate && !candidate.startsWith("data:")) {
+          url = candidate;
+        }
+      }
+    }
 
-    if (url.startsWith("data:")) continue;
+    if (!url || url.startsWith("data:")) continue;
 
-    if (url.startsWith("/")) {
+    if (url.startsWith("//")) {
+      url = `https:${url}`;
+    } else if (url.startsWith("/")) {
       url = `${siteUrl}${url}`;
     }
 

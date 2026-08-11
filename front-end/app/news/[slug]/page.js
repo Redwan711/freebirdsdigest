@@ -883,6 +883,7 @@ export default async function PostPage({ params, searchParams }) {
               headline: cleanHtml(post.title),
               description: cleanExcerptText,
               datePublished: post.date,
+              dateModified: post.modified || post.date,
               mainEntityOfPage: `${siteUrl}/news/${post.slug}`,
               image: (() => {
                 const imgObjs = getPostImageObjects(post);
@@ -898,6 +899,8 @@ export default async function PostPage({ params, searchParams }) {
                 logo: {
                   "@type": "ImageObject",
                   url: `${siteUrl}/freeBird-logo-new.png`,
+                  width: 600,
+                  height: 60,
                 },
               },
             }).replace(/</g, "\\u003c"),
