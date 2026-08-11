@@ -72,6 +72,7 @@ export function syncPostAuthor(
   authorSerial = ""
 ) {
   const defaultFallback = {
+    id: null,
     name: "Freebirds Editorial Team",
     email: "editorial@freebirdsdigest.com",
     avatar: null,
@@ -87,13 +88,14 @@ export function syncPostAuthor(
     isSynced: false,
   };
 
-  // Strict check: Only sync if authorSerial (Author Serial ACF field) is provided
-  if (authorSerial && String(authorSerial).trim() !== "") {
+  // Strict check: Only sync if authorSerial (Author Serial ACF field) is provided and matches an author
+  if (authorSerial !== null && authorSerial !== undefined && String(authorSerial).trim() !== "") {
     const matchedAuthor =
       getAuthorById(authorSerial) || getAuthorByNickname(authorSerial);
 
     if (matchedAuthor) {
       return {
+        id: matchedAuthor.id,
         name: matchedAuthor.name,
         email: matchedAuthor.email || "",
         avatar: matchedAuthor.avatar,
@@ -110,6 +112,6 @@ export function syncPostAuthor(
     }
   }
 
-  // When authorSerial is empty or does not match any ID, return general default data
+  // When authorSerial is empty or does not match any author serial ID, return general default fallback
   return defaultFallback;
 }

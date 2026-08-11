@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { getAuthorBySlug } from "@/lib/authors";
+import { getAuthorBySlug, syncPostAuthor } from "@/lib/authors";
 import { fetchAPI } from "@/lib/api";
 import { siteName } from "@/lib/site";
 import {
@@ -16,9 +16,9 @@ import {
 } from "lucide-react";
 import { TwitterIcon, LinkedinIcon, GithubIcon } from "@/components/SocialIcons";
 
-const GET_LATEST_ARTICLES = `
-  query GetLatestArticles {
-    posts(first: 6) {
+const GET_AUTHOR_ARTICLES_PRIMARY = `
+  query GetAuthorArticlesPrimary {
+    posts(first: 100) {
       nodes {
         id
         databaseId
@@ -30,6 +30,91 @@ const GET_LATEST_ARTICLES = `
           node {
             sourceUrl
             altText
+          }
+        }
+        author {
+          node {
+            name
+            slug
+            databaseId
+          }
+        }
+        articleMetadata {
+          authorSubtitle
+          authorSerial
+        }
+        categories {
+          nodes {
+            id
+            name
+            slug
+          }
+        }
+      }
+    }
+  }
+`;
+
+const GET_AUTHOR_ARTICLES_ALT = `
+  query GetAuthorArticlesAlt {
+    posts(first: 100) {
+      nodes {
+        id
+        databaseId
+        slug
+        title
+        date
+        excerpt
+        featuredImage {
+          node {
+            sourceUrl
+            altText
+          }
+        }
+        author {
+          node {
+            name
+            slug
+            databaseId
+          }
+        }
+        articleMetadata {
+          authorSubtitle
+          author_serial
+        }
+        categories {
+          nodes {
+            id
+            name
+            slug
+          }
+        }
+      }
+    }
+  }
+`;
+
+const GET_AUTHOR_ARTICLES_FALLBACK = `
+  query GetAuthorArticlesFallback {
+    posts(first: 100) {
+      nodes {
+        id
+        databaseId
+        slug
+        title
+        date
+        excerpt
+        featuredImage {
+          node {
+            sourceUrl
+            altText
+          }
+        }
+        author {
+          node {
+            name
+            slug
+            databaseId
           }
         }
         categories {
@@ -132,14 +217,46 @@ export default async function AuthorProfilePage({ params }) {
     topics,
   } = author;
 
-  // Fetch articles to show in the author's feed
-  let articles = [];
+  // Fetch all articles and filter by author serial ID / synced author
+  let allPosts = [];
   try {
-    const data = await fetchAPI(GET_LATEST_ARTICLES);
-    articles = data?.posts?.nodes ?? [];
-  } catch (err) {
-    console.error("Failed fetching author articles:", err);
+    const data = await fetchAPI(GET_AUTHOR_ARTICLES_PRIMARY);
+    allPosts = data?.posts?.nodes ?? [];
+  } catch (err1) {
+    try {
+      const data = await fetchAPI(GET_AUTHOR_ARTICLES_ALT);
+      allPosts = data?.posts?.nodes ?? [];
+    } catch (err2) {
+      try {
+        const data = await fetchAPI(GET_AUTHOR_ARTICLES_FALLBACK);
+        allPosts = data?.posts?.nodes ?? [];
+      } catch (err3) {
+        console.error("Failed fetching author articles:", err3);
+      }
+    }
   }
+
+  // Filter posts that belong to this author strictly by authorSerial / author_serial ACF field
+  const articles = allPosts.filter((post) => {
+    const rawAuthorSerial =
+      post.articleMetadata?.authorSerial || post.articleMetadata?.author_serial;
+
+    if (!rawAuthorSerial || String(rawAuthorSerial).trim() === "") {
+      return false;
+    }
+
+    const syncedAuthor = syncPostAuthor(
+      post.author?.node,
+      post.articleMetadata?.authorSubtitle,
+      rawAuthorSerial
+    );
+
+    return (
+      syncedAuthor.isSynced &&
+      (String(syncedAuthor.id) === String(author.id) ||
+        syncedAuthor.slug === author.slug)
+    );
+  });
 
   return (
     <main className="mx-auto max-w-7xl xl:max-w-[1440px] 2xl:max-w-[1536px] px-4 py-8 md:px-6 font-inter space-y-10">
@@ -277,66 +394,84 @@ export default async function AuthorProfilePage({ params }) {
               Articles & Guides by {name}
             </h2>
           </div>
+          <span className="text-xs font-bold text-text-muted bg-bg-subtle px-3 py-1 rounded-full border border-brandborder">
+            {articles.length} {articles.length === 1 ? "Article" : "Articles"}
+          </span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {articles.map((post) => {
-            const imageUrl = post.featuredImage?.node?.sourceUrl;
-            const categoryName = post.categories?.nodes?.[0]?.name;
-            const cleanExcerpt = cleanHtml(post.excerpt || "");
+        {articles.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {articles.map((post) => {
+              const imageUrl = post.featuredImage?.node?.sourceUrl;
+              const categoryName = post.categories?.nodes?.[0]?.name;
+              const cleanExcerpt = cleanHtml(post.excerpt || "");
 
-            return (
-              <Link
-                key={post.id || post.slug}
-                href={`/news/${post.slug}`}
-                className="group flex flex-col justify-between overflow-hidden rounded-3xl border border-brandborder bg-bg-surface p-4 transition-all duration-300 hover:border-brand/40 hover:shadow-md"
-              >
-                <div className="space-y-3">
-                  {imageUrl && (
-                    <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-bg-subtle border border-brandborder/50">
-                      <Image
-                        src={imageUrl}
-                        alt={post.title}
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                      {categoryName && (
-                        <div className="absolute top-3 left-3 z-10">
-                          <span className="inline-block rounded-full bg-bg-surface/95 backdrop-blur-md px-2.5 py-1 text-[11px] font-bold text-accent border border-brandborder/60 shadow-xs">
-                            {categoryName}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                  )}
+              return (
+                <Link
+                  key={post.id || post.slug}
+                  href={`/news/${post.slug}`}
+                  className="group flex flex-col justify-between overflow-hidden rounded-3xl border border-brandborder bg-bg-surface p-4 transition-all duration-300 hover:border-brand/40 hover:shadow-md"
+                >
+                  <div className="space-y-3">
+                    {imageUrl && (
+                      <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-bg-subtle border border-brandborder/50">
+                        <Image
+                          src={imageUrl}
+                          alt={post.title}
+                          fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
+                          className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                        {categoryName && (
+                          <div className="absolute top-3 left-3 z-10">
+                            <span className="inline-block rounded-full bg-bg-surface/95 backdrop-blur-md px-2.5 py-1 text-[11px] font-bold text-accent border border-brandborder/60 shadow-xs">
+                              {categoryName}
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                    )}
 
-                  <h3 className="text-base font-extrabold text-text-main leading-snug font-jakarta line-clamp-2 transition-colors group-hover:text-brand">
-                    {post.title}
-                  </h3>
+                    <h3 className="text-base font-extrabold text-text-main leading-snug font-jakarta line-clamp-2 transition-colors group-hover:text-brand">
+                      {post.title}
+                    </h3>
 
-                  {cleanExcerpt && (
-                    <p className="text-xs text-text-muted leading-relaxed line-clamp-2">
-                      {cleanExcerpt}
-                    </p>
-                  )}
-                </div>
+                    {cleanExcerpt && (
+                      <p className="text-xs text-text-muted leading-relaxed line-clamp-2">
+                        {cleanExcerpt}
+                      </p>
+                    )}
+                  </div>
 
-                <div className="mt-4 pt-3 border-t border-brandborder/60 flex items-center justify-between text-xs text-text-muted font-semibold">
-                  <span className="flex items-center gap-1.5">
-                    <Calendar className="w-3.5 h-3.5 text-brand shrink-0" />
-                    <time dateTime={post.date}>{formatDate(post.date)}</time>
-                  </span>
+                  <div className="mt-4 pt-3 border-t border-brandborder/60 flex items-center justify-between text-xs text-text-muted font-semibold">
+                    <span className="flex items-center gap-1.5">
+                      <Calendar className="w-3.5 h-3.5 text-brand shrink-0" />
+                      <time dateTime={post.date}>{formatDate(post.date)}</time>
+                    </span>
 
-                  <span className="inline-flex items-center gap-1 text-brand font-bold transition-transform group-hover:translate-x-1">
-                    Read Article <ArrowRight className="w-3.5 h-3.5" />
-                  </span>
-                </div>
-              </Link>
-            );
-          })}
-        </div>
+                    <span className="inline-flex items-center gap-1 text-brand font-bold transition-transform group-hover:translate-x-1">
+                      Read Article <ArrowRight className="w-3.5 h-3.5" />
+                    </span>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="rounded-3xl border border-brandborder bg-bg-surface p-12 text-center shadow-xs space-y-3">
+            <div className="mx-auto w-12 h-12 rounded-full bg-brand/10 text-brand flex items-center justify-center">
+              <BookOpen className="w-6 h-6" />
+            </div>
+            <h3 className="text-lg font-extrabold text-text-main font-jakarta">
+              No Articles Published Yet
+            </h3>
+            <p className="text-sm text-text-muted max-w-md mx-auto">
+              {name} has not published any articles yet. Please check back later!
+            </p>
+          </div>
+        )}
       </section>
     </main>
   );
 }
+

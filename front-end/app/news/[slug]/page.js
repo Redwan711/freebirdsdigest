@@ -26,6 +26,7 @@ import { TwitterIcon, LinkedinIcon, GithubIcon } from "@/components/SocialIcons"
 import SponsorsAdPnl from "@/components/SponsorsAdPnl";
 import TableOfContents from "@/components/TableOfContents";
 import { syncPostAuthor } from "@/lib/authors";
+import { getPostImageObjects } from "@/lib/parse-images";
 import { parseHeadingsAndInjectIds } from "@/lib/toc";
 
 const GET_POST_BY_SLUG = `
@@ -883,9 +884,10 @@ export default async function PostPage({ params, searchParams }) {
               description: cleanExcerptText,
               datePublished: post.date,
               mainEntityOfPage: `${siteUrl}/news/${post.slug}`,
-              image: post.featuredImage?.node?.sourceUrl
-                ? [post.featuredImage.node.sourceUrl]
-                : undefined,
+              image: (() => {
+                const imgObjs = getPostImageObjects(post);
+                return imgObjs.length > 0 ? imgObjs : undefined;
+              })(),
               author: {
                 "@type": "Person",
                 name: syncedAuthor.name,
