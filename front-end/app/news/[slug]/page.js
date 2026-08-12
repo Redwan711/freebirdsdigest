@@ -805,6 +805,13 @@ export default async function PostPage({ params, searchParams }) {
     post.content || ""
   );
 
+  // Check if post was modified after its initial publication date
+  const hasBeenModified = Boolean(
+    post?.modified &&
+      post?.date &&
+      new Date(post.modified).getTime() > new Date(post.date).getTime()
+  );
+
   return (
     <main className="mx-auto max-w-7xl xl:max-w-[1440px] 2xl:max-w-[1536px] px-4 py-8 md:px-6 font-inter">
       {/* Top Navigation & Action Bar */}
@@ -1004,6 +1011,15 @@ export default async function PostPage({ params, searchParams }) {
                   <Calendar className="w-3.5 h-3.5 text-brand shrink-0" />
                   <time dateTime={post.date}>{formatPostDate(post.date)}</time>
                 </span>
+
+                {hasBeenModified && (
+                  <span className="flex items-center gap-1.5 text-text-muted bg-bg-subtle px-3 py-1.5 rounded-full border border-brandborder">
+                    <Clock className="w-3.5 h-3.5 text-accent shrink-0" />
+                    <span>
+                      Updated <time dateTime={post.modified}>{formatPostDate(post.modified)}</time>
+                    </span>
+                  </span>
+                )}
               </div>
             </div>
           </header>
