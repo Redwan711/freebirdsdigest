@@ -315,9 +315,8 @@ export default function ContributePage() {
             QUICK STATS RIBBON
         ═══════════════════════════════════════════════════════════ */}
         <section className="my-8 rounded-2xl border border-brandborder bg-bg-surface p-6 shadow-xs">
-          <div className="grid grid-cols-2 gap-6 sm:grid-cols-4 sm:divide-x sm:divide-brandborder/60">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-3 sm:divide-x sm:divide-brandborder/60">
             {[
-              { label: "Monthly Readers", value: "15,000+" },
               { label: "Target Length", value: "1.2k – 2.5k words" },
               { label: "Review Window", value: "3-5 Business Days" },
               { label: "Author Perks", value: "Bio & Portfolio Links" },

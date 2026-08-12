@@ -340,44 +340,33 @@ export default function AboutPage() {
         </nav>
 
         {/* ═══════════════════════════════════════════════════════════
-            HERO — Full-width banner image with overlaid text
-            The image covers the entire hero like the HeroNews banner.
-            Drop your image at /public/about-hero-banner.jpg
+            HERO — Styled Dark Gradient Banner Card
         ═══════════════════════════════════════════════════════════ */}
-        <section className="relative overflow-hidden rounded-3xl shadow-xl min-h-[340px] sm:min-h-[420px]">
-          {/* Background Image (full cover, like HeroNews headerHeroImage) */}
-          <Image
-            src="/about-hero-banner.jpg"
-            alt="FreeBirds Digest — Empowering independent professionals"
-            fill
-            sizes="(max-width: 1280px) 100vw, 1200px"
-            className="object-cover"
-            priority
-          />
-          {/* Dark Gradient Overlay for readability */}
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-slate-950/40" />
+        <section className="relative overflow-hidden rounded-3xl bg-slate-950 text-white p-8 sm:p-12 md:p-16 shadow-xl border border-slate-800">
+          {/* Subtle Ambient Background Gradients */}
+          <div className="absolute top-0 right-0 -mt-12 -mr-12 w-96 h-96 rounded-full bg-brand/20 blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 left-0 -mb-12 -ml-12 w-80 h-80 rounded-full bg-teal-500/10 blur-3xl pointer-events-none" />
 
-          {/* Text Content */}
-          <div className="relative z-10 flex flex-col justify-end h-full p-8 sm:p-12 md:p-16 min-h-[340px] sm:min-h-[420px]">
-            <div className="max-w-3xl space-y-4">
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3.5 py-1 text-xs font-extrabold tracking-widest text-white/90 uppercase backdrop-blur-sm">
-                <Sparkles className="h-3.5 w-3.5 text-brand" />
-                <span>About FreeBirds Digest</span>
-              </div>
+          <div className="relative z-10 max-w-3xl space-y-6">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3.5 py-1 text-xs font-extrabold tracking-widest text-white/90 uppercase backdrop-blur-sm">
+              <Sparkles className="h-3.5 w-3.5 text-brand" />
+              <span>About FreeBirds Digest</span>
+            </div>
 
-              <h1 className="text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl md:text-6xl font-jakarta">
-                Helping Solo Professionals Build Better Careers.
-              </h1>
+            <h1 className="text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl md:text-6xl font-jakarta">
+              Helping Solo Professionals Build Better Careers.
+            </h1>
 
-              <p className="max-w-2xl text-base leading-relaxed text-slate-200 sm:text-lg">
-                A digital knowledge platform dedicated to delivering curated
-                news, career strategies, tool reviews, and productivity insights
-                for independent workers around the globe.
-              </p>
+            <p className="max-w-2xl text-base leading-relaxed text-slate-300 sm:text-lg">
+              A digital knowledge platform dedicated to delivering curated
+              news, career strategies, tool reviews, and productivity insights
+              for independent workers around the globe.
+            </p>
 
+            <div className="pt-2">
               <a
                 href="#what-we-cover"
-                className="inline-flex items-center gap-2 rounded-xl bg-brand px-6 py-3 text-sm font-bold text-white shadow-lg shadow-brand/25 transition-all hover:bg-brand-dark hover:scale-105 active:scale-95 mt-2"
+                className="inline-flex items-center gap-2 rounded-xl bg-brand px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-brand/25 transition-all hover:bg-brand-dark hover:scale-105 active:scale-95"
               >
                 <span>Explore Content Pillars</span>
                 <ArrowRight className="h-4 w-4" />
