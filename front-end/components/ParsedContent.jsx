@@ -27,25 +27,34 @@ const isInsideNotProse = (html, imgIndex) => {
 };
 
 /**
+ * Replaces em-dashes and en-dashes (—, &mdash;, &#8212;, –, &ndash;, &#8211;) with a comma and space (", ").
+ */
+export function replaceEmDashes(html) {
+  if (!html) return "";
+  return html.replace(/\s*(?:&mdash;|&#8212;|—|&ndash;|&#8211;|–)\s*/gi, ", ");
+}
+
+/**
  * Process HTML string by transforming editorial <img> tags to styled responsive image elements,
  * while leaving <img> tags inside .not-prose containers untouched.
  */
 export function processArticleHtml(html) {
   if (!html) return "";
 
+  const cleanHtml = replaceEmDashes(html);
   const imgRegex = /<img\s+([^>]*)\/?>/gi;
   let result = "";
   let lastIndex = 0;
   let match;
 
-  while ((match = imgRegex.exec(html)) !== null) {
+  while ((match = imgRegex.exec(cleanHtml)) !== null) {
     const imgIndex = match.index;
     const fullImgTag = match[0];
 
     // Append everything before this <img> tag
-    result += html.substring(lastIndex, imgIndex);
+    result += cleanHtml.substring(lastIndex, imgIndex);
 
-    if (isInsideNotProse(html, imgIndex)) {
+    if (isInsideNotProse(cleanHtml, imgIndex)) {
       // Keep original <img> inside .not-prose containers untouched
       result += fullImgTag;
     } else {
@@ -77,7 +86,7 @@ export function processArticleHtml(html) {
     lastIndex = imgRegex.lastIndex;
   }
 
-  result += html.substring(lastIndex);
+  result += cleanHtml.substring(lastIndex);
   return result;
 }
 

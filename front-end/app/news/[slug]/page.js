@@ -515,6 +515,7 @@ function cleanHtml(htmlString = "") {
   return htmlString
     .replace(/<[^>]*>/g, "")
     .replace(/\[\s*&hellip;\s*\]|\[\s*\.\.\.\s*\]|&hellip;|&#8230;/gi, "")
+    .replace(/\s*(?:&mdash;|&#8212;|—|&ndash;|&#8211;|–)\s*/gi, ", ")
     .replace(/&nbsp;/gi, " ")
     .replace(/&amp;/gi, "&")
     .replace(/&quot;/gi, '"')

@@ -12,6 +12,7 @@ export function parseHeadingsAndInjectIds(html = "") {
       const level = Number.parseInt(levelStr, 10);
       const rawText = innerContent
         .replace(/<[^>]*>/g, "")
+        .replace(/\s*(?:&mdash;|&#8212;|—|&ndash;|&#8211;|–)\s*/gi, ", ")
         .replace(/&nbsp;/gi, " ")
         .replace(/&amp;/gi, "&")
         .replace(/&quot;/gi, '"')
