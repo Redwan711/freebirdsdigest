@@ -350,6 +350,11 @@ export default function AffiliateDisclosurePage() {
                 Affiliate partnerships help us continue producing free,
                 practical, and research-driven content for our community.
               </p>
+              <p className="text-xs sm:text-sm leading-relaxed text-text-muted">
+                Affiliate revenue allows FreeBirds Digest to remain accessible
+                while investing in deeper research and better educational
+                resources.
+              </p>
             </div>
 
             {/* How Affiliate Links Support FreeBirds Digest */}
@@ -367,25 +372,35 @@ export default function AffiliateDisclosurePage() {
                 Affiliate partnerships are one of the ways we sustain our
                 platform while continuing to create useful resources.
               </p>
-              <p className="text-xs sm:text-sm leading-relaxed text-text-muted">
+              <p className="text-xs sm:text-sm leading-relaxed text-text-muted font-medium">
                 Revenue generated through affiliate relationships helps support:
               </p>
-              <ul className="space-y-1.5">
-                {[
-                  "Content creation and editorial research",
-                  "Product features, pricing, and user experience reviews",
-                  "Website performance and security infrastructure",
-                  "Publishing tools and content management systems",
-                ].map((item) => (
-                  <li
-                    key={item}
-                    className="flex items-center gap-2 text-xs sm:text-sm text-text-muted"
-                  >
-                    <CheckCircle2 className="h-3.5 w-3.5 text-brand shrink-0" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
+              <div className="space-y-3 pt-1">
+                <div>
+                  <h4 className="text-xs font-bold text-text-main uppercase tracking-wider">
+                    Content Creation
+                  </h4>
+                  <p className="text-xs text-text-muted mt-0.5 leading-relaxed">
+                    Our editorial team researches topics, analyzes solutions, and creates practical guides designed for independent professionals.
+                  </p>
+                </div>
+                <div>
+                  <h4 className="text-xs font-bold text-text-main uppercase tracking-wider">
+                    Research and Evaluation
+                  </h4>
+                  <p className="text-xs text-text-muted mt-0.5 leading-relaxed">
+                    We spend time reviewing product features, pricing structures, user experience, business suitability, advantages, and limitations.
+                  </p>
+                </div>
+                <div>
+                  <h4 className="text-xs font-bold text-text-main uppercase tracking-wider">
+                    Website Operations
+                  </h4>
+                  <p className="text-xs text-text-muted mt-0.5 leading-relaxed">
+                    Affiliate revenue contributes to maintaining and improving website performance, content management systems, publishing tools, security, and technical infrastructure.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
 
