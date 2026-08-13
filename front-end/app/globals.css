@@ -120,6 +120,11 @@ img {
   border-radius: 10px;
 }
 
+.imgNoBottomRadius {
+  border-radius: 0px !important;
+  overflow: hidden !important;
+}
+
 /* Typography & Prose Styling for WordPress Content */
 .prose {
   max-width: none;
@@ -276,7 +281,7 @@ img {
   margin-bottom: 0.75rem !important;
 }
 
-.prose :not(.not-prose) > table,
+.prose :not(.not-prose)>table,
 .prose :not(.not-prose) table:not(.not-prose *) {
   display: block !important;
   overflow-x: auto !important;

@@ -108,6 +108,11 @@ const Footer = async () => {
                                     </Link>
                                 </li>
                                 <li>
+                                    <Link href="/affiliate-disclosure" className="hover:text-brand transition-colors">
+                                        Affiliate Disclosure
+                                    </Link>
+                                </li>
+                                <li>
                                     <Link href="/advertising" className="hover:text-brand transition-colors">
                                         Advertising
                                     </Link>

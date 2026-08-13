@@ -43,7 +43,7 @@ export default async function sitemap() {
     fetchSitemapPosts(),
   ]);
 
-  const staticPages = ["", "/about"].map((path) => ({
+  const staticPages = ["", "/about", "/affiliate-disclosure"].map((path) => ({
     url: `${siteUrl}${path}`,
     lastModified: new Date(),
     changeFrequency: path ? "monthly" : "daily",

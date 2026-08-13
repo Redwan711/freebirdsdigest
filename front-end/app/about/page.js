@@ -494,11 +494,11 @@ export default function AboutPage() {
             {/* Image sits at top of card, same as article cards */}
             <div className="relative aspect-16/10 overflow-hidden bg-bg-subtle">
               <Image
-                src="/about-team.jpg"
+                src="/freeBirds-digest-editorial-team.jpg"
                 alt="FreeBirds Digest editorial team"
                 fill
                 sizes="(max-width: 1024px) 100vw, 450px"
-                className="object-cover"
+                className="object-cover imgNoBottomRadius"
               />
             </div>
             <div className="p-6 space-y-4">
