@@ -25,6 +25,7 @@ import RecommendedNews from "@/components/RecommendedNews";
 import { TwitterIcon, LinkedinIcon, GithubIcon } from "@/components/SocialIcons";
 import SponsorsAdPnl from "@/components/SponsorsAdPnl";
 import TableOfContents from "@/components/TableOfContents";
+import TransparencyNotice from "@/components/TransparencyNotice";
 import { syncPostAuthor } from "@/lib/authors";
 import { getPostImageObjects } from "@/lib/parse-images";
 import { parseHeadingsAndInjectIds } from "@/lib/toc";
@@ -84,6 +85,7 @@ const GET_POST_BY_SLUG = `
         authorSerial
         estimatedReadTime
         mainImageSourceInfo
+        includedAffiliateLinks
         secndImage {
           node {
             sourceUrl
@@ -153,6 +155,7 @@ const GET_POST_BY_SLUG_ALT = `
         author_serial
         estimatedReadTime
         mainImageSourceInfo
+        includedAffiliateLinks
         secndImage {
           node {
             sourceUrl
@@ -221,6 +224,7 @@ const GET_POST_BY_SLUG_FALLBACK = `
         authorSubtitle
         estimatedReadTime
         mainImageSourceInfo
+        includedAffiliateLinks
         secndImage {
           node {
             sourceUrl
@@ -290,6 +294,7 @@ const GET_POST_BY_DATABASE_ID = `
         authorSerial
         estimatedReadTime
         mainImageSourceInfo
+        includedAffiliateLinks
         secndImage {
           node {
             sourceUrl
@@ -359,6 +364,7 @@ const GET_POST_BY_DATABASE_ID_ALT = `
         author_serial
         estimatedReadTime
         mainImageSourceInfo
+        includedAffiliateLinks
         secndImage {
           node {
             sourceUrl
@@ -773,6 +779,7 @@ export default async function PostPage({ params, searchParams }) {
     author_serial,
     estimatedReadTime,
     mainImageSourceInfo,
+    includedAffiliateLinks,
     videoSource,
     otherUrl,
   } = articleMetadata;
@@ -1077,6 +1084,9 @@ export default async function PostPage({ params, searchParams }) {
           <div className="prose prose-lg max-w-none dark:prose-invert text-text-main prose-headings:font-extrabold prose-headings:text-text-main prose-headings:tracking-tight prose-headings:scroll-mt-24 prose-p:leading-8 prose-p:text-text-main prose-a:text-brand prose-a:font-semibold prose-a:no-underline hover:prose-a:underline prose-strong:text-text-main prose-blockquote:border-l-brand prose-blockquote:text-text-muted prose-table:w-full prose-table:border-collapse prose-th:border prose-th:border-brandborder prose-th:p-3 prose-td:border prose-td:border-brandborder prose-td:p-3 [&_.wp-block-paragraph]:mb-6 [&_.wp-block-heading]:mt-10 [&_.wp-block-heading]:mb-4 [&_.wp-block-quote]:border-l-4 [&_.wp-block-quote]:border-brand [&_.wp-block-quote]:pl-5 [&_.wp-block-quote]:py-2 [&_.wp-block-quote]:italic [&_.wp-block-image]:my-8 [&_.wp-block-image_img]:rounded-3xl [&_.wp-block-image_img]:shadow-sm [&_.wp-block-list]:pl-6 [&_.wp-block-list]:list-disc [&_li]:mb-1 [&_li]:mt-0.5 [&_li_p]:my-0">
             <ParsedContent html={modifiedHtml} />
           </div>
+
+          {/* Transparency Notice — Only shown when ACF field includedAffiliateLinks is true */}
+          {includedAffiliateLinks && <TransparencyNotice />}
 
           {/* E-E-A-T Author Bio Card */}
           <div className="rounded-3xl border border-brandborder bg-bg-surface p-6 sm:p-8 shadow-xs flex flex-col sm:flex-row items-center sm:items-start gap-5 text-center sm:text-left">

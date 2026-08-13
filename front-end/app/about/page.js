@@ -501,7 +501,17 @@ export default function AboutPage() {
                 className="object-cover imgNoBottomRadius"
               />
             </div>
-            <div className="p-6 space-y-4">
+            <div className="flex justify-between px-6 pt-4">
+              <span className="text-xs font-bold text-text-main">Dr. Lina Sofia</span>
+              <span className="text-xs font-bold text-text-main">Ethan Caldwell</span>
+            </div>
+            <div className="px-6 pt-3">
+              <h3 className="text-sm font-extrabold text-text-main font-jakarta">FreeBirds Digest Editorial Team</h3>
+              <p className="mt-1.5 text-xs leading-relaxed text-text-muted">
+                FreeBirds Digest is powered by a global remote editorial team of technology experts, AI researchers, and digital analysts. Ethan Caldwell and Dr. Lina Sofia Moretti combine industry insights, AI research, and technology trends to deliver trusted, practical, and future-focused content for modern professionals.
+              </p>
+            </div>
+            <div className="p-6 pt-4 space-y-4">
               <h3 className="text-xs font-extrabold uppercase tracking-widest text-text-main border-b border-brandborder pb-2">
                 Key Snapshot
               </h3>
