@@ -3,6 +3,7 @@ import "./globals.css";
 import Navber from "@/components/Navber";
 import Footer from "@/components/Footer";
 import { defaultDescription, siteName, siteUrl } from "@/lib/site";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({
   subsets: ['latin'],
@@ -65,6 +66,7 @@ export default function RootLayout({ children }) {
         <footer className="mt-16">
           <Footer />
         </footer>
+        <Analytics />
       </body>
     </html>
   );
