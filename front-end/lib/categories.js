@@ -9,6 +9,13 @@ const GET_ALL_CATEGORIES = `
         name
         slug
         count
+        parent {
+          node {
+            id
+            slug
+            name
+          }
+        }
       }
     }
   }
@@ -20,6 +27,13 @@ const NAVIGATION_CATEGORY_SLUGS = [
   'technology',
   'lifestyle',
   'news',
+];
+
+const DEFAULT_REVIEW_SUBCATEGORIES = [
+  { id: 'ai-tools-reviews', slug: 'ai-tools-reviews', name: 'AI Tools Reviews' },
+  { id: 'hosting-reviews', slug: 'hosting-reviews', name: 'Hosting Reviews' },
+  { id: 'domain-reviews', slug: 'domain-reviews', name: 'Domain Reviews' },
+  { id: 'vpn-reviews', slug: 'vpn-reviews', name: 'VPN Reviews' },
 ];
 
 const NAV_SLUG_SET = new Set(NAVIGATION_CATEGORY_SLUGS);
@@ -68,3 +82,29 @@ export async function fetchNavigationCategories() {
     );
   });
 }
+
+export async function fetchReviewSubcategories() {
+  try {
+    const allCategories = await fetchAllCategories();
+    const reviewCats = allCategories.filter((cat) => {
+      const parentSlug = cat?.parent?.node?.slug;
+      return (
+        parentSlug === 'reviews' ||
+        (cat?.slug !== 'reviews' && cat?.slug?.endsWith('-reviews'))
+      );
+    });
+
+    if (reviewCats.length > 0) {
+      return reviewCats.map((cat) => ({
+        id: cat.id || cat.slug,
+        slug: cat.slug,
+        name: cat.name,
+      }));
+    }
+  } catch (error) {
+    console.error('Error fetching review subcategories:', error);
+  }
+
+  return DEFAULT_REVIEW_SUBCATEGORIES;
+}
+

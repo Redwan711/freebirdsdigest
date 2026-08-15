@@ -1,14 +1,18 @@
 "use client";
 
-import { Home, Menu, X } from "lucide-react";
+import { Home, Menu, X, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import ThemeToggle from "./ThemeToggle";
 
-export default function MobileNav({ categories }) {
+export default function MobileNav({ categories = [], reviewSubcategories = [] }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isReviewsOpen, setIsReviewsOpen] = useState(false);
 
-  const closeMenu = () => setIsOpen(false);
+  const closeMenu = () => {
+    setIsOpen(false);
+    setIsReviewsOpen(false);
+  };
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -71,6 +75,46 @@ export default function MobileNav({ categories }) {
                 {category.name}
               </Link>
             ))}
+
+            {/* Mobile Reviews Section with Subcategories */}
+            <div className="rounded-xl transition-colors">
+              <div className="flex items-center justify-between px-3.5 py-2.5">
+                <Link
+                  href="/reviews"
+                  onClick={closeMenu}
+                  className="font-poppins text-sm font-semibold text-text-main hover:text-brand transition-colors"
+                >
+                  Reviews
+                </Link>
+                {reviewSubcategories.length > 0 && (
+                  <button
+                    type="button"
+                    onClick={() => setIsReviewsOpen((prev) => !prev)}
+                    className="p-1.5 rounded-lg text-text-muted hover:bg-bg-subtle hover:text-brand transition-colors"
+                    aria-label="Toggle Reviews Submenu"
+                  >
+                    <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isReviewsOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                )}
+              </div>
+
+              {isReviewsOpen && reviewSubcategories.length > 0 && (
+                <div className="pl-4 pr-2 pb-2 space-y-1">
+                  {reviewSubcategories.map((subCat) => (
+                    <Link
+                      key={subCat.id || subCat.slug}
+                      href={`/${subCat.slug}`}
+                      onClick={closeMenu}
+                      className="flex items-center gap-2.5 rounded-lg px-3 py-2 font-poppins text-xs font-medium text-text-muted hover:bg-brand/10 hover:text-brand transition-colors"
+                    >
+                      <span className="w-1.5 h-1.5 rounded-full bg-brand/50" />
+                      {subCat.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
             <Link
               href="/contribute"
               onClick={closeMenu}

@@ -78,6 +78,15 @@ const Footer = async () => {
                                         </Link>
                                     </li>
                                 ))}
+                                <li>
+                                    <Link
+                                        href="/reviews"
+                                        className="hover:text-brand transition-colors flex items-center gap-1.5 group"
+                                    >
+                                        <span className="w-1.5 h-1.5 rounded-full bg-slate-700 group-hover:bg-brand transition-colors" />
+                                        Reviews
+                                    </Link>
+                                </li>
                             </ul>
                         </div>
 

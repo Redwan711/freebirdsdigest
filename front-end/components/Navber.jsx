@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link';
-import { fetchNavigationCategories } from '@/lib/categories';
+import { fetchNavigationCategories, fetchReviewSubcategories } from '@/lib/categories';
 import { fetchHeaderNews } from '@/lib/headerNews';
 import { getHeaderLogoClass } from '@/lib/logoTheme';
 import BottomHeader from './BottomHeader';
@@ -10,6 +10,7 @@ import ThemeToggle from './ThemeToggle';
 const Navber = async () => {
 
   const activeCategories = await fetchNavigationCategories();
+  const reviewSubcategories = await fetchReviewSubcategories();
   const { headerNews } = await fetchHeaderNews();
 
   return (
@@ -55,7 +56,7 @@ const Navber = async () => {
           {/* Mobile & Tablet Menu Controls — Right Top on Non-Desktop Screens */}
           <div className="flex lg:hidden items-center gap-2">
             <ThemeToggle />
-            <MobileNav categories={activeCategories} />
+            <MobileNav categories={activeCategories} reviewSubcategories={reviewSubcategories} />
           </div>
         </div>
 
@@ -87,7 +88,7 @@ const Navber = async () => {
       </section>
 
       {/* bottom navbar — handles sticky header behavior for desktop */}
-      <BottomHeader activeCategories={activeCategories} />
+      <BottomHeader activeCategories={activeCategories} reviewSubcategories={reviewSubcategories} />
     </div>
   )
 }
