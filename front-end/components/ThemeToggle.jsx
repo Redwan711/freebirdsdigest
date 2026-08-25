@@ -45,7 +45,9 @@ export default function ThemeToggle({ className = "" }) {
     const observer = new MutationObserver(() => {
       if (!localStorage.getItem('theme')) {
         const detectedDark = isDarkModeActive();
-        setTheme(detectedDark ? 'dark' : 'light');
+        const newTheme = detectedDark ? 'dark' : 'light';
+        setTheme(newTheme);
+        applyTheme(newTheme);
       }
     });
 
@@ -59,6 +61,7 @@ export default function ThemeToggle({ className = "" }) {
       if (!localStorage.getItem('theme')) {
         const newTheme = e.matches ? 'dark' : 'light';
         setTheme(newTheme);
+        applyTheme(newTheme);
       }
     };
 
