@@ -26,6 +26,7 @@ import { TwitterIcon, LinkedinIcon, GithubIcon } from "@/components/SocialIcons"
 import SponsorsAdPnl from "@/components/SponsorsAdPnl";
 import TableOfContents from "@/components/TableOfContents";
 import TransparencyNotice from "@/components/TransparencyNotice";
+import FaqSection from "@/components/FaqSection";
 import { syncPostAuthor } from "@/lib/authors";
 import { getPostImageObjects } from "@/lib/parse-images";
 import { parseHeadingsAndInjectIds } from "@/lib/toc";
@@ -81,6 +82,7 @@ const GET_POST_BY_SLUG = `
         subheading
         topq
         topa
+        faqs
         authorSubtitle
         authorSerial
         estimatedReadTime
@@ -151,6 +153,7 @@ const GET_POST_BY_SLUG_ALT = `
         subheading
         topq
         topa
+        faqs
         authorSubtitle
         author_serial
         estimatedReadTime
@@ -774,6 +777,7 @@ export default async function PostPage({ params, searchParams }) {
     topa,
     topQ,
     topA,
+    faqs,
     authorSubtitle,
     authorSerial,
     author_serial,
@@ -1218,6 +1222,16 @@ export default async function PostPage({ params, searchParams }) {
 
               <ArticleActions title={post.title} />
             </div>
+
+            {/* Article FAQ Section (ACF faqs) */}
+            {faqs && (
+              <FaqSection
+                faqs={faqs}
+                title="Frequently Asked Questions"
+                subtitle={`Key answers related to "${cleanHtml(post.title)}"`}
+                className="py-4 border-t border-brandborder/60"
+              />
+            )}
 
             {/* 3 Recommended News Articles */}
             <RecommendedNews posts={recommendedPosts} />

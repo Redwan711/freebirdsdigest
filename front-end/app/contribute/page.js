@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import FaqSection from "@/components/FaqSection";
 import {
   PenTool,
   Sparkles,
@@ -540,39 +541,13 @@ export default function ContributePage() {
           </div>
         </section>
 
-        {/* ═══════════════════════════════════════════════════════════
-            FREQUENTLY ASKED QUESTIONS (FAQ)
-        ═══════════════════════════════════════════════════════════ */}
-        <section className="my-16">
-          <div className="max-w-2xl space-y-2 mb-8">
-            <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand">
-              <HelpCircle className="h-4 w-4" />
-              <span>Questions & Answers</span>
-            </div>
-            <h2 className="text-3xl font-extrabold text-text-main sm:text-4xl font-jakarta">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-sm text-text-muted sm:text-base">
-              Got questions about contributing? Here is what prospective writers ask us most.
-            </p>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2">
-            {faqs.map((faq, idx) => (
-              <div
-                key={idx}
-                className="rounded-2xl border border-brandborder bg-bg-surface p-6 shadow-2xs space-y-2"
-              >
-                <h3 className="text-base font-bold text-text-main font-jakarta">
-                  {faq.question}
-                </h3>
-                <p className="text-xs sm:text-sm text-text-muted leading-relaxed">
-                  {faq.answer}
-                </p>
-              </div>
-            ))}
-          </div>
-        </section>
+        {/* FREQUENTLY ASKED QUESTIONS (FAQ) */}
+        <FaqSection
+          faqs={faqs}
+          title="Frequently Asked Questions"
+          subtitle="Got questions about contributing? Here is what prospective writers ask us most."
+          className="my-16"
+        />
       </main>
     </>
   );

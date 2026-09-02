@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import FaqSection from "@/components/FaqSection";
 import {
   ShieldCheck,
   BookOpen,
@@ -792,39 +793,13 @@ export default function AffiliateDisclosurePage() {
           </p>
         </section>
 
-        {/* ═══════════════════════════════════════════════════════════
-            FAQs — Accordion-style
-        ═══════════════════════════════════════════════════════════ */}
-        <section className="my-16">
-          <div className="max-w-2xl space-y-2 mb-8">
-            <span className="text-xs font-bold uppercase tracking-widest text-brand">
-              Common Questions
-            </span>
-            <h2 className="text-3xl font-extrabold text-text-main sm:text-4xl font-jakarta">
-              Frequently Asked Questions (FAQs)
-            </h2>
-          </div>
-
-          <div className="space-y-3 max-w-3xl">
-            {faqs.map((faq, idx) => (
-              <details
-                key={idx}
-                className="group rounded-2xl border border-brandborder bg-bg-surface shadow-2xs overflow-hidden"
-              >
-                <summary className="flex items-center justify-between cursor-pointer p-5 text-sm sm:text-base font-bold text-text-main hover:text-brand transition-colors list-none [&::-webkit-details-marker]:hidden">
-                  <div className="flex items-center gap-3">
-                    <HelpCircle className="h-4 w-4 text-brand shrink-0" />
-                    <span>{faq.question}</span>
-                  </div>
-                  <ChevronDown className="h-4 w-4 text-text-muted shrink-0 transition-transform group-open:rotate-180" />
-                </summary>
-                <div className="px-5 pb-5 pt-0 text-xs sm:text-sm leading-relaxed text-text-muted border-t border-brandborder/60 mt-0 pt-4">
-                  {faq.answer}
-                </div>
-              </details>
-            ))}
-          </div>
-        </section>
+        {/* FREQUENTLY ASKED QUESTIONS (FAQ) */}
+        <FaqSection
+          faqs={faqs}
+          title="Frequently Asked Questions (FAQs)"
+          subtitle="Clear answers about our affiliate relationships and financial disclosures."
+          className="my-16"
+        />
 
         {/* ═══════════════════════════════════════════════════════════
             INTERNAL LINKS — Related Pages
