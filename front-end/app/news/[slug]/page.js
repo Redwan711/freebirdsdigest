@@ -1100,6 +1100,16 @@ export default async function PostPage({ params, searchParams }) {
           {/* Transparency Notice — Only shown when ACF field includedAffiliateLinks is true */}
           {includedAffiliateLinks && <TransparencyNotice />}
 
+          {/* Article FAQ Section (ACF faqs) */}
+          {activeFaqs && (
+            <FaqSection
+              faqs={activeFaqs}
+              title="Frequently Asked Questions"
+              subtitle={`Key answers related to "${cleanHtml(post.title)}"`}
+              className="py-4 border-t border-brandborder/60"
+            />
+          )}
+
           {/* E-E-A-T Author Bio Card */}
           <div className="rounded-3xl border border-brandborder bg-bg-surface p-6 sm:p-8 shadow-xs flex flex-col sm:flex-row items-center sm:items-start gap-5 text-center sm:text-left">
             {syncedAuthor.avatar ? (
@@ -1230,16 +1240,6 @@ export default async function PostPage({ params, searchParams }) {
 
               <ArticleActions title={post.title} />
             </div>
-
-            {/* Article FAQ Section (ACF faqs) */}
-            {activeFaqs && (
-              <FaqSection
-                faqs={activeFaqs}
-                title="Frequently Asked Questions"
-                subtitle={`Key answers related to "${cleanHtml(post.title)}"`}
-                className="py-4 border-t border-brandborder/60"
-              />
-            )}
 
             {/* 3 Recommended News Articles */}
             <RecommendedNews posts={recommendedPosts} />
