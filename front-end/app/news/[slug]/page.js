@@ -224,6 +224,7 @@ const GET_POST_BY_SLUG_FALLBACK = `
         subheading
         topq
         topa
+        faqs
         authorSubtitle
         estimatedReadTime
         mainImageSourceInfo
@@ -293,6 +294,7 @@ const GET_POST_BY_DATABASE_ID = `
         subheading
         topq
         topa
+        faqs
         authorSubtitle
         authorSerial
         estimatedReadTime
@@ -363,6 +365,7 @@ const GET_POST_BY_DATABASE_ID_ALT = `
         subheading
         topq
         topa
+        faqs
         authorSubtitle
         author_serial
         estimatedReadTime
@@ -433,6 +436,7 @@ const GET_POST_BY_DATABASE_ID_FALLBACK = `
         subheading
         topq
         topa
+        faqs
         authorSubtitle
         estimatedReadTime
         mainImageSourceInfo
@@ -791,6 +795,10 @@ export default async function PostPage({ params, searchParams }) {
   const topQuestion = topq || topQ;
   const topAnswer = topa || topA;
   const rawAuthorSerial = authorSerial || author_serial;
+
+  // Resolve raw FAQs or fallback to single topQ/topA
+  const rawFaqs = faqs || articleMetadata?.faqs || articleMetadata?.faq || articleMetadata?.Faqs || articleMetadata?.FAQs;
+  const activeFaqs = rawFaqs || (topQuestion && topAnswer ? `q: ${topQuestion}\na: ${topAnswer}` : null);
 
   // Author identity resolution via authors.json matching (Author Serial ID priority) & error handling
   const syncedAuthor = syncPostAuthor(
@@ -1224,9 +1232,9 @@ export default async function PostPage({ params, searchParams }) {
             </div>
 
             {/* Article FAQ Section (ACF faqs) */}
-            {faqs && (
+            {activeFaqs && (
               <FaqSection
-                faqs={faqs}
+                faqs={activeFaqs}
                 title="Frequently Asked Questions"
                 subtitle={`Key answers related to "${cleanHtml(post.title)}"`}
                 className="py-4 border-t border-brandborder/60"
