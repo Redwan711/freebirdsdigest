@@ -967,7 +967,7 @@ export default async function PostPage({ params, searchParams }) {
             </div>
 
             {/* Article Title */}
-            <h1 className="text-2xl font-extrabold tracking-tight text-text-main sm:text-3xl lg:text-4xl leading-tight font-jakarta">
+            <h1 className="text-2xl font-bold tracking-tight text-text-main sm:text-3xl lg:text-4xl leading-tight font-jakarta">
               {post.title}
             </h1>
 
@@ -1093,7 +1093,7 @@ export default async function PostPage({ params, searchParams }) {
           )}
 
           {/* Article Body Content — Parsed with full width inline images & compact list spacing */}
-          <div className="prose prose-lg max-w-none dark:prose-invert text-text-main prose-headings:font-extrabold prose-headings:text-text-main prose-headings:tracking-tight prose-headings:scroll-mt-24 prose-p:leading-8 prose-p:text-text-main prose-a:text-brand prose-a:font-semibold prose-a:no-underline hover:prose-a:underline prose-strong:text-text-main prose-blockquote:border-l-brand prose-blockquote:text-text-muted prose-table:w-full prose-table:border-collapse prose-th:border prose-th:border-brandborder prose-th:p-3 prose-td:border prose-td:border-brandborder prose-td:p-3 [&_.wp-block-paragraph]:mb-6 [&_.wp-block-heading]:mt-10 [&_.wp-block-heading]:mb-4 [&_.wp-block-quote]:border-l-4 [&_.wp-block-quote]:border-brand [&_.wp-block-quote]:pl-5 [&_.wp-block-quote]:py-2 [&_.wp-block-quote]:italic [&_.wp-block-image]:my-8 [&_.wp-block-image_img]:rounded-3xl [&_.wp-block-image_img]:shadow-sm [&_.wp-block-list]:pl-6 [&_.wp-block-list]:list-disc [&_li]:mb-1 [&_li]:mt-0.5 [&_li_p]:my-0">
+          <div className="prose prose-lg max-w-none dark:prose-invert text-text-main prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-text-main prose-headings:scroll-mt-24 prose-p:leading-8 prose-p:text-text-main prose-a:text-brand prose-a:font-semibold prose-a:no-underline hover:prose-a:underline prose-strong:text-text-main prose-blockquote:border-l-brand prose-blockquote:text-text-muted prose-table:w-full prose-table:border-collapse prose-th:border prose-th:border-brandborder prose-th:p-3 prose-td:border prose-td:border-brandborder prose-td:p-3 [&_.wp-block-paragraph]:mb-6 [&_.wp-block-heading]:mt-10 [&_.wp-block-heading]:mb-4 [&_.wp-block-quote]:border-l-4 [&_.wp-block-quote]:border-brand [&_.wp-block-quote]:pl-5 [&_.wp-block-quote]:py-2 [&_.wp-block-quote]:italic [&_.wp-block-image]:my-8 [&_.wp-block-image_img]:rounded-3xl [&_.wp-block-image_img]:shadow-sm [&_.wp-block-list]:pl-6 [&_.wp-block-list]:list-disc [&_li]:mb-1 [&_li]:mt-0.5 [&_li_p]:my-0">
             <ParsedContent html={modifiedHtml} />
           </div>
 

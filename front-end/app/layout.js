@@ -1,4 +1,4 @@
-import { Inter, Plus_Jakarta_Sans } from "next/font/google";
+import { Inter, Outfit, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Navber from "@/components/Navber";
 import Footer from "@/components/Footer";
@@ -9,6 +9,13 @@ const inter = Inter({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700', '800'],
   variable: '--font-inter',
+  display: 'swap',
+});
+
+const outfit = Outfit({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-outfit',
   display: 'swap',
 });
 
@@ -54,7 +61,7 @@ export default function RootLayout({ children }) {
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${inter.variable} ${plusJakartaSans.variable} h-full antialiased`}
+      className={`${inter.variable} ${outfit.variable} ${plusJakartaSans.variable} h-full antialiased`}
     >
       <head>
         <script

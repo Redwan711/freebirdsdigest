@@ -2,6 +2,9 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 :root {
@@ -97,12 +100,13 @@ body[data-theme="light"] .header-logo-dark-invert {
 
 @theme {
   --font-inter: var(--font-inter);
-  --font-jakarta: var(--font-jakarta);
+  --font-outfit: var(--font-outfit);
+  --font-jakarta: var(--font-outfit);
 
   /* Aliases & Fallbacks */
-  --font-heading: var(--font-jakarta);
+  --font-heading: var(--font-outfit);
   --font-body: var(--font-inter);
-  --font-poppins: var(--font-jakarta);
+  --font-poppins: var(--font-outfit);
   --font-bangali: var(--font-inter);
 
   --color-brand: var(--color-brand-raw);
@@ -136,32 +140,52 @@ img {
 .prose h4,
 .prose h5,
 .prose h6 {
-  font-weight: 800;
-  letter-spacing: -0.025em;
+  font-family: var(--font-outfit), var(--font-jakarta), var(--font-inter), sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.03em;
   color: var(--color-text-main-raw);
-  margin-top: 2rem;
-  margin-bottom: 1rem;
+  margin-top: 2.25rem;
+  margin-bottom: 1.15rem;
+  line-height: 1.25;
 }
 
 .prose h1 {
   font-size: 2.25rem;
-  line-height: 2.5rem;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.035em;
 }
 
 .prose h2 {
   font-size: 1.75rem;
-  line-height: 2rem;
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: -0.03em;
 }
 
 .prose h3 {
   font-size: 1.35rem;
-  line-height: 1.75rem;
+  line-height: 1.35;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.prose h4 {
+  font-size: 1.15rem;
+  line-height: 1.4;
+  font-weight: 600;
+  letter-spacing: -0.015em;
 }
 
 .prose p {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 400;
+  font-size: 1.0625rem;
   line-height: 1.8;
-  margin-bottom: 1.25rem;
+  letter-spacing: -0.011em;
+  margin-bottom: 1.35rem;
   color: var(--color-text-main-raw);
+  -webkit-font-smoothing: antialiased;
 }
 
 .prose a {

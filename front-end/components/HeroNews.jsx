@@ -125,7 +125,7 @@ const HeroNews = async () => {
                   <span className="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-brand">
                     Featured Digest
                   </span>
-                  <h1 className="text-xl font-extrabold leading-snug md:text-2xl text-text-main group-hover:text-brand transition-colors">
+                  <h1 className="text-xl font-bold tracking-tight leading-snug md:text-2xl text-text-main group-hover:text-brand transition-colors">
                     {topStory.title}
                   </h1>
                   <p className="text-sm leading-relaxed text-text-muted">
