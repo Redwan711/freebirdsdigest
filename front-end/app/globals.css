@@ -187,11 +187,12 @@ img {
   margin-bottom: 0.5rem !important;
 }
 
-.prose p {
+.prose p,
+.prose .wp-block-paragraph {
   font-family: var(--font-inter), sans-serif;
   font-weight: 400;
   font-size: 1.0625rem;
-  line-height: 1.8;
+  line-height: 24px !important;
   letter-spacing: -0.011em;
   margin-bottom: 1.35rem;
   color: var(--color-text-main-raw);
