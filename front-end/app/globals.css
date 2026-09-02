@@ -144,37 +144,47 @@ img {
   font-weight: 700;
   letter-spacing: -0.03em;
   color: var(--color-text-main-raw);
-  margin-top: 2.25rem;
-  margin-bottom: 1.15rem;
   line-height: 1.25;
 }
 
-.prose h1 {
+.prose h1,
+.prose h1.wp-block-heading {
   font-size: 2.25rem;
   line-height: 1.2;
   font-weight: 700;
   letter-spacing: -0.035em;
+  margin-top: 2rem !important;
+  margin-bottom: 1rem !important;
 }
 
-.prose h2 {
+.prose h2,
+.prose h2.wp-block-heading {
   font-size: 1.75rem;
   line-height: 1.25;
   font-weight: 700;
   letter-spacing: -0.03em;
+  margin-top: 1.85rem !important;
+  margin-bottom: 0.85rem !important;
 }
 
-.prose h3 {
+.prose h3,
+.prose h3.wp-block-heading {
   font-size: 1.35rem;
   line-height: 1.35;
   font-weight: 600;
   letter-spacing: -0.02em;
+  margin-top: 1.25rem !important;
+  margin-bottom: 0.65rem !important;
 }
 
-.prose h4 {
+.prose h4,
+.prose h4.wp-block-heading {
   font-size: 1.15rem;
   line-height: 1.4;
   font-weight: 600;
   letter-spacing: -0.015em;
+  margin-top: 1rem !important;
+  margin-bottom: 0.5rem !important;
 }
 
 .prose p {
