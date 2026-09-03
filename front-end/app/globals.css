@@ -274,7 +274,8 @@ img {
 
 /* Post Content Full Width Images & Figures */
 .prose figure,
-.prose .wp-block-image {
+.prose .wp-block-image,
+.prose .wp-caption {
   margin-top: 2rem !important;
   margin-bottom: 2rem !important;
   padding: 0 !important;
@@ -283,7 +284,6 @@ img {
   display: block !important;
   clear: both !important;
   max-width: 100% !important;
-  overflow: hidden !important;
 }
 
 .prose img {
@@ -297,6 +297,32 @@ img {
   padding: 0 !important;
   border: 1px solid var(--borderGlob);
   clear: both !important;
+}
+
+/* Ensure images inside figure/caption wrappers don't double the margins or create large gaps above the caption */
+.prose figure img,
+.prose .wp-block-image img,
+.prose .wp-caption img {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Image Captions & Image Descriptions (WordPress Block & Classic captions) */
+.prose figcaption,
+.prose .wp-element-caption,
+.prose .wp-caption-text,
+.prose figure figcaption {
+  display: block !important;
+  font-size: 0.8125rem !important;
+  line-height: 1.45 !important;
+  font-weight: 500 !important;
+  color: var(--color-text-muted-raw) !important;
+  text-align: center !important;
+  margin-top: 0.5rem !important;
+  margin-bottom: 0 !important;
+  padding: 0 0.5rem !important;
+  letter-spacing: -0.005em !important;
+  font-style: normal;
 }
 
 /* Table & Table Figure Vertical Spacing */

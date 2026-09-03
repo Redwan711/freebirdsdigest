@@ -76,7 +76,7 @@ export function processArticleHtml(html) {
       const className = getAttr("class") || getAttr("className") || "";
 
       if (src) {
-        const styledImg = `<img src="${src}" alt="${alt}" width="${width}" height="${height}" loading="lazy" class="block w-full h-auto object-cover rounded-3xl border border-brandborder/60 shadow-sm my-8 ${className}" style="width: 100%; height: auto;" />`;
+        const styledImg = `<img src="${src}" alt="${alt}" width="${width}" height="${height}" loading="lazy" class="block w-full h-auto object-cover rounded-3xl border border-brandborder/60 shadow-sm ${className}" style="width: 100%; height: auto;" />`;
         result += styledImg;
       } else {
         result += fullImgTag;
