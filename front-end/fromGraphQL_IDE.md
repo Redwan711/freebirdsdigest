@@ -61,6 +61,9 @@ query GetPostBySlug($slug: ID!) {
       }
       twitterTitle
       twitterDescription
+      twitterImage {
+        sourceUrl
+      }
     }
 
     # ACF Field Group: Article Metadata (Registered in WP via WPGraphQL for ACF)

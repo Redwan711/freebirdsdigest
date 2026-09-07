@@ -77,6 +77,11 @@ const GET_POST_BY_SLUG = `
         opengraphImage {
           sourceUrl
         }
+        twitterTitle
+        twitterDescription
+        twitterImage {
+          sourceUrl
+        }
       }
       articleMetadata {
         subheading
@@ -148,6 +153,11 @@ const GET_POST_BY_SLUG_ALT = `
         opengraphImage {
           sourceUrl
         }
+        twitterTitle
+        twitterDescription
+        twitterImage {
+          sourceUrl
+        }
       }
       articleMetadata {
         subheading
@@ -217,6 +227,11 @@ const GET_POST_BY_SLUG_FALLBACK = `
         opengraphTitle
         opengraphDescription
         opengraphImage {
+          sourceUrl
+        }
+        twitterTitle
+        twitterDescription
+        twitterImage {
           sourceUrl
         }
       }
@@ -360,6 +375,11 @@ const GET_POST_BY_DATABASE_ID_ALT = `
         opengraphImage {
           sourceUrl
         }
+        twitterTitle
+        twitterDescription
+        twitterImage {
+          sourceUrl
+        }
       }
       articleMetadata {
         subheading
@@ -429,6 +449,11 @@ const GET_POST_BY_DATABASE_ID_FALLBACK = `
         opengraphTitle
         opengraphDescription
         opengraphImage {
+          sourceUrl
+        }
+        twitterTitle
+        twitterDescription
+        twitterImage {
           sourceUrl
         }
       }
@@ -689,23 +714,36 @@ export async function generateMetadata({ params, searchParams }) {
   }
 
   const seo = post.seo || {};
-  const pageTitle = seo.title || cleanHtml(post.title);
+  const cleanedTitle = cleanHtml(post.title);
+  const cleanedExcerpt = cleanHtml(post.excerpt);
+  const featuredImageUrl = post.featuredImage?.node?.sourceUrl;
 
-  const description =
-    seo.metaDesc ||
-    seo.opengraphDescription ||
-    cleanHtml(post.excerpt) ||
-    defaultDescription;
-
+  // Fallback chains
+  const pageTitle = seo.title || (cleanedTitle ? `${cleanedTitle} | ${siteName}` : siteName);
+  const metaDescription =
+    seo.metaDesc || seo.opengraphDescription || cleanedExcerpt || defaultDescription;
   const canonicalPath = seo.canonical || `${siteUrl}/news/${post.slug}`;
-  const ogTitle = seo.opengraphTitle || pageTitle;
-  const ogDesc = seo.opengraphDescription || description;
-  const image =
-    seo.opengraphImage?.sourceUrl || post.featuredImage?.node?.sourceUrl;
+
+  // Open Graph fallbacks
+  const ogTitle = seo.opengraphTitle || seo.title || cleanedTitle || siteName;
+  const ogDesc = seo.opengraphDescription || seo.metaDesc || cleanedExcerpt || defaultDescription;
+  const ogImage = seo.opengraphImage?.sourceUrl || featuredImageUrl;
+
+  // Twitter Card fallbacks
+  const twitterTitle =
+    seo.twitterTitle || seo.opengraphTitle || seo.title || cleanedTitle || siteName;
+  const twitterDesc =
+    seo.twitterDescription ||
+    seo.opengraphDescription ||
+    seo.metaDesc ||
+    cleanedExcerpt ||
+    defaultDescription;
+  const twitterImage =
+    seo.twitterImage?.sourceUrl || seo.opengraphImage?.sourceUrl || featuredImageUrl;
 
   return {
     title: pageTitle,
-    description,
+    description: metaDescription,
     alternates: { canonical: canonicalPath },
     openGraph: {
       type: "article",
@@ -715,20 +753,21 @@ export async function generateMetadata({ params, searchParams }) {
       title: ogTitle,
       description: ogDesc,
       publishedTime: post.date,
-      images: image
+      modifiedTime: post.modified,
+      images: ogImage
         ? [
-          {
-            url: image,
-            alt: post.featuredImage?.node?.altText || cleanHtml(post.title),
-          },
-        ]
+            {
+              url: ogImage,
+              alt: post.featuredImage?.node?.altText || cleanedTitle,
+            },
+          ]
         : undefined,
     },
     twitter: {
       card: "summary_large_image",
-      title: ogTitle,
-      description: ogDesc,
-      images: image ? [image] : undefined,
+      title: twitterTitle,
+      description: twitterDesc,
+      images: twitterImage ? [twitterImage] : undefined,
     },
   };
 }

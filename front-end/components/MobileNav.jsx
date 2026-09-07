@@ -126,6 +126,17 @@ export default function MobileNav({ categories = [], reviewSubcategories = [] })
             </div>
 
             <Link
+              href="/vpn-finder"
+              onClick={closeMenu}
+              className="flex items-center justify-between rounded-xl px-3.5 py-3 font-poppins text-sm font-semibold text-text-main hover:bg-brand/10 hover:text-brand transition-colors"
+            >
+              <span>VPN Finder Tool</span>
+              <span className="px-2 py-0.5 text-[10px] font-bold text-brand uppercase rounded-md bg-brand/10 border border-brand/20">
+                Tool
+              </span>
+            </Link>
+
+            <Link
               href="/contribute"
               onClick={closeMenu}
               className="block rounded-xl px-3.5 py-3 font-poppins text-sm font-semibold text-text-main hover:bg-brand/10 hover:text-brand transition-colors"

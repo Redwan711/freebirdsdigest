@@ -98,6 +98,12 @@ const Footer = async () => {
                             </h4>
                             <ul className="space-y-2.5 text-sm text-slate-400 font-medium">
                                 <li>
+                                    <Link href="/vpn-finder" className="hover:text-brand transition-colors text-brand font-semibold flex items-center gap-1.5">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-brand" />
+                                        VPN Finder Tool
+                                    </Link>
+                                </li>
+                                <li>
                                     <Link href="/about" className="hover:text-brand transition-colors">
                                         About Us
                                     </Link>

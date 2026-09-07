@@ -100,6 +100,16 @@ const BottomHeader = ({ activeCategories = [], reviewSubcategories = [] }) => {
                 )}
               </div>
               <Link
+                href="/vpn-finder"
+                className="text-sm font-medium text-text-main hover:text-brand transition-colors relative group py-1 flex items-center gap-1.5"
+              >
+                <span>VPN Finder</span>
+                <span className="px-1.5 py-0.5 rounded-md bg-brand/10 text-brand text-[10px] font-bold uppercase border border-brand/20">
+                  Tool
+                </span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-brand transition-all duration-200 group-hover:w-full" />
+              </Link>
+              <Link
                 href="/contribute"
                 className="text-sm font-medium text-text-main hover:text-brand transition-colors relative group py-1"
               >
