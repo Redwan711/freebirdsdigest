@@ -25,6 +25,7 @@ import RecommendedNews from "@/components/RecommendedNews";
 import { TwitterIcon, LinkedinIcon, GithubIcon } from "@/components/SocialIcons";
 import SponsorsAdPnl from "@/components/SponsorsAdPnl";
 import TableOfContents from "@/components/TableOfContents";
+import FreelanceRateCalculator from "@/components/FreelanceRateCalculator";
 import TransparencyNotice from "@/components/TransparencyNotice";
 import FaqSection from "@/components/FaqSection";
 import { syncPostAuthor } from "@/lib/authors";
@@ -890,6 +891,11 @@ export default async function PostPage({ params, searchParams }) {
       <div className="flex flex-col lg:grid lg:grid-cols-[250px_1fr_250px] xl:grid-cols-[270px_1fr_270px] gap-6 lg:gap-4 xl:gap-5 items-start">
         {/* Left Column: Pinned / Sticky News Side Panel */}
         <aside className="w-full order-2 lg:order-1 space-y-6 lg:sticky lg:top-24 self-start">
+          {/* Freelance Rate Calculator (Rendered exclusively on calculate-freelance-rate post) */}
+          {(post?.slug?.includes("calculate-freelance-rate") || post?.databaseId == 195 || post?.databaseId == "195") && (
+            <FreelanceRateCalculator />
+          )}
+
           {/* Table of Contents Section */}
           <TableOfContents headings={headings} />
 
