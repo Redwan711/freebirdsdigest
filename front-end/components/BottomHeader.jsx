@@ -1,20 +1,33 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { Home, ChevronDown } from 'lucide-react'
+import { Home, ChevronDown, Search } from 'lucide-react'
 import Link from 'next/link'
 import MobileNav from './MobileNav'
+import SearchModal from './SearchModal'
 
 const BottomHeader = ({ activeCategories = [], reviewSubcategories = [] }) => {
   const sentinelRef = useRef(null)
   const headerRef = useRef(null)
   const [isPinned, setIsPinned] = useState(false)
   const [headerHeight, setHeaderHeight] = useState(0)
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
 
   useEffect(() => {
     if (headerRef.current) {
       setHeaderHeight(headerRef.current.offsetHeight)
     }
+  }, [])
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault()
+        setIsSearchOpen((prev) => !prev)
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
   }, [])
 
   useEffect(() => {
@@ -45,17 +58,19 @@ const BottomHeader = ({ activeCategories = [], reviewSubcategories = [] }) => {
         }`}
       >
         <div className="bottomHeader container mx-auto flex items-center justify-between px-4 py-3 md:px-6">
-          <div className="homeBtn">
-            <a 
-              href="/" 
-              className='flex items-center justify-center h-9 w-9 rounded-lg bg-bg-subtle text-text-main hover:bg-brand/10 hover:text-brand transition-colors'
-              aria-label="Home"
-            >
-              <Home className="w-4 h-4" />
-            </a>
+          <div className="flex items-center gap-3">
+            <div className="homeBtn">
+              <a 
+                href="/" 
+                className='flex items-center justify-center h-9 w-9 rounded-lg bg-bg-subtle text-text-main hover:bg-brand/10 hover:text-brand transition-colors'
+                aria-label="Home"
+              >
+                <Home className="w-4 h-4" />
+              </a>
+            </div>
           </div>
 
-          <div className="navberMenu">
+          <div className="navberMenu flex items-center gap-6">
             <nav className='flex items-center gap-8 justify-between'>
               {activeCategories.map((category) => (
                 <Link
@@ -111,9 +126,24 @@ const BottomHeader = ({ activeCategories = [], reviewSubcategories = [] }) => {
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-brand transition-all duration-200 group-hover:w-full" />
               </Link>
             </nav>
+
+            {/* Search Trigger Button */}
+            <button
+              type="button"
+              onClick={() => setIsSearchOpen(true)}
+              className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-bg-subtle text-text-muted hover:bg-brand/10 hover:text-brand border border-brandborder/80 transition-all text-xs font-semibold shadow-2xs group"
+              aria-label="Search articles"
+            >
+              <Search className="w-3.5 h-3.5 text-brand group-hover:scale-110 transition-transform" />
+              <span>Search</span>
+              <kbd className="px-1.5 py-0.5 text-[10px] font-bold bg-bg-surface border border-brandborder rounded text-text-muted">⌘K</kbd>
+            </button>
           </div>
         </div>
       </section>
+
+      {/* Global Search Modal */}
+      <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
     </>
   )
 }

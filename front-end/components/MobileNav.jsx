@@ -1,6 +1,6 @@
 "use client";
 
-import { Home, Menu, X, ChevronDown } from "lucide-react";
+import { Home, Menu, X, ChevronDown, Search } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import ThemeToggle from "./ThemeToggle";
@@ -58,6 +58,16 @@ export default function MobileNav({ categories = [], reviewSubcategories = [] })
             >
               <X aria-hidden="true" />
             </button>
+
+            {/* Mobile Search Button */}
+            <Link
+              href="/search"
+              onClick={closeMenu}
+              className="flex items-center gap-3 rounded-xl px-3.5 py-2.5 mb-2 font-poppins text-sm font-semibold text-brand bg-brand/10 border border-brand/20 hover:bg-brand/20 transition-colors"
+            >
+              <Search size={18} /> Search Articles
+            </Link>
+
             <Link
               href="/"
               onClick={closeMenu}
