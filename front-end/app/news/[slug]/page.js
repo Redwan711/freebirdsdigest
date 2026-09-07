@@ -26,8 +26,8 @@ import { TwitterIcon, LinkedinIcon, GithubIcon } from "@/components/SocialIcons"
 import SponsorsAdPnl from "@/components/SponsorsAdPnl";
 import TableOfContents from "@/components/TableOfContents";
 import FreelanceRateCalculator from "@/components/FreelanceRateCalculator";
-import TransparencyNotice from "@/components/TransparencyNotice";
 import FaqSection from "@/components/FaqSection";
+import FurtherReadingSection from "@/components/FurtherReadingSection";
 import { syncPostAuthor } from "@/lib/authors";
 import { getPostImageObjects } from "@/lib/parse-images";
 import { parseHeadingsAndInjectIds } from "@/lib/toc";
@@ -89,6 +89,7 @@ const GET_POST_BY_SLUG = `
         topq
         topa
         faqs
+        furtherReadingTrustedResources
         authorSubtitle
         authorSerial
         estimatedReadTime
@@ -165,6 +166,7 @@ const GET_POST_BY_SLUG_ALT = `
         topq
         topa
         faqs
+        furtherReadingTrustedResources
         authorSubtitle
         author_serial
         estimatedReadTime
@@ -241,6 +243,7 @@ const GET_POST_BY_SLUG_FALLBACK = `
         topq
         topa
         faqs
+        furtherReadingTrustedResources
         authorSubtitle
         estimatedReadTime
         mainImageSourceInfo
@@ -311,6 +314,7 @@ const GET_POST_BY_DATABASE_ID = `
         topq
         topa
         faqs
+        furtherReadingTrustedResources
         authorSubtitle
         authorSerial
         estimatedReadTime
@@ -387,6 +391,7 @@ const GET_POST_BY_DATABASE_ID_ALT = `
         topq
         topa
         faqs
+        furtherReadingTrustedResources
         authorSubtitle
         author_serial
         estimatedReadTime
@@ -463,6 +468,7 @@ const GET_POST_BY_DATABASE_ID_FALLBACK = `
         topq
         topa
         faqs
+        furtherReadingTrustedResources
         authorSubtitle
         estimatedReadTime
         mainImageSourceInfo
@@ -822,6 +828,7 @@ export default async function PostPage({ params, searchParams }) {
     topQ,
     topA,
     faqs,
+    furtherReadingTrustedResources,
     authorSubtitle,
     authorSerial,
     author_serial,
@@ -839,6 +846,17 @@ export default async function PostPage({ params, searchParams }) {
   // Resolve raw FAQs or fallback to single topQ/topA
   const rawFaqs = faqs || articleMetadata?.faqs || articleMetadata?.faq || articleMetadata?.Faqs || articleMetadata?.FAQs;
   const activeFaqs = rawFaqs || (topQuestion && topAnswer ? `q: ${topQuestion}\na: ${topAnswer}` : null);
+
+  // Resolve raw Further Reading & Trusted Resources field
+  const activeFurtherReading =
+    furtherReadingTrustedResources ||
+    articleMetadata?.furtherReadingTrustedResources ||
+    articleMetadata?.['further_reading_&_trusted_resources'] ||
+    articleMetadata?.['further_reading_and_trusted_resources'] ||
+    articleMetadata?.furtherReadingAndTrustedResources ||
+    articleMetadata?.further_reading_trusted_resources ||
+    articleMetadata?.furtherReading ||
+    articleMetadata?.trustedResources;
 
   // Author identity resolution via authors.json matching (Author Serial ID priority) & error handling
   const syncedAuthor = syncPostAuthor(
@@ -1154,6 +1172,14 @@ export default async function PostPage({ params, searchParams }) {
               title="Frequently Asked Questions"
               subtitle={`Key answers related to "${cleanHtml(post.title)}"`}
               className="py-4 border-t border-brandborder/60"
+            />
+          )}
+
+          {/* Article Further Reading & Trusted Resources (ACF further_reading_&_trusted_resources) */}
+          {activeFurtherReading && (
+            <FurtherReadingSection
+              content={activeFurtherReading}
+              className="py-2 border-t border-brandborder/60"
             />
           )}
 

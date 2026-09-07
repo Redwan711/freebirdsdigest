@@ -52,7 +52,7 @@ const TOOLS_LIST = [
       "No sign-up or email required",
     ],
     href: "/vpn-finder",
-    cta: "Take VPN Quiz",
+    cta: "Find the Best VPN for You",
   },
 ];
 
