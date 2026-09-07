@@ -581,6 +581,7 @@ export default function AboutPage() {
                   key={pillar.title}
                   className="group rounded-2xl border border-brandborder bg-bg-surface overflow-hidden shadow-2xs transition-all duration-300 hover:border-brand/40 hover:shadow-md hover:-translate-y-0.5"
                 >
+                  {/*
                   <div className="relative aspect-16/10 overflow-hidden bg-bg-subtle">
                     <Image
                       src={pillar.image}
@@ -590,6 +591,7 @@ export default function AboutPage() {
                       className="object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                   </div>
+                  */}
                   <div className="p-6">
                     <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand/10 text-brand group-hover:bg-brand group-hover:text-white transition-colors duration-300">
                       <IconComp className="h-5 w-5" />
@@ -615,6 +617,7 @@ export default function AboutPage() {
                   key={pillar.title}
                   className="group rounded-2xl border border-brandborder bg-bg-surface overflow-hidden shadow-2xs transition-all duration-300 hover:border-brand/40 hover:shadow-md hover:-translate-y-0.5"
                 >
+                  {/*
                   <div className="relative aspect-16/10 overflow-hidden bg-bg-subtle">
                     <Image
                       src={pillar.image}
@@ -624,6 +627,7 @@ export default function AboutPage() {
                       className="object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                   </div>
+                  */}
                   <div className="p-6">
                     <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand/10 text-brand group-hover:bg-brand group-hover:text-white transition-colors duration-300">
                       <IconComp className="h-5 w-5" />

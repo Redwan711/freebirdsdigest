@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import { Search, X, Loader2, ArrowRight, FileText, Calendar, Tag } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -11,8 +12,13 @@ export default function SearchModal({ isOpen, onClose }) {
   const [results, setResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const inputRef = useRef(null);
   const router = useRouter();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Focus input when modal opens
   useEffect(() => {
@@ -77,10 +83,10 @@ export default function SearchModal({ isOpen, onClose }) {
     onClose();
   };
 
-  if (!isOpen) return null;
+  if (!isOpen || !mounted) return null;
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-slate-950/70 backdrop-blur-md transition-opacity duration-200">
+  return createPortal(
+    <div className="fixed inset-0 z-[9999] flex items-start justify-center pt-16 sm:pt-24 px-4 bg-slate-950/70 backdrop-blur-md transition-opacity duration-200">
       {/* Backdrop click to close */}
       <div className="fixed inset-0" onClick={onClose} aria-hidden="true" />
 
@@ -222,6 +228,7 @@ export default function SearchModal({ isOpen, onClose }) {
         )}
 
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
