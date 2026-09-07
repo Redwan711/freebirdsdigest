@@ -80,10 +80,12 @@ const HeroNews = async () => {
   const finalLink = redirectionLink || postLink;
   const isExternal = Boolean(redirectionLink);
 
+  const showTopBannerAd = false;
+
   return (
     <div className="container mx-auto px-4 md:px-6 pt-6">
       <section className="bg-bg-surface border border-brandborder rounded-3xl overflow-hidden shadow-xs">
-        {headerHeroImage && (
+        {showTopBannerAd && headerHeroImage && (
           finalLink ? (
             <a
               href={finalLink}

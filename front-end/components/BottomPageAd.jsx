@@ -12,6 +12,12 @@ function formatRedirectionUrl(url) {
 }
 
 export default async function BottomPageAd({ className = "" }) {
+  const showBottomPageAd = false;
+
+  if (!showBottomPageAd) {
+    return null;
+  }
+
   const adPost = await fetchBottomPageAd();
 
   if (!adPost) return null;

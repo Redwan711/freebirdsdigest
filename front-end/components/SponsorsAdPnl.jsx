@@ -2,12 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { fetchSponsors } from "@/lib/sponsors";
 import { Megaphone, Sparkles } from "lucide-react";
+import ToolsWidget from "./ToolsWidget";
 
 export default async function SponsorsAdPnl() {
-  const showSponsorsAd = true;
+  const showSponsorsAd = false;
 
   if (!showSponsorsAd) {
-    return null;
+    return <ToolsWidget />;
   }
 
   const sponsors = await fetchSponsors();
