@@ -16,55 +16,61 @@ const Navber = async () => {
 
   return (
     <div className="bg-bg-surface border-b border-brandborder shadow-2xs">
-      {/* top navbar section, it's here if u want to change */}
-      <section className='topHeader container mx-auto px-4 py-3.5 md:px-6'>
-        {/* Top Header Row: Logo on Left, Desktop News Posts / Mobile Menu Toggle on Right */}
-        <div className="flex items-center justify-between gap-4">
-          <div className="logoSec shrink-0">
-            <a href="/" className='flex items-center gap-2 group transition-transform hover:scale-[1.01]'>
-              <Image src="/freeBird-logo-new.png" alt="Freebirds Digest Logo" width={170} height={55} priority className={getHeaderLogoClass("w-auto h-[38px] sm:h-[48px] object-contain max-w-full")} />
-            </a>
+      {/* Fixed top header bar on mobile (< lg), normal static layout on desktop (lg+) */}
+      <div className="fixed top-0 left-0 right-0 z-40 bg-bg-surface/95 backdrop-blur-md border-b border-brandborder/60 shadow-2xs lg:static lg:bg-transparent lg:border-b-0 lg:shadow-none">
+        <section className="topHeader container mx-auto px-4 py-2.5 sm:py-3 md:px-6">
+          <div className="flex items-center justify-between gap-4">
+            <div className="logoSec shrink-0">
+              <a href="/" className='flex items-center gap-2 group transition-transform hover:scale-[1.01]'>
+                <Image src="/freeBird-logo-new.png" alt="Freebirds Digest Logo" width={170} height={55} priority className={getHeaderLogoClass("w-auto h-[38px] sm:h-[48px] object-contain max-w-full")} />
+              </a>
+            </div>
+
+            {/* Desktop News Posts & Theme Toggle */}
+            <div className="gap-6 hidden lg:flex items-center">
+              {headerNews.slice(0, 2).map((post) => (
+                <div key={post.id} className="headerNews">
+                  <Link
+                    href={`/news/${post.slug}?pid=${post.databaseId}`}
+                    className='flex items-center font-inter text-text-muted hover:text-brand transition-colors gap-3 group'
+                  >
+                    <h3 className='line-clamp-2 max-w-[170px] text-xs font-semibold leading-snug group-hover:text-brand transition-colors'>
+                      {post.title}
+                    </h3>
+                    <div className="relative overflow-hidden rounded-lg w-[65px] h-[50px] bg-bg-subtle flex-shrink-0 border border-brandborder">
+                      <Image
+                        src={post.featuredImage?.node?.sourceUrl || '/freeBird-logo-new.png'}
+                        alt={post.title}
+                        fill
+                        sizes="65px"
+                        className="object-cover transition-transform group-hover:scale-105"
+                      />
+                    </div>
+                  </Link>
+                </div>
+              ))}
+
+              {/* Desktop Theme Toggle */}
+              <ThemeToggle />
+            </div>
+
+            {/* Mobile & Tablet Menu Controls — Right Top on Non-Desktop Screens */}
+            <div className="flex lg:hidden items-center gap-1 sm:gap-1.5">
+              <SearchButton variant="icon" />
+              <ThemeToggle />
+              <MobileNav categories={activeCategories} reviewSubcategories={reviewSubcategories} />
+            </div>
           </div>
+        </section>
+      </div>
 
-          {/* Desktop News Posts & Theme Toggle */}
-          <div className="gap-6 hidden lg:flex items-center">
-            {headerNews.slice(0, 2).map((post) => (
-              <div key={post.id} className="headerNews">
-                <Link
-                  href={`/news/${post.slug}?pid=${post.databaseId}`}
-                  className='flex items-center font-inter text-text-muted hover:text-brand transition-colors gap-3 group'
-                >
-                  <h3 className='line-clamp-2 max-w-[170px] text-xs font-semibold leading-snug group-hover:text-brand transition-colors'>
-                    {post.title}
-                  </h3>
-                  <div className="relative overflow-hidden rounded-lg w-[65px] h-[50px] bg-bg-subtle flex-shrink-0 border border-brandborder">
-                    <Image
-                      src={post.featuredImage?.node?.sourceUrl || '/freeBird-logo-new.png'}
-                      alt={post.title}
-                      fill
-                      sizes="65px"
-                      className="object-cover transition-transform group-hover:scale-105"
-                    />
-                  </div>
-                </Link>
-              </div>
-            ))}
+      {/* Spacer placeholder for fixed mobile top header (< lg) to prevent content overlap */}
+      <div className="h-[57px] sm:h-[72px] lg:hidden" />
 
-            {/* Desktop Theme Toggle */}
-            <ThemeToggle />
-          </div>
-
-          {/* Mobile & Tablet Menu Controls — Right Top on Non-Desktop Screens */}
-          <div className="flex lg:hidden items-center gap-1 sm:gap-1.5">
-            <SearchButton variant="icon" />
-            <ThemeToggle />
-            <MobileNav categories={activeCategories} reviewSubcategories={reviewSubcategories} />
-          </div>
-        </div>
-
-        {/* Mobile & Tablet 2 News Posts Row */}
-        {headerNews.length > 0 && (
-          <div className="grid grid-cols-2 gap-4 lg:hidden pt-2.5 border-t border-brandborder/60 mt-2.5 items-center">
+      {/* Mobile & Tablet 2 News Posts Row (Normal flow, non-sticky) */}
+      {headerNews.length > 0 && (
+        <div className="container mx-auto px-4 pb-3 md:px-6 lg:hidden">
+          <div className="grid grid-cols-2 gap-4 pt-2.5 border-t border-brandborder/60 items-center">
             {headerNews.slice(0, 2).map((post) => (
               <Link
                 key={post.id}
@@ -86,8 +92,8 @@ const Navber = async () => {
               </Link>
             ))}
           </div>
-        )}
-      </section>
+        </div>
+      )}
 
       {/* bottom navbar — handles sticky header behavior for desktop */}
       <BottomHeader activeCategories={activeCategories} reviewSubcategories={reviewSubcategories} />
