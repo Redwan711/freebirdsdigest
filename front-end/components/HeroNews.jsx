@@ -159,32 +159,40 @@ const HeroNews = async () => {
           </div>
 
           <div className="trandingNews grid gap-4 sm:grid-cols-2 xl:grid-cols-2 grid-rows-2">
-            {trendingNews.map((post) => (
-              <Link
-                href={`/news/${post.slug}?pid=${post.databaseId}`}
-                key={post.id}
-                className="trandingNewsItem flex gap-3 rounded-xl border border-brandborder bg-bg-subtle/50 p-3 shadow-2xs hover:border-brand/40 transition-all group"
-              >
-                <div className="texts font-inter flex min-w-0 flex-1 flex-col justify-between gap-2">
-                  <h4 className="text-sm font-bold leading-snug text-text-main group-hover:text-brand transition-colors line-clamp-2">
-                    {post.title}
-                  </h4>
-                  <span className="text-xs text-text-muted">
-                    {formatHeroDate(post.date)}
-                  </span>
-                </div>
+            {trendingNews.map((post) => {
+              const cleanedExcerpt = cleanText(post.excerpt);
+              return (
+                <Link
+                  href={`/news/${post.slug}?pid=${post.databaseId}`}
+                  key={post.id}
+                  className="trandingNewsItem flex gap-3 rounded-xl border border-brandborder bg-bg-subtle/50 p-3 shadow-2xs hover:border-brand/40 transition-all group"
+                >
+                  <div className="texts font-inter flex min-w-0 flex-1 flex-col justify-between gap-1.5">
+                    <h4 className="text-xs sm:text-sm font-bold leading-snug text-text-main group-hover:text-brand transition-colors line-clamp-1">
+                      {post.title}
+                    </h4>
+                    {cleanedExcerpt && (
+                      <p className="text-[11px] leading-snug text-text-muted line-clamp-2">
+                        {cleanedExcerpt}
+                      </p>
+                    )}
+                    <span className="text-[10px] sm:text-xs text-text-muted">
+                      {formatHeroDate(post.date)}
+                    </span>
+                  </div>
 
-                <div className="relative size-20 shrink-0 overflow-hidden rounded-lg bg-bg-subtle">
-                  <Image
-                    src={post.featuredImage?.node?.sourceUrl || fallbackImage}
-                    alt={post.featuredImage?.node?.altText || post.title}
-                    fill
-                    sizes="80px"
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
-                </div>
-              </Link>
-            ))}
+                  <div className="relative size-20 shrink-0 overflow-hidden rounded-lg bg-bg-subtle">
+                    <Image
+                      src={post.featuredImage?.node?.sourceUrl || fallbackImage}
+                      alt={post.featuredImage?.node?.altText || post.title}
+                      fill
+                      sizes="80px"
+                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </section>
       </section>
