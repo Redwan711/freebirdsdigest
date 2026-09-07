@@ -6,6 +6,7 @@ import { getHeaderLogoClass } from '@/lib/logoTheme';
 import BottomHeader from './BottomHeader';
 import MobileNav from './MobileNav';
 import ThemeToggle from './ThemeToggle';
+import SearchButton from './SearchButton';
 
 const Navber = async () => {
 
@@ -54,7 +55,8 @@ const Navber = async () => {
           </div>
 
           {/* Mobile & Tablet Menu Controls — Right Top on Non-Desktop Screens */}
-          <div className="flex lg:hidden items-center gap-2">
+          <div className="flex lg:hidden items-center gap-1 sm:gap-1.5">
+            <SearchButton variant="icon" />
             <ThemeToggle />
             <MobileNav categories={activeCategories} reviewSubcategories={reviewSubcategories} />
           </div>

@@ -1,33 +1,21 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { Home, ChevronDown, Search } from 'lucide-react'
+import { Home, ChevronDown } from 'lucide-react'
 import Link from 'next/link'
 import MobileNav from './MobileNav'
-import SearchModal from './SearchModal'
+import SearchButton from './SearchButton'
 
 const BottomHeader = ({ activeCategories = [], reviewSubcategories = [] }) => {
   const sentinelRef = useRef(null)
   const headerRef = useRef(null)
   const [isPinned, setIsPinned] = useState(false)
   const [headerHeight, setHeaderHeight] = useState(0)
-  const [isSearchOpen, setIsSearchOpen] = useState(false)
 
   useEffect(() => {
     if (headerRef.current) {
       setHeaderHeight(headerRef.current.offsetHeight)
     }
-  }, [])
-
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-        e.preventDefault()
-        setIsSearchOpen((prev) => !prev)
-      }
-    }
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
   }, [])
 
   useEffect(() => {
@@ -128,22 +116,10 @@ const BottomHeader = ({ activeCategories = [], reviewSubcategories = [] }) => {
             </nav>
 
             {/* Search Trigger Button */}
-            <button
-              type="button"
-              onClick={() => setIsSearchOpen(true)}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-bg-subtle text-text-muted hover:bg-brand/10 hover:text-brand border border-brandborder/80 transition-all text-xs font-semibold shadow-2xs group"
-              aria-label="Search articles"
-            >
-              <Search className="w-3.5 h-3.5 text-brand group-hover:scale-110 transition-transform" />
-              <span>Search</span>
-              <kbd className="px-1.5 py-0.5 text-[10px] font-bold bg-bg-surface border border-brandborder rounded text-text-muted">⌘K</kbd>
-            </button>
+            <SearchButton variant="button" />
           </div>
         </div>
       </section>
-
-      {/* Global Search Modal */}
-      <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
     </>
   )
 }
