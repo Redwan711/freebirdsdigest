@@ -888,16 +888,18 @@ export default async function PostPage({ params, searchParams }) {
       </div>
 
       {/* Main 3-Column Responsive Layout */}
-      <div className="flex flex-col lg:grid lg:grid-cols-[250px_1fr_250px] xl:grid-cols-[270px_1fr_270px] gap-6 lg:gap-4 xl:gap-5 items-start">
-        {/* Left Column: Pinned / Sticky News Side Panel */}
-        <aside className="w-full order-2 lg:order-1 space-y-6 lg:sticky lg:top-24 self-start">
+      <div className="flex flex-col lg:grid lg:grid-cols-[250px_1fr_250px] xl:grid-cols-[270px_1fr_270px] gap-6 lg:gap-4 xl:gap-5 items-stretch">
+        {/* Left Column: Side Panel */}
+        <aside className="w-full order-2 lg:order-1 space-y-6 h-full">
           {/* Freelance Rate Calculator (Rendered exclusively on calculate-freelance-rate post) */}
           {(post?.slug?.includes("calculate-freelance-rate") || post?.databaseId == 195 || post?.databaseId == "195") && (
             <FreelanceRateCalculator />
           )}
 
-          {/* Table of Contents Section */}
-          <TableOfContents headings={headings} />
+          {/* Table of Contents Section (Sticky when scrolled into view) */}
+          <div className="lg:sticky lg:top-24">
+            <TableOfContents headings={headings} />
+          </div>
 
           {/* ACF Field #7: videoSource (Featured Video Embed Player) */}
           {videoSource && (
