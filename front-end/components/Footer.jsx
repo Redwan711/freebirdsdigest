@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { fetchNavigationCategories } from '@/lib/categories'
 import { Mail, Heart, Globe } from 'lucide-react'
+import { socialLinks } from '@/lib/site'
 import NewsletterForm from './NewsletterForm'
 
 const Footer = async () => {
@@ -145,16 +146,16 @@ const Footer = async () => {
 
                             {/* Social Icons — Inverted & styled white pills so icons are 100% visible */}
                             <div className="flex items-center gap-3">
-                                <a href="https://www.facebook.com" target='_blank' rel="noreferrer" className='p-2.5 rounded-xl bg-white/10 hover:bg-brand border border-slate-700 text-white transition-all hover:scale-110 shadow-xs'>
+                                <a href={socialLinks.facebook} target='_blank' rel="noreferrer" className='p-2.5 rounded-xl bg-white/10 hover:bg-brand border border-slate-700 text-white transition-all hover:scale-110 shadow-xs' aria-label="Facebook">
                                     <Image src='/facebook.png' width={22} height={22} alt='facebook' className="w-5 h-5 invert brightness-200" />
                                 </a>
-                                <a href="https://www.x.com" target='_blank' rel="noreferrer" className='p-2.5 rounded-xl bg-white/10 hover:bg-brand border border-slate-700 text-white transition-all hover:scale-110 shadow-xs'>
+                                <a href={socialLinks.x} target='_blank' rel="noreferrer" className='p-2.5 rounded-xl bg-white/10 hover:bg-brand border border-slate-700 text-white transition-all hover:scale-110 shadow-xs' aria-label="X (Twitter)">
                                     <Image src='/x.png' width={22} height={22} alt='x' className="w-5 h-5 invert brightness-200" />
                                 </a>
-                                <a href="https://www.instagram.com" target='_blank' rel="noreferrer" className='p-2.5 rounded-xl bg-white/10 hover:bg-brand border border-slate-700 text-white transition-all hover:scale-110 shadow-xs'>
+                                <a href={socialLinks.instagram} target='_blank' rel="noreferrer" className='p-2.5 rounded-xl bg-white/10 hover:bg-brand border border-slate-700 text-white transition-all hover:scale-110 shadow-xs' aria-label="Instagram">
                                     <Image src='/insta.png' width={22} height={22} alt='instagram' className="w-5 h-5 invert brightness-200" />
                                 </a>
-                                <a href="https://www.linkedin.com" target='_blank' rel="noreferrer" className='p-2.5 rounded-xl bg-white/10 hover:bg-brand border border-slate-700 text-white transition-all hover:scale-110 shadow-xs'>
+                                <a href={socialLinks.linkedin} target='_blank' rel="noreferrer" className='p-2.5 rounded-xl bg-white/10 hover:bg-brand border border-slate-700 text-white transition-all hover:scale-110 shadow-xs' aria-label="LinkedIn">
                                     <Image src='/linkedin.png' width={22} height={22} alt='linkedin' className="w-5 h-5 invert brightness-200" />
                                 </a>
                             </div>

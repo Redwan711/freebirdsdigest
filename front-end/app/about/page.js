@@ -271,10 +271,10 @@ export default function AboutPage() {
     url: "https://freebirdsdigest.com",
     logo: "https://freebirdsdigest.com/freeBird-logo-new.png",
     sameAs: [
-      "https://www.facebook.com",
-      "https://www.x.com",
-      "https://www.instagram.com",
-      "https://www.linkedin.com",
+      "https://www.facebook.com/freebirdsdigest/",
+      "https://x.com/FreeBirdsDigest",
+      "https://www.instagram.com/freebirdsdigest/",
+      "https://www.linkedin.com/company/freebirdsdigest",
     ],
     contactPoint: {
       "@type": "ContactPoint",

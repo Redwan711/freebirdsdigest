@@ -115,10 +115,10 @@ export default function AffiliateDisclosurePage() {
     description:
       "A digital knowledge platform helping freelancers and independent professionals build smarter digital careers.",
     sameAs: [
-      "https://www.facebook.com",
-      "https://www.x.com",
-      "https://www.instagram.com",
-      "https://www.linkedin.com",
+      "https://www.facebook.com/freebirdsdigest/",
+      "https://x.com/FreeBirdsDigest",
+      "https://www.instagram.com/freebirdsdigest/",
+      "https://www.linkedin.com/company/freebirdsdigest",
     ],
     contactPoint: {
       "@type": "ContactPoint",
