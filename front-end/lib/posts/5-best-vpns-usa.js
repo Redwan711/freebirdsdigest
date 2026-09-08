@@ -898,7 +898,7 @@ export const BEST_VPNS_USA_POST = {
         </div>
 
         <!-- STUNNING 9 CATEGORY CARDS GRID -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6 mb-4 not-prose">
+        <div class="grid grid-cols-1 thisShit sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6 mb-4 not-prose">
           
           <!-- Category 1: Privacy and security -->
           <div class="group relative flex items-center gap-3.5 rounded-2xl border border-indigo-500/25 bg-gradient-to-br from-bg-surface via-bg-surface to-indigo-500/10 p-3.5 sm:p-4 shadow-2xs hover:shadow-md hover:-translate-y-1 hover:border-indigo-500/60 transition-all duration-300">
