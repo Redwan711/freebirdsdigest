@@ -6,9 +6,10 @@ const GET_HERO_NEWS = `
       nodes {
         id
         databaseId
-          slug
+        slug
         title
         date
+        modified
         excerpt
         featuredImage {
           node {
@@ -22,9 +23,10 @@ const GET_HERO_NEWS = `
       nodes {
         id
         databaseId
-          slug
+        slug
         title
         date
+        modified
         excerpt
         featuredImage {
           node {

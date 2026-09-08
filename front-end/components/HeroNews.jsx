@@ -51,8 +51,8 @@ function formatRedirectionUrl(url) {
   return `https://${trimmed}`;
 }
 
-const HeroNews = async () => {
-  const { topNews, trendingNews } = await fetchHeroNews();
+const HeroNews = async ({ heroData: passedHeroData } = {}) => {
+  const { topNews, trendingNews } = passedHeroData || (await fetchHeroNews());
   const promotionalImagePost = await fetchPromotionalImage();
   const topStory = topNews[0];
   const sponsoreData = promotionalImagePost?.sponsore || promotionalImagePost?.sponsors || {};
@@ -162,28 +162,23 @@ const HeroNews = async () => {
 
           <div className="trandingNews grid gap-4 sm:grid-cols-2 xl:grid-cols-2 grid-rows-2">
             {trendingNews.map((post) => {
-              const cleanedExcerpt = cleanText(post.excerpt);
+              const displayDate = post.modified || post.date;
               return (
                 <Link
                   href={`/news/${post.slug}?pid=${post.databaseId}`}
                   key={post.id}
-                  className="trandingNewsItem flex gap-3 rounded-xl border border-brandborder bg-bg-subtle/50 p-3 shadow-2xs hover:border-brand/40 transition-all group"
+                  className="trandingNewsItem flex items-start gap-3 rounded-xl border border-brandborder bg-bg-subtle/50 p-3 shadow-2xs hover:border-brand/40 transition-all group h-full"
                 >
-                  <div className="texts font-inter flex min-w-0 flex-1 flex-col justify-between gap-1.5">
-                    <h4 className="text-xs sm:text-sm font-bold leading-snug text-text-main group-hover:text-brand transition-colors line-clamp-1">
+                  <div className="texts font-inter flex min-w-0 flex-1 flex-col justify-between h-full gap-2">
+                    <h4 className="text-xs sm:text-sm font-bold leading-snug text-text-main group-hover:text-brand transition-colors line-clamp-3">
                       {post.title}
                     </h4>
-                    {cleanedExcerpt && (
-                      <p className="text-[11px] leading-snug text-text-muted line-clamp-2">
-                        {cleanedExcerpt}
-                      </p>
-                    )}
-                    <span className="text-[10px] sm:text-xs text-text-muted">
-                      {formatHeroDate(post.date)}
+                    <span className="text-[10px] sm:text-xs text-text-muted mt-auto">
+                      {formatHeroDate(displayDate)}
                     </span>
                   </div>
 
-                  <div className="relative size-20 shrink-0 overflow-hidden rounded-lg bg-bg-subtle">
+                  <div className="relative size-20 shrink-0 overflow-hidden rounded-lg bg-bg-subtle self-start">
                     <Image
                       src={post.featuredImage?.node?.sourceUrl || fallbackImage}
                       alt={post.featuredImage?.node?.altText || post.title}
