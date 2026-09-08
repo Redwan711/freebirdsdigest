@@ -67,9 +67,9 @@ export const BEST_VPNS_USA_POST = {
               <li class="flex items-start gap-1.5"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500 shrink-0 mt-0.5"><path d="M20 6 9 17l-5-5"/></svg><span>Advanced Security</span></li>
               <li class="flex items-start gap-1.5"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500 shrink-0 mt-0.5"><path d="M20 6 9 17l-5-5"/></svg><span>Global Network</span></li>
             </ul>
-            <a href="https://nordvpn.com" target="_blank" rel="nofollow noopener noreferrer" class="flex w-full items-center justify-center gap-1.5 rounded-2xl bg-[#2B59FF] hover:bg-[#1A47EB] px-3 py-3 text-[11px] font-extrabold text-white shadow-sm hover:shadow-md transition-all group/btn mt-auto text-center" style="text-decoration: none !important; color: #ffffff !important; background-color: #2B59FF !important;">
-              <span>See Why It's Our #1 Pick</span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-white shrink-0 transition-transform group-hover/btn:translate-x-1"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            <a href="https://nordvpn.com" target="_blank" rel="nofollow noopener noreferrer" class="flex w-full items-center justify-center gap-1 rounded-2xl bg-[#2B59FF] hover:bg-[#1A47EB] px-1.5 py-2.5 text-[10px] sm:text-[10.5px] leading-tight font-extrabold text-white shadow-sm hover:shadow-md transition-all group/btn mt-auto text-center" style="text-decoration: none !important; color: #ffffff !important; background-color: #2B59FF !important;">
+              <span class="block"><span class="block whitespace-nowrap">See Why It's</span><span class="block whitespace-nowrap">Our #1 Pick</span></span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-white shrink-0 transition-transform group-hover/btn:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </a>
           </div>
         </div>
@@ -87,9 +87,9 @@ export const BEST_VPNS_USA_POST = {
               <li class="flex items-start gap-1.5"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500 shrink-0 mt-0.5"><path d="M20 6 9 17l-5-5"/></svg><span>100+ Countries</span></li>
               <li class="flex items-start gap-1.5"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500 shrink-0 mt-0.5"><path d="M20 6 9 17l-5-5"/></svg><span>Advanced Privacy</span></li>
             </ul>
-            <a href="https://surfshark.com" target="_blank" rel="nofollow noopener noreferrer" class="flex w-full items-center justify-center gap-1.5 rounded-2xl bg-[#00B49F] hover:bg-[#009B88] px-3 py-3 text-[11px] font-extrabold text-white shadow-sm hover:shadow-md transition-all group/btn mt-auto text-center" style="text-decoration: none !important; color: #ffffff !important; background-color: #00B49F !important;">
-              <span>Unlock Unlimited Devices</span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-white shrink-0 transition-transform group-hover/btn:translate-x-1"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            <a href="https://surfshark.com" target="_blank" rel="nofollow noopener noreferrer" class="flex w-full items-center justify-center gap-1 rounded-2xl bg-[#00B49F] hover:bg-[#009B88] px-1.5 py-2.5 text-[10px] sm:text-[10.5px] leading-tight font-extrabold text-white shadow-sm hover:shadow-md transition-all group/btn mt-auto text-center" style="text-decoration: none !important; color: #ffffff !important; background-color: #00B49F !important;">
+              <span class="block"><span class="block whitespace-nowrap">Unlock Unlimited</span><span class="block whitespace-nowrap">Devices</span></span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-white shrink-0 transition-transform group-hover/btn:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </a>
           </div>
         </div>
@@ -107,9 +107,9 @@ export const BEST_VPNS_USA_POST = {
               <li class="flex items-start gap-1.5"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500 shrink-0 mt-0.5"><path d="M20 6 9 17l-5-5"/></svg><span>Audited No-Logs</span></li>
               <li class="flex items-start gap-1.5"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500 shrink-0 mt-0.5"><path d="M20 6 9 17l-5-5"/></svg><span>Secure Core</span></li>
             </ul>
-            <a href="https://protonvpn.com" target="_blank" rel="nofollow noopener noreferrer" class="flex w-full items-center justify-center gap-1.5 rounded-2xl bg-[#6D4AFF] hover:bg-[#5833EB] px-3 py-3 text-[11px] font-extrabold text-white shadow-sm hover:shadow-md transition-all group/btn mt-auto text-center" style="text-decoration: none !important; color: #ffffff !important; background-color: #6D4AFF !important;">
-              <span>Put Your Privacy First</span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-white shrink-0 transition-transform group-hover/btn:translate-x-1"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            <a href="https://protonvpn.com" target="_blank" rel="nofollow noopener noreferrer" class="flex w-full items-center justify-center gap-1 rounded-2xl bg-[#6D4AFF] hover:bg-[#5833EB] px-1.5 py-2.5 text-[10px] sm:text-[10.5px] leading-tight font-extrabold text-white shadow-sm hover:shadow-md transition-all group/btn mt-auto text-center" style="text-decoration: none !important; color: #ffffff !important; background-color: #6D4AFF !important;">
+              <span class="block"><span class="block whitespace-nowrap">Put Your</span><span class="block whitespace-nowrap">Privacy First</span></span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-white shrink-0 transition-transform group-hover/btn:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </a>
           </div>
         </div>
@@ -127,9 +127,9 @@ export const BEST_VPNS_USA_POST = {
               <li class="flex items-start gap-1.5"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500 shrink-0 mt-0.5"><path d="M20 6 9 17l-5-5"/></svg><span>Wide Device Support</span></li>
               <li class="flex items-start gap-1.5"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500 shrink-0 mt-0.5"><path d="M20 6 9 17l-5-5"/></svg><span>Strong Privacy</span></li>
             </ul>
-            <a href="https://expressvpn.com" target="_blank" rel="nofollow noopener noreferrer" class="flex w-full items-center justify-center gap-1.5 rounded-2xl bg-[#DA3940] hover:bg-[#BE242A] px-3 py-3 text-[11px] font-extrabold text-white shadow-sm hover:shadow-md transition-all group/btn mt-auto text-center" style="text-decoration: none !important; color: #ffffff !important; background-color: #DA3940 !important;">
-              <span>Start Browsing Privately</span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-white shrink-0 transition-transform group-hover/btn:translate-x-1"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            <a href="https://expressvpn.com" target="_blank" rel="nofollow noopener noreferrer" class="flex w-full items-center justify-center gap-1 rounded-2xl bg-[#DA3940] hover:bg-[#BE242A] px-1.5 py-2.5 text-[10px] sm:text-[10.5px] leading-tight font-extrabold text-white shadow-sm hover:shadow-md transition-all group/btn mt-auto text-center" style="text-decoration: none !important; color: #ffffff !important; background-color: #DA3940 !important;">
+              <span class="block"><span class="block whitespace-nowrap">Start Browsing</span><span class="block whitespace-nowrap">Privately</span></span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-white shrink-0 transition-transform group-hover/btn:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </a>
           </div>
         </div>
@@ -147,9 +147,9 @@ export const BEST_VPNS_USA_POST = {
               <li class="flex items-start gap-1.5"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500 shrink-0 mt-0.5"><path d="M20 6 9 17l-5-5"/></svg><span>100+ Countries</span></li>
               <li class="flex items-start gap-1.5"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500 shrink-0 mt-0.5"><path d="M20 6 9 17l-5-5"/></svg><span>Streaming Servers</span></li>
             </ul>
-            <a href="https://cyberghostvpn.com" target="_blank" rel="nofollow noopener noreferrer" class="flex w-full items-center justify-center gap-1.5 rounded-2xl bg-[#FFBA00] hover:bg-[#E6A600] px-3 py-3 text-[11px] font-extrabold text-slate-950 shadow-sm hover:shadow-md transition-all group/btn mt-auto text-center" style="text-decoration: none !important; color: #020617 !important; background-color: #FFBA00 !important;">
-              <span>Claim Your 30 Day Guarantee</span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-slate-950 shrink-0 transition-transform group-hover/btn:translate-x-1"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            <a href="https://cyberghostvpn.com" target="_blank" rel="nofollow noopener noreferrer" class="flex w-full items-center justify-center gap-1 rounded-2xl bg-[#FFBA00] hover:bg-[#E6A600] px-1.5 py-2.5 text-[10px] sm:text-[10.5px] leading-tight font-extrabold text-slate-950 shadow-sm hover:shadow-md transition-all group/btn mt-auto text-center" style="text-decoration: none !important; color: #020617 !important; background-color: #FFBA00 !important;">
+              <span class="block"><span class="block whitespace-nowrap">Claim Your 30-Day</span><span class="block whitespace-nowrap">Guarantee</span></span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-slate-950 shrink-0 transition-transform group-hover/btn:translate-x-0.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </a>
           </div>
         </div>
