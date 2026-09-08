@@ -16,6 +16,7 @@ import {
   ExternalLink,
   Link as LinkIcon,
   Globe,
+  Info,
 } from "lucide-react";
 import ArticleActions from "@/components/ArticleActions";
 import BottomPageAd from "@/components/BottomPageAd";
@@ -28,6 +29,7 @@ import TableOfContents from "@/components/TableOfContents";
 import FreelanceRateCalculator from "@/components/FreelanceRateCalculator";
 import FaqSection from "@/components/FaqSection";
 import FurtherReadingSection from "@/components/FurtherReadingSection";
+import TransparencyNotice from "@/components/TransparencyNotice";
 import { syncPostAuthor } from "@/lib/authors";
 import { getPostImageObjects } from "@/lib/parse-images";
 import { parseHeadingsAndInjectIds } from "@/lib/toc";
@@ -561,7 +563,7 @@ function cleanHtml(htmlString = "") {
   return htmlString
     .replace(/<[^>]*>/g, "")
     .replace(/\[\s*&hellip;\s*\]|\[\s*\.\.\.\s*\]|&hellip;|&#8230;/gi, "")
-    .replace(/\s*(?:&mdash;|&#8212;|—)\s*/gi, " — ")
+    .replace(/\s*(?:&mdash;|&#8212;|—)\s*/gi, ": ")
     .replace(/\s*(?:&ndash;|&#8211;|–)\s*/gi, " - ")
     .replace(/&nbsp;/gi, " ")
     .replace(/&amp;/gi, "&")
@@ -594,6 +596,16 @@ function isDirectVideo(url) {
 }
 
 const fetchPost = cache(async (postSlug, postId) => {
+  const isMatchingSlug =
+    postSlug === BEST_VPNS_USA_POST.slug ||
+    decodeURIComponent(postSlug || "") === BEST_VPNS_USA_POST.slug;
+  const isMatchingId =
+    postId && (postId == BEST_VPNS_USA_POST.databaseId || postId === BEST_VPNS_USA_POST.id);
+
+  if (isMatchingSlug || isMatchingId) {
+    return BEST_VPNS_USA_POST;
+  }
+
   let data = null;
 
   if (postId) {
@@ -662,18 +674,6 @@ const fetchPost = cache(async (postSlug, postId) => {
           console.error("Failed fetching post by raw slug:", err3);
         }
       }
-    }
-  }
-
-  if (!data?.post) {
-    const isMatchingSlug =
-      postSlug === BEST_VPNS_USA_POST.slug ||
-      decodeURIComponent(postSlug || "") === BEST_VPNS_USA_POST.slug;
-    const isMatchingId =
-      postId && (postId == BEST_VPNS_USA_POST.databaseId || postId === BEST_VPNS_USA_POST.id);
-
-    if (isMatchingSlug || isMatchingId) {
-      return BEST_VPNS_USA_POST;
     }
   }
 
@@ -929,9 +929,11 @@ export default async function PostPage({ params, searchParams }) {
           )}
 
           {/* Table of Contents Section (Sticky when scrolled into view) */}
-          <div className="lg:sticky lg:top-24">
-            <TableOfContents headings={headings} />
-          </div>
+          {!post?.hideTableOfContents && (
+            <div className="lg:sticky lg:top-24">
+              <TableOfContents headings={headings} />
+            </div>
+          )}
 
           {/* ACF Field #7: videoSource (Featured Video Embed Player) */}
           {videoSource && (
@@ -1105,7 +1107,7 @@ export default async function PostPage({ params, searchParams }) {
                 </div>
               </div>
 
-              <div className="flex flex-wrap items-center gap-2.5 sm:gap-4 text-xs sm:text-sm font-semibold shrink-0">
+              <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 text-xs sm:text-sm font-semibold shrink-0">
                 <span className="flex items-center gap-1.5 text-text-muted bg-bg-subtle px-3 py-1.5 rounded-full border border-brandborder">
                   <Calendar className="w-3.5 h-3.5 text-brand shrink-0" />
                   <time dateTime={post.date}>{formatPostDate(post.date)}</time>
@@ -1119,6 +1121,15 @@ export default async function PostPage({ params, searchParams }) {
                     </span>
                   </span>
                 )}
+
+                <Link
+                  href="/affiliate-disclosure"
+                  className="flex items-center gap-1.5 text-text-muted hover:text-brand bg-bg-subtle hover:bg-brand/10 px-3 py-1.5 rounded-full border border-brandborder hover:border-brand/30 transition-all group"
+                  title="Read our Affiliate Disclosure"
+                >
+                  <Info className="w-3.5 h-3.5 text-amber-500 shrink-0 group-hover:scale-110 transition-transform" />
+                  <span>Affiliate Disclosure</span>
+                </Link>
               </div>
             </div>
           </header>
@@ -1149,7 +1160,7 @@ export default async function PostPage({ params, searchParams }) {
           )}
 
           {/* Featured Main Image Frame */}
-          {post.featuredImage?.node?.sourceUrl && (
+          {post.featuredImage?.node?.sourceUrl && !post.hideFeaturedImageInPost && (
             <figure className="group relative overflow-hidden rounded-3xl border border-brandborder bg-bg-subtle shadow-md">
               <div className="relative aspect-video w-full overflow-hidden">
                 <Image

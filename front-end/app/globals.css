@@ -288,9 +288,9 @@ img {
 }
 
 /* Post Content Full Width Images & Figures */
-.prose figure,
-.prose .wp-block-image,
-.prose .wp-caption {
+.prose figure:not(.not-prose *):not([class*="not-prose"] *),
+.prose .wp-block-image:not(.not-prose *):not([class*="not-prose"] *),
+.prose .wp-caption:not(.not-prose *):not([class*="not-prose"] *) {
   margin-top: 2rem !important;
   margin-bottom: 2rem !important;
   padding: 0 !important;
@@ -301,7 +301,7 @@ img {
   max-width: 100% !important;
 }
 
-.prose img {
+.prose img:not(.not-prose *):not([class*="not-prose"] *) {
   width: 100% !important;
   max-width: 100% !important;
   height: auto !important;
@@ -315,9 +315,9 @@ img {
 }
 
 /* Ensure images inside figure/caption wrappers don't double the margins or create large gaps above the caption */
-.prose figure img,
-.prose .wp-block-image img,
-.prose .wp-caption img {
+.prose figure img:not(.not-prose *):not([class*="not-prose"] *),
+.prose .wp-block-image img:not(.not-prose *):not([class*="not-prose"] *),
+.prose .wp-caption img:not(.not-prose *):not([class*="not-prose"] *) {
   margin-top: 0 !important;
   margin-bottom: 0 !important;
 }
