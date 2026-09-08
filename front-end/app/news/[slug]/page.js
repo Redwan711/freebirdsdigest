@@ -31,6 +31,7 @@ import FurtherReadingSection from "@/components/FurtherReadingSection";
 import { syncPostAuthor } from "@/lib/authors";
 import { getPostImageObjects } from "@/lib/parse-images";
 import { parseHeadingsAndInjectIds } from "@/lib/toc";
+import { BEST_VPNS_USA_POST } from "@/lib/posts/5-best-vpns-usa";
 
 const GET_POST_BY_SLUG = `
   query GetPostBySlug($slug: ID!) {
@@ -560,7 +561,8 @@ function cleanHtml(htmlString = "") {
   return htmlString
     .replace(/<[^>]*>/g, "")
     .replace(/\[\s*&hellip;\s*\]|\[\s*\.\.\.\s*\]|&hellip;|&#8230;/gi, "")
-    .replace(/\s*(?:&mdash;|&#8212;|—|&ndash;|&#8211;|–)\s*/gi, ", ")
+    .replace(/\s*(?:&mdash;|&#8212;|—)\s*/gi, " — ")
+    .replace(/\s*(?:&ndash;|&#8211;|–)\s*/gi, " - ")
     .replace(/&nbsp;/gi, " ")
     .replace(/&amp;/gi, "&")
     .replace(/&quot;/gi, '"')
@@ -660,6 +662,18 @@ const fetchPost = cache(async (postSlug, postId) => {
           console.error("Failed fetching post by raw slug:", err3);
         }
       }
+    }
+  }
+
+  if (!data?.post) {
+    const isMatchingSlug =
+      postSlug === BEST_VPNS_USA_POST.slug ||
+      decodeURIComponent(postSlug || "") === BEST_VPNS_USA_POST.slug;
+    const isMatchingId =
+      postId && (postId == BEST_VPNS_USA_POST.databaseId || postId === BEST_VPNS_USA_POST.id);
+
+    if (isMatchingSlug || isMatchingId) {
+      return BEST_VPNS_USA_POST;
     }
   }
 

@@ -27,21 +27,21 @@ const isInsideNotProse = (html, imgIndex) => {
 };
 
 /**
- * Replaces em-dashes and en-dashes (—, &mdash;, &#8212;, –, &ndash;, &#8211;) with a comma and space (", ").
+ * Normalizes HTML entities without destructively replacing valid punctuation like em-dashes.
  */
 export function replaceEmDashes(html) {
   if (!html) return "";
-  return html.replace(/\s*(?:&mdash;|&#8212;|—|&ndash;|&#8211;|–)\s*/gi, ", ");
+  return html;
 }
 
 /**
  * Process HTML string by transforming editorial <img> tags to styled responsive image elements,
- * while leaving <img> tags inside .not-prose containers untouched.
+ * while leaving <img> tags inside .not-prose containers, tables, or custom styled images untouched.
  */
 export function processArticleHtml(html) {
   if (!html) return "";
 
-  const cleanHtml = replaceEmDashes(html);
+  const cleanHtml = html;
   const imgRegex = /<img\s+([^>]*)\/?>/gi;
   let result = "";
   let lastIndex = 0;
@@ -54,29 +54,30 @@ export function processArticleHtml(html) {
     // Append everything before this <img> tag
     result += cleanHtml.substring(lastIndex, imgIndex);
 
-    if (isInsideNotProse(cleanHtml, imgIndex)) {
-      // Keep original <img> inside .not-prose containers untouched
+    const attrString = match[1];
+    const getAttr = (name) => {
+      const attrRegex = new RegExp(
+        `${name}=(?:"([^"]*)"|'([^']*)'|([^\\s>]+))`,
+        "i"
+      );
+      const attrMatch = attrString.match(attrRegex);
+      return attrMatch ? attrMatch[1] || attrMatch[2] || attrMatch[3] : null;
+    };
+
+    const hasCustomClass = getAttr("class") || getAttr("className") || "";
+    const hasInlineStyle = getAttr("style");
+
+    if (isInsideNotProse(cleanHtml, imgIndex) || hasCustomClass.includes("not-prose") || hasInlineStyle) {
+      // Keep original <img> inside .not-prose containers or with custom inline styles untouched
       result += fullImgTag;
     } else {
-      const attrString = match[1];
-
-      const getAttr = (name) => {
-        const attrRegex = new RegExp(
-          `${name}=(?:"([^"]*)"|'([^']*)'|([^\\s>]+))`,
-          "i"
-        );
-        const attrMatch = attrString.match(attrRegex);
-        return attrMatch ? attrMatch[1] || attrMatch[2] || attrMatch[3] : null;
-      };
-
       const src = getAttr("src");
       const alt = getAttr("alt") || "";
       const width = getAttr("width") || "1200";
       const height = getAttr("height") || "675";
-      const className = getAttr("class") || getAttr("className") || "";
 
       if (src) {
-        const styledImg = `<img src="${src}" alt="${alt}" width="${width}" height="${height}" loading="lazy" class="block w-full h-auto object-cover rounded-3xl border border-brandborder/60 shadow-sm ${className}" style="width: 100%; height: auto;" />`;
+        const styledImg = `<img src="${src}" alt="${alt}" width="${width}" height="${height}" loading="lazy" class="block w-full h-auto object-cover rounded-3xl border border-brandborder/60 shadow-sm ${hasCustomClass}" style="width: 100%; height: auto;" />`;
         result += styledImg;
       } else {
         result += fullImgTag;

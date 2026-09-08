@@ -199,37 +199,52 @@ img {
   -webkit-font-smoothing: antialiased;
 }
 
-.prose a {
+.prose a:not(.not-prose *):not([class*="not-prose"] *) {
   color: var(--color-brand-raw);
   font-weight: 600;
   text-decoration: none;
 }
 
-.prose a:hover {
+.prose a:not(.not-prose *):not([class*="not-prose"] *):hover {
   text-decoration: underline;
 }
 
-.prose ul {
+.prose ul:not(.not-prose *):not([class*="not-prose"] *) {
   list-style-type: disc;
   padding-left: 1.5rem;
   margin-top: 0.5rem;
   margin-bottom: 1rem;
 }
 
-.prose ol {
+.prose ol:not(.not-prose *):not([class*="not-prose"] *) {
   list-style-type: decimal;
   padding-left: 1.5rem;
   margin-top: 0.5rem;
   margin-bottom: 1rem;
 }
 
-.prose li {
+.not-prose ul,
+.not-prose ol,
+.not-prose li,
+[class*="not-prose"] ul,
+[class*="not-prose"] ol,
+[class*="not-prose"] li,
+.not-prose ul li,
+.not-prose ol li {
+  list-style: none !important;
+  list-style-type: none !important;
+  padding-left: 0 !important;
+  padding: 0 !important;
+  margin-left: 0 !important;
+}
+
+.prose li:not(.not-prose *):not([class*="not-prose"] *) {
   margin-top: 0.15rem !important;
   margin-bottom: 0.25rem !important;
   line-height: 1.5 !important;
 }
 
-.prose li p {
+.prose li:not(.not-prose *):not([class*="not-prose"] *) p {
   margin-top: 0 !important;
   margin-bottom: 0 !important;
 }
