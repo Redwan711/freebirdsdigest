@@ -109,20 +109,7 @@ const BottomHeader = ({ activeCategories = [], reviewSubcategories = [] }) => {
                 </span>
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-brand transition-all duration-200 group-hover:w-full" />
               </Link>
-              <Link
-                href="/contribute"
-                className="text-sm font-medium text-text-main hover:text-brand transition-colors relative group py-1"
-              >
-                Contribute
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-brand transition-all duration-200 group-hover:w-full" />
-              </Link>
-              <Link
-                href="/about"
-                className="text-sm font-medium text-text-main hover:text-brand transition-colors relative group py-1"
-              >
-                About Us
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-brand transition-all duration-200 group-hover:w-full" />
-              </Link>
+
             </nav>
 
             {/* Search Trigger Button */}

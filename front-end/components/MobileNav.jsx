@@ -136,20 +136,7 @@ export default function MobileNav({ categories = [], reviewSubcategories = [] })
               </span>
             </Link>
 
-            <Link
-              href="/contribute"
-              onClick={closeMenu}
-              className="block rounded-xl px-3.5 py-3 font-poppins text-sm font-semibold text-text-main hover:bg-brand/10 hover:text-brand transition-colors"
-            >
-              Contribute
-            </Link>
-            <Link
-              href="/about"
-              onClick={closeMenu}
-              className="block rounded-xl px-3.5 py-3 font-poppins text-sm font-semibold text-text-main hover:bg-brand/10 hover:text-brand transition-colors"
-            >
-              About Us
-            </Link>
+
 
             <div className="mt-3 pt-3 border-t border-brandborder flex items-center justify-between px-3.5">
               <span className="text-xs font-semibold text-text-muted">Appearance</span>
