@@ -24,10 +24,10 @@ export default async function BottomPageAd({ className = "" }) {
 
   // Extract variables for current rendering and future usage
   const sponsoreData = adPost.sponsore || adPost.sponsors || {};
-  
+
   const rawRedirectionLink = sponsoreData.redirectionLink || adPost.redirectionLink;
   const redirectionLink = formatRedirectionUrl(rawRedirectionLink);
-  
+
   const postLink = adPost.slug ? `/news/${adPost.slug}?pid=${adPost.databaseId}` : null;
   const finalLink = redirectionLink || postLink;
   const isExternal = Boolean(redirectionLink);
@@ -39,7 +39,8 @@ export default async function BottomPageAd({ className = "" }) {
     (typeof sponsoreData.adImage === "string" ? sponsoreData.adImage : null) ||
     adPost.featuredImage?.node?.sourceUrl;
 
-  // Metadata variables stored for future optional use (titles/text)
+  // Metadata variables stored for future optional use (titles/text),
+  //why the vercel not working
   const adTitle = sponsoreData.adTitleIfAny || adPost.title || "";
   const adText = sponsoreData.adTextIfAny || "";
   const imageAlt =
