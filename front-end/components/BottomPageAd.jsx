@@ -40,7 +40,7 @@ export default async function BottomPageAd({ className = "" }) {
     adPost.featuredImage?.node?.sourceUrl;
 
   // Metadata variables stored for future optional use (titles/text),
-  //why the vercel not working
+  //why the vercel not working mmmm
   const adTitle = sponsoreData.adTitleIfAny || adPost.title || "";
   const adText = sponsoreData.adTextIfAny || "";
   const imageAlt =
