@@ -180,10 +180,10 @@ export const BEST_VPNS_USA_POST = {
 
         <figure class="my-8 overflow-hidden rounded-3xl border border-brandborder/80 bg-bg-surface shadow-md transition-all hover:shadow-xl group">
           <a href="https://nordvpn.com" target="_blank" rel="nofollow noopener noreferrer" class="block overflow-hidden">
-            <img src="/images/vpn/nordvpn-app-interface-server-map.jpg" alt="NordVPN desktop application displaying global server selection map and quick connection settings" title="NordVPN Desktop App Dashboard & Interactive Server Map" width="1672" height="941" class="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.01]" loading="lazy" />
+            <img src="/images/vpn/nordvpn-app-interface-server-map.jpg" alt="This image is inspired by NordVPN official website" title="NordVPN Desktop App Dashboard & Interactive Server Map" width="1672" height="941" class="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.01]" loading="lazy" />
           </a>
           <figcaption class="p-3.5 text-center text-xs font-medium text-text-muted bg-bg-subtle/90 border-t border-brandborder/70">
-            NordVPN's desktop application interface featuring global map server selection and NordLynx quick connect.
+            This image is inspired by NordVPN official website.
           </figcaption>
         </figure>
 
@@ -244,10 +244,10 @@ export const BEST_VPNS_USA_POST = {
           </a>
         </div>
 
-        <div class="mt-6 rounded-2xl border border-brandborder/70 bg-bg-subtle/60 p-4 sm:p-5 text-xs sm:text-sm text-text-muted">
+        <div class="mt-6 rounded-2xl border border-brandborder/70 bg-bg-subtle/60 p-4 sm:p-5 text-xs sm:text-sm text-text-muted not-prose">
           <p class="m-0 leading-relaxed font-medium">
             <a href="/affiliate-disclosure" class="font-bold text-text-main hover:text-brand underline decoration-brandborder hover:decoration-brand transition-colors">Affiliate Disclosure:</a>
-            We may earn a commission if you purchase a VPN through links on this page. This does not add to your cost. Our recommendations are based on our stated evaluation criteria, available independent testing, provider documentation, and current product information.
+            We may earn a commission if you purchase a VPN through links on this page. <span class="text-brand font-bold" style="color: #FF4D2E !important; font-weight: bold;">This does not add to your cost.</span> Our recommendations are based on our stated evaluation criteria, available independent testing, provider documentation, and current product information.
           </p>
         </div>
       </section>
@@ -289,10 +289,10 @@ export const BEST_VPNS_USA_POST = {
 
           <figure class="my-8 overflow-hidden rounded-3xl border border-brandborder/80 bg-bg-surface shadow-xs transition-all hover:shadow-md group">
             <a href="https://nordvpn.com" target="_blank" rel="nofollow noopener noreferrer" class="block overflow-hidden">
-              <img src="/images/vpn/nordvpn-settings-threat-protection.jpg" alt="NordVPN settings dashboard showing Threat Protection feature, Double VPN, and Meshnet controls" title="NordVPN Threat Protection & Malware Blocking Dashboard" width="1672" height="941" class="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.01]" loading="lazy" />
+              <img src="/images/vpn/nordvpn-settings-threat-protection.jpg" alt="This image is inspired by NordVPN official website" title="NordVPN Threat Protection & Malware Blocking Dashboard" width="1672" height="941" class="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.01]" loading="lazy" />
             </a>
             <figcaption class="p-3.5 text-center text-xs font-medium text-text-muted bg-bg-subtle/80 border-t border-brandborder/70">
-              NordVPN Threat Protection blocks malicious sites, tracking cookies, and pop-up advertisements automatically.
+              This image is inspired by NordVPN official website.
             </figcaption>
           </figure>
 
@@ -381,10 +381,10 @@ export const BEST_VPNS_USA_POST = {
 
           <figure class="my-8 overflow-hidden rounded-3xl border border-brandborder/80 bg-bg-surface shadow-xs transition-all hover:shadow-md group">
             <a href="https://surfshark.com" target="_blank" rel="nofollow noopener noreferrer" class="block overflow-hidden">
-              <img src="/images/vpn/surfshark-app-cleanweb-interface.jpg" alt="Surfshark VPN app interface showcasing CleanWeb ad-blocker, Bypasser split tunneling, and 1-click connect" title="Surfshark Desktop Dashboard & CleanWeb Feature" width="1672" height="941" class="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.01]" loading="lazy" />
+              <img src="/images/vpn/surfshark-app-cleanweb-interface.jpg" alt="This image is inspired by Surfshark official website" title="Surfshark Desktop Dashboard & CleanWeb Feature" width="1672" height="941" class="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.01]" loading="lazy" />
             </a>
             <figcaption class="p-3.5 text-center text-xs font-medium text-text-muted bg-bg-subtle/80 border-t border-brandborder/70">
-              Surfshark application dashboard highlighting CleanWeb malware blocking and Bypasser split tunneling.
+              This image is inspired by Surfshark official website.
             </figcaption>
           </figure>
 
@@ -471,10 +471,10 @@ export const BEST_VPNS_USA_POST = {
 
           <figure class="my-8 overflow-hidden rounded-3xl border border-brandborder/80 bg-bg-surface shadow-xs transition-all hover:shadow-md group">
             <a href="https://protonvpn.com" target="_blank" rel="nofollow noopener noreferrer" class="block overflow-hidden">
-              <img src="/images/vpn/proton-vpn-app-secure-core-interface.jpg" alt="Proton VPN desktop app interface demonstrating Secure Core multi-hop server routing and NetShield ad-blocker" title="Proton VPN Secure Core Dashboard & Swiss Privacy Controls" width="1672" height="941" class="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.01]" loading="lazy" />
+              <img src="/images/vpn/proton-vpn-app-secure-core-interface.jpg" alt="This image is inspired by Proton VPN official website" title="Proton VPN Secure Core Dashboard & Swiss Privacy Controls" width="1672" height="941" class="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.01]" loading="lazy" />
             </a>
             <figcaption class="p-3.5 text-center text-xs font-medium text-text-muted bg-bg-subtle/80 border-t border-brandborder/70">
-              Proton VPN's interface showcasing Secure Core multi-hop routing through hardened Swiss data centers.
+              This image is inspired by Proton VPN official website.
             </figcaption>
           </figure>
 
@@ -561,10 +561,10 @@ export const BEST_VPNS_USA_POST = {
 
           <figure class="my-8 overflow-hidden rounded-3xl border border-brandborder/80 bg-bg-surface shadow-xs transition-all hover:shadow-md group">
             <a href="https://expressvpn.com" target="_blank" rel="nofollow noopener noreferrer" class="block overflow-hidden">
-              <img src="/images/vpn/expressvpn-app-lightway-interface.jpg" alt="ExpressVPN Windows app dashboard featuring 1-click connection button and Smart Location server selection" title="ExpressVPN Desktop App UI & Lightway Protocol Picker" width="1672" height="941" class="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.01]" loading="lazy" />
+              <img src="/images/vpn/expressvpn-app-lightway-interface.jpg" alt="This image is inspired by ExpressVPN official website" title="ExpressVPN Desktop App UI & Lightway Protocol Picker" width="1672" height="941" class="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.01]" loading="lazy" />
             </a>
             <figcaption class="p-3.5 text-center text-xs font-medium text-text-muted bg-bg-subtle/80 border-t border-brandborder/70">
-              ExpressVPN's desktop application featuring the 1-click connection button and Smart Location picker.
+              This image is inspired by ExpressVPN official website.
             </figcaption>
           </figure>
 
@@ -648,10 +648,10 @@ export const BEST_VPNS_USA_POST = {
 
           <figure class="my-8 overflow-hidden rounded-3xl border border-brandborder/80 bg-bg-surface shadow-xs transition-all hover:shadow-md group">
             <a href="https://cyberghostvpn.com" target="_blank" rel="nofollow noopener noreferrer" class="block overflow-hidden">
-              <img src="/images/vpn/cyberghost-app-streaming-torrenting-interface.jpg" alt="CyberGhost VPN app dashboard displaying dedicated streaming and P2P torrenting server categories" title="CyberGhost App Dashboard & Specialized Server Profiles" width="1672" height="941" class="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.01]" loading="lazy" />
+              <img src="/images/vpn/cyberghost-app-streaming-torrenting-interface.jpg" alt="This image is inspired by CyberGhost official website" title="CyberGhost App Dashboard & Specialized Server Profiles" width="1672" height="941" class="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.01]" loading="lazy" />
             </a>
             <figcaption class="p-3.5 text-center text-xs font-medium text-text-muted bg-bg-subtle/80 border-t border-brandborder/70">
-              CyberGhost's application UI displaying dedicated server categories pre-tuned for streaming platforms and P2P sharing.
+              This image is inspired by CyberGhost official website.
             </figcaption>
           </figure>
 
@@ -738,7 +738,7 @@ export const BEST_VPNS_USA_POST = {
               </h2>
             </div>
             <p class="text-sm text-text-muted leading-relaxed m-0 font-medium">
-              Best combination of performance, privacy, streaming, features and usability.
+              NordVPN delivers the top overall score in our testing, combining industry-leading speed performance, robust NordLynx protocol security, reliable 4K streaming unblocking, and a feature-rich threat protection suite across all major devices.
             </p>
           </div>
 
@@ -898,104 +898,104 @@ export const BEST_VPNS_USA_POST = {
         </div>
 
         <!-- STUNNING 9 CATEGORY CARDS GRID -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4.5 my-8 not-prose">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6 mb-4 not-prose">
           
           <!-- Category 1: Privacy and security -->
-          <div class="group relative flex items-center gap-4 rounded-2xl border border-indigo-500/25 bg-gradient-to-br from-bg-surface via-bg-surface to-indigo-500/10 p-4.5 shadow-2xs hover:shadow-md hover:-translate-y-1 hover:border-indigo-500/60 transition-all duration-300">
-            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300 shadow-2xs">
-              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <div class="group relative flex items-center gap-3.5 rounded-2xl border border-indigo-500/25 bg-gradient-to-br from-bg-surface via-bg-surface to-indigo-500/10 p-3.5 sm:p-4 shadow-2xs hover:shadow-md hover:-translate-y-1 hover:border-indigo-500/60 transition-all duration-300">
+            <div class="flex h-10 w-10 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-2xl bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300 shadow-2xs">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             </div>
             <div class="flex-1 min-w-0">
-              <span class="text-[10px] font-black uppercase tracking-widest text-indigo-600/80 dark:text-indigo-400/80 block mb-0.5">Category 01</span>
-              <h3 class="font-jakarta font-bold text-sm sm:text-base text-text-main m-0 truncate">Privacy and security</h3>
+              <span class="text-[10px] font-black uppercase tracking-widest text-indigo-600/80 dark:text-indigo-400/80 block leading-none mb-1">Category 01</span>
+              <h3 class="font-jakarta font-extrabold text-sm sm:text-base text-text-main m-0 leading-tight">Privacy and security</h3>
             </div>
           </div>
 
           <!-- Category 2: Speed and performance -->
-          <div class="group relative flex items-center gap-4 rounded-2xl border border-amber-500/25 bg-gradient-to-br from-bg-surface via-bg-surface to-amber-500/10 p-4.5 shadow-2xs hover:shadow-md hover:-translate-y-1 hover:border-amber-500/60 transition-all duration-300">
-            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-amber-500/15 text-amber-600 dark:text-amber-400 group-hover:scale-110 group-hover:bg-amber-500 group-hover:text-slate-950 transition-all duration-300 shadow-2xs">
-              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          <div class="group relative flex items-center gap-3.5 rounded-2xl border border-amber-500/25 bg-gradient-to-br from-bg-surface via-bg-surface to-amber-500/10 p-3.5 sm:p-4 shadow-2xs hover:shadow-md hover:-translate-y-1 hover:border-amber-500/60 transition-all duration-300">
+            <div class="flex h-10 w-10 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-2xl bg-amber-500/15 text-amber-600 dark:text-amber-400 group-hover:scale-110 group-hover:bg-amber-500 group-hover:text-slate-950 transition-all duration-300 shadow-2xs">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
             </div>
             <div class="flex-1 min-w-0">
-              <span class="text-[10px] font-black uppercase tracking-widest text-amber-600/80 dark:text-amber-400/80 block mb-0.5">Category 02</span>
-              <h3 class="font-jakarta font-bold text-sm sm:text-base text-text-main m-0 truncate">Speed and performance</h3>
+              <span class="text-[10px] font-black uppercase tracking-widest text-amber-600/80 dark:text-amber-400/80 block leading-none mb-1">Category 02</span>
+              <h3 class="font-jakarta font-extrabold text-sm sm:text-base text-text-main m-0 leading-tight">Speed and performance</h3>
             </div>
           </div>
 
           <!-- Category 3: Streaming -->
-          <div class="group relative flex items-center gap-4 rounded-2xl border border-rose-500/25 bg-gradient-to-br from-bg-surface via-bg-surface to-rose-500/10 p-4.5 shadow-2xs hover:shadow-md hover:-translate-y-1 hover:border-rose-500/60 transition-all duration-300">
-            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-rose-500/15 text-rose-600 dark:text-rose-400 group-hover:scale-110 group-hover:bg-rose-600 group-hover:text-white transition-all duration-300 shadow-2xs">
-              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="15" x="2" y="7" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></svg>
+          <div class="group relative flex items-center gap-3.5 rounded-2xl border border-rose-500/25 bg-gradient-to-br from-bg-surface via-bg-surface to-rose-500/10 p-3.5 sm:p-4 shadow-2xs hover:shadow-md hover:-translate-y-1 hover:border-rose-500/60 transition-all duration-300">
+            <div class="flex h-10 w-10 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-2xl bg-rose-500/15 text-rose-600 dark:text-rose-400 group-hover:scale-110 group-hover:bg-rose-600 group-hover:text-white transition-all duration-300 shadow-2xs">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="15" x="2" y="7" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></svg>
             </div>
             <div class="flex-1 min-w-0">
-              <span class="text-[10px] font-black uppercase tracking-widest text-rose-600/80 dark:text-rose-400/80 block mb-0.5">Category 03</span>
-              <h3 class="font-jakarta font-bold text-sm sm:text-base text-text-main m-0 truncate">Streaming</h3>
+              <span class="text-[10px] font-black uppercase tracking-widest text-rose-600/80 dark:text-rose-400/80 block leading-none mb-1">Category 03</span>
+              <h3 class="font-jakarta font-extrabold text-sm sm:text-base text-text-main m-0 leading-tight">Streaming</h3>
             </div>
           </div>
 
           <!-- Category 4: Features -->
-          <div class="group relative flex items-center gap-4 rounded-2xl border border-cyan-500/25 bg-gradient-to-br from-bg-surface via-bg-surface to-cyan-500/10 p-4.5 shadow-2xs hover:shadow-md hover:-translate-y-1 hover:border-cyan-500/60 transition-all duration-300">
-            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-cyan-500/15 text-cyan-600 dark:text-cyan-400 group-hover:scale-110 group-hover:bg-cyan-600 group-hover:text-white transition-all duration-300 shadow-2xs">
-              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          <div class="group relative flex items-center gap-3.5 rounded-2xl border border-cyan-500/25 bg-gradient-to-br from-bg-surface via-bg-surface to-cyan-500/10 p-3.5 sm:p-4 shadow-2xs hover:shadow-md hover:-translate-y-1 hover:border-cyan-500/60 transition-all duration-300">
+            <div class="flex h-10 w-10 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-2xl bg-cyan-500/15 text-cyan-600 dark:text-cyan-400 group-hover:scale-110 group-hover:bg-cyan-600 group-hover:text-white transition-all duration-300 shadow-2xs">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
             </div>
             <div class="flex-1 min-w-0">
-              <span class="text-[10px] font-black uppercase tracking-widest text-cyan-600/80 dark:text-cyan-400/80 block mb-0.5">Category 04</span>
-              <h3 class="font-jakarta font-bold text-sm sm:text-base text-text-main m-0 truncate">Features</h3>
+              <span class="text-[10px] font-black uppercase tracking-widest text-cyan-600/80 dark:text-cyan-400/80 block leading-none mb-1">Category 04</span>
+              <h3 class="font-jakarta font-extrabold text-sm sm:text-base text-text-main m-0 leading-tight">Features</h3>
             </div>
           </div>
 
           <!-- Category 5: Network coverage -->
-          <div class="group relative flex items-center gap-4 rounded-2xl border border-emerald-500/25 bg-gradient-to-br from-bg-surface via-bg-surface to-emerald-500/10 p-4.5 shadow-2xs hover:shadow-md hover:-translate-y-1 hover:border-emerald-500/60 transition-all duration-300">
-            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 group-hover:scale-110 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300 shadow-2xs">
-              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+          <div class="group relative flex items-center gap-3.5 rounded-2xl border border-emerald-500/25 bg-gradient-to-br from-bg-surface via-bg-surface to-emerald-500/10 p-3.5 sm:p-4 shadow-2xs hover:shadow-md hover:-translate-y-1 hover:border-emerald-500/60 transition-all duration-300">
+            <div class="flex h-10 w-10 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-2xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 group-hover:scale-110 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300 shadow-2xs">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
             </div>
             <div class="flex-1 min-w-0">
-              <span class="text-[10px] font-black uppercase tracking-widest text-emerald-600/80 dark:text-emerald-400/80 block mb-0.5">Category 05</span>
-              <h3 class="font-jakarta font-bold text-sm sm:text-base text-text-main m-0 truncate">Network coverage</h3>
+              <span class="text-[10px] font-black uppercase tracking-widest text-emerald-600/80 dark:text-emerald-400/80 block leading-none mb-1">Category 05</span>
+              <h3 class="font-jakarta font-extrabold text-sm sm:text-base text-text-main m-0 leading-tight">Network coverage</h3>
             </div>
           </div>
 
           <!-- Category 6: Usability -->
-          <div class="group relative flex items-center gap-4 rounded-2xl border border-violet-500/25 bg-gradient-to-br from-bg-surface via-bg-surface to-violet-500/10 p-4.5 shadow-2xs hover:shadow-md hover:-translate-y-1 hover:border-violet-500/60 transition-all duration-300">
-            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-violet-500/15 text-violet-600 dark:text-violet-400 group-hover:scale-110 group-hover:bg-violet-600 group-hover:text-white transition-all duration-300 shadow-2xs">
-              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/><path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v6"/><path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 0 1 2 2v4a6 6 0 0 1-6 6h-2a6 6 0 0 1-6-6v-1.5"/></svg>
+          <div class="group relative flex items-center gap-3.5 rounded-2xl border border-violet-500/25 bg-gradient-to-br from-bg-surface via-bg-surface to-violet-500/10 p-3.5 sm:p-4 shadow-2xs hover:shadow-md hover:-translate-y-1 hover:border-violet-500/60 transition-all duration-300">
+            <div class="flex h-10 w-10 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-2xl bg-violet-500/15 text-violet-600 dark:text-violet-400 group-hover:scale-110 group-hover:bg-violet-600 group-hover:text-white transition-all duration-300 shadow-2xs">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/><path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v6"/><path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 0 1 2 2v4a6 6 0 0 1-6 6h-2a6 6 0 0 1-6-6v-1.5"/></svg>
             </div>
             <div class="flex-1 min-w-0">
-              <span class="text-[10px] font-black uppercase tracking-widest text-violet-600/80 dark:text-violet-400/80 block mb-0.5">Category 06</span>
-              <h3 class="font-jakarta font-bold text-sm sm:text-base text-text-main m-0 truncate">Usability</h3>
+              <span class="text-[10px] font-black uppercase tracking-widest text-violet-600/80 dark:text-violet-400/80 block leading-none mb-1">Category 06</span>
+              <h3 class="font-jakarta font-extrabold text-sm sm:text-base text-text-main m-0 leading-tight">Usability</h3>
             </div>
           </div>
 
           <!-- Category 7: Device support -->
-          <div class="group relative flex items-center gap-4 rounded-2xl border border-blue-500/25 bg-gradient-to-br from-bg-surface via-bg-surface to-blue-500/10 p-4.5 shadow-2xs hover:shadow-md hover:-translate-y-1 hover:border-blue-500/60 transition-all duration-300">
-            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-blue-500/15 text-blue-600 dark:text-blue-400 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 shadow-2xs">
-              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
+          <div class="group relative flex items-center gap-3.5 rounded-2xl border border-blue-500/25 bg-gradient-to-br from-bg-surface via-bg-surface to-blue-500/10 p-3.5 sm:p-4 shadow-2xs hover:shadow-md hover:-translate-y-1 hover:border-blue-500/60 transition-all duration-300">
+            <div class="flex h-10 w-10 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-2xl bg-blue-500/15 text-blue-600 dark:text-blue-400 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 shadow-2xs">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
             </div>
             <div class="flex-1 min-w-0">
-              <span class="text-[10px] font-black uppercase tracking-widest text-blue-600/80 dark:text-blue-400/80 block mb-0.5">Category 07</span>
-              <h3 class="font-jakarta font-bold text-sm sm:text-base text-text-main m-0 truncate">Device support</h3>
+              <span class="text-[10px] font-black uppercase tracking-widest text-blue-600/80 dark:text-blue-400/80 block leading-none mb-1">Category 07</span>
+              <h3 class="font-jakarta font-extrabold text-sm sm:text-base text-text-main m-0 leading-tight">Device support</h3>
             </div>
           </div>
 
           <!-- Category 8: Price and value -->
-          <div class="group relative flex items-center gap-4 rounded-2xl border border-emerald-500/25 bg-gradient-to-br from-bg-surface via-bg-surface to-emerald-500/10 p-4.5 shadow-2xs hover:shadow-md hover:-translate-y-1 hover:border-emerald-500/60 transition-all duration-300">
-            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 group-hover:scale-110 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300 shadow-2xs">
-              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          <div class="group relative flex items-center gap-3.5 rounded-2xl border border-emerald-500/25 bg-gradient-to-br from-bg-surface via-bg-surface to-emerald-500/10 p-3.5 sm:p-4 shadow-2xs hover:shadow-md hover:-translate-y-1 hover:border-emerald-500/60 transition-all duration-300">
+            <div class="flex h-10 w-10 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-2xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 group-hover:scale-110 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300 shadow-2xs">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
             </div>
             <div class="flex-1 min-w-0">
-              <span class="text-[10px] font-black uppercase tracking-widest text-emerald-600/80 dark:text-emerald-400/80 block mb-0.5">Category 08</span>
-              <h3 class="font-jakarta font-bold text-sm sm:text-base text-text-main m-0 truncate">Price and value</h3>
+              <span class="text-[10px] font-black uppercase tracking-widest text-emerald-600/80 dark:text-emerald-400/80 block leading-none mb-1">Category 08</span>
+              <h3 class="font-jakarta font-extrabold text-sm sm:text-base text-text-main m-0 leading-tight">Price and value</h3>
             </div>
           </div>
 
           <!-- Category 9: Customer support -->
-          <div class="group relative flex items-center gap-4 rounded-2xl border border-teal-500/25 bg-gradient-to-br from-bg-surface via-bg-surface to-teal-500/10 p-4.5 shadow-2xs hover:shadow-md hover:-translate-y-1 hover:border-teal-500/60 transition-all duration-300">
-            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-teal-500/15 text-teal-600 dark:text-teal-400 group-hover:scale-110 group-hover:bg-teal-600 group-hover:text-white transition-all duration-300 shadow-2xs">
-              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/></svg>
+          <div class="group relative flex items-center gap-3.5 rounded-2xl border border-teal-500/25 bg-gradient-to-br from-bg-surface via-bg-surface to-teal-500/10 p-3.5 sm:p-4 shadow-2xs hover:shadow-md hover:-translate-y-1 hover:border-teal-500/60 transition-all duration-300">
+            <div class="flex h-10 w-10 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-2xl bg-teal-500/15 text-teal-600 dark:text-teal-400 group-hover:scale-110 group-hover:bg-teal-600 group-hover:text-white transition-all duration-300 shadow-2xs">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/></svg>
             </div>
             <div class="flex-1 min-w-0">
-              <span class="text-[10px] font-black uppercase tracking-widest text-teal-600/80 dark:text-teal-400/80 block mb-0.5">Category 09</span>
-              <h3 class="font-jakarta font-bold text-sm sm:text-base text-text-main m-0 truncate">Customer support</h3>
+              <span class="text-[10px] font-black uppercase tracking-widest text-teal-600/80 dark:text-teal-400/80 block leading-none mb-1">Category 09</span>
+              <h3 class="font-jakarta font-extrabold text-sm sm:text-base text-text-main m-0 leading-tight">Customer support</h3>
             </div>
           </div>
 

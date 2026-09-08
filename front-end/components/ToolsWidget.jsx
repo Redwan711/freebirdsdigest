@@ -34,17 +34,12 @@ export default function ToolsWidget({ className = "" }) {
             href="/freelance-rate-calculator"
             className="group block p-3.5 rounded-2xl border border-brandborder/70 bg-bg-subtle/50 hover:border-brand/40 hover:bg-bg-subtle transition-all shadow-2xs"
           >
-            <div className="flex items-center justify-between gap-2 mb-2">
-              <div className="flex items-center gap-2">
-                <div className="p-1.5 rounded-xl bg-brand/10 text-brand shrink-0">
-                  <Calculator className="w-4 h-4" />
-                </div>
-                <span className="text-xs font-bold text-text-main group-hover:text-brand transition-colors font-heading">
-                  Rate Calculator
-                </span>
+            <div className="flex items-center gap-2 mb-2">
+              <div className="p-1.5 rounded-xl bg-brand/10 text-brand shrink-0">
+                <Calculator className="w-4 h-4" />
               </div>
-              <span className="px-2 py-0.5 text-[9px] font-bold uppercase rounded-md bg-brand/10 text-brand border border-brand/20 shrink-0">
-                Calculator
+              <span className="text-xs font-bold text-text-main group-hover:text-brand transition-colors font-heading">
+                Freelance Rate Calculator
               </span>
             </div>
             <p className="text-[11px] text-text-muted leading-relaxed line-clamp-2">
@@ -61,17 +56,12 @@ export default function ToolsWidget({ className = "" }) {
             href="/vpn-finder"
             className="group block p-3.5 rounded-2xl border border-brandborder/70 bg-bg-subtle/50 hover:border-teal-500/40 hover:bg-bg-subtle transition-all shadow-2xs"
           >
-            <div className="flex items-center justify-between gap-2 mb-2">
-              <div className="flex items-center gap-2">
-                <div className="p-1.5 rounded-xl bg-teal-500/10 text-teal-600 dark:text-teal-400 shrink-0">
-                  <ShieldCheck className="w-4 h-4" />
-                </div>
-                <span className="text-xs font-bold text-text-main group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors font-heading">
-                  Smart VPN Finder
-                </span>
+            <div className="flex items-center gap-2 mb-2">
+              <div className="p-1.5 rounded-xl bg-teal-500/10 text-teal-600 dark:text-teal-400 shrink-0">
+                <ShieldCheck className="w-4 h-4" />
               </div>
-              <span className="px-2 py-0.5 text-[9px] font-bold uppercase rounded-md bg-teal-500/10 text-teal-600 dark:text-teal-400 border border-teal-500/20 shrink-0">
-                Security
+              <span className="text-xs font-bold text-text-main group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors font-heading">
+                Smart VPN Finder
               </span>
             </div>
             <p className="text-[11px] text-text-muted leading-relaxed line-clamp-2">
