@@ -9,8 +9,8 @@ import {
 } from "lucide-react";
 
 export default function FreelanceRateCalculator({ className = "" }) {
-  // Mode: "annual" vs "monthly"
-  const [mode, setMode] = useState("annual");
+  // Mode: "monthly" vs "annual"
+  const [mode, setMode] = useState("monthly");
 
   // Tax input type: default to "amount" ($) as requested
   const [taxType, setTaxType] = useState("amount");
@@ -54,7 +54,7 @@ export default function FreelanceRateCalculator({ className = "" }) {
 
   // Reset all fields to blank
   const handleReset = () => {
-    setMode("annual");
+    setMode("monthly");
     setTaxType("amount");
     setIncome("");
     setExpenses("");
@@ -124,19 +124,8 @@ export default function FreelanceRateCalculator({ className = "" }) {
           </button>
         </div>
 
-        {/* Mode Selector (Annual vs Monthly) */}
+        {/* Mode Selector (Monthly vs Annual) */}
         <div className="grid grid-cols-2 p-0.5 bg-bg-subtle/70 rounded-xl border border-brandborder text-xs font-bold">
-          <button
-            type="button"
-            onClick={() => handleModeChange("annual")}
-            className={`py-1.5 rounded-lg transition-all text-[11px] cursor-pointer ${
-              mode === "annual"
-                ? "bg-brand text-white shadow-2xs"
-                : "text-text-muted hover:text-text-main"
-            }`}
-          >
-            Annual
-          </button>
           <button
             type="button"
             onClick={() => handleModeChange("monthly")}
@@ -147,6 +136,17 @@ export default function FreelanceRateCalculator({ className = "" }) {
             }`}
           >
             Monthly
+          </button>
+          <button
+            type="button"
+            onClick={() => handleModeChange("annual")}
+            className={`py-1.5 rounded-lg transition-all text-[11px] cursor-pointer ${
+              mode === "annual"
+                ? "bg-brand text-white shadow-2xs"
+                : "text-text-muted hover:text-text-main"
+            }`}
+          >
+            Annual
           </button>
         </div>
 
@@ -203,20 +203,8 @@ export default function FreelanceRateCalculator({ className = "" }) {
               <label className="font-bold text-text-main truncate">
                 Tax & Savings ({mode === "monthly" && taxType === "amount" ? "Monthly" : mode === "annual" && taxType === "amount" ? "Annual" : "%"})
               </label>
-              {/* TOGGLE SELECTOR (% vs $) */}
+              {/* TOGGLE SELECTOR ($ vs %) */}
               <div className="inline-flex bg-bg-subtle p-0.5 rounded-lg border border-brandborder font-bold shrink-0">
-                <button
-                  type="button"
-                  onClick={() => handleTaxTypeChange("percent")}
-                  title="Percentage (%)"
-                  className={`px-1.5 py-0.5 rounded text-[10px] transition cursor-pointer ${
-                    taxType === "percent"
-                      ? "bg-brand text-white shadow-2xs"
-                      : "text-text-muted hover:text-text-main"
-                  }`}
-                >
-                  %
-                </button>
                 <button
                   type="button"
                   onClick={() => handleTaxTypeChange("amount")}
@@ -228,6 +216,18 @@ export default function FreelanceRateCalculator({ className = "" }) {
                   }`}
                 >
                   $
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleTaxTypeChange("percent")}
+                  title="Percentage (%)"
+                  className={`px-1.5 py-0.5 rounded text-[10px] transition cursor-pointer ${
+                    taxType === "percent"
+                      ? "bg-brand text-white shadow-2xs"
+                      : "text-text-muted hover:text-text-main"
+                  }`}
+                >
+                  %
                 </button>
               </div>
             </div>

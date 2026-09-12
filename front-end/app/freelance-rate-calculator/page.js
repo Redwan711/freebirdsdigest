@@ -47,16 +47,6 @@ export default function FreelanceRateCalculatorPage() {
 
         {/* Simplified Calculator Component */}
         <FreelanceRateCalculator />
-
-        {/* Footer info */}
-        <div className="text-center text-xs text-text-muted pt-4 border-t border-brandborder">
-          <p>
-            Formula:{" "}
-            <code className="bg-bg-subtle px-2 py-0.5 rounded border border-brandborder text-text-main">
-              (Income + Expenses + Taxes) ÷ Billable Hours
-            </code>
-          </p>
-        </div>
       </div>
     </main>
   );
