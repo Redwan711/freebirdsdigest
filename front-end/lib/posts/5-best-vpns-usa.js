@@ -1011,57 +1011,58 @@ export const BEST_VPNS_USA_POST = {
       <hr class="border-brandborder/60 my-10" />
 
       <!-- SECTION 8: IMPORTANT: VPN PRICING CHANGES -->
-      <section id="important-vpn-pricing-changes" class="my-8 rounded-3xl border border-amber-500/40 bg-gradient-to-br from-amber-500/15 via-amber-500/5 to-bg-surface p-6 sm:p-8 shadow-sm">
-        <div class="flex items-start gap-4">
-          <div class="p-3 rounded-2xl bg-amber-500/20 text-amber-700 dark:text-amber-400 shrink-0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 1 1.73-3Z"/><line x1="12" x2="12" y1="9" y2="13"/><line x1="12" x2="12.01" y1="17" y2="17"/></svg>
+      <section id="important-vpn-pricing-changes" class="my-8 rounded-3xl border border-amber-500/40 bg-gradient-to-br from-amber-500/15 via-amber-500/5 to-bg-surface p-5 sm:p-7 shadow-sm space-y-4 not-prose">
+        <div class="flex items-center gap-3">
+          <div class="p-2.5 sm:p-3 rounded-2xl bg-amber-500/20 text-amber-700 dark:text-amber-400 shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 1 1.73-3Z"/><line x1="12" x2="12" y1="9" y2="13"/><line x1="12" x2="12.01" y1="17" y2="17"/></svg>
           </div>
-          <div class="space-y-3.5">
-            <h1 class="font-jakarta text-xl sm:text-2xl font-extrabold text-amber-900 dark:text-amber-200 m-0">Important: VPN Pricing Changes</h1>
-            <p class="text-sm sm:text-base leading-relaxed text-amber-900/90 dark:text-amber-300/90 m-0 font-medium">
-              VPN companies frequently change promotional prices.
-            </p>
-            <p class="text-sm sm:text-base leading-relaxed text-amber-900 dark:text-amber-200 m-0 font-extrabold">
-              The price shown in an advertisement may depend on:
-            </p>
-            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm text-amber-900/90 dark:text-amber-300/90 list-none m-0 p-0 font-medium">
-              <li class="flex items-center gap-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-500/15 p-2.5 border border-amber-500/20">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-amber-600 dark:text-amber-400 shrink-0"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-                <span>subscription length</span>
-              </li>
-              <li class="flex items-center gap-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-500/15 p-2.5 border border-amber-500/20">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-amber-600 dark:text-amber-400 shrink-0"><path d="m3 11 18-5v12L3 13v-2z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
-                <span>promotional campaign</span>
-              </li>
-              <li class="flex items-center gap-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-500/15 p-2.5 border border-amber-500/20">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-amber-600 dark:text-amber-400 shrink-0"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
-                <span>country</span>
-              </li>
-              <li class="flex items-center gap-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-500/15 p-2.5 border border-amber-500/20">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-amber-600 dark:text-amber-400 shrink-0"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 6v12"/></svg>
-                <span>taxes</span>
-              </li>
-              <li class="flex items-center gap-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-500/15 p-2.5 border border-amber-500/20">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-amber-600 dark:text-amber-400 shrink-0"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 11v2"/><path d="M13 17v2"/></svg>
-                <span>coupon</span>
-              </li>
-              <li class="flex items-center gap-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-500/15 p-2.5 border border-amber-500/20">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-amber-600 dark:text-amber-400 shrink-0"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
-                <span>new-customer status</span>
-              </li>
-              <li class="flex items-center gap-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-500/15 p-2.5 border border-amber-500/20">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-amber-600 dark:text-amber-400 shrink-0"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
-                <span>renewal period</span>
-              </li>
-              <li class="flex items-center gap-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-500/15 p-2.5 border border-amber-500/20">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-amber-600 dark:text-amber-400 shrink-0"><line x1="4" x2="4" y1="21" y2="14"/><line x1="4" x2="4" y1="10" y2="3"/><line x1="12" x2="12" y1="21" y2="12"/><line x1="12" x2="12" y1="8" y2="3"/><line x1="20" x2="20" y1="21" y2="16"/><line x1="20" x2="20" y1="12" y2="3"/><line x1="1" x2="7" y1="14" y2="14"/><line x1="9" x2="15" y1="8" y2="8"/><line x1="17" x2="23" y1="16" y2="16"/></svg>
-                <span>plan tier</span>
-              </li>
-            </ul>
-            <div class="space-y-1.5 pt-2 text-sm sm:text-base leading-relaxed text-amber-900/90 dark:text-amber-300/90 font-medium">
-              <p class="m-0">For that reason, always check the provider's current checkout price before purchasing.</p>
-              <p class="m-0">A low introductory price should not automatically be treated as the long-term cost.</p>
-            </div>
+          <h1 class="font-jakarta text-xl sm:text-2xl font-extrabold text-amber-900 dark:text-amber-200 m-0">Important: VPN Pricing Changes</h1>
+        </div>
+
+        <div class="space-y-3.5">
+          <p class="text-sm sm:text-base leading-relaxed text-amber-900/90 dark:text-amber-300/90 m-0 font-medium">
+            VPN companies frequently change promotional prices.
+          </p>
+          <p class="text-sm sm:text-base leading-relaxed text-amber-900 dark:text-amber-200 m-0 font-extrabold">
+            The price shown in an advertisement may depend on:
+          </p>
+          <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 text-xs sm:text-sm text-amber-900/90 dark:text-amber-300/90 list-none m-0 p-0 font-medium">
+            <li class="flex items-center gap-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-500/15 p-2.5 border border-amber-500/20">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-amber-600 dark:text-amber-400 shrink-0"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+              <span>subscription length</span>
+            </li>
+            <li class="flex items-center gap-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-500/15 p-2.5 border border-amber-500/20">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-amber-600 dark:text-amber-400 shrink-0"><path d="m3 11 18-5v12L3 13v-2z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
+              <span>promotional campaign</span>
+            </li>
+            <li class="flex items-center gap-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-500/15 p-2.5 border border-amber-500/20">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-amber-600 dark:text-amber-400 shrink-0"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+              <span>country</span>
+            </li>
+            <li class="flex items-center gap-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-500/15 p-2.5 border border-amber-500/20">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-amber-600 dark:text-amber-400 shrink-0"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 6v12"/></svg>
+              <span>taxes</span>
+            </li>
+            <li class="flex items-center gap-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-500/15 p-2.5 border border-amber-500/20">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-amber-600 dark:text-amber-400 shrink-0"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 11v2"/><path d="M13 17v2"/></svg>
+              <span>coupon</span>
+            </li>
+            <li class="flex items-center gap-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-500/15 p-2.5 border border-amber-500/20">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-amber-600 dark:text-amber-400 shrink-0"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
+              <span>new-customer status</span>
+            </li>
+            <li class="flex items-center gap-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-500/15 p-2.5 border border-amber-500/20">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-amber-600 dark:text-amber-400 shrink-0"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
+              <span>renewal period</span>
+            </li>
+            <li class="flex items-center gap-2.5 rounded-xl bg-amber-500/10 dark:bg-amber-500/15 p-2.5 border border-amber-500/20">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-amber-600 dark:text-amber-400 shrink-0"><line x1="4" x2="4" y1="21" y2="14"/><line x1="4" x2="4" y1="10" y2="3"/><line x1="12" x2="12" y1="21" y2="12"/><line x1="12" x2="12" y1="8" y2="3"/><line x1="20" x2="20" y1="21" y2="16"/><line x1="20" x2="20" y1="12" y2="3"/><line x1="1" x2="7" y1="14" y2="14"/><line x1="9" x2="15" y1="8" y2="8"/><line x1="17" x2="23" y1="16" y2="16"/></svg>
+              <span>plan tier</span>
+            </li>
+          </ul>
+          <div class="space-y-1.5 pt-2 text-sm sm:text-base leading-relaxed text-amber-900/90 dark:text-amber-300/90 font-medium">
+            <p class="m-0">For that reason, always check the provider's current checkout price before purchasing.</p>
+            <p class="m-0">A low introductory price should not automatically be treated as the long-term cost.</p>
           </div>
         </div>
       </section>
@@ -1232,34 +1233,34 @@ export const BEST_VPNS_USA_POST = {
           <h1 class="font-jakarta text-2xl sm:text-3xl font-black text-text-main m-0">Final Recommendation</h1>
           
           <div class="space-y-3.5 text-base leading-relaxed text-text-main font-normal">
-            <p>For most US consumers, NordVPN is the strongest overall choice in this five-VPN comparison.</p>
+            <p>For most US consumers, <a href="https://nordvpn.com" target="_blank" rel="nofollow noopener noreferrer" class="text-[#2B59FF] font-bold underline decoration-[#2B59FF]/40 underline-offset-2 hover:decoration-[#2B59FF] transition-all">NordVPN</a> is the strongest overall choice in this five-VPN comparison.</p>
             <p>It isn't the cheapest VPN, and it isn't necessarily the best choice for every individual. But its combination of privacy, performance, streaming, features, device support, network coverage and usability makes it the most balanced option.</p>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 my-4 not-prose">
-              <div class="flex items-center gap-3 p-3.5 rounded-2xl border border-[#6D4AFF]/25 bg-[#6D4AFF]/5 text-sm font-medium">
-                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#6D4AFF] text-white shadow-2xs">
+              <a href="https://protonvpn.com" target="_blank" rel="nofollow noopener noreferrer" class="flex items-center gap-3 p-3.5 rounded-2xl border border-[#6D4AFF]/25 bg-[#6D4AFF]/5 text-sm font-medium text-text-main transition-all duration-200 hover:bg-[#6D4AFF]/10 hover:border-[#6D4AFF]/50 hover:-translate-y-0.5 hover:shadow-xs group" style="text-decoration: none !important;">
+                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#6D4AFF] text-white shadow-2xs group-hover:scale-105 transition-transform">
                   <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
                 </span>
-                <span>If you're privacy-first, look closely at Proton VPN.</span>
-              </div>
-              <div class="flex items-center gap-3 p-3.5 rounded-2xl border border-[#00B49F]/25 bg-[#00B49F]/5 text-sm font-medium">
-                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#00B49F] text-white shadow-2xs">
+                <span>If you're privacy-first, look closely at <strong class="text-[#6D4AFF] font-bold underline decoration-[#6D4AFF]/30 underline-offset-2">Proton VPN</strong>.</span>
+              </a>
+              <a href="https://surfshark.com" target="_blank" rel="nofollow noopener noreferrer" class="flex items-center gap-3 p-3.5 rounded-2xl border border-[#00B49F]/25 bg-[#00B49F]/5 text-sm font-medium text-text-main transition-all duration-200 hover:bg-[#00B49F]/10 hover:border-[#00B49F]/50 hover:-translate-y-0.5 hover:shadow-xs group" style="text-decoration: none !important;">
+                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#00B49F] text-white shadow-2xs group-hover:scale-105 transition-transform">
                   <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="12" x="3" y="4" rx="2"/><line x1="2" x2="22" y1="20" y2="20"/></svg>
                 </span>
-                <span>If you're trying to cover a large number of devices, consider Surfshark.</span>
-              </div>
-              <div class="flex items-center gap-3 p-3.5 rounded-2xl border border-[#DA3940]/25 bg-[#DA3940]/5 text-sm font-medium">
-                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#DA3940] text-white shadow-2xs">
+                <span>If you're trying to cover a large number of devices, consider <strong class="text-[#00B49F] font-bold underline decoration-[#00B49F]/30 underline-offset-2">Surfshark</strong>.</span>
+              </a>
+              <a href="https://expressvpn.com" target="_blank" rel="nofollow noopener noreferrer" class="flex items-center gap-3 p-3.5 rounded-2xl border border-[#DA3940]/25 bg-[#DA3940]/5 text-sm font-medium text-text-main transition-all duration-200 hover:bg-[#DA3940]/10 hover:border-[#DA3940]/50 hover:-translate-y-0.5 hover:shadow-xs group" style="text-decoration: none !important;">
+                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#DA3940] text-white shadow-2xs group-hover:scale-105 transition-transform">
                   <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
                 </span>
-                <span>If you want the simplest VPN possible, ExpressVPN is a strong alternative.</span>
-              </div>
-              <div class="flex items-center gap-3 p-3.5 rounded-2xl border border-[#FFBA00]/30 bg-[#FFBA00]/10 text-sm font-medium">
-                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#FFBA00] text-slate-950 shadow-2xs">
+                <span>If you want the simplest VPN possible, <strong class="text-[#DA3940] font-bold underline decoration-[#DA3940]/30 underline-offset-2">ExpressVPN</strong> is a strong alternative.</span>
+              </a>
+              <a href="https://cyberghostvpn.com" target="_blank" rel="nofollow noopener noreferrer" class="flex items-center gap-3 p-3.5 rounded-2xl border border-[#FFBA00]/30 bg-[#FFBA00]/10 text-sm font-medium text-text-main transition-all duration-200 hover:bg-[#FFBA00]/15 hover:border-[#FFBA00]/60 hover:-translate-y-0.5 hover:shadow-xs group" style="text-decoration: none !important;">
+                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#FFBA00] text-slate-950 shadow-2xs group-hover:scale-105 transition-transform">
                   <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"/><path d="M7 7h.01"/></svg>
                 </span>
-                <span>And if your priority is a low long-term price and a generous refund period, CyberGhost is worth considering.</span>
-              </div>
+                <span>And if your priority is a low long-term price and a generous refund period, <strong class="text-[#D99B00] dark:text-[#FFBA00] font-bold underline decoration-[#FFBA00]/40 underline-offset-2">CyberGhost</strong> is worth considering.</span>
+              </a>
             </div>
 
             <p class="font-bold text-text-main">The best VPN isn't necessarily the one with the lowest price or the longest feature list. It's the one that best matches how you actually use the internet.</p>
@@ -1287,7 +1288,7 @@ export const BEST_VPNS_USA_POST = {
       <!-- SECTION 12: AFFILIATE DISCLOSURE -->
       <footer id="affiliate-disclosure" class="my-8 rounded-2xl border border-brandborder/80 bg-bg-subtle/80 p-5 text-xs leading-relaxed text-text-muted not-prose shadow-2xs">
         <strong class="text-text-main block mb-1">Affiliate Disclosure:</strong>
-        We may earn a commission if you purchase a VPN through links on this page. This does not add to your cost. Our recommendations are based on our stated evaluation criteria, available independent testing, provider documentation, and current product information.
+        We may earn a commission if you purchase a VPN through links on this page. <span class="text-brand font-bold" style="color: #FF4D2E !important; font-weight: bold;">This does not add to your cost.</span> Our recommendations are based on our stated evaluation criteria, available independent testing, provider documentation, and current product information.
       </footer>
 
     </div>
