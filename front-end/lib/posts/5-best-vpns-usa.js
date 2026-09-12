@@ -171,21 +171,25 @@ export const BEST_VPNS_USA_POST = {
           <h3 class="font-jakarta text-lg sm:text-xl font-bold text-[#2B59FF] m-0">Best overall VPN for most US users</h3>
         </div>
 
+        <figure class="my-8 overflow-hidden rounded-3xl border border-brandborder/80 bg-bg-surface shadow-md transition-all hover:shadow-xl group">
+          <a href="https://nordvpn.com" target="_blank" rel="nofollow noopener noreferrer" class="relative block overflow-hidden group/btn-overlay" style="display: block !important; position: relative !important; margin: 0 !important; padding: 0 !important; line-height: 0 !important;">
+            <img src="/images/vpn/nordvpn-app-interface-server-map.jpg" alt="This image is inspired by NordVPN official website" title="NordVPN Desktop App Dashboard & Interactive Server Map" width="1672" height="941" class="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.01]" loading="lazy" style="border-radius: 0 !important; display: block !important; width: 100% !important; margin: 0 !important;" />
+            <span class="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-10 inline-flex items-center gap-1.5 sm:gap-2 rounded-xl bg-[#2B59FF] hover:bg-[#1A47EB] text-white px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-extrabold shadow-lg backdrop-blur-sm transition-all duration-200 group-hover/btn-overlay:scale-105 pointer-events-none" style="color: #ffffff !important; background-color: #2B59FF !important; text-decoration: none !important; line-height: 1 !important;">
+              <span>Visit NordVPN</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover/btn-overlay:translate-x-0.5 text-white" style="color: #ffffff !important;"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </span>
+          </a>
+          <figcaption class="p-3.5 text-center text-xs font-medium text-text-muted bg-bg-subtle/90 border-t border-brandborder/70 m-0" style="margin: 0 !important;">
+            This image is inspired by NordVPN official website.
+          </figcaption>
+        </figure>
+
         <p class="text-base leading-relaxed text-text-main">
           NordVPN is our best overall VPN because it delivers the strongest combination of privacy, speed, streaming performance, features, usability, and value among the five VPNs we compared.
         </p>
         <p class="text-base leading-relaxed text-text-main">
           Independent 2026 testing supports that conclusion. Tom's Guide and TechRadar both currently rank NordVPN as their overall VPN leader, while Security.org also placed it first in its 2026 testing. An independent Artifact Security performance test published in 2026 awarded NordVPN the only Platinum rating among the five providers it tested.
         </p>
-
-        <figure class="my-8 overflow-hidden rounded-3xl border border-brandborder/80 bg-bg-surface shadow-md transition-all hover:shadow-xl group">
-          <a href="https://nordvpn.com" target="_blank" rel="nofollow noopener noreferrer" class="block overflow-hidden">
-            <img src="/images/vpn/nordvpn-app-interface-server-map.jpg" alt="This image is inspired by NordVPN official website" title="NordVPN Desktop App Dashboard & Interactive Server Map" width="1672" height="941" class="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.01]" loading="lazy" />
-          </a>
-          <figcaption class="p-3.5 text-center text-xs font-medium text-text-muted bg-bg-subtle/90 border-t border-brandborder/70">
-            This image is inspired by NordVPN official website.
-          </figcaption>
-        </figure>
 
         <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 my-6 not-prose">
           <div class="rounded-3xl border border-emerald-500/30 bg-gradient-to-b from-emerald-500/10 via-emerald-500/5 to-bg-surface p-6 space-y-4 shadow-sm">
@@ -280,21 +284,25 @@ export const BEST_VPNS_USA_POST = {
             </div>
           </div>
 
+          <figure class="my-8 overflow-hidden rounded-3xl border border-brandborder/80 bg-bg-surface shadow-xs transition-all hover:shadow-md group">
+            <a href="https://nordvpn.com" target="_blank" rel="nofollow noopener noreferrer" class="relative block overflow-hidden group/btn-overlay" style="display: block !important; position: relative !important; margin: 0 !important; padding: 0 !important; line-height: 0 !important;">
+              <img src="/images/vpn/nordvpn-settings-threat-protection.jpg" alt="This image is inspired by NordVPN official website" title="NordVPN Threat Protection & Malware Blocking Dashboard" width="1672" height="941" class="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.01]" loading="lazy" style="border-radius: 0 !important; display: block !important; width: 100% !important; margin: 0 !important;" />
+              <span class="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-10 inline-flex items-center gap-1.5 sm:gap-2 rounded-xl bg-[#2B59FF] hover:bg-[#1A47EB] text-white px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-extrabold shadow-lg backdrop-blur-sm transition-all duration-200 group-hover/btn-overlay:scale-105 pointer-events-none" style="color: #ffffff !important; background-color: #2B59FF !important; text-decoration: none !important; line-height: 1 !important;">
+                <span>Visit NordVPN</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover/btn-overlay:translate-x-0.5 text-white" style="color: #ffffff !important;"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </span>
+            </a>
+            <figcaption class="p-3.5 text-center text-xs font-medium text-text-muted bg-bg-subtle/80 border-t border-brandborder/70 m-0" style="margin: 0 !important;">
+              This image is inspired by NordVPN official website.
+            </figcaption>
+          </figure>
+
           <p class="text-base leading-relaxed text-text-main">
             NordVPN is the easiest choice if you don't want to spend hours comparing technical VPN features.
           </p>
           <p class="text-base leading-relaxed text-text-main">
             It combines strong privacy and security features with fast performance, broad device support, streaming capability, and a large network. Current plans support up to 10 simultaneous devices, and NordVPN offers a 30-day money-back guarantee.
           </p>
-
-          <figure class="my-8 overflow-hidden rounded-3xl border border-brandborder/80 bg-bg-surface shadow-xs transition-all hover:shadow-md group">
-            <a href="https://nordvpn.com" target="_blank" rel="nofollow noopener noreferrer" class="block overflow-hidden">
-              <img src="/images/vpn/nordvpn-settings-threat-protection.jpg" alt="This image is inspired by NordVPN official website" title="NordVPN Threat Protection & Malware Blocking Dashboard" width="1672" height="941" class="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.01]" loading="lazy" />
-            </a>
-            <figcaption class="p-3.5 text-center text-xs font-medium text-text-muted bg-bg-subtle/80 border-t border-brandborder/70">
-              This image is inspired by NordVPN official website.
-            </figcaption>
-          </figure>
 
           <p class="text-base leading-relaxed text-text-main">
             Independent 2026 testing has also been favorable. Security.org reported an average download speed loss of about 6% in its testing, while its streaming tests found NordVPN consistently effective across major platforms.
@@ -369,6 +377,19 @@ export const BEST_VPNS_USA_POST = {
             </div>
           </div>
 
+          <figure class="my-8 overflow-hidden rounded-3xl border border-brandborder/80 bg-bg-surface shadow-xs transition-all hover:shadow-md group">
+            <a href="https://surfshark.com" target="_blank" rel="nofollow noopener noreferrer" class="relative block overflow-hidden group/btn-overlay" style="display: block !important; position: relative !important; margin: 0 !important; padding: 0 !important; line-height: 0 !important;">
+              <img src="/images/vpn/surfshark-app-cleanweb-interface.jpg" alt="This image is inspired by Surfshark official website" title="Surfshark Desktop Dashboard & CleanWeb Feature" width="1672" height="941" class="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.01]" loading="lazy" style="border-radius: 0 !important; display: block !important; width: 100% !important; margin: 0 !important;" />
+              <span class="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-10 inline-flex items-center gap-1.5 sm:gap-2 rounded-xl bg-[#00B49F] hover:bg-[#009B88] text-white px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-extrabold shadow-lg backdrop-blur-sm transition-all duration-200 group-hover/btn-overlay:scale-105 pointer-events-none" style="color: #ffffff !important; background-color: #00B49F !important; text-decoration: none !important; line-height: 1 !important;">
+                <span>Visit Surfshark</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover/btn-overlay:translate-x-0.5 text-white" style="color: #ffffff !important;"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </span>
+            </a>
+            <figcaption class="p-3.5 text-center text-xs font-medium text-text-muted bg-bg-subtle/80 border-t border-brandborder/70 m-0" style="margin: 0 !important;">
+              This image is inspired by Surfshark official website.
+            </figcaption>
+          </figure>
+
           <p class="text-base leading-relaxed text-text-main">
             Surfshark stands out for one major reason:
           </p>
@@ -378,15 +399,6 @@ export const BEST_VPNS_USA_POST = {
           <p class="text-base leading-relaxed text-text-main">
             That makes it particularly attractive for households with multiple phones, laptops, tablets, TVs, and other compatible devices.
           </p>
-
-          <figure class="my-8 overflow-hidden rounded-3xl border border-brandborder/80 bg-bg-surface shadow-xs transition-all hover:shadow-md group">
-            <a href="https://surfshark.com" target="_blank" rel="nofollow noopener noreferrer" class="block overflow-hidden">
-              <img src="/images/vpn/surfshark-app-cleanweb-interface.jpg" alt="This image is inspired by Surfshark official website" title="Surfshark Desktop Dashboard & CleanWeb Feature" width="1672" height="941" class="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.01]" loading="lazy" />
-            </a>
-            <figcaption class="p-3.5 text-center text-xs font-medium text-text-muted bg-bg-subtle/80 border-t border-brandborder/70">
-              This image is inspired by Surfshark official website.
-            </figcaption>
-          </figure>
 
           <p class="text-base leading-relaxed text-text-main">
             Its current Starter plan is advertised at $2.49/month on the two-year offer, with three additional months included. Surfshark also offers a 30-day money-back guarantee.
@@ -462,21 +474,25 @@ export const BEST_VPNS_USA_POST = {
             </div>
           </div>
 
+          <figure class="my-8 overflow-hidden rounded-3xl border border-brandborder/80 bg-bg-surface shadow-xs transition-all hover:shadow-md group">
+            <a href="https://protonvpn.com" target="_blank" rel="nofollow noopener noreferrer" class="relative block overflow-hidden group/btn-overlay" style="display: block !important; position: relative !important; margin: 0 !important; padding: 0 !important; line-height: 0 !important;">
+              <img src="/images/vpn/proton-vpn-app-secure-core-interface.jpg" alt="This image is inspired by Proton VPN official website" title="Proton VPN Secure Core Dashboard & Swiss Privacy Controls" width="1672" height="941" class="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.01]" loading="lazy" style="border-radius: 0 !important; display: block !important; width: 100% !important; margin: 0 !important;" />
+              <span class="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-10 inline-flex items-center gap-1.5 sm:gap-2 rounded-xl bg-[#6D4AFF] hover:bg-[#5833EB] text-white px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-extrabold shadow-lg backdrop-blur-sm transition-all duration-200 group-hover/btn-overlay:scale-105 pointer-events-none" style="color: #ffffff !important; background-color: #6D4AFF !important; text-decoration: none !important; line-height: 1 !important;">
+                <span>Visit Proton VPN</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover/btn-overlay:translate-x-0.5 text-white" style="color: #ffffff !important;"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </span>
+            </a>
+            <figcaption class="p-3.5 text-center text-xs font-medium text-text-muted bg-bg-subtle/80 border-t border-brandborder/70 m-0" style="margin: 0 !important;">
+              This image is inspired by Proton VPN official website.
+            </figcaption>
+          </figure>
+
           <p class="text-base leading-relaxed text-text-main">
             Proton VPN is the privacy specialist in this comparison.
           </p>
           <p class="text-base leading-relaxed text-text-main">
             Its privacy credentials include Swiss jurisdiction, open-source apps, Secure Core technology, and an independently audited no-logs policy.
           </p>
-
-          <figure class="my-8 overflow-hidden rounded-3xl border border-brandborder/80 bg-bg-surface shadow-xs transition-all hover:shadow-md group">
-            <a href="https://protonvpn.com" target="_blank" rel="nofollow noopener noreferrer" class="block overflow-hidden">
-              <img src="/images/vpn/proton-vpn-app-secure-core-interface.jpg" alt="This image is inspired by Proton VPN official website" title="Proton VPN Secure Core Dashboard & Swiss Privacy Controls" width="1672" height="941" class="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.01]" loading="lazy" />
-            </a>
-            <figcaption class="p-3.5 text-center text-xs font-medium text-text-muted bg-bg-subtle/80 border-t border-brandborder/70">
-              This image is inspired by Proton VPN official website.
-            </figcaption>
-          </figure>
 
           <p class="text-base leading-relaxed text-text-main">
             Proton's 2026 external audit reported that the reviewed server infrastructure did not show evidence of logging browsing activity, DNS queries, network traffic contents, or user-identifiable connection metadata.
@@ -552,21 +568,25 @@ export const BEST_VPNS_USA_POST = {
             </div>
           </div>
 
+          <figure class="my-8 overflow-hidden rounded-3xl border border-brandborder/80 bg-bg-surface shadow-xs transition-all hover:shadow-md group">
+            <a href="https://expressvpn.com" target="_blank" rel="nofollow noopener noreferrer" class="relative block overflow-hidden group/btn-overlay" style="display: block !important; position: relative !important; margin: 0 !important; padding: 0 !important; line-height: 0 !important;">
+              <img src="/images/vpn/expressvpn-app-lightway-interface.jpg" alt="This image is inspired by ExpressVPN official website" title="ExpressVPN Desktop App UI & Lightway Protocol Picker" width="1672" height="941" class="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.01]" loading="lazy" style="border-radius: 0 !important; display: block !important; width: 100% !important; margin: 0 !important;" />
+              <span class="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-10 inline-flex items-center gap-1.5 sm:gap-2 rounded-xl bg-[#DA3940] hover:bg-[#BE242A] text-white px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-extrabold shadow-lg backdrop-blur-sm transition-all duration-200 group-hover/btn-overlay:scale-105 pointer-events-none" style="color: #ffffff !important; background-color: #DA3940 !important; text-decoration: none !important; line-height: 1 !important;">
+                <span>Visit ExpressVPN</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover/btn-overlay:translate-x-0.5 text-white" style="color: #ffffff !important;"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </span>
+            </a>
+            <figcaption class="p-3.5 text-center text-xs font-medium text-text-muted bg-bg-subtle/80 border-t border-brandborder/70 m-0" style="margin: 0 !important;">
+              This image is inspired by ExpressVPN official website.
+            </figcaption>
+          </figure>
+
           <p class="text-base leading-relaxed text-text-main">
             ExpressVPN is the VPN we'd recommend to someone who says: “I don't really understand VPNs. I just want something simple.”
           </p>
           <p class="text-base leading-relaxed text-text-main">
             Ease of use is its biggest advantage.
           </p>
-
-          <figure class="my-8 overflow-hidden rounded-3xl border border-brandborder/80 bg-bg-surface shadow-xs transition-all hover:shadow-md group">
-            <a href="https://expressvpn.com" target="_blank" rel="nofollow noopener noreferrer" class="block overflow-hidden">
-              <img src="/images/vpn/expressvpn-app-lightway-interface.jpg" alt="This image is inspired by ExpressVPN official website" title="ExpressVPN Desktop App UI & Lightway Protocol Picker" width="1672" height="941" class="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.01]" loading="lazy" />
-            </a>
-            <figcaption class="p-3.5 text-center text-xs font-medium text-text-muted bg-bg-subtle/80 border-t border-brandborder/70">
-              This image is inspired by ExpressVPN official website.
-            </figcaption>
-          </figure>
 
           <p class="text-base leading-relaxed text-text-main">
             Its current Basic long-term plan is advertised at $2.99/month, with 10 simultaneous devices and a 30-day money-back guarantee for new users. ExpressVPN also supports a broad range of devices and uses its Lightway protocol for performance and reliability.
@@ -642,18 +662,22 @@ export const BEST_VPNS_USA_POST = {
             </div>
           </div>
 
-          <p class="text-base leading-relaxed text-text-main">
-            CyberGhost is worth considering if price is your biggest concern.
-          </p>
-
           <figure class="my-8 overflow-hidden rounded-3xl border border-brandborder/80 bg-bg-surface shadow-xs transition-all hover:shadow-md group">
-            <a href="https://cyberghostvpn.com" target="_blank" rel="nofollow noopener noreferrer" class="block overflow-hidden">
-              <img src="/images/vpn/cyberghost-app-streaming-torrenting-interface.jpg" alt="This image is inspired by CyberGhost official website" title="CyberGhost App Dashboard & Specialized Server Profiles" width="1672" height="941" class="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.01]" loading="lazy" />
+            <a href="https://cyberghostvpn.com" target="_blank" rel="nofollow noopener noreferrer" class="relative block overflow-hidden group/btn-overlay" style="display: block !important; position: relative !important; margin: 0 !important; padding: 0 !important; line-height: 0 !important;">
+              <img src="/images/vpn/cyberghost-app-streaming-torrenting-interface.jpg" alt="This image is inspired by CyberGhost official website" title="CyberGhost App Dashboard & Specialized Server Profiles" width="1672" height="941" class="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.01]" loading="lazy" style="border-radius: 0 !important; display: block !important; width: 100% !important; margin: 0 !important;" />
+              <span class="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-10 inline-flex items-center gap-1.5 sm:gap-2 rounded-xl bg-[#FFBA00] hover:bg-[#E6A600] text-slate-950 px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-extrabold shadow-lg backdrop-blur-sm transition-all duration-200 group-hover/btn-overlay:scale-105 pointer-events-none" style="color: #020617 !important; background-color: #FFBA00 !important; text-decoration: none !important; line-height: 1 !important;">
+                <span>Visit CyberGhost</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover/btn-overlay:translate-x-0.5 text-slate-950" style="color: #020617 !important;"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </span>
             </a>
-            <figcaption class="p-3.5 text-center text-xs font-medium text-text-muted bg-bg-subtle/80 border-t border-brandborder/70">
+            <figcaption class="p-3.5 text-center text-xs font-medium text-text-muted bg-bg-subtle/80 border-t border-brandborder/70 m-0" style="margin: 0 !important;">
               This image is inspired by CyberGhost official website.
             </figcaption>
           </figure>
+
+          <p class="text-base leading-relaxed text-text-main">
+            CyberGhost is worth considering if price is your biggest concern.
+          </p>
 
           <p class="text-base leading-relaxed text-text-main">
             Its current long-term offer is advertised at $2.19/month for 26 months, billed at $56.94 initially, and the plan comes with a 45-day money-back guarantee. It also supports up to seven simultaneous devices and operates servers in 100 countries.
@@ -730,68 +754,108 @@ export const BEST_VPNS_USA_POST = {
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5 not-prose">
           <!-- 🏆 Best Overall -->
-          <div class="rounded-3xl border border-[#2B59FF]/30 bg-gradient-to-br from-[#2B59FF]/10 via-bg-surface to-bg-surface p-6 shadow-xs space-y-2.5 hover:border-[#2B59FF]/60 hover:shadow-md transition-all">
-            <div class="flex items-center gap-2.5">
-              <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-[#2B59FF] text-white font-bold text-lg shadow-2xs">🏆</span>
-              <h2 class="font-jakarta text-lg sm:text-xl font-extrabold text-text-main m-0">
-                Best Overall: NordVPN
-              </h2>
+          <div class="rounded-3xl border border-[#2B59FF]/30 bg-gradient-to-br from-[#2B59FF]/10 via-bg-surface to-bg-surface p-6 shadow-xs flex flex-col justify-between gap-4 hover:border-[#2B59FF]/60 hover:shadow-md transition-all">
+            <div class="space-y-2.5">
+              <div class="flex items-center gap-2.5">
+                <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-[#2B59FF] text-white font-bold text-lg shadow-2xs">🏆</span>
+                <h2 class="font-jakarta text-lg sm:text-xl font-extrabold text-text-main m-0">
+                  Best Overall: NordVPN
+                </h2>
+              </div>
+              <p class="text-sm text-text-muted leading-relaxed m-0 font-medium">
+                NordVPN delivers the top overall score in our testing, combining industry-leading speed performance, robust NordLynx protocol security, reliable 4K streaming unblocking, and a feature-rich threat protection suite across all major devices.
+              </p>
             </div>
-            <p class="text-sm text-text-muted leading-relaxed m-0 font-medium">
-              NordVPN delivers the top overall score in our testing, combining industry-leading speed performance, robust NordLynx protocol security, reliable 4K streaming unblocking, and a feature-rich threat protection suite across all major devices.
-            </p>
+            <div class="pt-2 flex justify-end">
+              <a href="https://nordvpn.com" target="_blank" rel="nofollow noopener noreferrer" class="inline-flex items-center gap-1.5 rounded-xl bg-[#2B59FF] hover:bg-[#1A47EB] text-white px-4 py-2 text-xs font-extrabold shadow-2xs hover:shadow-md transition-all group/btn" style="color: #ffffff !important; background-color: #2B59FF !important; text-decoration: none !important;">
+                <span>Visit NordVPN</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover/btn:translate-x-0.5 text-white" style="color: #ffffff !important;"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </a>
+            </div>
           </div>
 
           <!-- 🎬 Best for Streaming -->
-          <div class="rounded-3xl border border-[#2B59FF]/30 bg-gradient-to-br from-[#2B59FF]/10 via-bg-surface to-bg-surface p-6 shadow-xs space-y-2.5 hover:border-[#2B59FF]/60 hover:shadow-md transition-all">
-            <div class="flex items-center gap-2.5">
-              <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-rose-500 text-white font-bold text-lg shadow-2xs">🎬</span>
-              <h2 class="font-jakarta text-lg sm:text-xl font-extrabold text-text-main m-0">
-                Best for Streaming: NordVPN
-              </h2>
+          <div class="rounded-3xl border border-[#2B59FF]/30 bg-gradient-to-br from-[#2B59FF]/10 via-bg-surface to-bg-surface p-6 shadow-xs flex flex-col justify-between gap-4 hover:border-[#2B59FF]/60 hover:shadow-md transition-all">
+            <div class="space-y-2.5">
+              <div class="flex items-center gap-2.5">
+                <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-rose-500 text-white font-bold text-lg shadow-2xs">🎬</span>
+                <h2 class="font-jakarta text-lg sm:text-xl font-extrabold text-text-main m-0">
+                  Best for Streaming: NordVPN
+                </h2>
+              </div>
+              <p class="text-sm text-text-muted leading-relaxed m-0 font-medium">
+                NordVPN has one of the strongest and most consistent streaming records among the five VPNs in this comparison. Streaming compatibility can change as services update their VPN detection systems, so no VPN should be treated as having a permanent guarantee.
+              </p>
             </div>
-            <p class="text-sm text-text-muted leading-relaxed m-0 font-medium">
-              NordVPN has one of the strongest and most consistent streaming records among the five VPNs in this comparison. Streaming compatibility can change as services update their VPN detection systems, so no VPN should be treated as having a permanent guarantee.
-            </p>
+            <div class="pt-2 flex justify-end">
+              <a href="https://nordvpn.com" target="_blank" rel="nofollow noopener noreferrer" class="inline-flex items-center gap-1.5 rounded-xl bg-[#2B59FF] hover:bg-[#1A47EB] text-white px-4 py-2 text-xs font-extrabold shadow-2xs hover:shadow-md transition-all group/btn" style="color: #ffffff !important; background-color: #2B59FF !important; text-decoration: none !important;">
+                <span>Visit NordVPN</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover/btn:translate-x-0.5 text-white" style="color: #ffffff !important;"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </a>
+            </div>
           </div>
 
           <!-- 🔒 Best for Privacy -->
-          <div class="rounded-3xl border border-[#6D4AFF]/30 bg-gradient-to-br from-[#6D4AFF]/10 via-bg-surface to-bg-surface p-6 shadow-xs space-y-2.5 hover:border-[#6D4AFF]/60 hover:shadow-md transition-all">
-            <div class="flex items-center gap-2.5">
-              <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-[#6D4AFF] text-white font-bold text-lg shadow-2xs">🔒</span>
-              <h2 class="font-jakarta text-lg sm:text-xl font-extrabold text-text-main m-0">
-                Best for Privacy: Proton VPN
-              </h2>
+          <div class="rounded-3xl border border-[#6D4AFF]/30 bg-gradient-to-br from-[#6D4AFF]/10 via-bg-surface to-bg-surface p-6 shadow-xs flex flex-col justify-between gap-4 hover:border-[#6D4AFF]/60 hover:shadow-md transition-all">
+            <div class="space-y-2.5">
+              <div class="flex items-center gap-2.5">
+                <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-[#6D4AFF] text-white font-bold text-lg shadow-2xs">🔒</span>
+                <h2 class="font-jakarta text-lg sm:text-xl font-extrabold text-text-main m-0">
+                  Best for Privacy: Proton VPN
+                </h2>
+              </div>
+              <p class="text-sm text-text-muted leading-relaxed m-0 font-medium">
+                Proton's Swiss jurisdiction, open-source apps, Secure Core architecture and independently audited no-logs infrastructure make it the strongest privacy-focused choice in this group.
+              </p>
             </div>
-            <p class="text-sm text-text-muted leading-relaxed m-0 font-medium">
-              Proton's Swiss jurisdiction, open-source apps, Secure Core architecture and independently audited no-logs infrastructure make it the strongest privacy-focused choice in this group.
-            </p>
+            <div class="pt-2 flex justify-end">
+              <a href="https://protonvpn.com" target="_blank" rel="nofollow noopener noreferrer" class="inline-flex items-center gap-1.5 rounded-xl bg-[#6D4AFF] hover:bg-[#5833EB] text-white px-4 py-2 text-xs font-extrabold shadow-2xs hover:shadow-md transition-all group/btn" style="color: #ffffff !important; background-color: #6D4AFF !important; text-decoration: none !important;">
+                <span>Visit Proton VPN</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover/btn:translate-x-0.5 text-white" style="color: #ffffff !important;"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </a>
+            </div>
           </div>
 
           <!-- 💰 Best Value -->
-          <div class="rounded-3xl border border-[#00B49F]/30 bg-gradient-to-br from-[#00B49F]/10 via-bg-surface to-bg-surface p-6 shadow-xs space-y-2.5 hover:border-[#00B49F]/60 hover:shadow-md transition-all">
-            <div class="flex items-center gap-2.5">
-              <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-[#00B49F] text-white font-bold text-lg shadow-2xs">💰</span>
-              <h2 class="font-jakarta text-lg sm:text-xl font-extrabold text-text-main m-0">
-                Best Value: Surfshark
-              </h2>
+          <div class="rounded-3xl border border-[#00B49F]/30 bg-gradient-to-br from-[#00B49F]/10 via-bg-surface to-bg-surface p-6 shadow-xs flex flex-col justify-between gap-4 hover:border-[#00B49F]/60 hover:shadow-md transition-all">
+            <div class="space-y-2.5">
+              <div class="flex items-center gap-2.5">
+                <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-[#00B49F] text-white font-bold text-lg shadow-2xs">💰</span>
+                <h2 class="font-jakarta text-lg sm:text-xl font-extrabold text-text-main m-0">
+                  Best Value: Surfshark
+                </h2>
+              </div>
+              <p class="text-sm text-text-muted leading-relaxed m-0 font-medium">
+                Surfshark's combination of low promotional pricing and unlimited simultaneous connections makes it especially attractive to families and multi-device households.
+              </p>
             </div>
-            <p class="text-sm text-text-muted leading-relaxed m-0 font-medium">
-              Surfshark's combination of low promotional pricing and unlimited simultaneous connections makes it especially attractive to families and multi-device households.
-            </p>
+            <div class="pt-2 flex justify-end">
+              <a href="https://surfshark.com" target="_blank" rel="nofollow noopener noreferrer" class="inline-flex items-center gap-1.5 rounded-xl bg-[#00B49F] hover:bg-[#009B88] text-white px-4 py-2 text-xs font-extrabold shadow-2xs hover:shadow-md transition-all group/btn" style="color: #ffffff !important; background-color: #00B49F !important; text-decoration: none !important;">
+                <span>Visit Surfshark</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover/btn:translate-x-0.5 text-white" style="color: #ffffff !important;"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </a>
+            </div>
           </div>
 
           <!-- 👶 Best for Beginners -->
-          <div class="rounded-3xl border border-[#DA3940]/30 bg-gradient-to-br from-[#DA3940]/10 via-bg-surface to-bg-surface p-6 shadow-xs space-y-2.5 hover:border-[#DA3940]/60 hover:shadow-md transition-all md:col-span-2">
-            <div class="flex items-center gap-2.5">
-              <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-[#DA3940] text-white font-bold text-lg shadow-2xs">👶</span>
-              <h2 class="font-jakarta text-lg sm:text-xl font-extrabold text-text-main m-0">
-                Best for Beginners: ExpressVPN
-              </h2>
+          <div class="rounded-3xl border border-[#DA3940]/30 bg-gradient-to-br from-[#DA3940]/10 via-bg-surface to-bg-surface p-6 shadow-xs flex flex-col justify-between gap-4 hover:border-[#DA3940]/60 hover:shadow-md transition-all md:col-span-2">
+            <div class="space-y-2.5">
+              <div class="flex items-center gap-2.5">
+                <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-[#DA3940] text-white font-bold text-lg shadow-2xs">👶</span>
+                <h2 class="font-jakarta text-lg sm:text-xl font-extrabold text-text-main m-0">
+                  Best for Beginners: ExpressVPN
+                </h2>
+              </div>
+              <p class="text-sm text-text-muted leading-relaxed m-0 font-medium">
+                ExpressVPN's clean interface and straightforward setup make it one of the easiest choices for someone who has never used a VPN before.
+              </p>
             </div>
-            <p class="text-sm text-text-muted leading-relaxed m-0 font-medium">
-              ExpressVPN's clean interface and straightforward setup make it one of the easiest choices for someone who has never used a VPN before.
-            </p>
+            <div class="pt-2 flex justify-end">
+              <a href="https://expressvpn.com" target="_blank" rel="nofollow noopener noreferrer" class="inline-flex items-center gap-1.5 rounded-xl bg-[#DA3940] hover:bg-[#BE242A] text-white px-4 py-2 text-xs font-extrabold shadow-2xs hover:shadow-md transition-all group/btn" style="color: #ffffff !important; background-color: #DA3940 !important; text-decoration: none !important;">
+                <span>Visit ExpressVPN</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover/btn:translate-x-0.5 text-white" style="color: #ffffff !important;"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -805,7 +869,7 @@ export const BEST_VPNS_USA_POST = {
             Head-to-Head Comparison
           </span>
           <h1 class="font-jakarta text-2xl sm:text-3xl font-black text-text-main m-0">
-            NordVPN vs. Surfshark vs. Proton VPN vs. ExpressVPN vs. CyberGhost
+            Top 5 VPNs Compared: Side-by-Side
           </h1>
         </div>
 

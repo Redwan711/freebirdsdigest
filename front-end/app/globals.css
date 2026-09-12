@@ -124,6 +124,33 @@ img {
   border-radius: 10px;
 }
 
+.vpn-review-article figure,
+figure.overflow-hidden {
+  overflow: hidden !important;
+}
+
+.vpn-review-article figure a,
+figure.overflow-hidden a {
+  display: block !important;
+  line-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.vpn-review-article figure img,
+figure.overflow-hidden img {
+  border-radius: 0 !important;
+  display: block !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.vpn-review-article figure figcaption,
+figure.overflow-hidden figcaption {
+  margin: 0 !important;
+}
+
 .imgNoBottomRadius {
   border-radius: 0px !important;
   overflow: hidden !important;
