@@ -180,8 +180,19 @@ const Footer = async () => {
 
             {/* Bottom Copyright & Footer Bar */}
             <div className="border-t border-slate-800/80 py-6 bg-slate-950">
-                <div className="container mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 px-4 text-xs text-slate-400 md:px-6">
+                <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-3 px-4 text-xs text-slate-400 md:px-6">
                     <p>© 2026 Freebirds Digest. All rights reserved.</p>
+                    <p className="flex items-center gap-1">
+                        Developed by{' '}
+                        <a
+                            href="https://redmun.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-slate-300 font-medium hover:text-brand transition-colors underline underline-offset-2"
+                        >
+                            Redmun Digitech
+                        </a>
+                    </p>
                     <p className="flex items-center gap-1">
                         Empowering remote professionals worldwide <Heart className="w-3 h-3 text-brand fill-brand" />
                     </p>
