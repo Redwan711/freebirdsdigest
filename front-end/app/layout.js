@@ -4,6 +4,7 @@ import Navber from "@/components/Navber";
 import Footer from "@/components/Footer";
 import { defaultDescription, siteName, siteUrl } from "@/lib/site";
 import { Analytics } from "@vercel/analytics/react";
+import { PostHogProvider } from "./providers";
 
 const inter = Inter({
   subsets: ['latin'],
@@ -85,16 +86,18 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className="min-h-full flex flex-col bg-bg-base text-text-main font-inter selection:bg-brand selection:text-white overflow-x-hidden w-full max-w-full">
-        <header>
-          <Navber />
-        </header>
-        <div className="flex-1">
-          {children}
-        </div>
-        <footer className="mt-16">
-          <Footer />
-        </footer>
-        <Analytics />
+        <PostHogProvider>
+          <header>
+            <Navber />
+          </header>
+          <div className="flex-1">
+            {children}
+          </div>
+          <footer className="mt-16">
+            <Footer />
+          </footer>
+          <Analytics />
+        </PostHogProvider>
       </body>
     </html>
   );
