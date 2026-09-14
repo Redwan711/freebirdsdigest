@@ -29,6 +29,15 @@ const nextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: "/go/nordvpn",
+        destination: "https://go.nordvpn.net/aff_c?offer_id=15&aff_id=156559&url_id=902",
+        permanent: false,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

@@ -91,9 +91,59 @@ export function processArticleHtml(html) {
   return result;
 }
 
+/**
+ * Safely auto-links specified affiliate keywords (e.g. NordVPN) in ANY HTML content,
+ * including WordPress standard blocks, Classic editor, and Custom HTML widgets (divs, spans, lists, etc).
+ * 
+ * Safety Rules:
+ * - Replaces keyword in visible plain text nodes (inside p, div, span, li, td, etc).
+ * - Skips anything inside forbidden blocks: <a>, <h1>-<h6>, <script>, <style>, <button>, <pre>, <code>.
+ * - Never modifies HTML tag names or tag attributes (e.g. alt, title, src, href, class).
+ * - Caps auto-links at maxOccurrences (default: 5) to maintain SEO health and reader experience.
+ */
+export function injectAffiliateLinks(html, maxOccurrences = 5) {
+  if (!html || typeof html !== "string") return html || "";
+
+  // Quick check: if keyword isn't present, return unmodified
+  if (!/NordVPN|Nord\s+VPN/i.test(html)) return html;
+
+  let replacementsCount = 0;
+
+  // Pattern matches either:
+  // 1. Forbidden elements (<a>...</a>, <h1..6>...</h1..6>, <script>...</script>, <style>...</style>, <button>...</button>, <pre>...</pre>, <code>...</code>)
+  // 2. HTML comments (<!-- ... -->)
+  // 3. Any single HTML opening/closing/self-closing tag (<...>)
+  // 4. Any plain text chunk outside tags ([^<]+)
+  const pattern = /(<!--[\s\S]*?-->|<(a|h[1-6]|script|style|button|pre|code)\b[^>]*>[\s\S]*?<\/\2>|<[^>]+>)|([^<]+)/gi;
+
+  return html.replace(pattern, (match, tagOrForbiddenBlock, _tagName, textNode) => {
+    // If it's a tag, comment, or forbidden element, return it as-is
+    if (tagOrForbiddenBlock) {
+      return tagOrForbiddenBlock;
+    }
+
+    // If it's a plain text node:
+    if (textNode) {
+      if (replacementsCount >= maxOccurrences) {
+        return textNode;
+      }
+
+      return textNode.replace(/\b(NordVPN|Nord\s+VPN)\b/gi, (word) => {
+        if (replacementsCount < maxOccurrences) {
+          replacementsCount++;
+          return `<a href="/go/nordvpn" target="_blank" rel="nofollow sponsored noopener noreferrer" class="text-brand font-semibold hover:underline">${word}</a>`;
+        }
+        return word;
+      });
+    }
+
+    return match;
+  });
+}
+
 export default function ParsedContent({ html }) {
   if (!html) return null;
-  const processedHtml = processArticleHtml(html);
+  const processedHtml = injectAffiliateLinks(processArticleHtml(html));
 
   return (
     <div

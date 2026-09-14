@@ -69,7 +69,7 @@ export const VPN_PROVIDERS = {
     rating: "4.9",
     price: "$3.09 / mo",
     billingInfo: "2-year plan + 3 extra months",
-    affiliateUrl: "https://nordvpn.com",
+    affiliateUrl: "/go/nordvpn",
     scores: {
       streaming: 9.5,
       privacy: 9.0,
