@@ -55,7 +55,7 @@ export const VPN_PROVIDERS = {
       "Cash & cryptocurrency payment options supported",
     ],
     reasonTemplates: {
-      no_email: "Mullvad requires zero personal information — you sign up with an anonymous 16-digit account code without an email address.",
+      no_email: "Mullvad requires zero personal information - you sign up with an anonymous 16-digit account code without an email address.",
       flat_rate: "Fixed flat rate of €5/month with no hidden auto-renewals or long-term subscription traps.",
       privacy: "100% open-source software backed by frequent independent third-party security audits.",
       audited_nologs: "Strict, mathematically verified zero-logs policy operating transparently in Sweden.",

@@ -13,7 +13,7 @@ const page = () => {
         </p>
 
         <p className="text-base mb-8 sm:text-lg text-text-muted leading-relaxed font-inter">
-          By using our content and services—that is, by reading or using any content, picture, or information whatsoever—the reader/visitor accepts our “Terms of Use” including Freebirds Digest’s Privacy Policy. If anyone has any objection or reservation to any clause, she or he may raise the issue by sending an email to <a href="mailto:hello@freebirdsdigest.com" className="text-brand hover:underline font-bold">hello@freebirdsdigest.com</a>.
+          By using our content and services, that is, by reading or using any content, picture, or information whatsoever, the reader/visitor accepts our “Terms of Use” including Freebirds Digest’s Privacy Policy. If anyone has any objection or reservation to any clause, she or he may raise the issue by sending an email to <a href="mailto:hello@freebirdsdigest.com" className="text-brand hover:underline font-bold">hello@freebirdsdigest.com</a>.
         </p>
 
         <h2 className="text-2xl font-bold mt-8 mb-4 text-text-main font-jakarta">Intellectual Property Rights</h2>

@@ -104,7 +104,7 @@ export async function sendContactEmail(formData) {
       reply_to: email,
       html: `
         <div style="font-family: Arial, sans-serif; padding: 20px; color: #0B1220;">
-          <h2 style="color: #FF4D2E;">New Contact Request — FreeBirds Digest</h2>
+          <h2 style="color: #FF4D2E;">New Contact Request - FreeBirds Digest</h2>
           <hr style="border: 0; border-top: 1px solid #E2E7EF; margin: 15px 0;" />
           <p><strong>Name:</strong> ${name}</p>
           <p><strong>Email:</strong> ${email}</p>
@@ -198,7 +198,7 @@ export async function subscribeNewsletter(formData) {
       reply_to: email,
       html: `
         <div style="font-family: Arial, sans-serif; padding: 20px; color: #0B1220;">
-          <h2>New Newsletter Subscription — FreeBirds Digest</h2>
+          <h2>New Newsletter Subscription - FreeBirds Digest</h2>
           <p><strong>Email:</strong> ${email}</p>
         </div>
       `,
@@ -241,7 +241,7 @@ export async function sendContributePitchEmail(formData) {
       reply_to: email,
       html: `
         <div style="font-family: Arial, sans-serif; padding: 20px; color: #0B1220;">
-          <h2 style="color: #FF4D2E;">New Contributor Pitch Proposal — FreeBirds Digest</h2>
+          <h2 style="color: #FF4D2E;">New Contributor Pitch Proposal - FreeBirds Digest</h2>
           <hr style="border: 0; border-top: 1px solid #E2E7EF; margin: 15px 0;" />
           <p><strong>Contributor Name:</strong> ${name}</p>
           <p><strong>Email:</strong> ${email}</p>

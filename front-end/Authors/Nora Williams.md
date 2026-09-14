@@ -125,7 +125,7 @@ I write about technology that makes everyday life easier.
 
 My work explores apps, digital tools, smart devices, and productivity solutions designed for modern professionals.
 
-Technology should not simply be impressive — it should be useful.
+Technology should not simply be impressive - it should be useful.
 
 I focus on finding tools that genuinely improve productivity, creativity, and daily experiences.
 

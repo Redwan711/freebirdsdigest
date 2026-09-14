@@ -311,7 +311,7 @@ Technology reviewer covering devices, software, and digital tools.
 
 Newsletter:
 
-"The Smart Tech Brief — Weekly technology recommendations and reviews."
+"The Smart Tech Brief - Weekly technology recommendations and reviews."
 
 Email:
 

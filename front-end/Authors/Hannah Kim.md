@@ -166,7 +166,7 @@ I research how technology is changing the way people work.
 
 My focus is understanding how remote work, automation, artificial intelligence, and digital collaboration tools are reshaping modern organizations.
 
-I believe the future workplace will not simply be remote or traditional — it will be more flexible, technology-enabled, and focused on outcomes rather than location.
+I believe the future workplace will not simply be remote or traditional - it will be more flexible, technology-enabled, and focused on outcomes rather than location.
 
 My research helps companies and professionals prepare for changing work environments.
 

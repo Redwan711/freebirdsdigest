@@ -329,7 +329,7 @@ Digital entrepreneurship writer exploring the future of online business.
 
 Newsletter:
 
-"Independent Builder Weekly — Strategies for freelancers and creators."
+"Independent Builder Weekly - Strategies for freelancers and creators."
 
 Email:
 
