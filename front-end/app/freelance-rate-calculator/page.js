@@ -2,10 +2,22 @@ import FreelanceRateCalculator from "@/components/FreelanceRateCalculator";
 import Link from "next/link";
 import { ArrowLeft, BookOpen, Sparkles } from "lucide-react";
 
+import { siteName } from "@/lib/site";
+
 export const metadata = {
-  title: "Calculate Your Freelance Rate - Free Birds Digest",
+  title: "Calculate Your Freelance Rate",
   description:
     "A simple and clean freelance hourly rate calculator. Easily calculate your target hourly rate, day rate, and monthly revenue.",
+  alternates: {
+    canonical: "/freelance-rate-calculator",
+  },
+  openGraph: {
+    type: "website",
+    url: "/freelance-rate-calculator",
+    title: `Calculate Your Freelance Rate | ${siteName}`,
+    description:
+      "A simple and clean freelance hourly rate calculator. Easily calculate your target hourly rate, day rate, and monthly revenue.",
+  },
 };
 
 export default function FreelanceRateCalculatorPage() {

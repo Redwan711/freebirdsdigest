@@ -1,4 +1,21 @@
 import React from 'react';
+import { siteName } from '@/lib/site';
+
+export const metadata = {
+  title: "Terms of Use & Privacy Policy",
+  description:
+    "Read the terms of use, editorial standards, and privacy policy for Freebirds Digest and its affiliated services.",
+  alternates: {
+    canonical: "/privacy-policy",
+  },
+  openGraph: {
+    type: "website",
+    url: "/privacy-policy",
+    title: `Terms of Use & Privacy Policy | ${siteName}`,
+    description:
+      "Read the terms of use, editorial standards, and privacy policy for Freebirds Digest and its affiliated services.",
+  },
+};
 
 const page = () => {
   return (

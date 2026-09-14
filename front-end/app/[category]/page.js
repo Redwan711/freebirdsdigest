@@ -6,13 +6,22 @@ const fallbackImage = "/prothomalo-bangla_2026-07-09_nxgtx74x_bbm.avif";
 
 export async function generateMetadata({ params }) {
   const { category } = await params;
-  const title = category.replace(/-/g, " ");
+  const formattedTitle = category
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
 
   return {
-    title: `${title} | Freebirds Digest`,
-    description: `Read the latest articles, guides, and updates in ${title} on Freebirds Digest.`,
+    title: formattedTitle,
+    description: `Read the latest articles, guides, and updates in ${formattedTitle} on Freebirds Digest.`,
     alternates: {
       canonical: `/${category}`,
+    },
+    openGraph: {
+      type: "website",
+      url: `/${category}`,
+      title: `${formattedTitle} | Freebirds Digest`,
+      description: `Read the latest articles, guides, and updates in ${formattedTitle} on Freebirds Digest.`,
     },
   };
 }

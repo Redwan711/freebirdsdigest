@@ -740,10 +740,12 @@ export async function generateMetadata({ params, searchParams }) {
   const featuredImageUrl = post.featuredImage?.node?.sourceUrl;
 
   // Fallback chains
-  const pageTitle = seo.title || (cleanedTitle ? `${cleanedTitle} | ${siteName}` : siteName);
+  const pageTitle = seo.title
+    ? { absolute: seo.title }
+    : cleanedTitle || siteName;
   const metaDescription =
     seo.metaDesc || seo.opengraphDescription || cleanedExcerpt || defaultDescription;
-  const canonicalPath = seo.canonical || `${siteUrl}/news/${post.slug}`;
+  const canonicalPath = `${siteUrl}/news/${post.slug}`;
 
   // Open Graph fallbacks
   const ogTitle = seo.opengraphTitle || seo.title || cleanedTitle || siteName;

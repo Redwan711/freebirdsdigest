@@ -11,10 +11,22 @@ import {
   Lock,
 } from "lucide-react";
 
+import { siteName } from "@/lib/site";
+
 export const metadata = {
-  title: "Tools & Calculators - Free Birds Digest",
+  title: "Tools & Calculators",
   description:
     "Explore our free interactive tools for freelancers and remote workers, including the Freelance Rate Calculator and Smart VPN Finder.",
+  alternates: {
+    canonical: "/tools",
+  },
+  openGraph: {
+    type: "website",
+    url: "/tools",
+    title: `Tools & Calculators | ${siteName}`,
+    description:
+      "Explore our free interactive tools for freelancers and remote workers, including the Freelance Rate Calculator and Smart VPN Finder.",
+  },
 };
 
 const TOOLS_LIST = [

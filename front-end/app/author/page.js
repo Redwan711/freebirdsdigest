@@ -14,9 +14,19 @@ import {
 import { TwitterIcon, LinkedinIcon, GithubIcon } from "@/components/SocialIcons";
 
 export const metadata = {
-  title: `Our Editorial Team & Authors | ${siteName}`,
+  title: "Our Editorial Team & Authors",
   description:
     "Meet the remote work strategists, tech analysts, and digital nomad columnists behind Freebirds Digest.",
+  alternates: {
+    canonical: "/author",
+  },
+  openGraph: {
+    type: "website",
+    url: "/author",
+    title: `Our Editorial Team & Authors | ${siteName}`,
+    description:
+      "Meet the remote work strategists, tech analysts, and digital nomad columnists behind Freebirds Digest.",
+  },
 };
 
 export default function AuthorsPage() {

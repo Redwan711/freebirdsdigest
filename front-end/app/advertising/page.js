@@ -1,4 +1,21 @@
 import React from 'react';
+import { siteName } from '@/lib/site';
+
+export const metadata = {
+  title: "Advertise with Us",
+  description:
+    "Reach a highly engaged audience of remote workers, freelancers, and digital nomads by partnering with Freebirds Digest.",
+  alternates: {
+    canonical: "/advertising",
+  },
+  openGraph: {
+    type: "website",
+    url: "/advertising",
+    title: `Advertise with Us | ${siteName}`,
+    description:
+      "Reach a highly engaged audience of remote workers, freelancers, and digital nomads by partnering with Freebirds Digest.",
+  },
+};
 
 const page = () => {
   return (

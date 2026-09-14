@@ -43,11 +43,23 @@ export default async function sitemap() {
     fetchSitemapPosts(),
   ]);
 
-  const staticPages = ["", "/about", "/affiliate-disclosure"].map((path) => ({
+  const staticPages = [
+    { path: "", priority: 1.0, changeFrequency: "daily" },
+    { path: "/tools", priority: 0.8, changeFrequency: "weekly" },
+    { path: "/vpn-finder", priority: 0.8, changeFrequency: "weekly" },
+    { path: "/freelance-rate-calculator", priority: 0.8, changeFrequency: "weekly" },
+    { path: "/author", priority: 0.7, changeFrequency: "weekly" },
+    { path: "/about", priority: 0.7, changeFrequency: "monthly" },
+    { path: "/contribute", priority: 0.7, changeFrequency: "monthly" },
+    { path: "/affiliate-disclosure", priority: 0.6, changeFrequency: "monthly" },
+    { path: "/advertising", priority: 0.6, changeFrequency: "monthly" },
+    { path: "/privacy-policy", priority: 0.5, changeFrequency: "monthly" },
+    { path: "/newsletter", priority: 0.5, changeFrequency: "monthly" },
+  ].map(({ path, priority, changeFrequency }) => ({
     url: `${siteUrl}${path}`,
     lastModified: new Date(),
-    changeFrequency: path ? "monthly" : "daily",
-    priority: path ? 0.7 : 1,
+    changeFrequency,
+    priority,
   }));
 
   const categoryPages = categories

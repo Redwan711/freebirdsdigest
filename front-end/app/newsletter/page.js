@@ -1,13 +1,29 @@
-// app/newsletter/page.js
 import React from 'react';
 import Link from 'next/link';
+import { siteName } from '@/lib/site';
+
+export const metadata = {
+  title: "Newsletter",
+  description:
+    "Subscribe to the Freebirds Digest newsletter for weekly remote work guides, productivity strategies, and tech insights.",
+  alternates: {
+    canonical: "/newsletter",
+  },
+  openGraph: {
+    type: "website",
+    url: "/newsletter",
+    title: `Newsletter | ${siteName}`,
+    description:
+      "Subscribe to the Freebirds Digest newsletter for weekly remote work guides, productivity strategies, and tech insights.",
+  },
+};
 
 const page = () => {
   return (
     <div className="newsletter-page">
       <section className="container mx-auto px-4 py-16 md:px-6 max-w-3xl text-center">
         <h1 className="text-3xl font-bold mb-4 text-brand sm:text-[32px] font-poppins">
-          Astha News Newsletter
+          Freebirds Digest Newsletter
         </h1>
 
         <p className="text-base mb-8 sm:text-[18px] font-poppins text-gray-700">

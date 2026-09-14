@@ -163,13 +163,23 @@ export async function generateMetadata({ params }) {
 
   if (!author) {
     return {
-      title: `Author Not Found | ${siteName}`,
+      title: "Author Not Found",
     };
   }
 
   return {
-    title: `${author.name} - ${author.role} | ${siteName}`,
+    title: `${author.name} - ${author.role}`,
     description: author.bio || author.description,
+    alternates: {
+      canonical: `/author/${slug}`,
+    },
+    openGraph: {
+      type: "profile",
+      url: `/author/${slug}`,
+      title: `${author.name} - ${author.role} | ${siteName}`,
+      description: author.bio || author.description,
+      images: author.avatar?.src ? [{ url: author.avatar.src, alt: author.name }] : undefined,
+    },
   };
 }
 
