@@ -141,9 +141,48 @@ export function injectAffiliateLinks(html, maxOccurrences = 5) {
   });
 }
 
+/**
+ * Normalizes WordPress HTML markup so dark mode / light mode theming works seamlessly.
+ * Strips hardcoded bgcolor attributes and inline white/near-white backgrounds from WordPress blocks.
+ */
+export function normalizeTableHtml(html) {
+  if (!html || typeof html !== "string") return html || "";
+
+  // 1. Remove hardcoded bgcolor attributes
+  let cleanHtml = html.replace(/\s+bgcolor\s*=\s*["'][^"']*["']/gi, "");
+
+  // 2. Remove inline white / near-white backgrounds from style attributes
+  cleanHtml = cleanHtml.replace(/style\s*=\s*(["'])([\s\S]*?)\1/gi, (fullMatch, quote, styleContent) => {
+    const cleanedStyle = styleContent
+      .replace(/background(?:-color)?\s*:\s*(?:#fff(?:fff)?|#f8fafc|#f1f5f9|#ffffff|white|rgb\(\s*255\s*,\s*255\s*,\s*255\s*\)|rgba\(\s*255\s*,\s*255\s*,\s*255\s*,\s*1(?:\.0+)?\s*\))\s*;?/gi, "")
+      .replace(/border(?:-color)?\s*:\s*[^;]*(?:#e[0-9a-f]{5}|#d[0-9a-f]{5})[^;]*;?/gi, "")
+      .trim();
+
+    if (!cleanedStyle) {
+      return "";
+    }
+    return `style=${quote}${cleanedStyle}${quote}`;
+  });
+
+  // 3. Strip hardcoded Tailwind background classes (bg-white, bg-gray-*, dark:bg-*)
+  //    These don't work with data-theme based dark mode and override CSS variable theming
+  cleanHtml = cleanHtml.replace(/class\s*=\s*(["'])([\s\S]*?)\1/gi, (fullMatch, quote, classContent) => {
+    const cleanedClass = classContent
+      .replace(/\b(?:dark:)?bg-(?:white|gray-\d{2,3})\b/g, "")
+      .replace(/\b(?:dark:)?text-(?:black|white|gray-\d{2,3})\b/g, "")
+      .replace(/\b(?:dark:)?border-(?:gray-\d{2,3})\b/g, "")
+      .replace(/\b(?:dark:)?hover:bg-(?:gray-\d{2,3}(?:\/\d+)?)\b/g, "")
+      .replace(/\s{2,}/g, " ")
+      .trim();
+    return `class=${quote}${cleanedClass}${quote}`;
+  });
+
+  return cleanHtml;
+}
+
 export default function ParsedContent({ html }) {
   if (!html) return null;
-  const processedHtml = injectAffiliateLinks(processArticleHtml(html));
+  const processedHtml = injectAffiliateLinks(processArticleHtml(normalizeTableHtml(html)));
 
   return (
     <div

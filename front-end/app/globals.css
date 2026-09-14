@@ -287,119 +287,204 @@ figure.overflow-hidden figcaption {
   border-radius: 0 0.75rem 0.75rem 0;
 }
 
-.prose table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
-  font-size: 0.9375rem;
-}
-
-.prose th {
-  background-color: var(--color-bg-subtle-raw);
-  color: var(--color-text-main-raw);
-  font-weight: 700;
-  text-align: left;
-  padding: 0.75rem 1rem;
-  border: 1px solid var(--borderGlob);
-}
-
-.prose td {
-  padding: 0.75rem 1rem;
-  border: 1px solid var(--borderGlob);
-  color: var(--color-text-main-raw);
-}
-
-.prose tr:nth-child(even) td {
-  background-color: rgba(0, 0, 0, 0.02);
-}
-
-/* Post Content Full Width Images & Figures */
-.prose figure:not(.not-prose *):not([class*="not-prose"] *),
-.prose .wp-block-image:not(.not-prose *):not([class*="not-prose"] *),
-.prose .wp-caption:not(.not-prose *):not([class*="not-prose"] *) {
-  margin-top: 2rem !important;
-  margin-bottom: 2rem !important;
-  padding: 0 !important;
-  border: none !important;
-  background: transparent !important;
-  display: block !important;
-  clear: both !important;
-  max-width: 100% !important;
-}
-
-.prose img:not(.not-prose *):not([class*="not-prose"] *) {
-  width: 100% !important;
-  max-width: 100% !important;
-  height: auto !important;
-  display: block !important;
-  border-radius: 1.5rem !important;
+/* WordPress Tables & Table Figures Styling */
+.prose figure.wp-block-table,
+.prose .wp-block-table,
+.wp-block-table,
+.parsed-article-content figure.wp-block-table,
+.parsed-article-content .wp-block-table {
   margin-top: 1.5rem !important;
   margin-bottom: 2rem !important;
   padding: 0 !important;
-  border: 1px solid var(--borderGlob);
-  clear: both !important;
-}
-
-/* Ensure images inside figure/caption wrappers don't double the margins or create large gaps above the caption */
-.prose figure img:not(.not-prose *):not([class*="not-prose"] *),
-.prose .wp-block-image img:not(.not-prose *):not([class*="not-prose"] *),
-.prose .wp-caption img:not(.not-prose *):not([class*="not-prose"] *) {
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
-}
-
-/* Image Captions & Image Descriptions (WordPress Block & Classic captions) */
-.prose figcaption,
-.prose .wp-element-caption,
-.prose .wp-caption-text,
-.prose figure figcaption {
-  display: block !important;
-  font-size: 0.8125rem !important;
-  line-height: 1.45 !important;
-  font-weight: 500 !important;
-  color: var(--color-text-muted-raw) !important;
-  text-align: center !important;
-  margin-top: 0.5rem !important;
-  margin-bottom: 0 !important;
-  padding: 0 0.5rem !important;
-  letter-spacing: -0.005em !important;
-  font-style: normal;
-}
-
-/* Table & Table Figure Vertical Spacing */
-.prose figure.wp-block-table,
-.prose figure:has(table) {
-  margin-top: 0.75rem !important;
-  margin-bottom: 0.75rem !important;
-  border: none !important;
-  padding: 0 !important;
   background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-radius: 1rem !important;
+  overflow: hidden !important;
 }
 
-.prose table {
+.prose table,
+.parsed-article-content table,
+.wp-block-table table {
   width: 100% !important;
   max-width: 100% !important;
-  margin-top: 0.75rem !important;
-  margin-bottom: 0.75rem !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  margin-top: 1rem !important;
+  margin-bottom: 1.5rem !important;
+  font-size: 0.9375rem !important;
+  line-height: 1.55 !important;
+  border: 1px solid var(--borderGlob) !important;
+  border-radius: 1rem !important;
+  overflow: hidden !important;
+  background-color: var(--color-bg-surface-raw) !important;
+  color: var(--color-text-main-raw) !important;
+  box-shadow: 0 2px 6px -1px rgba(0, 0, 0, 0.05), 0 1px 3px -1px rgba(0, 0, 0, 0.03) !important;
 }
 
-.prose :not(.not-prose)>table,
-.prose :not(.not-prose) table:not(.not-prose *) {
-  display: block !important;
-  overflow-x: auto !important;
-  -webkit-overflow-scrolling: touch;
-  border-collapse: collapse !important;
+.prose thead,
+.parsed-article-content thead,
+.wp-block-table thead {
+  background-color: var(--color-bg-subtle-raw) !important;
 }
 
-.prose .not-prose table {
-  display: table !important;
-  width: 100% !important;
+.prose th,
+.parsed-article-content th,
+.wp-block-table th {
+  background-color: var(--color-bg-subtle-raw) !important;
+  color: var(--color-text-main-raw) !important;
+  font-weight: 700 !important;
+  font-size: 0.8125rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  text-align: left !important;
+  padding: 0.875rem 1.25rem !important;
+  border: none !important;
+  border-bottom: 1px solid var(--borderGlob) !important;
+  border-right: 1px solid var(--borderGlob) !important;
+}
+
+.prose th:last-child,
+.parsed-article-content th:last-child,
+.wp-block-table th:last-child {
+  border-right: none !important;
+}
+
+.prose tbody,
+.parsed-article-content tbody,
+.wp-block-table tbody {
+  background-color: var(--color-bg-surface-raw) !important;
+}
+
+.prose tbody tr,
+.parsed-article-content tbody tr,
+.wp-block-table tbody tr {
+  background-color: var(--color-bg-surface-raw) !important;
+  transition: background-color 0.15s ease !important;
+}
+
+.prose tbody tr:nth-child(even),
+.parsed-article-content tbody tr:nth-child(even),
+.wp-block-table tbody tr:nth-child(even) {
+  background-color: var(--color-bg-base-raw) !important;
+}
+
+.prose tbody tr:hover,
+.parsed-article-content tbody tr:hover,
+.wp-block-table tbody tr:hover {
+  background-color: rgba(255, 77, 46, 0.05) !important;
 }
 
 .prose td,
-.prose th {
-  min-width: 90px;
+.parsed-article-content td,
+.wp-block-table td {
+  padding: 0.875rem 1.25rem !important;
+  border: none !important;
+  border-bottom: 1px solid var(--borderGlob) !important;
+  border-right: 1px solid var(--borderGlob) !important;
+  color: var(--color-text-main-raw) !important;
+  font-size: 0.9375rem !important;
+  vertical-align: middle !important;
+  background-color: inherit !important;
+}
+
+.prose td:last-child,
+.parsed-article-content td:last-child,
+.wp-block-table td:last-child {
+  border-right: none !important;
+}
+
+.prose tbody tr:last-child td,
+.parsed-article-content tbody tr:last-child td,
+.wp-block-table tbody tr:last-child td {
+  border-bottom: none !important;
+}
+
+.prose td strong,
+.prose td b,
+.parsed-article-content td strong,
+.parsed-article-content td b {
+  color: var(--color-text-main-raw) !important;
+  font-weight: 700 !important;
+}
+
+.prose td a,
+.parsed-article-content td a {
+  color: var(--color-brand-raw) !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+}
+
+.prose td a:hover,
+.parsed-article-content td a:hover {
+  text-decoration: underline !important;
+}
+
+/* WordPress Block Dark Mode Background Overrides */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .prose .has-white-background-color,
+  :root:not([data-theme="light"]) .prose .has-background,
+  :root:not([data-theme="light"]) .prose .wp-block-group,
+  :root:not([data-theme="light"]) .prose .wp-block-group__inner-container,
+  :root:not([data-theme="light"]) .prose .wp-block-columns,
+  :root:not([data-theme="light"]) .prose .wp-block-column,
+  :root:not([data-theme="light"]) .prose [class*="wp-block-group"],
+  :root:not([data-theme="light"]) .prose figure.wp-block-table,
+  :root:not([data-theme="light"]) .prose .wp-block-table,
+  :root:not([data-theme="light"]) .parsed-article-content .has-white-background-color,
+  :root:not([data-theme="light"]) .parsed-article-content .has-background,
+  :root:not([data-theme="light"]) .parsed-article-content .wp-block-group,
+  :root:not([data-theme="light"]) .parsed-article-content .wp-block-group__inner-container,
+  :root:not([data-theme="light"]) .parsed-article-content .wp-block-columns,
+  :root:not([data-theme="light"]) .parsed-article-content .wp-block-column,
+  :root:not([data-theme="light"]) .parsed-article-content [class*="wp-block-group"],
+  :root:not([data-theme="light"]) .parsed-article-content figure.wp-block-table,
+  :root:not([data-theme="light"]) .parsed-article-content .wp-block-table {
+    background: transparent !important;
+    background-color: transparent !important;
+    color: var(--color-text-main-raw) !important;
+  }
+}
+
+:root.dark .prose .has-white-background-color,
+:root.dark .prose .has-background,
+:root.dark .prose .wp-block-group,
+:root.dark .prose .wp-block-group__inner-container,
+:root.dark .prose .wp-block-columns,
+:root.dark .prose .wp-block-column,
+:root.dark .prose [class*="wp-block-group"],
+:root.dark .prose figure.wp-block-table,
+:root.dark .prose .wp-block-table,
+:root.dark .parsed-article-content .has-white-background-color,
+:root.dark .parsed-article-content .has-background,
+:root.dark .parsed-article-content .wp-block-group,
+:root.dark .parsed-article-content .wp-block-group__inner-container,
+:root.dark .parsed-article-content .wp-block-columns,
+:root.dark .parsed-article-content .wp-block-column,
+:root.dark .parsed-article-content [class*="wp-block-group"],
+:root.dark .parsed-article-content figure.wp-block-table,
+:root.dark .parsed-article-content .wp-block-table,
+:root[data-theme="dark"] .prose .has-white-background-color,
+:root[data-theme="dark"] .prose .has-background,
+:root[data-theme="dark"] .prose .wp-block-group,
+:root[data-theme="dark"] .prose .wp-block-group__inner-container,
+:root[data-theme="dark"] .prose .wp-block-columns,
+:root[data-theme="dark"] .prose .wp-block-column,
+:root[data-theme="dark"] .prose [class*="wp-block-group"],
+:root[data-theme="dark"] .prose figure.wp-block-table,
+:root[data-theme="dark"] .prose .wp-block-table,
+:root[data-theme="dark"] .parsed-article-content .has-white-background-color,
+:root[data-theme="dark"] .parsed-article-content .has-background,
+:root[data-theme="dark"] .parsed-article-content .wp-block-group,
+:root[data-theme="dark"] .parsed-article-content .wp-block-group__inner-container,
+:root[data-theme="dark"] .parsed-article-content .wp-block-columns,
+:root[data-theme="dark"] .parsed-article-content .wp-block-column,
+:root[data-theme="dark"] .parsed-article-content [class*="wp-block-group"],
+:root[data-theme="dark"] .parsed-article-content figure.wp-block-table,
+:root[data-theme="dark"] .parsed-article-content .wp-block-table {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: var(--color-text-main-raw) !important;
 }
 
 .prose pre,
@@ -408,3 +493,61 @@ figure.overflow-hidden figcaption {
   overflow-x: auto !important;
   word-break: break-word !important;
 }
+
+/* Dark Mode overrides for custom HTML blocks inside parsed content (not-prose containers) */
+/* These blocks use hardcoded bg/text colors that don't respond to CSS variables */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .parsed-article-content .not-prose,
+  :root:not([data-theme="light"]) .parsed-article-content .not-prose table,
+  :root:not([data-theme="light"]) .parsed-article-content .not-prose thead,
+  :root:not([data-theme="light"]) .parsed-article-content .not-prose tbody,
+  :root:not([data-theme="light"]) .parsed-article-content .not-prose tr,
+  :root:not([data-theme="light"]) .parsed-article-content .not-prose th,
+  :root:not([data-theme="light"]) .parsed-article-content .not-prose td,
+  :root:not([data-theme="light"]) .prose .not-prose,
+  :root:not([data-theme="light"]) .prose .not-prose table {
+    background-color: var(--color-bg-surface-raw) !important;
+    color: var(--color-text-main-raw) !important;
+    border-color: var(--borderGlob) !important;
+  }
+  :root:not([data-theme="light"]) .parsed-article-content .not-prose thead,
+  :root:not([data-theme="light"]) .parsed-article-content .not-prose th,
+  :root:not([data-theme="light"]) .prose .not-prose thead,
+  :root:not([data-theme="light"]) .prose .not-prose th {
+    background-color: var(--color-bg-subtle-raw) !important;
+  }
+}
+
+:root.dark .parsed-article-content .not-prose,
+:root.dark .parsed-article-content .not-prose table,
+:root.dark .parsed-article-content .not-prose thead,
+:root.dark .parsed-article-content .not-prose tbody,
+:root.dark .parsed-article-content .not-prose tr,
+:root.dark .parsed-article-content .not-prose th,
+:root.dark .parsed-article-content .not-prose td,
+:root.dark .prose .not-prose,
+:root.dark .prose .not-prose table,
+:root[data-theme="dark"] .parsed-article-content .not-prose,
+:root[data-theme="dark"] .parsed-article-content .not-prose table,
+:root[data-theme="dark"] .parsed-article-content .not-prose thead,
+:root[data-theme="dark"] .parsed-article-content .not-prose tbody,
+:root[data-theme="dark"] .parsed-article-content .not-prose tr,
+:root[data-theme="dark"] .parsed-article-content .not-prose th,
+:root[data-theme="dark"] .parsed-article-content .not-prose td,
+:root[data-theme="dark"] .prose .not-prose,
+:root[data-theme="dark"] .prose .not-prose table {
+  background-color: var(--color-bg-surface-raw) !important;
+  color: var(--color-text-main-raw) !important;
+  border-color: var(--borderGlob) !important;
+}
+
+:root.dark .parsed-article-content .not-prose thead,
+:root.dark .parsed-article-content .not-prose th,
+:root.dark .prose .not-prose thead,
+:root.dark .prose .not-prose th,
+:root[data-theme="dark"] .parsed-article-content .not-prose thead,
+:root[data-theme="dark"] .parsed-article-content .not-prose th,
+:root[data-theme="dark"] .prose .not-prose thead,
+:root[data-theme="dark"] .prose .not-prose th {
+  background-color: var(--color-bg-subtle-raw) !important;
+}
