@@ -1,6 +1,7 @@
 import { fetchAllCategories } from "@/lib/categories";
 import { fetchAPI } from "@/lib/api";
 import { siteUrl } from "@/lib/site";
+import { BEST_VPNS_USA_POST } from "@/lib/posts/5-best-vpns-usa";
 
 export const revalidate = 3600;
 
@@ -32,6 +33,18 @@ async function fetchSitemapPosts() {
     posts.push(...(connection?.nodes ?? []));
     hasNextPage = connection?.pageInfo?.hasNextPage ?? false;
     after = connection?.pageInfo?.endCursor ?? null;
+  }
+
+  // Include standalone/local posts if not returned by GraphQL
+  if (
+    BEST_VPNS_USA_POST?.slug &&
+    !posts.some((p) => p.slug === BEST_VPNS_USA_POST.slug)
+  ) {
+    posts.push({
+      slug: BEST_VPNS_USA_POST.slug,
+      date: BEST_VPNS_USA_POST.date,
+      modified: BEST_VPNS_USA_POST.modified,
+    });
   }
 
   return posts;
@@ -79,3 +92,4 @@ export default async function sitemap() {
 
   return [...staticPages, ...categoryPages, ...articlePages];
 }
+

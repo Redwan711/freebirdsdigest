@@ -987,36 +987,78 @@ export default async function PostPage({ params, searchParams }) {
           )}
         </aside>
 
+        {/* Schema.org BlogPosting & BreadcrumbList JSON-LD Payloads */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "BlogPosting",
-              headline: cleanHtml(post.title),
-              description: cleanExcerptText,
-              datePublished: post.date,
-              dateModified: post.modified || post.date,
-              mainEntityOfPage: `${siteUrl}/news/${post.slug}`,
-              image: (() => {
-                const imgObjs = getPostImageObjects(post);
-                return imgObjs.length > 0 ? imgObjs : undefined;
-              })(),
-              author: {
-                "@type": "Person",
-                name: syncedAuthor.name,
-              },
-              publisher: {
-                "@type": "Organization",
-                name: siteName,
-                logo: {
-                  "@type": "ImageObject",
-                  url: `${siteUrl}/freeBird-logo-new.png`,
-                  width: 600,
-                  height: 60,
+            __html: JSON.stringify([
+              {
+                "@context": "https://schema.org",
+                "@type": "BlogPosting",
+                headline: cleanHtml(post.title),
+                description: cleanExcerptText,
+                datePublished: post.date,
+                dateModified: post.modified || post.date,
+                mainEntityOfPage: `${siteUrl}/news/${post.slug}`,
+                image: (() => {
+                  const imgObjs = getPostImageObjects(post);
+                  return imgObjs.length > 0 ? imgObjs : undefined;
+                })(),
+                author: {
+                  "@type": "Person",
+                  name: syncedAuthor.name,
+                  ...(syncedAuthor.slug
+                    ? { url: `${siteUrl}/author/${syncedAuthor.slug}` }
+                    : {}),
+                  ...(syncedAuthor.role ? { jobTitle: syncedAuthor.role } : {}),
+                },
+                publisher: {
+                  "@type": "Organization",
+                  name: siteName,
+                  logo: {
+                    "@type": "ImageObject",
+                    url: `${siteUrl}/freeBird-logo-new.png`,
+                    width: 600,
+                    height: 60,
+                  },
                 },
               },
-            }).replace(/</g, "\\u003c"),
+              {
+                "@context": "https://schema.org",
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  {
+                    "@type": "ListItem",
+                    position: 1,
+                    name: "Home",
+                    item: siteUrl,
+                  },
+                  ...(displayCategories?.[0]?.slug
+                    ? [
+                        {
+                          "@type": "ListItem",
+                          position: 2,
+                          name: displayCategories[0].name,
+                          item: `${siteUrl}/${displayCategories[0].slug}`,
+                        },
+                        {
+                          "@type": "ListItem",
+                          position: 3,
+                          name: cleanHtml(post.title),
+                          item: `${siteUrl}/news/${post.slug}`,
+                        },
+                      ]
+                    : [
+                        {
+                          "@type": "ListItem",
+                          position: 2,
+                          name: cleanHtml(post.title),
+                          item: `${siteUrl}/news/${post.slug}`,
+                        },
+                      ]),
+                ],
+              },
+            ]).replace(/</g, "\\u003c"),
           }}
         />
 
@@ -1172,7 +1214,7 @@ export default async function PostPage({ params, searchParams }) {
                   src={post.featuredImage.node.sourceUrl}
                   alt={post.featuredImage.node.altText || post.title}
                   fill
-                  sizes="(max-width: 768px) 100vw, 896px"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 896px"
                   priority
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />

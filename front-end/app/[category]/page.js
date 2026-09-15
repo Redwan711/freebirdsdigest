@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { fetchCategoryNews } from "../../lib/category-news";
+import { siteUrl } from "@/lib/site";
 
 const fallbackImage = "/prothomalo-bangla_2026-07-09_nxgtx74x_bbm.avif";
 
@@ -71,9 +72,38 @@ export default async function CategoryPage({ params }) {
   const gridStories = posts.slice(3, 9);
 
   const formattedCategory = currentCategory.replace(/-/g, " ");
+  const formattedTitle = currentCategory
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-8 md:px-6 font-inter">
+      {/* Schema.org BreadcrumbList JSON-LD Payload */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Home",
+                item: siteUrl,
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: formattedTitle,
+                item: `${siteUrl}/${currentCategory}`,
+              },
+            ],
+          }).replace(/</g, "\\u003c"),
+        }}
+      />
+
       <section className="mb-8 flex flex-col gap-2 border-b border-brandborder pb-4">
         <p className="text-xs font-bold uppercase tracking-wider text-brand">Category Digest</p>
         <h1 className="font-jakarta text-3xl font-extrabold text-text-main md:text-4xl capitalize tracking-tight">
