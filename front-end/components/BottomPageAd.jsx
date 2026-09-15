@@ -28,7 +28,7 @@ export default async function BottomPageAd({ className = "" }) {
   const rawRedirectionLink = sponsoreData.redirectionLink || adPost.redirectionLink;
   const redirectionLink = formatRedirectionUrl(rawRedirectionLink);
 
-  const postLink = adPost.slug ? `/news/${adPost.slug}?pid=${adPost.databaseId}` : null;
+  const postLink = adPost.slug ? `/news/${adPost.slug}` : null;
   const finalLink = redirectionLink || postLink;
   const isExternal = Boolean(redirectionLink);
 

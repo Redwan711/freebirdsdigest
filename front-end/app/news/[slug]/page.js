@@ -608,29 +608,8 @@ const fetchPost = cache(async (postSlug, postId) => {
 
   let data = null;
 
-  if (postId) {
-    try {
-      data = await fetchAPI(GET_POST_BY_DATABASE_ID, {
-        variables: { postId },
-      });
-    } catch (err) {
-      try {
-        data = await fetchAPI(GET_POST_BY_DATABASE_ID_ALT, {
-          variables: { postId },
-        });
-      } catch (err2) {
-        try {
-          data = await fetchAPI(GET_POST_BY_DATABASE_ID_FALLBACK, {
-            variables: { postId },
-          });
-        } catch (err3) {
-          console.error("Failed fetching post by databaseId:", err3);
-        }
-      }
-    }
-  }
-
-  if (!data?.post && postSlug) {
+  // 1. Primary lookup by decoded slug
+  if (postSlug) {
     try {
       const decodedSlug = decodeURIComponent(postSlug);
       data = await fetchAPI(GET_POST_BY_SLUG, {
@@ -655,6 +634,7 @@ const fetchPost = cache(async (postSlug, postId) => {
     }
   }
 
+  // 2. Fallback to raw slug
   if (!data?.post && postSlug) {
     try {
       data = await fetchAPI(GET_POST_BY_SLUG, {
@@ -672,6 +652,29 @@ const fetchPost = cache(async (postSlug, postId) => {
           });
         } catch (err3) {
           console.error("Failed fetching post by raw slug:", err3);
+        }
+      }
+    }
+  }
+
+  // 3. Fallback to databaseId for legacy external bookmarks/links
+  if (!data?.post && postId) {
+    try {
+      data = await fetchAPI(GET_POST_BY_DATABASE_ID, {
+        variables: { postId },
+      });
+    } catch (err) {
+      try {
+        data = await fetchAPI(GET_POST_BY_DATABASE_ID_ALT, {
+          variables: { postId },
+        });
+      } catch (err2) {
+        try {
+          data = await fetchAPI(GET_POST_BY_DATABASE_ID_FALLBACK, {
+            variables: { postId },
+          });
+        } catch (err3) {
+          console.error("Failed fetching post by databaseId fallback:", err3);
         }
       }
     }

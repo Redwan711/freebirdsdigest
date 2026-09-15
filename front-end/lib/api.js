@@ -19,6 +19,13 @@ export async function fetchAPI(query, { variables } = {}) {
 
   const res = await fetch(process.env.NEXT_PUBLIC_WORDPRESS_API_URL, fetchOptions);
 
+  const contentType = res.headers.get('content-type') || '';
+  if (!contentType.includes('application/json')) {
+    const errorText = await res.text();
+    console.error('WordPress API returned non-JSON response:', errorText.slice(0, 200));
+    throw new Error(`WordPress API returned non-JSON response (${res.status}): ${errorText.slice(0, 100)}`);
+  }
+
   const json = await res.json();
   
   if (json.errors) {

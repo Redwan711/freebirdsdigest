@@ -35,7 +35,7 @@ export default function FreelanceRateCalculatorPage() {
           </Link>
 
           <Link
-            href="/news/calculate-freelance-rate?pid=195"
+            href="/news/calculate-freelance-rate"
             className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-bg-subtle border border-brandborder text-text-muted hover:text-brand text-xs font-semibold transition"
           >
             <BookOpen className="w-3.5 h-3.5" />

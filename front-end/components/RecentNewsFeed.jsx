@@ -68,7 +68,7 @@ export default function RecentNewsFeed({ posts = [] }) {
       {featuredStory && (
         <section className="grid grid-cols-1 items-center gap-6 border-b border-brandborder pb-6 sm:grid-cols-2">
           <Link
-            href={`/news/${featuredStory.slug}?pid=${featuredStory.databaseId}`}
+            href={`/news/${featuredStory.slug}`}
             className="group overflow-hidden rounded-2xl bg-bg-subtle aspect-16/10"
           >
             <Image
@@ -82,7 +82,7 @@ export default function RecentNewsFeed({ posts = [] }) {
           <div className="space-y-2">
             <span className="text-xs font-bold uppercase tracking-wider text-brand">Latest Story</span>
             <h3 className="text-xl font-extrabold text-text-main md:text-2xl leading-snug hover:text-brand transition-colors">
-              <Link href={`/news/${featuredStory.slug}?pid=${featuredStory.databaseId}`}>
+              <Link href={`/news/${featuredStory.slug}`}>
                 {featuredStory?.title}
               </Link>
             </h3>
@@ -103,7 +103,7 @@ export default function RecentNewsFeed({ posts = [] }) {
             {splitStories[0] && (
               <>
                 <Link
-                  href={`/news/${splitStories[0].slug}?pid=${splitStories[0].databaseId}`}
+                  href={`/news/${splitStories[0].slug}`}
                   className="group overflow-hidden rounded-xl bg-bg-subtle aspect-16/10"
                 >
                   <Image
@@ -116,7 +116,7 @@ export default function RecentNewsFeed({ posts = [] }) {
                 </Link>
                 <div className="text space-y-1.5">
                   <h3 className="text-base font-bold text-text-main hover:text-brand transition-colors line-clamp-2">
-                    <Link href={`/news/${splitStories[0].slug}?pid=${splitStories[0].databaseId}`}>
+                    <Link href={`/news/${splitStories[0].slug}`}>
                       {splitStories[0]?.title}
                     </Link>
                   </h3>
@@ -135,7 +135,7 @@ export default function RecentNewsFeed({ posts = [] }) {
             {splitStories[1] && (
               <>
                 <Link
-                  href={`/news/${splitStories[1].slug}?pid=${splitStories[1].databaseId}`}
+                  href={`/news/${splitStories[1].slug}`}
                   className="group overflow-hidden rounded-xl bg-bg-subtle aspect-16/10"
                 >
                   <Image
@@ -148,7 +148,7 @@ export default function RecentNewsFeed({ posts = [] }) {
                 </Link>
                 <div className="text space-y-1.5">
                   <h3 className="text-base font-bold text-text-main hover:text-brand transition-colors line-clamp-2">
-                    <Link href={`/news/${splitStories[1].slug}?pid=${splitStories[1].databaseId}`}>
+                    <Link href={`/news/${splitStories[1].slug}`}>
                       {splitStories[1]?.title}
                     </Link>
                   </h3>
@@ -171,7 +171,7 @@ export default function RecentNewsFeed({ posts = [] }) {
           {gridStories.map((story) => (
             <Link
               key={story.id}
-              href={`/news/${story.slug}?pid=${story.databaseId}`}
+              href={`/news/${story.slug}`}
               className="group flex flex-col gap-2.5 rounded-xl border border-brandborder/60 p-3 bg-bg-subtle/70 hover:bg-bg-subtle hover:border-brand/40 transition-all shadow-2xs"
             >
               <div className="image overflow-hidden rounded-lg bg-bg-subtle aspect-16/10">

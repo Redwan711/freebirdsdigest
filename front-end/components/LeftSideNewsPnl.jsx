@@ -61,7 +61,7 @@ const LeftSideNewsPnl = async ({ posts: initialPosts }) => {
                             return (
                                 <Link
                                     key={post.id}
-                                    href={`/news/${post.slug}?pid=${post.databaseId}`}
+                                    href={`/news/${post.slug}`}
                                     className="group grid grid-cols-[80px_minmax(0,1fr)] gap-3 rounded-xl border border-brandborder p-2 transition-all hover:border-brand/40 hover:bg-bg-subtle/60"
                                 >
                                     <div className="relative aspect-square overflow-hidden rounded-lg bg-bg-subtle">

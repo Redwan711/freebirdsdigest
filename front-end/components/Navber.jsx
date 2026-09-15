@@ -31,7 +31,7 @@ const Navber = async () => {
               {headerNews.slice(0, 2).map((post) => (
                 <div key={post.id} className="headerNews">
                   <Link
-                    href={`/news/${post.slug}?pid=${post.databaseId}`}
+                    href={`/news/${post.slug}`}
                     className='flex items-center font-inter text-text-muted hover:text-brand transition-colors gap-3 group'
                   >
                     <h3 className='line-clamp-2 max-w-[170px] text-xs font-semibold leading-snug group-hover:text-brand transition-colors'>
@@ -74,7 +74,7 @@ const Navber = async () => {
             {headerNews.slice(0, 2).map((post) => (
               <Link
                 key={post.id}
-                href={`/news/${post.slug}?pid=${post.databaseId}`}
+                href={`/news/${post.slug}`}
                 className='flex items-center justify-start gap-2.5 font-inter text-text-muted hover:text-brand transition-colors group min-w-0'
               >
                 <h3 className='line-clamp-2 text-[11px] sm:text-xs font-semibold leading-tight group-hover:text-brand transition-colors max-w-[150px] sm:max-w-[240px]'>

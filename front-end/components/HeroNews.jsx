@@ -74,7 +74,7 @@ const HeroNews = async ({ heroData: passedHeroData } = {}) => {
     "Hero Banner";
 
   const postLink = promotionalImagePost?.slug
-    ? `/news/${promotionalImagePost.slug}?pid=${promotionalImagePost.databaseId}`
+    ? `/news/${promotionalImagePost.slug}`
     : null;
 
   const finalLink = redirectionLink || postLink;
@@ -120,7 +120,7 @@ const HeroNews = async ({ heroData: passedHeroData } = {}) => {
           <div className="topNews border-r-0 lg:border-r lg:border-brandborder lg:pr-6">
             {topStory ? (
               <Link
-                href={`/news/${topStory.slug}?pid=${topStory.databaseId}`}
+                href={`/news/${topStory.slug}`}
                 className="grid gap-5 lg:grid-cols-[1.1fr_0.9fr] group"
               >
                 <div className="font-inter grid grid-cols-1 gap-3">
@@ -165,7 +165,7 @@ const HeroNews = async ({ heroData: passedHeroData } = {}) => {
               const displayDate = post.modified || post.date;
               return (
                 <Link
-                  href={`/news/${post.slug}?pid=${post.databaseId}`}
+                  href={`/news/${post.slug}`}
                   key={post.id}
                   className="trandingNewsItem flex items-start gap-3 rounded-xl border border-brandborder bg-bg-subtle/50 p-3 shadow-2xs hover:border-brand/40 transition-all group h-full"
                 >

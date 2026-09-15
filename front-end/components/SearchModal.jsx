@@ -158,7 +158,7 @@ export default function SearchModal({ isOpen, onClose }) {
                   return (
                     <Link
                       key={post.id}
-                      href={`/news/${post.slug}?pid=${post.databaseId}`}
+                      href={`/news/${post.slug}`}
                       onClick={handleSelectResult}
                       className="flex items-center gap-3.5 p-2.5 rounded-xl hover:bg-bg-subtle transition-all group"
                     >

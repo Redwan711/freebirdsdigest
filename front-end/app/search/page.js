@@ -94,7 +94,7 @@ export default async function SearchPage({ searchParams }) {
                 >
                   {/* Featured Image */}
                   <Link
-                    href={`/news/${post.slug}?pid=${post.databaseId}`}
+                    href={`/news/${post.slug}`}
                     className="relative w-full aspect-[16/9] bg-bg-subtle overflow-hidden block"
                   >
                     <Image
@@ -130,7 +130,7 @@ export default async function SearchPage({ searchParams }) {
                       </div>
 
                       <h2 className="text-lg font-bold text-text-main line-clamp-2 leading-snug group-hover:text-brand transition-colors">
-                        <Link href={`/news/${post.slug}?pid=${post.databaseId}`}>
+                        <Link href={`/news/${post.slug}`}>
                           {post.title}
                         </Link>
                       </h2>
@@ -147,7 +147,7 @@ export default async function SearchPage({ searchParams }) {
 
                     <div className="pt-3 border-t border-brandborder/50 flex items-center justify-between">
                       <Link
-                        href={`/news/${post.slug}?pid=${post.databaseId}`}
+                        href={`/news/${post.slug}`}
                         className="inline-flex items-center gap-1.5 text-xs font-extrabold text-brand hover:underline group/btn"
                       >
                         <span>Read Article</span>
