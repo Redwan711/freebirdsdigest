@@ -39,7 +39,7 @@ export const metadata = {
       "Affiliate Disclosure | How FreeBirds Digest Maintains Transparency",
     description:
       "Understand FreeBirds Digest's affiliate relationships, product evaluation process, and commitment to honest, independent recommendations.",
-    url: "https://freebirdsdigest.com/affiliate-disclosure",
+    url: "https://www.freebirdsdigest.com/affiliate-disclosure",
     siteName: "FreeBirds Digest",
     type: "website",
   },
@@ -110,8 +110,8 @@ export default function AffiliateDisclosurePage() {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "FreeBirds Digest",
-    url: "https://freebirdsdigest.com",
-    logo: "https://freebirdsdigest.com/freeBird-logo-new.png",
+    url: "https://www.freebirdsdigest.com",
+    logo: "https://www.freebirdsdigest.com/freeBird-logo-new.png",
     description:
       "A digital knowledge platform helping freelancers and independent professionals build smarter digital careers.",
     sameAs: [
@@ -135,13 +135,13 @@ export default function AffiliateDisclosurePage() {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://freebirdsdigest.com",
+        item: "https://www.freebirdsdigest.com",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Affiliate Disclosure",
-        item: "https://freebirdsdigest.com/affiliate-disclosure",
+        item: "https://www.freebirdsdigest.com/affiliate-disclosure",
       },
     ],
   };
@@ -152,7 +152,7 @@ export default function AffiliateDisclosurePage() {
     name: "Affiliate Disclosure",
     description:
       "FreeBirds Digest affiliate partnerships, recommendations policy, and editorial independence.",
-    url: "https://freebirdsdigest.com/affiliate-disclosure",
+    url: "https://www.freebirdsdigest.com/affiliate-disclosure",
     about: "Affiliate transparency and editorial disclosure",
     publisher: jsonLdOrg,
   };

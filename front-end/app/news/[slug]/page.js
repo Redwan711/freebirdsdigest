@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { cache } from "react";
 import { fetchAPI } from "@/lib/api";
 import { filterNavCategories } from "@/lib/categories";
@@ -807,35 +808,7 @@ export default async function PostPage({ params, searchParams }) {
   const post = await fetchPost(postSlug, postId);
 
   if (!post) {
-    return (
-      <main className="mx-auto max-w-4xl px-4 py-16 md:px-6 font-inter">
-        <Link
-          href="/"
-          className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-text-muted hover:text-brand transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4" /> Back to Home
-        </Link>
-
-        <div className="rounded-3xl border border-brandborder bg-bg-surface p-12 shadow-sm text-center">
-          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-brand/10 text-brand">
-            <BookOpen className="h-8 w-8" />
-          </div>
-          <h1 className="text-3xl font-extrabold text-text-main">
-            Article Not Found
-          </h1>
-          <p className="mt-3 text-text-muted max-w-md mx-auto">
-            We couldn't locate the post you're looking for. It may have been
-            moved or updated.
-          </p>
-          <Link
-            href="/"
-            className="mt-6 inline-flex items-center gap-2 rounded-xl bg-brand px-6 py-3 text-sm font-semibold text-white transition-transform hover:scale-[1.02] shadow-md"
-          >
-            Browse Articles
-          </Link>
-        </div>
-      </main>
-    );
+    notFound();
   }
 
   // ACF Article Metadata fields

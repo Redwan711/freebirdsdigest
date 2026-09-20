@@ -1,4 +1,4 @@
-export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://freebirdsdigest.com").replace(
+export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.freebirdsdigest.com").replace(
   /\/$/,
   ""
 );

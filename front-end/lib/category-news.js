@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { fetchAPI } from "./api";
 import { BEST_VPNS_USA_POST } from "./posts/5-best-vpns-usa";
 
@@ -22,7 +23,7 @@ const GET_CATEGORY_NEWS = `
   }
 `;
 
-export async function fetchCategoryNews(categoryName) {
+export const fetchCategoryNews = cache(async (categoryName) => {
   let nodes = [];
   try {
     const data = await fetchAPI(GET_CATEGORY_NEWS, {
@@ -48,4 +49,4 @@ export async function fetchCategoryNews(categoryName) {
   }
 
   return nodes;
-}
+});

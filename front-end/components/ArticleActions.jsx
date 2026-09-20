@@ -61,10 +61,10 @@ export default function ArticleActions({ title = '' }) {
   }
 
   const publicUrl = currentUrl.includes('localhost')
-    ? currentUrl.replace(/http:\/\/localhost:\d+/, 'https://freebirdsdigest.com')
+    ? currentUrl.replace(/http:\/\/localhost:\d+/, 'https://www.freebirdsdigest.com')
     : currentUrl
 
-  const encodedUrl = encodeURIComponent(publicUrl || 'https://freebirdsdigest.com')
+  const encodedUrl = encodeURIComponent(publicUrl || 'https://www.freebirdsdigest.com')
   const encodedTitle = encodeURIComponent(title || 'Freebirds Digest')
 
   const socialChannels = [

@@ -45,7 +45,7 @@ export const metadata = {
     title: "Write for Us | Contribute to FreeBirds Digest",
     description:
       "Become a contributor at FreeBirds Digest. We publish practical, research-backed guides, career strategies, and tech insights for the global independent workforce.",
-    url: "https://freebirdsdigest.com/contribute",
+    url: "https://www.freebirdsdigest.com/contribute",
     siteName: "FreeBirds Digest",
     type: "website",
   },
@@ -210,8 +210,8 @@ export default function ContributePage() {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "FreeBirds Digest",
-    url: "https://freebirdsdigest.com",
-    logo: "https://freebirdsdigest.com/freeBird-logo-new.png",
+    url: "https://www.freebirdsdigest.com",
+    logo: "https://www.freebirdsdigest.com/freeBird-logo-new.png",
   };
 
   const jsonLdBreadcrumb = {
@@ -222,13 +222,13 @@ export default function ContributePage() {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://freebirdsdigest.com",
+        item: "https://www.freebirdsdigest.com",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Contribute",
-        item: "https://freebirdsdigest.com/contribute",
+        item: "https://www.freebirdsdigest.com/contribute",
       },
     ],
   };
@@ -239,7 +239,7 @@ export default function ContributePage() {
     name: "Write for FreeBirds Digest | Editorial Pitch & Submission Guidelines",
     description:
       "Contribute your expert insights to FreeBirds Digest. Guidelines, topics, and pitch submission form for authors, freelancers, and industry experts.",
-    url: "https://freebirdsdigest.com/contribute",
+    url: "https://www.freebirdsdigest.com/contribute",
     publisher: jsonLdOrg,
   };
 

@@ -44,7 +44,7 @@ export const metadata = {
       "About FreeBirds Digest | Trusted Knowledge for Solo Professionals",
     description:
       "Discover our mission, editorial principles, and commitment to publishing trusted, research-backed content for independent professionals worldwide.",
-    url: "https://freebirdsdigest.com/about",
+    url: "https://www.freebirdsdigest.com/about",
     siteName: "FreeBirds Digest",
     type: "website",
   },
@@ -268,8 +268,8 @@ export default function AboutPage() {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "FreeBirds Digest",
-    url: "https://freebirdsdigest.com",
-    logo: "https://freebirdsdigest.com/freeBird-logo-new.png",
+    url: "https://www.freebirdsdigest.com",
+    logo: "https://www.freebirdsdigest.com/freeBird-logo-new.png",
     sameAs: [
       "https://www.facebook.com/freebirdsdigest/",
       "https://x.com/FreeBirdsDigest",
@@ -291,13 +291,13 @@ export default function AboutPage() {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://freebirdsdigest.com",
+        item: "https://www.freebirdsdigest.com",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "About",
-        item: "https://freebirdsdigest.com/about",
+        item: "https://www.freebirdsdigest.com/about",
       },
     ],
   };
@@ -308,7 +308,7 @@ export default function AboutPage() {
     name: "About FreeBirds Digest",
     description:
       "FreeBirds Digest is a digital knowledge platform dedicated to helping freelancers, remote workers, solopreneurs, digital nomads, and creators build sustainable careers.",
-    url: "https://freebirdsdigest.com/about",
+    url: "https://www.freebirdsdigest.com/about",
     publisher: jsonLdOrg,
   };
 
