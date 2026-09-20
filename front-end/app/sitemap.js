@@ -75,8 +75,23 @@ export default async function sitemap() {
     priority,
   }));
 
+  const EXCLUDED_CATEGORIES = new Set([
+    "top-news",
+    "header-news",
+    "trending",
+    "main-new-preview",
+    "side-panel-news",
+    "promotional-image",
+    "bottom-page-ads",
+    "uncategorized",
+    "sponsors",
+  ]);
+
   const categoryPages = categories
-    .filter((category) => category.slug !== "uncategorized" && category.count > 0)
+    .filter(
+      (category) =>
+        !EXCLUDED_CATEGORIES.has(category.slug) && category.count > 0
+    )
     .map((category) => ({
       url: `${siteUrl}/${category.slug}`,
       changeFrequency: "daily",

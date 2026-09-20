@@ -36,6 +36,8 @@ import { getPostImageObjects } from "@/lib/parse-images";
 import { parseHeadingsAndInjectIds } from "@/lib/toc";
 import { BEST_VPNS_USA_POST } from "@/lib/posts/5-best-vpns-usa";
 
+export const revalidate = 3600;
+
 const GET_POST_BY_SLUG = `
   query GetPostBySlug($slug: ID!) {
     post(id: $slug, idType: SLUG) {
@@ -882,8 +884,97 @@ export default async function PostPage({ params, searchParams }) {
       new Date(post.modified).getTime() > new Date(post.date).getTime()
   );
 
+  const postUrl = `${siteUrl}/news/${post.slug}`;
+  const articleImageUrl = post.featuredImage?.node?.sourceUrl || `${siteUrl}/freeBird-logo-new.png`;
+
+  const jsonLdArticle = {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    headline: cleanHtml(post.title),
+    description: cleanExcerptText || defaultDescription,
+    image: [articleImageUrl],
+    datePublished: post.date,
+    dateModified: post.modified || post.date,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": postUrl,
+    },
+    author: [
+      {
+        "@type": "Person",
+        name: syncedAuthor?.name || post.author?.node?.name || "Freebirds Digest Editorial Team",
+        url: syncedAuthor?.slug ? `${siteUrl}/author/${syncedAuthor.slug}` : `${siteUrl}/author`,
+        jobTitle: syncedAuthor?.role || "Contributor",
+      },
+    ],
+    publisher: {
+      "@type": "Organization",
+      name: siteName,
+      url: siteUrl,
+      logo: {
+        "@type": "ImageObject",
+        url: `${siteUrl}/freeBird-logo-new.png`,
+      },
+    },
+  };
+
+  const jsonLdBreadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: siteUrl,
+      },
+      ...(primaryCategorySlug
+        ? [
+            {
+              "@type": "ListItem",
+              position: 2,
+              name:
+                displayCategories?.[0]?.name ||
+                primaryCategorySlug
+                  .split("-")
+                  .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+                  .join(" "),
+              item: `${siteUrl}/${primaryCategorySlug}`,
+            },
+            {
+              "@type": "ListItem",
+              position: 3,
+              name: cleanHtml(post.title),
+              item: postUrl,
+            },
+          ]
+        : [
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: cleanHtml(post.title),
+              item: postUrl,
+            },
+          ]),
+    ],
+  };
+
   return (
     <main className="mx-auto max-w-7xl xl:max-w-[1440px] 2xl:max-w-[1536px] px-4 py-8 md:px-6 font-inter">
+      {/* Schema.org NewsArticle & BreadcrumbList JSON-LD Payloads */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLdArticle).replace(/</g, "\\u003c"),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLdBreadcrumb).replace(/</g, "\\u003c"),
+        }}
+      />
+
       {/* Top Navigation & Action Bar */}
       <div className="mb-6 flex flex-wrap items-center justify-between gap-4 border-b border-brandborder/60 pb-4">
         <Link
