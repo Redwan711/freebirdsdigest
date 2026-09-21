@@ -4,6 +4,16 @@ import { fetchSponsors } from "@/lib/sponsors";
 import { Megaphone, Sparkles } from "lucide-react";
 import ToolsWidget from "./ToolsWidget";
 
+function formatRedirectionUrl(url) {
+  if (!url || typeof url !== "string") return null;
+  const trimmed = url.trim();
+  if (!trimmed) return null;
+  if (trimmed.startsWith("http://") || trimmed.startsWith("https://") || trimmed.startsWith("/")) {
+    return trimmed;
+  }
+  return `https://${trimmed}`;
+}
+
 export default async function SponsorsAdPnl() {
   const showSponsorsAd = false;
 
@@ -17,7 +27,6 @@ export default async function SponsorsAdPnl() {
   return (
     <aside className="sponsorsAdPnl flex flex-col gap-4 font-inter 2xl:sticky 2xl:top-24 self-start">
       <section className="bg-bg-surface p-4 sm:p-4.5 xl:p-5 rounded-3xl border border-brandborder shadow-2xs space-y-4">
-        {/* Sponsored Parent Header
         <div className="flex items-center justify-between border-b border-brandborder pb-3">
           <div>
             <p className="text-xs font-bold uppercase tracking-wider text-brand flex items-center gap-1.5">
@@ -31,7 +40,6 @@ export default async function SponsorsAdPnl() {
             Ad
           </span>
         </div>
-        */}
 
         {displaySponsors.length === 0 ? (
           <div className="rounded-2xl border border-dashed border-brandborder p-5 text-center space-y-2 bg-bg-subtle/50">
@@ -51,7 +59,7 @@ export default async function SponsorsAdPnl() {
           <div className="grid gap-4">
             {displaySponsors.map((post) => {
               const sponsoreData = post.sponsore || post.sponsors || {};
-              const { redirectionLink, adTitleIfAny, adImage } = sponsoreData;
+              const { redirectionLink, adTitleIfAny, adTextIfAny, adImage } = sponsoreData;
 
               const imageUrl =
                 adImage?.node?.sourceUrl ||
@@ -66,15 +74,16 @@ export default async function SponsorsAdPnl() {
                 post.title;
 
               const titleText = adTitleIfAny || post.title || "Featured Partner";
+              const formattedLink = formatRedirectionUrl(redirectionLink);
 
               if (!imageUrl) return null;
 
               return (
                 <a
                   key={post.id}
-                  href={redirectionLink || "#"}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href={formattedLink || "#"}
+                  target={formattedLink ? "_blank" : undefined}
+                  rel={formattedLink ? "noopener noreferrer sponsored" : undefined}
                   className="group flex flex-col overflow-hidden rounded-2xl border border-brandborder/70 bg-bg-subtle/50 hover:border-brand/40 hover:bg-bg-subtle transition-all shadow-2xs"
                 >
                   {/* Ad Image */}
@@ -84,15 +93,21 @@ export default async function SponsorsAdPnl() {
                       alt={imageAlt}
                       fill
                       sizes="320px"
+                      unoptimized
                       className="object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                   </div>
 
-                  {/* Title Section with Padding & Subtle Background */}
-                  <div className="p-3.5">
+                  {/* Title & Text Section */}
+                  <div className="p-3.5 space-y-1.5">
                     <h4 className="text-xs font-bold text-text-main group-hover:text-brand transition-colors line-clamp-2">
                       {titleText}
                     </h4>
+                    {adTextIfAny && (
+                      <p className="text-[11px] text-text-muted leading-relaxed line-clamp-3">
+                        {adTextIfAny}
+                      </p>
+                    )}
                   </div>
                 </a>
               );

@@ -111,6 +111,17 @@ const GET_POST_BY_SLUG = `
         videoSource
         otherUrl
       }
+      sponsore {
+        redirectionLink
+        adTitleIfAny
+        adTextIfAny
+        adImage {
+          node {
+            sourceUrl
+            altText
+          }
+        }
+      }
     }
   }
 `;
@@ -188,6 +199,17 @@ const GET_POST_BY_SLUG_ALT = `
         videoSource
         otherUrl
       }
+      sponsore {
+        redirectionLink
+        adTitleIfAny
+        adTextIfAny
+        adImage {
+          node {
+            sourceUrl
+            altText
+          }
+        }
+      }
     }
   }
 `;
@@ -264,6 +286,17 @@ const GET_POST_BY_SLUG_FALLBACK = `
         videoSource
         otherUrl
       }
+      sponsore {
+        redirectionLink
+        adTitleIfAny
+        adTextIfAny
+        adImage {
+          node {
+            sourceUrl
+            altText
+          }
+        }
+      }
     }
   }
 `;
@@ -335,6 +368,17 @@ const GET_POST_BY_DATABASE_ID = `
         imageSource
         videoSource
         otherUrl
+      }
+      sponsore {
+        redirectionLink
+        adTitleIfAny
+        adTextIfAny
+        adImage {
+          node {
+            sourceUrl
+            altText
+          }
+        }
       }
     }
   }
@@ -413,6 +457,17 @@ const GET_POST_BY_DATABASE_ID_ALT = `
         videoSource
         otherUrl
       }
+      sponsore {
+        redirectionLink
+        adTitleIfAny
+        adTextIfAny
+        adImage {
+          node {
+            sourceUrl
+            altText
+          }
+        }
+      }
     }
   }
 `;
@@ -487,6 +542,17 @@ const GET_POST_BY_DATABASE_ID_FALLBACK = `
         imageSource
         videoSource
         otherUrl
+      }
+      sponsore {
+        redirectionLink
+        adTitleIfAny
+        adTextIfAny
+        adImage {
+          node {
+            sourceUrl
+            altText
+          }
+        }
       }
     }
   }
@@ -832,6 +898,9 @@ export default async function PostPage({ params, searchParams }) {
     videoSource,
     otherUrl,
   } = articleMetadata;
+
+  // Post-specific ACF Sponsor fields (unique to this post if configured in WordPress)
+  const postSponsor = post?.sponsore || post?.sponsors || null;
 
   const topQuestion = topq || topQ;
   const topAnswer = topa || topA;
@@ -1453,6 +1522,9 @@ export default async function PostPage({ params, searchParams }) {
             {/* 3 Recommended News Articles */}
             <RecommendedNews posts={recommendedPosts} />
 
+            {/* Bottom Page Ad Banner (Inside Post Body Footer) */}
+            <BottomPageAd postSponsor={postSponsor} />
+
             {/* Interactive Remote Worker Newsletter Subscription Box */}
             <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand/10 via-bg-surface to-accent/10 border border-brandborder p-8 shadow-sm space-y-6">
               <div className="space-y-2">
@@ -1470,9 +1542,6 @@ export default async function PostPage({ params, searchParams }) {
 
               <NewsletterForm />
             </div>
-
-            {/* Bottom Page Ad Banner (Inside Post Body Footer) */}
-            <BottomPageAd />
           </footer>
         </article>
 

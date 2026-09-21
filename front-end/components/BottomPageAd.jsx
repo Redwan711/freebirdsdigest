@@ -11,14 +11,23 @@ function formatRedirectionUrl(url) {
   return `https://${trimmed}`;
 }
 
-export default async function BottomPageAd({ className = "" }) {
+export default async function BottomPageAd({ className = "", postSponsor = null }) {
+  const postSponsorData = postSponsor || null;
+  const postImageUrl =
+    postSponsorData?.adImage?.node?.sourceUrl ||
+    postSponsorData?.adImage?.sourceUrl ||
+    (typeof postSponsorData?.adImage === "string" ? postSponsorData.adImage : null);
+
+  const hasPostSponsor = Boolean(postImageUrl || postSponsorData?.redirectionLink);
+
   const showBottomPageAd = false;
 
-  if (!showBottomPageAd) {
+  // Only render if this specific post has an ACF sponsor, or if global showBottomPageAd is enabled
+  if (!hasPostSponsor && !showBottomPageAd) {
     return null;
   }
 
-  const adPost = await fetchBottomPageAd();
+  const adPost = hasPostSponsor ? { sponsore: postSponsorData } : await fetchBottomPageAd();
 
   if (!adPost) return null;
 
@@ -39,8 +48,6 @@ export default async function BottomPageAd({ className = "" }) {
     (typeof sponsoreData.adImage === "string" ? sponsoreData.adImage : null) ||
     adPost.featuredImage?.node?.sourceUrl;
 
-  // Metadata variables stored for future optional use (titles/text),
-  //why the vercel not working mmmm
   const adTitle = sponsoreData.adTitleIfAny || adPost.title || "";
   const adText = sponsoreData.adTextIfAny || "";
   const imageAlt =
@@ -57,6 +64,7 @@ export default async function BottomPageAd({ className = "" }) {
         src={imageUrl}
         alt={imageAlt}
         fill
+        unoptimized
         sizes="(max-width: 768px) 100vw, 720px"
         className="object-cover transition-transform duration-300 group-hover:scale-[1.01]"
         priority={false}
@@ -65,7 +73,7 @@ export default async function BottomPageAd({ className = "" }) {
   );
 
   return (
-    <div className={`bottomPageAd w-full mt-6 ${className}`}>
+    <div className={`bottomPageAd w-full ${className}`}>
       {finalLink ? (
         <a
           href={finalLink}
