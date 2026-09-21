@@ -23,9 +23,25 @@ export const metadata = {
   openGraph: {
     type: "website",
     url: "/tools",
+    siteName,
     title: `Tools & Calculators | ${siteName}`,
     description:
       "Explore our free interactive tools for freelancers and remote workers, including the Freelance Rate Calculator and Smart VPN Finder.",
+    images: [
+      {
+        url: "/freeBird-logo-new.png",
+        width: 1200,
+        height: 630,
+        alt: `Tools & Calculators | ${siteName}`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Tools & Calculators | ${siteName}`,
+    description:
+      "Explore our free interactive tools for freelancers and remote workers, including the Freelance Rate Calculator and Smart VPN Finder.",
+    images: ["/freeBird-logo-new.png"],
   },
 };
 

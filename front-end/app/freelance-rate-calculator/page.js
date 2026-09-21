@@ -14,9 +14,25 @@ export const metadata = {
   openGraph: {
     type: "website",
     url: "/freelance-rate-calculator",
+    siteName,
     title: `Calculate Your Freelance Rate | ${siteName}`,
     description:
       "A simple and clean freelance hourly rate calculator. Easily calculate your target hourly rate, day rate, and monthly revenue.",
+    images: [
+      {
+        url: "/freeBird-logo-new.png",
+        width: 1200,
+        height: 630,
+        alt: `Calculate Your Freelance Rate | ${siteName}`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Calculate Your Freelance Rate | ${siteName}`,
+    description:
+      "A simple and clean freelance hourly rate calculator. Easily calculate your target hourly rate, day rate, and monthly revenue.",
+    images: ["/freeBird-logo-new.png"],
   },
 };
 

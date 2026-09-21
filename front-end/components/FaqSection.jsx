@@ -118,16 +118,17 @@ export default function FaqSection({
                   </div>
                 </button>
 
-                {isOpen && (
-                  <div
-                    id={answerId}
-                    role="region"
-                    aria-labelledby={questionId}
-                    className="border-t border-border/40 px-5 pb-6 pt-4 text-sm leading-relaxed text-muted-foreground sm:text-base whitespace-pre-line"
-                  >
-                    {faq.answer}
-                  </div>
-                )}
+                <div
+                  id={answerId}
+                  role="region"
+                  aria-labelledby={questionId}
+                  hidden={!isOpen}
+                  className={`border-t border-border/40 px-5 pb-6 pt-4 text-sm leading-relaxed text-muted-foreground sm:text-base whitespace-pre-line ${
+                    isOpen ? "block" : "hidden"
+                  }`}
+                >
+                  {faq.answer}
+                </div>
               </div>
             );
           })}

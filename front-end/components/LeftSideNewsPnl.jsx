@@ -4,28 +4,7 @@ import { fetchSidePanelNews } from "@/lib/side-panel-news";
 
 const fallbackImage = "/prothomalo-bangla_2026-07-09_nxgtx74x_bbm.avif";
 
-function cleanText(htmlString = "") {
-    if (!htmlString) return "";
-    return htmlString
-        .replace(/<[^>]*>/g, "")
-        .replace(/\[\s*&hellip;\s*\]|\[\s*\.\.\.\s*\]|&hellip;|&#8230;/gi, "")
-        .replace(/&nbsp;/gi, " ")
-        .replace(/&amp;/gi, "&")
-        .replace(/&quot;/gi, '"')
-        .replace(/&#039;/gi, "'")
-        .replace(/&lt;/gi, "<")
-        .replace(/&gt;/gi, ">")
-        .replace(/\s+/g, " ")
-        .trim();
-}
-
-function truncateText(text, maxLength = 110) {
-    if (!text || text.length <= maxLength) {
-        return text;
-    }
-
-    return `${text.slice(0, maxLength).trimEnd()}...`;
-}
+import { cleanText, truncateText } from "@/lib/text-utils";
 
 function formatSidebarDate(dateString) {
     if (!dateString) return "";
