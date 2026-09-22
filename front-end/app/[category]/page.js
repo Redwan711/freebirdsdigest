@@ -9,6 +9,17 @@ const fallbackImage = "/placeholder-news.svg";
 
 export async function generateMetadata({ params }) {
   const { category } = await params;
+  if (!category || category.toLowerCase() === "hide") {
+    return {
+      title: `Page Not Found | ${siteName}`,
+      robots: {
+        index: false,
+        follow: false,
+        nocache: true,
+      },
+    };
+  }
+
   const posts = await fetchCategoryNews(category);
 
   if (!posts || posts.length === 0) {
@@ -54,6 +65,10 @@ function formatPostDate(dateString) {
 export default async function CategoryPage({ params }) {
   const resolvedParams = await params;
   const currentCategory = resolvedParams.category;
+
+  if (!currentCategory || currentCategory.toLowerCase() === "hide") {
+    notFound();
+  }
 
   const posts = await fetchCategoryNews(currentCategory);
 

@@ -1,5 +1,6 @@
 import { cache } from "react";
 import { fetchAPI } from "./api";
+import { filterVisiblePosts } from "./post-filter";
 import { BEST_VPNS_USA_POST } from "./posts/5-best-vpns-usa";
 
 const GET_CATEGORY_NEWS = `
@@ -18,12 +19,23 @@ const GET_CATEGORY_NEWS = `
             altText
           }
         }
+        categories {
+          nodes {
+            id
+            name
+            slug
+          }
+        }
       }
     }
   }
 `;
 
 export const fetchCategoryNews = cache(async (categoryName, first = 24) => {
+  if (!categoryName || categoryName.toLowerCase() === "hide") {
+    return [];
+  }
+
   let nodes = [];
   try {
     const data = await fetchAPI(GET_CATEGORY_NEWS, {
@@ -51,5 +63,6 @@ export const fetchCategoryNews = cache(async (categoryName, first = 24) => {
   }
   */
 
-  return nodes;
-});
+  return filterVisiblePosts(nodes);
+});
+

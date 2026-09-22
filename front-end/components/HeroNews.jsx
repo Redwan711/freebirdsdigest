@@ -101,7 +101,7 @@ const HeroNews = async ({ heroData: passedHeroData } = {}) => {
             {topStory ? (
               <Link
                 href={`/news/${topStory.slug}`}
-                className="grid gap-5 lg:grid-cols-[1.1fr_0.9fr] group"
+                className="grid gap-5 lg:grid-cols-2 items-center group"
               >
                 <div className="font-inter grid grid-cols-1 gap-3">
                   <span className="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-brand">
@@ -119,7 +119,7 @@ const HeroNews = async ({ heroData: passedHeroData } = {}) => {
                   </span>
                 </div>
 
-                <div className="image relative aspect-16/12 overflow-hidden rounded-xl bg-bg-subtle shadow-sm">
+                <div className="image relative aspect-video w-full overflow-hidden rounded-xl bg-bg-subtle shadow-sm self-center">
                   <ArticleImage
                     src={
                       topStory.featuredImage?.node?.sourceUrl || fallbackImage

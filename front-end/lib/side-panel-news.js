@@ -1,4 +1,5 @@
 import { fetchAPI } from "./api";
+import { filterVisiblePosts } from "./post-filter";
 
 const GET_SIDE_PANEL_NEWS = `
   query GetSidePanelNews {
@@ -68,7 +69,8 @@ export async function fetchSidePanelNews() {
       }
     }
 
-    return combined.sort((a, b) => new Date(b.date) - new Date(a.date));
+    const visiblePosts = filterVisiblePosts(combined);
+    return visiblePosts.sort((a, b) => new Date(b.date) - new Date(a.date));
   } catch (err) {
     console.error("Failed fetching side panel news:", err);
     return [];

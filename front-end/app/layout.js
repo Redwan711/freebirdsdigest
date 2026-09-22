@@ -1,4 +1,5 @@
 import { Inter, Outfit, Plus_Jakarta_Sans } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import Navber from "@/components/Navber";
 import Footer from "@/components/Footer";
@@ -64,8 +65,10 @@ export default function RootLayout({ children }) {
       suppressHydrationWarning
       className={`${inter.variable} ${outfit.variable} ${plusJakartaSans.variable} h-full antialiased`}
     >
-      <head>
-        <script
+      <body className="min-h-full flex flex-col bg-bg-base text-text-main font-inter selection:bg-brand selection:text-white overflow-x-hidden w-full max-w-full">
+        <Script
+          id="theme-initializer"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
@@ -84,8 +87,6 @@ export default function RootLayout({ children }) {
             `,
           }}
         />
-      </head>
-      <body className="min-h-full flex flex-col bg-bg-base text-text-main font-inter selection:bg-brand selection:text-white overflow-x-hidden w-full max-w-full">
         <PostHogProvider>
           <header>
             <Navber />

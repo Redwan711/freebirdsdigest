@@ -1,4 +1,5 @@
 import { fetchAPI } from "./api";
+import { filterVisiblePosts } from "./post-filter";
 
 const SEARCH_POSTS = `
   query SearchPosts($search: String!, $first: Int = 30) {
@@ -45,9 +46,11 @@ export async function fetchSearchResults(searchQuery, first = 30) {
     const data = await fetchAPI(SEARCH_POSTS, {
       variables: { search: searchQuery.trim(), first },
     });
-    return data?.posts?.nodes ?? [];
+    const nodes = data?.posts?.nodes ?? [];
+    return filterVisiblePosts(nodes);
   } catch (err) {
     console.error("Failed fetching search results:", err);
     return [];
   }
 }
+

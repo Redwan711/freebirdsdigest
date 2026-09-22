@@ -1,8 +1,9 @@
 import { fetchAPI } from "./api";
+import { filterVisiblePosts } from "./post-filter";
 
 const GET_MAIN_NEW_PREVIEW = `
   query GetMainNewPreview {
-    posts(where: { categoryName: "main-new-preview" }, first: 9) {
+    posts(where: { categoryName: "main-new-preview" }, first: 15) {
       nodes {
         id
         databaseId
@@ -16,6 +17,13 @@ const GET_MAIN_NEW_PREVIEW = `
             altText
           }
         }
+        categories {
+          nodes {
+            id
+            name
+            slug
+          }
+        }
       }
     }
   }
@@ -23,6 +31,6 @@ const GET_MAIN_NEW_PREVIEW = `
 
 export async function fetchMainNewPreview() {
   const data = await fetchAPI(GET_MAIN_NEW_PREVIEW);
-
-  return data?.posts?.nodes ?? [];
-}
+  const raw = data?.posts?.nodes ?? [];
+  return filterVisiblePosts(raw).slice(0, 9);
+}

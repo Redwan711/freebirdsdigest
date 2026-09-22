@@ -108,3 +108,32 @@ The full tools directory page component and data are preserved in:
 - **Changes Made**:
   - Changed `const showSponsorsAd = false;` to `const showSponsorsAd = true;` on line 18.
   - When active, the sidebar switches away from `<ToolsWidget />` and now directly renders the **Featured Partners / Sponsored Ad Panel** fetching from the WordPress `sponsors` category.
+
+---
+
+## 4. Automatic Post Hiding via the `hide` Category
+
+Any post assigned to the WordPress category **`hide`** (slug: `hide`) is automatically and completely suppressed from the entire frontend:
+
+### How it Works:
+1. **Direct Post Access (`app/news/[slug]/page.js`)**:
+   - If a post's categories include `hide`, `fetchPost` returns `null`.
+   - The user receives a clean `404 Not Found` page and `robots: { index: false, follow: false }` metadata.
+2. **Category Page Access (`app/[category]/page.js`)**:
+   - Visiting `/hide` returns a clean `404 Not Found` page.
+3. **Navigation & Feeds Suppressed**:
+   - **Hero Digest & Trending News**: Excluded via `lib/hero-news.js`.
+   - **Header Bar Top News**: Excluded via `lib/headerNews.js`.
+   - **Recent Articles & Category Feeds**: Excluded via `lib/recent-posts.js` and `lib/category-news.js`.
+   - **Main News Preview**: Excluded via `lib/main-new-preview.js`.
+   - **Side Panel News**: Excluded via `lib/side-panel-news.js`.
+   - **Search Results**: Excluded via `lib/search.js`.
+   - **Author Profiles**: Excluded from author article lists in `app/author/[slug]/page.js`.
+   - **Recommended News**: Excluded from the related posts widget at the bottom of articles.
+   - **Sitemap**: Excluded from `sitemap.xml` via `app/sitemap.js`.
+   - **Navbar / Menus**: The category `hide` itself is excluded from all navigation categories in `lib/categories.js`.
+
+### How to Hide or Unhide a Post:
+- **To Hide**: In WordPress Admin, simply check the **hide** category on the post and save.
+- **To Unhide**: In WordPress Admin, uncheck the **hide** category from the post and save.
+

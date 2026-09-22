@@ -1,6 +1,7 @@
 import { fetchAllCategories } from "@/lib/categories";
 import { fetchAPI } from "@/lib/api";
 import { siteUrl } from "@/lib/site";
+import { filterVisiblePosts } from "@/lib/post-filter";
 import { BEST_VPNS_USA_POST } from "@/lib/posts/5-best-vpns-usa";
 
 export const revalidate = 3600;
@@ -12,6 +13,13 @@ const GET_SITEMAP_POSTS = `
         slug
         date
         modified
+        categories {
+          nodes {
+            id
+            name
+            slug
+          }
+        }
       }
       pageInfo {
         hasNextPage
@@ -88,12 +96,13 @@ export default async function sitemap() {
     "bottom-page-ads",
     "uncategorized",
     "sponsors",
+    "hide",
   ]);
 
   const categoryPages = categories
     .filter(
       (category) =>
-        !EXCLUDED_CATEGORIES.has(category.slug) && category.count > 0
+        !EXCLUDED_CATEGORIES.has(category.slug?.toLowerCase()) && category.count > 0
     )
     .map((category) => ({
       url: `${siteUrl}/${category.slug}`,
@@ -101,7 +110,9 @@ export default async function sitemap() {
       priority: 0.8,
     }));
 
-  const articlePages = posts.map((post) => ({
+  const visiblePosts = filterVisiblePosts(posts);
+
+  const articlePages = visiblePosts.map((post) => ({
     url: `${siteUrl}/news/${post.slug}`,
     lastModified: new Date(post.modified || post.date),
     changeFrequency: "weekly",

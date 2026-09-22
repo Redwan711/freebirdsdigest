@@ -33,6 +33,7 @@ import TransparencyNotice from "@/components/TransparencyNotice";
 import { syncPostAuthor } from "@/lib/authors";
 import { getPostImageObjects } from "@/lib/parse-images";
 import { parseHeadingsAndInjectIds } from "@/lib/toc";
+import { isPostHidden, filterVisiblePosts } from "@/lib/post-filter";
 import { BEST_VPNS_USA_POST } from "@/lib/posts/5-best-vpns-usa";
 
 export const revalidate = 3600;
@@ -736,14 +737,22 @@ const fetchPost = cache(async (postSlug, postId) => {
     }
   }
 
-  return data?.post;
+  const post = data?.post;
+  if (!post) return null;
+
+  // Block any post that belongs to the 'hide' category
+  if (isPostHidden(post)) {
+    return null;
+  }
+
+  return post;
 });
 
 const fetchRecommendedPosts = cache(
   async (categorySlug, currentPostId, currentDatabaseId) => {
     let recommendedNodes = [];
 
-    if (categorySlug) {
+    if (categorySlug && categorySlug.toLowerCase() !== "hide") {
       try {
         const data = await fetchAPI(GET_RECOMMENDED_POSTS_BY_CATEGORY, {
           variables: { categoryName: categorySlug },
@@ -752,7 +761,8 @@ const fetchRecommendedPosts = cache(
         recommendedNodes = nodes.filter(
           (p) =>
             p.id !== currentPostId &&
-            String(p.databaseId) !== String(currentDatabaseId)
+            String(p.databaseId) !== String(currentDatabaseId) &&
+            !isPostHidden(p)
         );
       } catch (err) {
         console.error("Failed fetching recommended posts by category:", err);
@@ -767,7 +777,8 @@ const fetchRecommendedPosts = cache(
           (p) =>
             p.id !== currentPostId &&
             String(p.databaseId) !== String(currentDatabaseId) &&
-            !recommendedNodes.some((existing) => existing.id === p.id)
+            !recommendedNodes.some((existing) => existing.id === p.id) &&
+            !isPostHidden(p)
         );
         recommendedNodes = [...recommendedNodes, ...extraNodes];
       } catch (err) {

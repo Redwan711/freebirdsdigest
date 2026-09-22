@@ -30,10 +30,10 @@ const NAVIGATION_CATEGORY_SLUGS = [
 ];
 
 const DEFAULT_REVIEW_SUBCATEGORIES = [
+  { id: 'vpn-reviews', slug: 'vpn-reviews', name: 'VPN Reviews' },
   { id: 'ai-tools-reviews', slug: 'ai-tools-reviews', name: 'AI Tools Reviews' },
   { id: 'hosting-reviews', slug: 'hosting-reviews', name: 'Hosting Reviews' },
   { id: 'domain-reviews', slug: 'domain-reviews', name: 'Domain Reviews' },
-  { id: 'vpn-reviews', slug: 'vpn-reviews', name: 'VPN Reviews' },
 ];
 
 const NAV_SLUG_SET = new Set(NAVIGATION_CATEGORY_SLUGS);
@@ -55,14 +55,18 @@ export function filterNavCategories(categories = []) {
         'promotional-image',
         'bottom-page-ads',
         'uncategorized',
-      ].includes(cat?.slug)
+        'hide',
+      ].includes(cat?.slug?.toLowerCase())
   );
 }
 
 export const fetchAllCategories = cache(async () => {
   const data = await fetchAPI(GET_ALL_CATEGORIES);
 
-  return data?.categories?.nodes ?? [];
+  const rawNodes = data?.categories?.nodes ?? [];
+  return rawNodes.filter(
+    (cat) => cat?.slug?.toLowerCase() !== 'hide' && cat?.name?.toLowerCase() !== 'hide'
+  );
 });
 
 export async function fetchNavigationCategories() {
@@ -95,11 +99,22 @@ export async function fetchReviewSubcategories() {
     });
 
     if (reviewCats.length > 0) {
-      return reviewCats.map((cat) => ({
+      const mapped = reviewCats.map((cat) => ({
         id: cat.id || cat.slug,
         slug: cat.slug,
         name: cat.name,
       }));
+
+      // Ensure 'vpn-reviews' is prioritized at the very top of the list
+      mapped.sort((a, b) => {
+        const aIsVpn = a.slug === 'vpn-reviews' || a.name?.toLowerCase().includes('vpn');
+        const bIsVpn = b.slug === 'vpn-reviews' || b.name?.toLowerCase().includes('vpn');
+        if (aIsVpn && !bIsVpn) return -1;
+        if (!aIsVpn && bIsVpn) return 1;
+        return 0;
+      });
+
+      return mapped;
     }
   } catch (error) {
     console.error('Error fetching review subcategories:', error);

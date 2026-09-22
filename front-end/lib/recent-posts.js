@@ -1,4 +1,5 @@
 import { fetchAPI } from "./api";
+import { filterVisiblePosts } from "./post-filter";
 import { BEST_VPNS_USA_POST } from "./posts/5-best-vpns-usa";
 
 const GET_RECENT_POSTS = `
@@ -48,5 +49,6 @@ export async function fetchRecentPosts() {
   }
   */
 
-  return nodes;
+  return filterVisiblePosts(nodes);
 }
+

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getAuthorBySlug, syncPostAuthor } from "@/lib/authors";
+import { isPostHidden } from "@/lib/post-filter";
 import { fetchAPI } from "@/lib/api";
 import { siteName } from "@/lib/site";
 import {
@@ -216,6 +217,10 @@ export default async function AuthorProfilePage({ params }) {
 
   // Filter posts that belong to this author strictly by authorSerial / author_serial ACF field
   const articles = allPosts.filter((post) => {
+    if (isPostHidden(post)) {
+      return false;
+    }
+
     const rawAuthorSerial =
       post.articleMetadata?.authorSerial || post.articleMetadata?.author_serial;
 
