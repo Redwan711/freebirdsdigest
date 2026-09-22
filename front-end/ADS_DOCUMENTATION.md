@@ -10,7 +10,7 @@ This document outlines all advertisement, promotional banner, and sponsored part
 |---|---|---|---|---|
 | 1 | **Top Hero Banner Ad** | `components/HeroNews.jsx` | ❌ Hidden | Set `showTopBannerAd = true` in `HeroNews.jsx` |
 | 2 | **In-Between / Bottom Ad Banner** | `components/BottomPageAd.jsx` | ❌ Hidden | Set `showBottomPageAd = true` in `BottomPageAd.jsx` |
-| 3 | **Right Sidebar Sponsors Ad Panel** | `components/SponsorsAdPnl.jsx` | ❌ Hidden | Set `showSponsorsAd = true` in `SponsorsAdPnl.jsx` |
+| 3 | **Sidebar Sponsors Ad Panel** | `components/SponsorsAdPnl.jsx` | ✅ Active | Set `showSponsorsAd = true` in `SponsorsAdPnl.jsx` |
 
 ---
 

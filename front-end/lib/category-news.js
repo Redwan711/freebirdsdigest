@@ -34,6 +34,8 @@ export const fetchCategoryNews = cache(async (categoryName, first = 24) => {
     console.error("Failed fetching category news from GraphQL:", err);
   }
 
+  // TEMPORARILY DISABLED: US Top 5 VPN post injection
+  /*
   const isVpnCategory =
     categoryName?.toLowerCase() === "vpn-reviews" ||
     categoryName?.toLowerCase() === "vpn reviews";
@@ -47,6 +49,7 @@ export const fetchCategoryNews = cache(async (categoryName, first = 24) => {
       nodes = [BEST_VPNS_USA_POST, ...nodes];
     }
   }
+  */
 
   return nodes;
 });

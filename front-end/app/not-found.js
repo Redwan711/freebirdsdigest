@@ -22,7 +22,8 @@ export default function NotFound() {
   const quickLinks = [
     { title: "VPN Finder", href: "/vpn-finder", icon: ShieldCheck, desc: "Find top-rated secure VPNs" },
     { title: "Rate Calculator", href: "/freelance-rate-calculator", icon: Calculator, desc: "Calculate freelance hourly rates" },
-    { title: "Tools Directory", href: "/tools", icon: Compass, desc: "Explore remote work tools" },
+    // TEMPORARILY DISABLED: Tools Directory link
+    // { title: "Tools Directory", href: "/tools", icon: Compass, desc: "Explore remote work tools" },
   ];
 
   const popularCategories = [
@@ -60,6 +61,7 @@ export default function NotFound() {
             <Home className="h-4 w-4" />
             Back to Home
           </Link>
+          {/* TEMPORARILY DISABLED: Explore Tools button
           <Link
             href="/tools"
             className="inline-flex items-center gap-2 rounded-xl border border-brandborder bg-bg-subtle px-6 py-3 text-sm font-semibold text-text-main transition-colors hover:border-brand/40 hover:text-brand"
@@ -67,6 +69,7 @@ export default function NotFound() {
             <Compass className="h-4 w-4" />
             Explore Tools
           </Link>
+          */}
         </div>
 
         {/* Quick Links */}

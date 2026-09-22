@@ -35,7 +35,8 @@ async function fetchSitemapPosts() {
     after = connection?.pageInfo?.endCursor ?? null;
   }
 
-  // Include standalone/local posts if not returned by GraphQL
+  // TEMPORARILY DISABLED: US Top 5 VPN post from sitemap
+  /*
   if (
     BEST_VPNS_USA_POST?.slug &&
     !posts.some((p) => p.slug === BEST_VPNS_USA_POST.slug)
@@ -46,6 +47,7 @@ async function fetchSitemapPosts() {
       modified: BEST_VPNS_USA_POST.modified,
     });
   }
+  */
 
   return posts;
 }
@@ -58,7 +60,8 @@ export default async function sitemap() {
 
   const staticPages = [
     { path: "", priority: 1.0, changeFrequency: "daily" },
-    { path: "/tools", priority: 0.8, changeFrequency: "weekly" },
+    // TEMPORARILY DISABLED: Tools page from sitemap
+    // { path: "/tools", priority: 0.8, changeFrequency: "weekly" },
     { path: "/vpn-finder", priority: 0.8, changeFrequency: "weekly" },
     { path: "/freelance-rate-calculator", priority: 0.8, changeFrequency: "weekly" },
     { path: "/author", priority: 0.7, changeFrequency: "weekly" },

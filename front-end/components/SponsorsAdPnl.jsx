@@ -15,7 +15,7 @@ function formatRedirectionUrl(url) {
 }
 
 export default async function SponsorsAdPnl() {
-  const showSponsorsAd = false;
+  const showSponsorsAd = true;
 
   if (!showSponsorsAd) {
     return <ToolsWidget />;

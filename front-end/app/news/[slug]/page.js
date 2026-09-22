@@ -649,6 +649,8 @@ function isDirectVideo(url) {
 }
 
 const fetchPost = cache(async (postSlug, postId) => {
+  // TEMPORARILY DISABLED: US Top 5 VPN post (/news/5-best-vpns-usa-tested-compared)
+  /*
   const isMatchingSlug =
     postSlug === BEST_VPNS_USA_POST.slug ||
     decodeURIComponent(postSlug || "") === BEST_VPNS_USA_POST.slug;
@@ -658,6 +660,7 @@ const fetchPost = cache(async (postSlug, postId) => {
   if (isMatchingSlug || isMatchingId) {
     return BEST_VPNS_USA_POST;
   }
+  */
 
   let data = null;
 

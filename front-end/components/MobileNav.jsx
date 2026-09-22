@@ -125,6 +125,7 @@ export default function MobileNav({ categories = [], reviewSubcategories = [] })
               )}
             </div>
 
+            {/* TEMPORARILY DISABLED: Freebirds Tools link in mobile nav
             <Link
               href="/tools"
               onClick={closeMenu}
@@ -135,6 +136,7 @@ export default function MobileNav({ categories = [], reviewSubcategories = [] })
                 2 Tools
               </span>
             </Link>
+            */}
 
 
 

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import {
   Calculator,
   ShieldCheck,
@@ -19,6 +20,11 @@ export const metadata = {
     "Explore our free interactive tools for freelancers and remote workers, including the Freelance Rate Calculator and Smart VPN Finder.",
   alternates: {
     canonical: "/tools",
+  },
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
   },
   openGraph: {
     type: "website",
@@ -85,6 +91,9 @@ const TOOLS_LIST = [
 ];
 
 export default function ToolsPage() {
+  // TEMPORARILY DISABLED: Tools page disabled per request
+  notFound();
+
   return (
     <main className="min-h-screen bg-bg-base text-text-main py-10 px-4 sm:px-6 lg:px-8 font-inter">
       <div className="max-w-5xl mx-auto space-y-10">

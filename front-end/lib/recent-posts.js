@@ -38,12 +38,15 @@ export async function fetchRecentPosts() {
     console.error("Failed fetching recent posts:", err);
   }
 
+  // TEMPORARILY DISABLED: US Top 5 VPN post injection
+  /*
   const exists = nodes.some(
     (n) => n.slug === BEST_VPNS_USA_POST.slug || n.databaseId === BEST_VPNS_USA_POST.databaseId
   );
   if (!exists) {
     nodes = [BEST_VPNS_USA_POST, ...nodes];
   }
+  */
 
   return nodes;
 }

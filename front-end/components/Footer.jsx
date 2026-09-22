@@ -97,12 +97,14 @@ const Footer = async () => {
                                 Company & Legal
                             </h4>
                             <ul className="space-y-2.5 text-sm text-slate-400 font-medium">
+                                {/* TEMPORARILY DISABLED: Freebirds Tools link in footer
                                 <li>
                                     <Link href="/tools" className="hover:text-brand transition-colors text-brand font-semibold flex items-center gap-1.5">
                                         <span className="w-1.5 h-1.5 rounded-full bg-brand" />
                                         Freebirds Tools
                                     </Link>
                                 </li>
+                                */}
                                 <li>
                                     <Link href="/about" className="hover:text-brand transition-colors">
                                         About Us

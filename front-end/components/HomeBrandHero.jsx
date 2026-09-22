@@ -17,8 +17,10 @@ export default function HomeBrandHero() {
           </div>
 
           {/* Primary H1 Heading */}
-          <h1 className="font-jakarta text-2xl font-extrabold tracking-tight text-text-main sm:text-3xl md:text-4xl lg:text-[42px] leading-tight">
-            Helping Solo Professionals Build Smarter Careers.
+          <h1 className="font-jakarta text-2xl font-extrabold tracking-tight text-text-main sm:text-3xl md:text-4xl lg:text-[40px] leading-tight">
+            <span className="text-brand">FreeBirds Digest</span>{" "}
+            <span className="text-text-muted/50 font-normal">|</span>{" "}
+            <span>Insights, Resources &amp; Stories for Solo Professionals &amp; Freelancers</span>
           </h1>
 
           {/* Subheading / Value Proposition */}
@@ -28,6 +30,7 @@ export default function HomeBrandHero() {
 
           {/* Quick Pillar & Tools Navigation Pills */}
           <div className="flex flex-wrap items-center gap-2 pt-2 text-xs font-bold">
+            {/* TEMPORARILY DISABLED: Interactive Toolkit HUB link
             <Link
               href="/tools"
               className="inline-flex items-center gap-1.5 rounded-full bg-brand text-white px-3.5 py-1.5 shadow-xs hover:bg-brand-dark transition-all hover:scale-105 active:scale-95"
@@ -38,6 +41,7 @@ export default function HomeBrandHero() {
                 HUB
               </span>
             </Link>
+            */}
 
             <Link
               href="/finance"
