@@ -3,8 +3,8 @@ import { fetchAPI } from "./api";
 import { BEST_VPNS_USA_POST } from "./posts/5-best-vpns-usa";
 
 const GET_CATEGORY_NEWS = `
-  query GetCategoryNews($categoryName: String!) {
-    posts(where: { categoryName: $categoryName }, first: 9) {
+  query GetCategoryNews($categoryName: String!, $first: Int) {
+    posts(where: { categoryName: $categoryName }, first: $first) {
       nodes {
         id
         databaseId
@@ -23,11 +23,11 @@ const GET_CATEGORY_NEWS = `
   }
 `;
 
-export const fetchCategoryNews = cache(async (categoryName) => {
+export const fetchCategoryNews = cache(async (categoryName, first = 24) => {
   let nodes = [];
   try {
     const data = await fetchAPI(GET_CATEGORY_NEWS, {
-      variables: { categoryName },
+      variables: { categoryName, first },
     });
     nodes = data?.posts?.nodes ?? [];
   } catch (err) {

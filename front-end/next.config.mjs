@@ -1,14 +1,59 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    unoptimized: process.env.NODE_ENV === 'development',
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    minimumCacheTTL: 2678400, // Cache optimized images for 31 days
     dangerouslyAllowLocalIP: true,
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     remotePatterns: [
       {
         protocol: "https",
         hostname: "server.freebirdsdigest.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "http",
+        hostname: "server.freebirdsdigest.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "freebirdsdigest.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "www.freebirdsdigest.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "secure.gravatar.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "images.pexels.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "**.wp.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "**.wordpress.com",
         pathname: "/**",
       },
       {
@@ -24,10 +69,12 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "**",
+        pathname: "/**",
       },
       {
         protocol: "http",
         hostname: "**",
+        pathname: "/**",
       },
     ],
   },

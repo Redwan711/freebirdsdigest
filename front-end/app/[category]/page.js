@@ -1,10 +1,11 @@
-import Image from "next/image";
+import ArticleImage from "@/components/ArticleImage";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { fetchCategoryNews } from "../../lib/category-news";
 import { siteName, siteUrl } from "@/lib/site";
+import { cleanText, truncateText, formatCategoryTitle } from "@/lib/text-utils";
 
-const fallbackImage = "/prothomalo-bangla_2026-07-09_nxgtx74x_bbm.avif";
+const fallbackImage = "/placeholder-news.svg";
 
 export async function generateMetadata({ params }) {
   const { category } = await params;
@@ -21,10 +22,7 @@ export async function generateMetadata({ params }) {
     };
   }
 
-  const formattedTitle = category
-    .split("-")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
+  const formattedTitle = formatCategoryTitle(category);
 
   return {
     title: formattedTitle,
@@ -40,8 +38,6 @@ export async function generateMetadata({ params }) {
     },
   };
 }
-
-import { cleanText, truncateText } from "@/lib/text-utils";
 
 function formatPostDate(dateString) {
   if (!dateString) return "";
@@ -67,13 +63,9 @@ export default async function CategoryPage({ params }) {
 
   const mainStory = posts[0];
   const splitStories = posts.slice(1, 3);
-  const gridStories = posts.slice(3, 9);
+  const gridStories = posts.slice(3);
 
-  const formattedCategory = currentCategory.replace(/-/g, " ");
-  const formattedTitle = currentCategory
-    .split("-")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
+  const formattedTitle = formatCategoryTitle(currentCategory);
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-8 md:px-6 font-inter">
@@ -104,20 +96,21 @@ export default async function CategoryPage({ params }) {
 
       <section className="mb-8 flex flex-col gap-2 border-b border-brandborder pb-4">
         <p className="text-xs font-bold uppercase tracking-wider text-brand">Category Digest</p>
-        <h1 className="font-jakarta text-3xl font-extrabold text-text-main md:text-4xl capitalize tracking-tight">
-          {formattedCategory}
+        <h1 className="font-jakarta text-3xl font-extrabold text-text-main md:text-4xl tracking-tight">
+          {formattedTitle}
         </h1>
       </section>
 
       <div className="rightSideNewsPnl font-inter grid gap-6">
         <section className="top1sec grid grid-cols-1 items-center gap-6 border-b border-brandborder pb-6 sm:grid-cols-2">
-          <Link href={`/news/${mainStory.slug}`} className="group overflow-hidden rounded-2xl bg-bg-subtle aspect-16/10">
-            <Image
+          <Link href={`/news/${mainStory.slug}`} className="group relative overflow-hidden rounded-2xl bg-bg-subtle aspect-16/10">
+            <ArticleImage
               src={mainStory.featuredImage?.node?.sourceUrl || fallbackImage}
               alt={mainStory.featuredImage?.node?.altText || mainStory.title}
-              width={450}
-              height={300}
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              fill
+              sizes="(max-width: 768px) 100vw, 550px"
+              priority
+              className="object-cover transition-transform duration-300 group-hover:scale-105"
             />
           </Link>
           <div className="right space-y-2">
@@ -140,13 +133,13 @@ export default async function CategoryPage({ params }) {
           <div className="lefttNews grid grid-cols-1 gap-4 border-b border-brandborder pb-6 sm:grid-cols-2 2xl:border-b-0 2xl:border-r 2xl:pb-0 2xl:pr-6">
             {splitStories[0] && (
               <>
-                <Link href={`/news/${splitStories[0]?.slug}`} className="group overflow-hidden rounded-xl bg-bg-subtle aspect-16/10">
-                  <Image
+                <Link href={`/news/${splitStories[0]?.slug}`} className="group relative overflow-hidden rounded-xl bg-bg-subtle aspect-16/10">
+                  <ArticleImage
                     src={splitStories[0]?.featuredImage?.node?.sourceUrl || fallbackImage}
-                    alt={splitStories[0]?.featuredImage?.node?.altText || splitStories[0]?.title || formattedCategory}
-                    width={350}
-                    height={220}
-                    className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
+                    alt={splitStories[0]?.featuredImage?.node?.altText || splitStories[0]?.title || formattedTitle}
+                    fill
+                    sizes="(max-width: 640px) 100vw, 350px"
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 </Link>
                 <div className="text space-y-1.5">
@@ -169,13 +162,13 @@ export default async function CategoryPage({ params }) {
           <div className="righttNews grid grid-cols-1 gap-4 sm:grid-cols-2">
             {splitStories[1] && (
               <>
-                <Link href={`/news/${splitStories[1]?.slug}`} className="group overflow-hidden rounded-xl bg-bg-subtle aspect-16/10">
-                  <Image
+                <Link href={`/news/${splitStories[1]?.slug}`} className="group relative overflow-hidden rounded-xl bg-bg-subtle aspect-16/10">
+                  <ArticleImage
                     src={splitStories[1]?.featuredImage?.node?.sourceUrl || fallbackImage}
-                    alt={splitStories[1]?.featuredImage?.node?.altText || splitStories[1]?.title || formattedCategory}
-                    width={350}
-                    height={220}
-                    className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
+                    alt={splitStories[1]?.featuredImage?.node?.altText || splitStories[1]?.title || formattedTitle}
+                    fill
+                    sizes="(max-width: 640px) 100vw, 350px"
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 </Link>
                 <div className="text space-y-1.5">
@@ -203,13 +196,13 @@ export default async function CategoryPage({ params }) {
               href={`/news/${post.slug}`}
               className="group flex flex-col gap-2.5 rounded-xl border border-brandborder p-3 bg-bg-surface hover:border-brand/40 transition-all shadow-2xs"
             >
-              <div className="image overflow-hidden rounded-lg bg-bg-subtle aspect-16/10">
-                <Image
+              <div className="image relative overflow-hidden rounded-lg bg-bg-subtle aspect-16/10">
+                <ArticleImage
                   src={post.featuredImage?.node?.sourceUrl || fallbackImage}
                   alt={post.featuredImage?.node?.altText || post.title}
-                  width={350}
-                  height={200}
-                  className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 350px"
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
                 />
               </div>
               <div className="text space-y-1">

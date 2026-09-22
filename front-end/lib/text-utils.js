@@ -91,3 +91,45 @@ export function truncateText(text = "", maxLength = 140) {
 
   return `${text.slice(0, maxLength).trimEnd()}...`;
 }
+
+const KNOWN_ACRONYMS = new Set([
+  "vpn",
+  "ai",
+  "seo",
+  "usa",
+  "api",
+  "ui",
+  "ux",
+  "faq",
+  "rss",
+  "ip",
+  "dns",
+  "os",
+  "url",
+  "html",
+  "css",
+  "js",
+]);
+
+/**
+ * Formats a slug into a properly capitalized title, preserving acronyms in uppercase.
+ * Example: 'vpn-reviews' -> 'VPN Reviews', 'ai-tools-reviews' -> 'AI Tools Reviews'
+ *
+ * @param {string} slug - Category or route slug
+ * @returns {string} - Formatted title string
+ */
+export function formatCategoryTitle(slug = "") {
+  if (!slug || typeof slug !== "string") return "";
+
+  return slug
+    .split("-")
+    .map((word) => {
+      const lower = word.toLowerCase();
+      if (KNOWN_ACRONYMS.has(lower)) {
+        return lower.toUpperCase();
+      }
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    })
+    .join(" ");
+}
+

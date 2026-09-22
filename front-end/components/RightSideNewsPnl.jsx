@@ -1,8 +1,8 @@
-import Image from "next/image";
+import ArticleImage from "./ArticleImage";
 import Link from "next/link";
 import { fetchMainNewPreview } from "@/lib/main-new-preview";
 
-const fallbackImage = "/prothomalo-bangla_2026-07-09_nxgtx74x_bbm.avif";
+const fallbackImage = "/placeholder-news.svg";
 
 import { cleanText, truncateText } from "@/lib/text-utils";
 
@@ -28,13 +28,14 @@ const RightSideNewsPnl = async () => {
         <div className='rightSideNewsPnl font-inter grid gap-6 rounded-3xl border border-brandborder bg-bg-surface p-5 sm:p-8 shadow-2xs'>
 
             <section className="top1sec grid grid-cols-1 items-center gap-6 border-b border-brandborder pb-6 font-inter sm:grid-cols-2">
-                <Link href={mainStory ? `/news/${mainStory.slug}` : "#"} className="group overflow-hidden rounded-2xl bg-bg-subtle aspect-16/10">
-                    <Image
+                <Link href={mainStory ? `/news/${mainStory.slug}` : "#"} className="group relative overflow-hidden rounded-2xl bg-bg-subtle aspect-16/10">
+                    <ArticleImage
                         src={mainStory?.featuredImage?.node?.sourceUrl || fallbackImage}
                         alt={mainStory?.featuredImage?.node?.altText || mainStory?.title || "main digest preview"}
-                        width={450}
-                        height={300}
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        fill
+                        sizes="(max-width: 768px) 100vw, 550px"
+                        priority
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                 </Link>
                 <div className="right space-y-2">
@@ -58,13 +59,13 @@ const RightSideNewsPnl = async () => {
                 <div className="lefttNews grid grid-cols-1 gap-4 border-b border-brandborder pb-6 sm:grid-cols-2 2xl:border-b-0 2xl:border-r 2xl:pb-0 2xl:pr-6">
                     {splitStories[0] && (
                         <>
-                            <Link href={`/news/${splitStories[0].slug}`} className="group overflow-hidden rounded-xl bg-bg-subtle aspect-16/10">
-                                <Image
+                            <Link href={`/news/${splitStories[0].slug}`} className="group relative overflow-hidden rounded-xl bg-bg-subtle aspect-16/10">
+                                <ArticleImage
                                     src={splitStories[0]?.featuredImage?.node?.sourceUrl || fallbackImage}
                                     alt={splitStories[0]?.featuredImage?.node?.altText || splitStories[0]?.title}
-                                    width={350}
-                                    height={220}
-                                    className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
+                                    fill
+                                    sizes="(max-width: 640px) 100vw, 350px"
+                                    className="object-cover transition-transform duration-300 group-hover:scale-105"
                                 />
                             </Link>
                             <div className="text space-y-1.5">
@@ -87,13 +88,13 @@ const RightSideNewsPnl = async () => {
                 <div className="righttNews grid grid-cols-1 gap-4 sm:grid-cols-2">
                     {splitStories[1] && (
                         <>
-                            <Link href={`/news/${splitStories[1].slug}`} className="group overflow-hidden rounded-xl bg-bg-subtle aspect-16/10">
-                                <Image
+                            <Link href={`/news/${splitStories[1].slug}`} className="group relative overflow-hidden rounded-xl bg-bg-subtle aspect-16/10">
+                                <ArticleImage
                                     src={splitStories[1]?.featuredImage?.node?.sourceUrl || fallbackImage}
                                     alt={splitStories[1]?.featuredImage?.node?.altText || splitStories[1]?.title}
-                                    width={350}
-                                    height={220}
-                                    className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
+                                    fill
+                                    sizes="(max-width: 640px) 100vw, 350px"
+                                    className="object-cover transition-transform duration-300 group-hover:scale-105"
                                 />
                             </Link>
                             <div className="text space-y-1.5">
@@ -122,13 +123,13 @@ const RightSideNewsPnl = async () => {
                         href={`/news/${story.slug}`}
                         className="group flex flex-col gap-2.5 rounded-xl border border-brandborder/60 p-3 bg-bg-subtle/70 hover:bg-bg-subtle hover:border-brand/40 transition-all shadow-2xs"
                     >
-                        <div className="image overflow-hidden rounded-lg bg-bg-subtle aspect-16/10">
-                            <Image
+                        <div className="image relative overflow-hidden rounded-lg bg-bg-subtle aspect-16/10">
+                            <ArticleImage
                                 src={story?.featuredImage?.node?.sourceUrl || fallbackImage}
                                 alt={story?.featuredImage?.node?.altText || story?.title}
-                                width={350}
-                                height={200}
-                                className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
+                                fill
+                                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 350px"
+                                className="object-cover transition-transform duration-300 group-hover:scale-105"
                             />
                         </div>
                         <div className="text space-y-1">
