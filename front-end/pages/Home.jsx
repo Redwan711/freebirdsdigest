@@ -1,3 +1,4 @@
+import HomeBrandHero from '@/components/HomeBrandHero';
 import HeroNews from '@/components/HeroNews';
 import LeftSideNewsPnl from '@/components/LeftSideNewsPnl';
 import RightSideNewsPnl from '@/components/RightSideNewsPnl';
@@ -77,6 +78,7 @@ const Home = async () => {
 
   return (
     <div>
+      <HomeBrandHero />
       <HeroNews heroData={heroData} />
 
       {/* Main News Preview Panel */}

@@ -1,10 +1,11 @@
+import ArticleImage from "./ArticleImage";
 import Image from "next/image";
 import Link from "next/link";
 import { fetchHeroNews } from "@/lib/hero-news";
 import { fetchPromotionalImage } from "@/lib/promotional-image";
 import { Clock } from "lucide-react";
 
-const fallbackImage = "/prothomalo-bangla_2026-07-09_nxgtx74x_bbm.avif";
+const fallbackImage = "/placeholder-news.svg";
 
 function formatHeroDate(dateString) {
   if (!dateString) return "";
@@ -62,7 +63,7 @@ const HeroNews = async ({ heroData: passedHeroData } = {}) => {
   const showTopBannerAd = false;
 
   return (
-    <div className="container mx-auto px-4 md:px-6 pt-6">
+    <div className="container mx-auto px-4 md:px-6 pt-4">
       <section className="bg-bg-surface border border-brandborder rounded-3xl overflow-hidden shadow-xs">
         {showTopBannerAd && headerHeroImage && (
           finalLink ? (
@@ -106,9 +107,9 @@ const HeroNews = async ({ heroData: passedHeroData } = {}) => {
                   <span className="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-brand">
                     Featured Digest
                   </span>
-                  <h1 className="text-xl font-bold tracking-tight leading-snug md:text-2xl text-text-main group-hover:text-brand transition-colors">
+                  <h2 className="text-xl font-bold tracking-tight leading-snug md:text-2xl text-text-main group-hover:text-brand transition-colors">
                     {topStory.title}
-                  </h1>
+                  </h2>
                   <p className="text-sm leading-relaxed text-text-muted">
                     {truncateText(cleanText(topStory.excerpt), 160)}
                   </p>
@@ -119,7 +120,7 @@ const HeroNews = async ({ heroData: passedHeroData } = {}) => {
                 </div>
 
                 <div className="image relative aspect-16/12 overflow-hidden rounded-xl bg-bg-subtle shadow-sm">
-                  <Image
+                  <ArticleImage
                     src={
                       topStory.featuredImage?.node?.sourceUrl || fallbackImage
                     }
@@ -128,6 +129,7 @@ const HeroNews = async ({ heroData: passedHeroData } = {}) => {
                     }
                     fill
                     sizes="(max-width: 1024px) 100vw, 560px"
+                    priority
                     className="object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
@@ -158,7 +160,7 @@ const HeroNews = async ({ heroData: passedHeroData } = {}) => {
                   </div>
 
                   <div className="relative size-20 shrink-0 overflow-hidden rounded-lg bg-bg-subtle self-start">
-                    <Image
+                    <ArticleImage
                       src={post.featuredImage?.node?.sourceUrl || fallbackImage}
                       alt={post.featuredImage?.node?.altText || post.title}
                       fill

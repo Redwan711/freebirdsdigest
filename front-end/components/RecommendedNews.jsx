@@ -1,8 +1,8 @@
-import Image from "next/image";
+import ArticleImage from "./ArticleImage";
 import Link from "next/link";
 import { Sparkles, Calendar, ArrowRight } from "lucide-react";
 
-const fallbackImage = "/prothomalo-bangla_2026-07-09_nxgtx74x_bbm.avif";
+const fallbackImage = "/placeholder-news.svg";
 
 import { cleanHtml } from "@/lib/text-utils";
 
@@ -56,13 +56,12 @@ export default function RecommendedNews({ posts = [] }) {
               <div className="space-y-3">
                 {/* Article Thumbnail */}
                 <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-bg-subtle border border-brandborder/50">
-                  <Image
+                  <ArticleImage
                     src={imageUrl}
                     alt={imageAlt}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
                   />
                   {categoryName && (
                     <div className="absolute top-3 left-3 z-10">

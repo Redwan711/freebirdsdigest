@@ -17,7 +17,6 @@ import {
   ExternalLink,
   Link as LinkIcon,
   Globe,
-  Info,
 } from "lucide-react";
 import ArticleActions from "@/components/ArticleActions";
 import BottomPageAd from "@/components/BottomPageAd";
@@ -934,8 +933,7 @@ export default async function PostPage({ params, searchParams }) {
   // Check if post was modified after its initial publication date
   const hasBeenModified = Boolean(
     post?.modified &&
-      post?.date &&
-      new Date(post.modified).getTime() > new Date(post.date).getTime()
+      (!post?.date || new Date(post.modified).getTime() > new Date(post.date).getTime())
   );
 
   const postUrl = `${siteUrl}/news/${post.slug}`;
@@ -1273,28 +1271,21 @@ export default async function PostPage({ params, searchParams }) {
               </div>
 
               <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 text-xs sm:text-sm font-semibold shrink-0">
-                <span className="flex items-center gap-1.5 text-text-muted bg-bg-subtle px-3 py-1.5 rounded-full border border-brandborder">
-                  <Calendar className="w-3.5 h-3.5 text-brand shrink-0" />
-                  <time dateTime={post.date}>{formatPostDate(post.date)}</time>
-                </span>
-
-                {hasBeenModified && (
+                {hasBeenModified ? (
                   <span className="flex items-center gap-1.5 text-text-muted bg-bg-subtle px-3 py-1.5 rounded-full border border-brandborder">
                     <Clock className="w-3.5 h-3.5 text-accent shrink-0" />
                     <span>
                       Updated <time dateTime={post.modified}>{formatPostDate(post.modified)}</time>
                     </span>
                   </span>
+                ) : (
+                  post?.date && (
+                    <span className="flex items-center gap-1.5 text-text-muted bg-bg-subtle px-3 py-1.5 rounded-full border border-brandborder">
+                      <Calendar className="w-3.5 h-3.5 text-brand shrink-0" />
+                      <time dateTime={post.date}>{formatPostDate(post.date)}</time>
+                    </span>
+                  )
                 )}
-
-                <Link
-                  href="/affiliate-disclosure"
-                  className="flex items-center gap-1.5 text-text-muted hover:text-brand bg-bg-subtle hover:bg-brand/10 px-3 py-1.5 rounded-full border border-brandborder hover:border-brand/30 transition-all group"
-                  title="Read our Affiliate Disclosure"
-                >
-                  <Info className="w-3.5 h-3.5 text-amber-500 shrink-0 group-hover:scale-110 transition-transform" />
-                  <span>Affiliate Disclosure</span>
-                </Link>
               </div>
             </div>
           </header>
