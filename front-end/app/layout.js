@@ -56,6 +56,9 @@ export const metadata = {
   icons: {
     icon: '/favicon.ico',
   },
+  other: {
+    'impact-site-verification': '821c665f-c1f7-4bff-a516-5b47a8563791',
+  },
 };
 
 export default function RootLayout({ children }) {
@@ -65,6 +68,9 @@ export default function RootLayout({ children }) {
       suppressHydrationWarning
       className={`${inter.variable} ${outfit.variable} ${plusJakartaSans.variable} h-full antialiased`}
     >
+      <head>
+        <meta name="impact-site-verification" value="821c665f-c1f7-4bff-a516-5b47a8563791" />
+      </head>
       <body className="min-h-full flex flex-col bg-bg-base text-text-main font-inter selection:bg-brand selection:text-white overflow-x-hidden w-full max-w-full">
         <Script
           id="theme-initializer"
