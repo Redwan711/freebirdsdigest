@@ -56,6 +56,11 @@ export const metadata = {
   icons: {
     icon: '/favicon.ico',
   },
+  verification: {
+    other: {
+      'impact-site-verification': 'e64764cf-1ef6-4a4a-9b9d-01a9556c5fc0',
+    },
+  },
 };
 
 export default function RootLayout({ children }) {
