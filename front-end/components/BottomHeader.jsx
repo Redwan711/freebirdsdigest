@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { Home, ChevronDown } from 'lucide-react'
+import { Home /*, ChevronDown */ } from 'lucide-react'
 import Link from 'next/link'
 import MobileNav from './MobileNav'
 import SearchButton from './SearchButton'
@@ -71,7 +71,16 @@ const BottomHeader = ({ activeCategories = [], reviewSubcategories = [] }) => {
                 </Link>
               ))}
 
-              {/* Reviews Dropdown */}
+              {/* VPN Reviews Link (temporarily replaces Reviews dropdown at the same position) */}
+              <Link
+                href="/vpn-reviews"
+                className="text-sm font-medium text-text-main hover:text-brand transition-colors relative group py-1"
+              >
+                VPN Reviews
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-brand transition-all duration-200 group-hover:w-full" />
+              </Link>
+
+              {/* TEMPORARILY DISABLED: Reviews Dropdown with subcategories
               <div className="relative group py-1">
                 <Link
                   href="/reviews"
@@ -99,6 +108,7 @@ const BottomHeader = ({ activeCategories = [], reviewSubcategories = [] }) => {
                   </div>
                 )}
               </div>
+              */}
               {/* TEMPORARILY DISABLED: Tools Hub link
               <Link
                 href="/tools"

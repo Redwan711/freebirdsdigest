@@ -1,3 +1,6 @@
 # Content source folders (not for public repo)
 Affiliate Disclosure/
 5 vpn/
+
+# Environment files
+.env*

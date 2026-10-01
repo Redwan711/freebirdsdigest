@@ -12,6 +12,7 @@ This document tracks all pages, routes, widgets, and links that have been tempor
 | **US Top 5 VPN Injections** | Category feed & recent posts | 🔴 Disabled | Uncomment injections in `lib/category-news.js` & `lib/recent-posts.js` |
 | **Tools Hub Page** | `/tools` | 🔴 Disabled (404) | Remove `notFound()` in `app/tools/page.js` |
 | **Tools Navigation Links** | Header, Mobile Nav, Hero, Footer, 404 | 🔴 Commented Out | Uncomment links in navigation components |
+| **Reviews Dropdown Menu** | Desktop Header (`BottomHeader.jsx`) & Mobile Nav (`MobileNav.jsx`) | 🔴 Dropdown Hidden / Replaced | Direct link to `/vpn-reviews` shown; uncomment dropdown blocks to restore |
 | **Sidebar Sponsors Ad Panel** | `components/SponsorsAdPnl.jsx` | 🟢 **ACTIVE** | Controlled by `showSponsorsAd = true` |
 
 ---
@@ -136,4 +137,37 @@ Any post assigned to the WordPress category **`hide`** (slug: `hide`) is automat
 ### How to Hide or Unhide a Post:
 - **To Hide**: In WordPress Admin, simply check the **hide** category on the post and save.
 - **To Unhide**: In WordPress Admin, uncheck the **hide** category from the post and save.
+
+---
+
+## 5. Reviews Dropdown Menu & Subcategories Navigation
+
+The hierarchical **Reviews** dropdown menu and mobile accordion submenu have been temporarily hidden. In their exact position on the navigation bar, a direct link to **VPN Reviews** (`/vpn-reviews`) has been placed instead.
+
+### What is Temporarily Hidden:
+- The top-level **Reviews** link (`/reviews`) with Chevron dropdown arrow.
+- The subcategory dropdown list (`reviewSubcategories`), including links to:
+  - AI Tools Reviews (`/ai-tools-reviews`)
+  - Hosting Reviews (`/hosting-reviews`)
+  - Domain Reviews (`/domain-reviews`)
+  - (VPN Reviews remains directly accessible as the active navbar item).
+
+### Modifications Made:
+
+1. **Desktop Header Navigation (`components/BottomHeader.jsx`)**:
+   - Location: Lines 74–110 in [`BottomHeader.jsx`](file:///home/potato/Documents/GitHub/freebirdsdigest/front-end/components/BottomHeader.jsx).
+   - **Current Status**: A direct `<Link href="/vpn-reviews">VPN Reviews</Link>` nav item is rendered at the exact position after `activeCategories`. The multi-link dropdown container is commented out.
+   - **To Re-enable**:
+     1. Remove the direct `<Link href="/vpn-reviews">VPN Reviews</Link>` block.
+     2. Uncomment the `{/* TEMPORARILY DISABLED: Reviews Dropdown with subcategories ... */}` block.
+     3. Restore `ChevronDown` in the `lucide-react` import at the top of `BottomHeader.jsx`.
+
+2. **Mobile Drawer Navigation (`components/MobileNav.jsx`)**:
+   - Location: Lines 89–134 in [`MobileNav.jsx`](file:///home/potato/Documents/GitHub/freebirdsdigest/front-end/components/MobileNav.jsx).
+   - **Current Status**: A direct `<Link href="/vpn-reviews">VPN Reviews</Link>` button is rendered at the same position. The expandable mobile Reviews section and its toggle button are commented out.
+   - **To Re-enable**:
+     1. Remove the standalone `<Link href="/vpn-reviews">VPN Reviews</Link>` item.
+     2. Uncomment the `{/* TEMPORARILY DISABLED: Mobile Reviews Section with Subcategories dropdown ... */}` block.
+     3. Restore `ChevronDown` in the `lucide-react` import at the top of `MobileNav.jsx`.
+
 

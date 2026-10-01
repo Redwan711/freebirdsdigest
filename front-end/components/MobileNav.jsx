@@ -1,6 +1,6 @@
 "use client";
 
-import { Home, Menu, X, ChevronDown, Search } from "lucide-react";
+import { Home, Menu, X, /* ChevronDown, */ Search } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import ThemeToggle from "./ThemeToggle";
@@ -86,7 +86,16 @@ export default function MobileNav({ categories = [], reviewSubcategories = [] })
               </Link>
             ))}
 
-            {/* Mobile Reviews Section with Subcategories */}
+            {/* VPN Reviews Link (temporarily replaces Reviews dropdown at the same position) */}
+            <Link
+              href="/vpn-reviews"
+              onClick={closeMenu}
+              className="block rounded-xl px-3.5 py-3 font-poppins text-sm font-semibold text-text-main hover:bg-brand/10 hover:text-brand transition-colors"
+            >
+              VPN Reviews
+            </Link>
+
+            {/* TEMPORARILY DISABLED: Mobile Reviews Section with Subcategories dropdown
             <div className="rounded-xl transition-colors">
               <div className="flex items-center justify-between px-3.5 py-2.5">
                 <Link
@@ -124,6 +133,7 @@ export default function MobileNav({ categories = [], reviewSubcategories = [] })
                 </div>
               )}
             </div>
+            */}
 
             {/* TEMPORARILY DISABLED: Freebirds Tools link in mobile nav
             <Link
