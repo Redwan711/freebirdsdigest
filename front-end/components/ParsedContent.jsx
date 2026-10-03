@@ -99,15 +99,14 @@ export function processArticleHtml(html) {
  * - Replaces keyword in visible plain text nodes (inside p, div, span, li, td, etc).
  * - Skips anything inside forbidden blocks: <a>, <h1>-<h6>, <script>, <style>, <button>, <pre>, <code>.
  * - Never modifies HTML tag names or tag attributes (e.g. alt, title, src, href, class).
- * - Caps auto-links at maxOccurrences (default: 5) to maintain SEO health and reader experience.
+ * - Distributes links evenly across the article (top, middle, and end) capped at maxOccurrences (default: 5)
+ *   to avoid link clustering in the first sections and ensure optimal reader conversion & SEO health.
  */
 export function injectAffiliateLinks(html, maxOccurrences = 5) {
   if (!html || typeof html !== "string") return html || "";
 
   // Quick check: if keyword isn't present, return unmodified
   if (!/NordVPN|Nord\s+VPN/i.test(html)) return html;
-
-  let replacementsCount = 0;
 
   // Pattern matches either:
   // 1. Forbidden elements (<a>...</a>, <h1..6>...</h1..6>, <script>...</script>, <style>...</style>, <button>...</button>, <pre>...</pre>, <code>...</code>)
@@ -116,28 +115,51 @@ export function injectAffiliateLinks(html, maxOccurrences = 5) {
   // 4. Any plain text chunk outside tags ([^<]+)
   const pattern = /(<!--[\s\S]*?-->|<(a|h[1-6]|script|style|button|pre|code)\b[^>]*>[\s\S]*?<\/\2>|<[^>]+>)|([^<]+)/gi;
 
-  return html.replace(pattern, (match, tagOrForbiddenBlock, _tagName, textNode) => {
-    // If it's a tag, comment, or forbidden element, return it as-is
-    if (tagOrForbiddenBlock) {
-      return tagOrForbiddenBlock;
-    }
-
-    // If it's a plain text node:
+  // Pass 1: Count total eligible plain-text occurrences across the entire article
+  let totalMatches = 0;
+  let match;
+  while ((match = pattern.exec(html)) !== null) {
+    const textNode = match[3];
     if (textNode) {
-      if (replacementsCount >= maxOccurrences) {
-        return textNode;
+      const keywordOccurrences = textNode.match(/\b(?:NordVPN|Nord\s+VPN)\b/gi);
+      if (keywordOccurrences) {
+        totalMatches += keywordOccurrences.length;
       }
+    }
+  }
 
-      return textNode.replace(/\b(NordVPN|Nord\s+VPN)\b/gi, (word) => {
-        if (replacementsCount < maxOccurrences) {
-          replacementsCount++;
-          return `<a href="/go/nordvpn" target="_blank" rel="nofollow sponsored noopener noreferrer" class="text-brand font-semibold hover:underline">${word}</a>`;
-        }
-        return word;
-      });
+  if (totalMatches === 0) return html;
+
+  // Pass 2: Calculate target indices spread evenly (top, middle, and bottom)
+  const selectedIndices = new Set();
+  const countToLink = Math.min(totalMatches, maxOccurrences);
+
+  if (countToLink === 1) {
+    selectedIndices.add(0);
+  } else {
+    for (let i = 0; i < countToLink; i++) {
+      const targetIndex = Math.round((i * (totalMatches - 1)) / (countToLink - 1));
+      selectedIndices.add(targetIndex);
+    }
+  }
+
+  // Pass 3: Replace only the selected distributed indices
+  let currentIndex = 0;
+  return html.replace(pattern, (fullMatch, tagOrForbidden, _tag, textNode) => {
+    // If it's a tag, comment, or forbidden element, return it as-is
+    if (tagOrForbidden || !textNode) {
+      return fullMatch;
     }
 
-    return match;
+    return textNode.replace(/\b(NordVPN|Nord\s+VPN)\b/gi, (word) => {
+      const isTarget = selectedIndices.has(currentIndex);
+      currentIndex++;
+
+      if (isTarget) {
+        return `<a href="/go/nordvpn" target="_blank" rel="nofollow sponsored noopener noreferrer" class="text-brand font-semibold hover:underline">${word}</a>`;
+      }
+      return word;
+    });
   });
 }
 
