@@ -80,6 +80,18 @@ const BottomHeader = ({ activeCategories = [], reviewSubcategories = [] }) => {
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-brand transition-all duration-200 group-hover:w-full" />
               </Link>
 
+              {/* VPN Finder Interactive Tool Link */}
+              <Link
+                href="/vpn-finder"
+                className="text-sm font-medium text-text-main hover:text-brand transition-colors relative group py-1 flex items-center gap-1.5"
+              >
+                <span>VPN Finder</span>
+                <span className="px-1.5 py-0.5 rounded-md bg-teal-500/10 text-teal-600 dark:text-teal-400 text-[10px] font-bold uppercase border border-teal-500/20">
+                  Tool
+                </span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-brand transition-all duration-200 group-hover:w-full" />
+              </Link>
+
               {/* TEMPORARILY DISABLED: Reviews Dropdown with subcategories
               <div className="relative group py-1">
                 <Link
