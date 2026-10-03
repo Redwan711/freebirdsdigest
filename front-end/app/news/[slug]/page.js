@@ -30,6 +30,7 @@ import FreelanceRateCalculator from "@/components/FreelanceRateCalculator";
 import FaqSection from "@/components/FaqSection";
 import FurtherReadingSection from "@/components/FurtherReadingSection";
 import TransparencyNotice from "@/components/TransparencyNotice";
+import { parseFaqs } from "@/lib/faq-parser";
 import { syncPostAuthor } from "@/lib/authors";
 import { getPostImageObjects } from "@/lib/parse-images";
 import { parseHeadingsAndInjectIds } from "@/lib/toc";
@@ -906,7 +907,13 @@ export default async function PostPage({ params, searchParams }) {
 
   // Resolve raw FAQs or fallback to single topQ/topA
   const rawFaqs = faqs || articleMetadata?.faqs || articleMetadata?.faq || articleMetadata?.Faqs || articleMetadata?.FAQs;
-  const activeFaqs = rawFaqs || (topQuestion && topAnswer ? `q: ${topQuestion}\na: ${topAnswer}` : null);
+  const parsedRawFaqs = rawFaqs ? parseFaqs(rawFaqs) : [];
+  const activeFaqs =
+    parsedRawFaqs.length > 0
+      ? parsedRawFaqs
+      : topQuestion && topAnswer
+      ? [{ question: topQuestion, answer: topAnswer }]
+      : null;
 
   // Resolve raw Further Reading & Trusted Resources field
   const activeFurtherReading =
@@ -943,6 +950,32 @@ export default async function PostPage({ params, searchParams }) {
   const { modifiedHtml, headings } = parseHeadingsAndInjectIds(
     post.content || ""
   );
+
+  const tocHeadings = [...headings];
+  if (activeFaqs && activeFaqs.length > 0) {
+    const hasFaqHeading = tocHeadings.some((h) =>
+      /faq|frequently asked/i.test(h.text)
+    );
+    if (!hasFaqHeading) {
+      tocHeadings.push({
+        id: "faq",
+        text: "Frequently Asked Questions",
+        level: 2,
+      });
+    }
+  }
+  if (activeFurtherReading) {
+    const hasFurtherReadingHeading = tocHeadings.some((h) =>
+      /further reading|trusted resources/i.test(h.text)
+    );
+    if (!hasFurtherReadingHeading) {
+      tocHeadings.push({
+        id: "further-reading",
+        text: "Further Reading & Resources",
+        level: 2,
+      });
+    }
+  }
 
   // Check if post was modified after its initial publication date
   const hasBeenModified = Boolean(
@@ -1066,7 +1099,7 @@ export default async function PostPage({ params, searchParams }) {
           {/* Table of Contents Section (Sticky when scrolled into view) */}
           {!post?.hideTableOfContents && (
             <div className="lg:sticky lg:top-24">
-              <TableOfContents headings={headings} />
+              <TableOfContents headings={tocHeadings} />
             </div>
           )}
 

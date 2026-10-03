@@ -16,6 +16,21 @@ import { parseFaqs } from "@/lib/faq-parser";
  * @param {string} [props.className] - Additional wrapper CSS classes
  * @param {boolean} [props.allowMultiple=false] - Allow multiple items open at once
  */
+function renderFaqAnswer(text) {
+  if (!text) return null;
+  const parts = text.split(/(\*\*.*?\*\*)/g);
+  return parts.map((part, i) => {
+    if (part.startsWith("**") && part.endsWith("**")) {
+      return (
+        <strong key={i} className="font-semibold text-text-main">
+          {part.slice(2, -2)}
+        </strong>
+      );
+    }
+    return part;
+  });
+}
+
 export default function FaqSection({
   faqs,
   title = "Frequently Asked Questions",
@@ -59,7 +74,7 @@ export default function FaqSection({
   };
 
   return (
-    <section className={`w-full py-10 ${className}`}>
+    <section id="faq" className={`w-full py-8 scroll-mt-24 ${className}`}>
       {/* Schema.org FAQPage JSON-LD Payload */}
       {showSchema && (
         <script
@@ -71,17 +86,17 @@ export default function FaqSection({
       <div className="mx-auto max-w-4xl">
         {/* Header */}
         <div className="mb-8 text-center sm:text-left">
-          <div className="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/10 px-3.5 py-1 text-xs font-semibold text-accent">
+          <div className="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/10 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-accent">
             <HelpCircle className="w-3.5 h-3.5" />
             <span>FAQ</span>
           </div>
           {title && (
-            <h2 className="mt-3 text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+            <h2 className="mt-3 text-2xl font-bold tracking-tight text-text-main sm:text-3xl font-heading">
               {title}
             </h2>
           )}
           {subtitle && (
-            <p className="mt-2 text-sm text-muted-foreground sm:text-base">
+            <p className="mt-2 text-sm text-text-muted sm:text-base">
               {subtitle}
             </p>
           )}
@@ -97,24 +112,26 @@ export default function FaqSection({
             return (
               <div
                 key={index}
-                className="overflow-hidden rounded-2xl border border-border/80 bg-card/60 backdrop-blur-xs transition-all duration-200 hover:border-accent/40 hover:shadow-xs"
+                className="overflow-hidden rounded-2xl border border-brandborder bg-bg-surface shadow-xs transition-all duration-200 hover:border-brand/40"
               >
                 <button
                   id={questionId}
                   aria-controls={answerId}
                   aria-expanded={isOpen}
                   onClick={() => toggleIndex(index)}
-                  className="flex w-full items-center justify-between gap-4 p-5 text-left font-medium text-foreground transition-colors hover:text-accent focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
+                  className="flex w-full items-center justify-between gap-4 p-5 text-left font-medium text-text-main transition-colors hover:text-brand focus:outline-hidden focus-visible:ring-2 focus-visible:ring-brand"
                 >
                   <span className="text-base font-semibold sm:text-lg">
                     {faq.question}
                   </span>
                   <div
-                    className={`flex h-8 w-8 shrink-0 items-center justify-between rounded-full border border-border bg-background transition-transform duration-300 ${
-                      isOpen ? "rotate-180 bg-accent/10 text-accent border-accent/30" : "text-muted-foreground"
+                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border transition-transform duration-300 ${
+                      isOpen
+                        ? "rotate-180 bg-brand/10 text-brand border-brand/30"
+                        : "border-brandborder bg-bg-subtle text-text-muted"
                     }`}
                   >
-                    <ChevronDown className="mx-auto w-4 h-4" />
+                    <ChevronDown className="w-4 h-4" />
                   </div>
                 </button>
 
@@ -123,11 +140,11 @@ export default function FaqSection({
                   role="region"
                   aria-labelledby={questionId}
                   hidden={!isOpen}
-                  className={`border-t border-border/40 px-5 pb-6 pt-4 text-sm leading-relaxed text-muted-foreground sm:text-base whitespace-pre-line ${
+                  className={`border-t border-brandborder/60 px-5 pb-6 pt-4 text-sm leading-relaxed text-text-muted sm:text-base whitespace-pre-line ${
                     isOpen ? "block" : "hidden"
                   }`}
                 >
-                  {faq.answer}
+                  {renderFaqAnswer(faq.answer)}
                 </div>
               </div>
             );
@@ -137,3 +154,4 @@ export default function FaqSection({
     </section>
   );
 }
+

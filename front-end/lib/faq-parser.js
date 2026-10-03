@@ -11,7 +11,8 @@
  * @param {string|Array<{question: string, answer: string}>} input
  * @returns {Array<{question: string, answer: string}>}
  */
-import { cleanText } from "./text-utils";
+import { cleanText, decodeHtmlEntities } from "./text-utils";
+
 export function parseFaqs(input) {
   if (!input) return [];
 
@@ -28,7 +29,7 @@ export function parseFaqs(input) {
       )
       .map((item) => ({
         question: cleanText(item.question),
-        answer: cleanText(item.answer),
+        answer: decodeHtmlEntities(item.answer).trim(),
       }));
   }
 
@@ -47,8 +48,8 @@ export function parseFaqs(input) {
   // 2. Strip remaining HTML tags
   text = text.replace(/<[^>]+>/g, "");
 
-  // 3. Decode common HTML entities
-  text = cleanText(text);
+  // 3. Decode common HTML entities (preserving newlines)
+  text = decodeHtmlEntities(text);
 
   const trimmed = text.trim();
   if (!trimmed) return [];
@@ -58,10 +59,10 @@ export function parseFaqs(input) {
   let currentQ = null;
   let currentA = [];
 
-  // Flexible prefix matching: q:, Q:, q1:, 1. Q:, Question:, Question 1:, Q.
-  const qPrefixRegex = /^(?:\d+[\.\)]\s*)?(?:q\d*|question\s*\d*)\s*[:\.]\s*(.*)/i;
-  // Flexible prefix matching: a:, A:, a1:, Answer:, Answer 1:, A.
-  const aPrefixRegex = /^(?:a\d*|answer\s*\d*)\s*[:\.]\s*(.*)/i;
+  // Flexible prefix matching: q:, Q:, q1:, 1. Q:, Question:, Question 1:, Q., Q;, Q-
+  const qPrefixRegex = /^(?:\d+[\.\)]\s*)?(?:q\d*|question\s*\d*)\s*[:\.;\-]\s*(.*)/i;
+  // Flexible prefix matching: a:, A:, a1:, Answer:, Answer 1:, A., A;, A-
+  const aPrefixRegex = /^(?:a\d*|answer\s*\d*)\s*[:\.;\-]\s*(.*)/i;
 
   for (const line of lines) {
     const cleanLine = line.trim();
@@ -73,10 +74,14 @@ export function parseFaqs(input) {
     if (qMatch && qMatch[1] !== undefined) {
       // Save previous FAQ if complete
       if (currentQ && currentA.length > 0) {
-        results.push({
-          question: currentQ.trim(),
-          answer: currentA.join("\n").trim(),
-        });
+        const q = cleanText(currentQ);
+        const a = currentA.join("\n").trim();
+        if (q && a) {
+          results.push({
+            question: q,
+            answer: a,
+          });
+        }
       }
       currentQ = qMatch[1];
       currentA = [];
@@ -93,10 +98,14 @@ export function parseFaqs(input) {
 
   // Push last item
   if (currentQ && currentA.length > 0) {
-    results.push({
-      question: currentQ.trim(),
-      answer: currentA.join("\n").trim(),
-    });
+    const q = cleanText(currentQ);
+    const a = currentA.join("\n").trim();
+    if (q && a) {
+      results.push({
+        question: q,
+        answer: a,
+      });
+    }
   }
 
   return results.filter((item) => item.question && item.answer);

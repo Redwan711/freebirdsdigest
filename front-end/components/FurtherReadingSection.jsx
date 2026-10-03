@@ -25,7 +25,7 @@ export default function FurtherReadingSection({
   }
 
   return (
-    <section className={`w-full py-6 ${className}`}>
+    <section id="further-reading" className={`w-full py-6 scroll-mt-24 ${className}`}>
       <div className="rounded-3xl border border-brandborder bg-bg-surface p-6 sm:p-8 shadow-xs">
         {/* Section Header */}
         <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-brandborder/60 pb-5">
