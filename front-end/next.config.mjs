@@ -85,6 +85,11 @@ const nextConfig = {
         destination: "https://go.nordvpn.net/aff_c?offer_id=15&aff_id=156559&url_id=902",
         permanent: false,
       },
+      {
+        source: "/go/privadovpn",
+        destination: "https://privadovpn.com/getprivadovpn/#a_aid=1120252",
+        permanent: false,
+      },
     ];
   },
 };

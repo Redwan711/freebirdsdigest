@@ -42,7 +42,7 @@ export const VPN_PROVIDERS = {
     rating: "4.7",
     price: "Free / $1.11 / mo",
     billingInfo: "10GB/mo Free Plan or $1.11/mo 2-year deal",
-    affiliateUrl: "https://privadovpn.com",
+    affiliateUrl: "/go/privadovpn",
     scores: {
       streaming: 8.8,
       privacy: 9.8,

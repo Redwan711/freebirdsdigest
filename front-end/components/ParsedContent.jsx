@@ -91,37 +91,44 @@ export function processArticleHtml(html) {
   return result;
 }
 
+const AFFILIATE_CONFIGS = [
+  {
+    name: "NordVPN",
+    testRegex: /NordVPN|Nord\s+VPN/i,
+    matchRegex: /\b(NordVPN|Nord\s+VPN)\b/gi,
+    url: "/go/nordvpn",
+    maxOccurrences: 5,
+  },
+  {
+    name: "PrivadoVPN",
+    testRegex: /PrivadoVPN|Privado\s+VPN/i,
+    matchRegex: /\b(PrivadoVPN|Privado\s+VPN)\b/gi,
+    url: "/go/privadovpn",
+    maxOccurrences: 5,
+  },
+];
+
 /**
- * Safely auto-links specified affiliate keywords (e.g. NordVPN) in ANY HTML content,
- * including WordPress standard blocks, Classic editor, and Custom HTML widgets (divs, spans, lists, etc).
- * 
- * Safety Rules:
- * - Replaces keyword in visible plain text nodes (inside p, div, span, li, td, etc).
- * - Skips anything inside forbidden blocks: <a>, <h1>-<h6>, <script>, <style>, <button>, <pre>, <code>.
- * - Never modifies HTML tag names or tag attributes (e.g. alt, title, src, href, class).
- * - Distributes links evenly across the article (top, middle, and end) capped at maxOccurrences (default: 5)
- *   to avoid link clustering in the first sections and ensure optimal reader conversion & SEO health.
+ * Distributes affiliate links evenly across plain-text nodes in an HTML string.
  */
-export function injectAffiliateLinks(html, maxOccurrences = 5) {
+function distributeSingleAffiliateLink(html, config) {
+  const { testRegex, matchRegex, url, maxOccurrences = 5 } = config;
   if (!html || typeof html !== "string") return html || "";
+  if (!testRegex.test(html)) return html;
 
-  // Quick check: if keyword isn't present, return unmodified
-  if (!/NordVPN|Nord\s+VPN/i.test(html)) return html;
-
-  // Pattern matches either:
-  // 1. Forbidden elements (<a>...</a>, <h1..6>...</h1..6>, <script>...</script>, <style>...</style>, <button>...</button>, <pre>...</pre>, <code>...</code>)
-  // 2. HTML comments (<!-- ... -->)
-  // 3. Any single HTML opening/closing/self-closing tag (<...>)
-  // 4. Any plain text chunk outside tags ([^<]+)
+  // Pattern matches:
+  // 1. Forbidden elements (<a>...</a>, <h1..6>...</h1..6>, <script>, <style>, <button>, <pre>, <code>)
+  // 2. HTML comments
+  // 3. Any HTML tag
+  // 4. Any plain-text chunk outside tags
   const pattern = /(<!--[\s\S]*?-->|<(a|h[1-6]|script|style|button|pre|code)\b[^>]*>[\s\S]*?<\/\2>|<[^>]+>)|([^<]+)/gi;
 
-  // Pass 1: Count total eligible plain-text occurrences across the entire article
   let totalMatches = 0;
   let match;
   while ((match = pattern.exec(html)) !== null) {
     const textNode = match[3];
     if (textNode) {
-      const keywordOccurrences = textNode.match(/\b(?:NordVPN|Nord\s+VPN)\b/gi);
+      const keywordOccurrences = textNode.match(matchRegex);
       if (keywordOccurrences) {
         totalMatches += keywordOccurrences.length;
       }
@@ -130,7 +137,6 @@ export function injectAffiliateLinks(html, maxOccurrences = 5) {
 
   if (totalMatches === 0) return html;
 
-  // Pass 2: Calculate target indices spread evenly (top, middle, and bottom)
   const selectedIndices = new Set();
   const countToLink = Math.min(totalMatches, maxOccurrences);
 
@@ -143,24 +149,35 @@ export function injectAffiliateLinks(html, maxOccurrences = 5) {
     }
   }
 
-  // Pass 3: Replace only the selected distributed indices
   let currentIndex = 0;
   return html.replace(pattern, (fullMatch, tagOrForbidden, _tag, textNode) => {
-    // If it's a tag, comment, or forbidden element, return it as-is
     if (tagOrForbidden || !textNode) {
       return fullMatch;
     }
 
-    return textNode.replace(/\b(NordVPN|Nord\s+VPN)\b/gi, (word) => {
+    return textNode.replace(matchRegex, (word) => {
       const isTarget = selectedIndices.has(currentIndex);
       currentIndex++;
 
       if (isTarget) {
-        return `<a href="/go/nordvpn" target="_blank" rel="nofollow sponsored noopener noreferrer" class="text-brand font-semibold hover:underline">${word}</a>`;
+        return `<a href="${url}" target="_blank" rel="nofollow sponsored noopener noreferrer" class="text-brand font-semibold hover:underline">${word}</a>`;
       }
       return word;
     });
   });
+}
+
+/**
+ * Safely auto-links specified affiliate keywords (NordVPN, PrivadoVPN) in ANY HTML content,
+ * distributing links evenly (top, middle, bottom) and skipping headers, links, and code blocks.
+ */
+export function injectAffiliateLinks(html) {
+  if (!html || typeof html !== "string") return html || "";
+  let processed = html;
+  for (const config of AFFILIATE_CONFIGS) {
+    processed = distributeSingleAffiliateLink(processed, config);
+  }
+  return processed;
 }
 
 /**
