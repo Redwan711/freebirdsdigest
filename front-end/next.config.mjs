@@ -90,6 +90,16 @@ const nextConfig = {
         destination: "https://privadovpn.com/getprivadovpn/#a_aid=1120252",
         permanent: false,
       },
+      {
+        source: "/go/hideme",
+        destination: "https://hide.me/?friend=1120252",
+        permanent: false,
+      },
+      {
+        source: "/go/hide-me",
+        destination: "https://hide.me/?friend=1120252",
+        permanent: false,
+      },
     ];
   },
 };

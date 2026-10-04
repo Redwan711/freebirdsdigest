@@ -310,7 +310,7 @@ export default function VpnFinderPage() {
                   <a
                     href={recommendationResult.topMatch.affiliateUrl}
                     target="_blank"
-                    rel="noopener noreferrer"
+                    rel="nofollow sponsored noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 rounded-xl bg-brand hover:bg-brand-dark text-white font-bold text-sm transition shadow-lg shadow-brand/25"
                   >
                     <span>Get {recommendationResult.topMatch.name}</span>
@@ -386,7 +386,7 @@ export default function VpnFinderPage() {
                   <a
                     href={recommendationResult.runnerUp.affiliateUrl}
                     target="_blank"
-                    rel="noopener noreferrer"
+                    rel="nofollow sponsored noopener noreferrer"
                     className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-bg-subtle hover:bg-bg-subtle/80 text-text-main text-xs font-bold border border-brandborder transition"
                   >
                     <span>View {recommendationResult.runnerUp.name}</span>

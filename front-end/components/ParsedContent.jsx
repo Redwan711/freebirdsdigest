@@ -102,6 +102,13 @@ const AFFILIATE_CONFIGS = [
     url: "/go/privadovpn",
     maxOccurrences: 5,
   },
+  {
+    name: "Hide.me",
+    testRegex: /hide\.me|hideme/i,
+    matchRegex: /\b(?:hide\.me|hideme)(?:\s+VPN)?\b/gi,
+    url: "/go/hideme",
+    maxOccurrences: 5,
+  },
 ];
 
 /**

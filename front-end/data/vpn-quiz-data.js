@@ -75,7 +75,7 @@ export const VPN_PROVIDERS = {
     rating: "4.7",
     price: "Free / $2.69 / mo",
     billingInfo: "Unlimited Free Data or $2.69/mo 2-year plan",
-    affiliateUrl: "https://hide.me",
+    affiliateUrl: "/go/hideme",
     scores: {
       streaming: 8.6,
       privacy: 9.6,
