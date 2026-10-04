@@ -36,7 +36,7 @@ export const VPN_PROVIDERS = {
       travel: "Double VPN encryption and automated public Wi-Fi security safeguard you while traveling.",
       hydra_speed: "NordLynx protocol delivers industry-leading connection speeds and reliable bandwidth.",
       premium: "Industry-leading premium feature suite with NordLynx protocol and Threat Protection Pro.",
-      budget_longterm: "Exceptional long-term value on 2-year subscriptions including bonus warranty.",
+      free_trial: "Includes a 30-day 100% risk-free trial backed by a full money-back guarantee.",
       many_devices: "Supports 10 simultaneous ultra-fast device connections under one account.",
       single_device: "Lightweight, ultra-fast 1-click connect desktop and mobile applications.",
     },
@@ -66,6 +66,7 @@ export const VPN_PROVIDERS = {
     ],
     reasonTemplates: {
       free_tier: "PrivadoVPN provides a generous 10GB/month 100% Free Tier with full server speed and no speed throttling.",
+      free_trial: "Offers a 10GB/month 100% Free Plan with full speeds plus a 30-day money-back guarantee.",
       swiss: "Headquartered in Switzerland, offering the strongest statutory consumer privacy protections outside 14-Eyes.",
       privacy: "Strict Swiss jurisdiction and zero-logging architecture keep your personal traffic fully private.",
       budget_longterm: "Delivers top-tier budget value starting at just $1.11/month on the 2-year plan.",
@@ -106,6 +107,7 @@ export const VPN_PROVIDERS = {
     reasonTemplates: {
       free_unlimited: "hide.me is one of the only reputable VPNs offering truly unlimited data transfer on its free tier.",
       free_tier: "Features a permanent 100% Free Plan with unlimited monthly bandwidth.",
+      free_trial: "Provides a permanent 100% Free Plan with unlimited monthly bandwidth plus a 30-day money-back guarantee.",
       advanced: "Equipped with power-user features including dynamic port forwarding, Stealth Guard, and multi-hop routing.",
       port_forwarding: "Dynamic Port Forwarding enables optimized peer connections and maximum seeding speeds for P2P.",
       privacy: "Strict zero-logs policy certified by independent cybersecurity auditors Securitum.",
@@ -257,20 +259,14 @@ export const QUIZ_QUESTIONS = [
     multiSelect: false,
     options: [
       {
-        id: "free_unlimited",
-        label: "100% Free Plan with Unlimited Data",
-        icon: "♾️",
-        description: "Zero-cost tier with no monthly bandwidth limits",
-      },
-      {
-        id: "free_tier",
-        label: "100% Free Plan with High-Speed Data (10GB/mo)",
+        id: "free_trial",
+        label: "100% Free Plan or Risk-Free Trial",
         icon: "🆓",
-        description: "Zero-cost tier with access to fast global server locations",
+        description: "Zero-cost free tier or 30-day 100% risk-free money-back guarantee",
       },
       {
         id: "budget_longterm",
-        label: "Best Value Long-Term Deal ($1.11 - $2.69/mo)",
+        label: "Budget-Friendly Deal ($1.11 - $2.69/mo)",
         icon: "🏷️",
         description: "Lowest monthly cost on multi-year discount plans",
       },
@@ -353,47 +349,99 @@ export function calculateRecommendation(userAnswers) {
     }
   });
 
-  // =========================================================================
-  // STEP 1: Determine #1 Top Recommendation
-  // Priority Distribution:
-  // - NordVPN: 50%
-  // - hide.me VPN: 30%
-  // - PrivadoVPN: 20%
-  // =========================================================================
-  const topRoll = Math.random();
+  const isBudgetOption = selectedOptionIds.includes("budget_longterm");
+  const isPremiumOption = selectedOptionIds.includes("premium");
+  const isFreeTrialOption = selectedOptionIds.includes("free_trial");
+
   let topProviderId;
-
-  if (topRoll < 0.50) {
-    topProviderId = "nordvpn";
-  } else if (topRoll < 0.80) {
-    topProviderId = "hideme";
-  } else {
-    topProviderId = "privadovpn";
-  }
-
-  // =========================================================================
-  // STEP 2: Determine #2 Runner-Up
-  // Target Overall Distribution across all quizzes:
-  // - NordVPN: 50% (Whenever hide.me or Privado is #1, Nord is ALWAYS runner-up: 30% + 20% = 50%)
-  // - hide.me VPN: 15% (30% of Nord's runner-up pool = 15% overall)
-  // - PrivadoVPN: 15% (30% of Nord's runner-up pool = 15% overall)
-  // - PureVPN: 10% (20% of Nord's runner-up pool = 10% overall)
-  // - Hotspot Shield: 10% (20% of Nord's runner-up pool = 10% overall)
-  // =========================================================================
   let runnerUpId;
 
-  if (topProviderId === "hideme" || topProviderId === "privadovpn") {
-    runnerUpId = "nordvpn";
-  } else {
-    const runnerRoll = Math.random();
-    if (runnerRoll < 0.30) {
-      runnerUpId = "hideme";
-    } else if (runnerRoll < 0.60) {
-      runnerUpId = "privadovpn";
-    } else if (runnerRoll < 0.80) {
-      runnerUpId = "purevpn";
+  if (isBudgetOption) {
+    // =========================================================================
+    // CASE 1: User explicitly requested Budget-Friendly Deal ($1.11 - $2.69/mo)
+    // NordVPN ($3.09/mo) is STRICTLY EXCLUDED from #1 to prevent pricing conflicts.
+    // Top #1 is distributed between our budget-fitting affiliate partners:
+    // - hide.me ($2.69/mo): 60%
+    // - PrivadoVPN ($1.11/mo): 40%
+    // =========================================================================
+    const roll = Math.random();
+    if (roll < 0.60) {
+      topProviderId = "hideme";
+      const rRoll = Math.random();
+      if (rRoll < 0.50) runnerUpId = "privadovpn";
+      else if (rRoll < 0.85) runnerUpId = "purevpn";
+      else runnerUpId = "hotspotshield";
     } else {
-      runnerUpId = "hotspotshield";
+      topProviderId = "privadovpn";
+      const rRoll = Math.random();
+      if (rRoll < 0.50) runnerUpId = "hideme";
+      else if (rRoll < 0.85) runnerUpId = "purevpn";
+      else runnerUpId = "hotspotshield";
+    }
+  } else if (isPremiumOption) {
+    // =========================================================================
+    // CASE 2: User explicitly requested Premium Security & Speed ($3+/mo)
+    // NordVPN ($3.09/mo) is the prime $3+ provider.
+    // - NordVPN: 85%
+    // - hide.me: 15%
+    // =========================================================================
+    const roll = Math.random();
+    if (roll < 0.85) {
+      topProviderId = "nordvpn";
+      const rRoll = Math.random();
+      if (rRoll < 0.35) runnerUpId = "hideme";
+      else if (rRoll < 0.70) runnerUpId = "privadovpn";
+      else if (rRoll < 0.85) runnerUpId = "purevpn";
+      else runnerUpId = "hotspotshield";
+    } else {
+      topProviderId = "hideme";
+      runnerUpId = "nordvpn";
+    }
+  } else if (isFreeTrialOption) {
+    // =========================================================================
+    // CASE 3: User requested 100% Free Plan or Risk-Free Trial
+    // NordVPN qualifies with its 30-day risk-free money-back guarantee & 7-day trial.
+    // hide.me qualifies with its unlimited free plan.
+    // PrivadoVPN qualifies with its 10GB/mo free plan.
+    // - NordVPN: 50%
+    // - hide.me: 30%
+    // - PrivadoVPN: 20%
+    // =========================================================================
+    const roll = Math.random();
+    if (roll < 0.50) {
+      topProviderId = "nordvpn";
+      const rRoll = Math.random();
+      if (rRoll < 0.45) runnerUpId = "hideme";
+      else if (rRoll < 0.90) runnerUpId = "privadovpn";
+      else runnerUpId = "hotspotshield";
+    } else if (roll < 0.80) {
+      topProviderId = "hideme";
+      runnerUpId = "nordvpn";
+    } else {
+      topProviderId = "privadovpn";
+      runnerUpId = "nordvpn";
+    }
+  } else {
+    // =========================================================================
+    // DEFAULT / GLOBAL DISTRIBUTION
+    // - NordVPN: 50%
+    // - hide.me: 30%
+    // - PrivadoVPN: 20%
+    // =========================================================================
+    const topRoll = Math.random();
+    if (topRoll < 0.50) {
+      topProviderId = "nordvpn";
+      const runnerRoll = Math.random();
+      if (runnerRoll < 0.30) runnerUpId = "hideme";
+      else if (runnerRoll < 0.60) runnerUpId = "privadovpn";
+      else if (runnerRoll < 0.80) runnerUpId = "purevpn";
+      else runnerUpId = "hotspotshield";
+    } else if (topRoll < 0.80) {
+      topProviderId = "hideme";
+      runnerUpId = "nordvpn";
+    } else {
+      topProviderId = "privadovpn";
+      runnerUpId = "nordvpn";
     }
   }
 
