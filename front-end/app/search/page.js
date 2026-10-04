@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Search, Calendar, User, ArrowRight, BookOpen, Compass, AlertCircle } from "lucide-react";
 import { fetchSearchResults } from "@/lib/search";
 import { fetchNavigationCategories } from "@/lib/categories";
+import { cleanText } from "@/lib/text-utils";
 import SearchInputForm from "./SearchInputForm";
 
 export async function generateMetadata({ searchParams }) {
@@ -131,17 +132,14 @@ export default async function SearchPage({ searchParams }) {
 
                       <h2 className="text-lg font-bold text-text-main line-clamp-2 leading-snug group-hover:text-brand transition-colors">
                         <Link href={`/news/${post.slug}`}>
-                          {post.title}
+                          {cleanText(post.title)}
                         </Link>
                       </h2>
 
                       {post.excerpt && (
-                        <div
-                          className="text-xs text-text-muted line-clamp-3 leading-relaxed"
-                          dangerouslySetInnerHTML={{
-                            __html: post.excerpt.replace(/<[^>]+>/g, ""),
-                          }}
-                        />
+                        <p className="text-xs text-text-muted line-clamp-3 leading-relaxed">
+                          {cleanText(post.excerpt)}
+                        </p>
                       )}
                     </div>
 

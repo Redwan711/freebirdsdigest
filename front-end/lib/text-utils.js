@@ -53,8 +53,53 @@ export function decodeHtmlEntities(str = "") {
 }
 
 /**
+ * Safely filters and replaces em-dashes (—, &mdash;, &#8212;, &#x2014;) with ": " (colon and space).
+ * Also replaces en-dashes (–, &ndash;, &#8211;, &#x2013;) with " - ".
+ * When handling HTML content, it only replaces inside visible text nodes, protecting
+ * HTML tags, attributes, and raw blocks (<script>, <style>, <pre>, <code>, HTML comments).
+ *
+ * @param {string} content - Plain text or HTML string
+ * @returns {string} - Filtered string
+ */
+export function replaceEmDashes(content = "") {
+  if (!content || typeof content !== "string") return "";
+
+  // If content contains HTML tags, replace only in text nodes outside tags and protected blocks
+  if (content.includes("<") && content.includes(">")) {
+    const pattern =
+      /(<!--[\s\S]*?-->|<(script|style|pre|code)\b[^>]*>[\s\S]*?<\/\2>|<[^>]+>)|([^<]+)/gi;
+    return content.replace(
+      pattern,
+      (match, tagOrProtectedBlock, _tagName, textNode) => {
+        if (tagOrProtectedBlock) {
+          return tagOrProtectedBlock;
+        }
+        if (textNode) {
+          return textNode
+            .replace(/\s*(?:&mdash;|&#8212;|&#x2014;|—)\s*/gi, ": ")
+            .replace(/\s*(?:&ndash;|&#8211;|&#x2013;|–)\s*/gi, " - ")
+            .replace(/:\s*:/g, ":")
+            .replace(/,\s*:/g, ":");
+        }
+        return match;
+      }
+    );
+  }
+
+  // Plain text replacement
+  return content
+    .replace(/\s*(?:&mdash;|&#8212;|&#x2014;|—)\s*/gi, ": ")
+    .replace(/\s*(?:&ndash;|&#8211;|&#x2013;|–)\s*/gi, " - ")
+    .replace(/:\s*:/g, ":")
+    .replace(/,\s*:/g, ":")
+    .replace(/^[\s:]+/, "")
+    .replace(/[\s:]+$/, "");
+}
+
+/**
  * Strips HTML tags, removes WordPress excerpt artifacts (e.g. [&hellip;]),
- * decodes all HTML entities, normalizes whitespace, and trims.
+ * decodes all HTML entities, filters out em-dashes (replacing with ": "),
+ * normalizes whitespace, and trims.
  *
  * @param {string} htmlString - Raw HTML or excerpt from WordPress
  * @returns {string} - Clean plain text
@@ -67,7 +112,11 @@ export function cleanText(htmlString = "") {
     .replace(/\[\s*(?:&hellip;|&#8230;|\.{3})\s*\]/gi, "")
     .replace(/(?:&hellip;|&#8230;|\.{3})/gi, "…");
 
-  return decodeHtmlEntities(stripped)
+  const decoded = decodeHtmlEntities(stripped);
+
+  return replaceEmDashes(decoded)
+    .replace(/^[\s:]+/, "")
+    .replace(/[\s:]+$/, "")
     .replace(/\s+/g, " ")
     .trim();
 }
@@ -76,6 +125,18 @@ export function cleanText(htmlString = "") {
  * Alias for cleanText to maintain backwards compatibility with existing cleanHtml calls.
  */
 export const cleanHtml = cleanText;
+
+/**
+ * Sanitizes and cleans post titles, decoding HTML entities, removing HTML tags,
+ * and replacing em-dashes with ": ".
+ *
+ * @param {string} title - Raw post title
+ * @returns {string} - Clean formatted title
+ */
+export function cleanTitle(title = "") {
+  if (!title || typeof title !== "string") return "";
+  return cleanText(title);
+}
 
 /**
  * Cleanly truncates text to a specified maximum length, ensuring no dangling cut words.

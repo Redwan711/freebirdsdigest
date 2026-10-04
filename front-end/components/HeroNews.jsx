@@ -108,7 +108,7 @@ const HeroNews = async ({ heroData: passedHeroData } = {}) => {
                     Featured Digest
                   </span>
                   <h2 className="text-xl font-bold tracking-tight leading-snug md:text-2xl text-text-main group-hover:text-brand transition-colors">
-                    {topStory.title}
+                    {cleanText(topStory.title)}
                   </h2>
                   <p className="text-sm leading-relaxed text-text-muted">
                     {truncateText(cleanText(topStory.excerpt), 160)}
@@ -152,7 +152,7 @@ const HeroNews = async ({ heroData: passedHeroData } = {}) => {
                 >
                   <div className="texts font-inter flex min-w-0 flex-1 flex-col justify-between h-full gap-2">
                     <h4 className="text-xs sm:text-sm font-bold leading-snug text-text-main group-hover:text-brand transition-colors line-clamp-3">
-                      {post.title}
+                      {cleanText(post.title)}
                     </h4>
                     <span className="text-[10px] sm:text-xs text-text-muted mt-auto">
                       {formatHeroDate(displayDate)}

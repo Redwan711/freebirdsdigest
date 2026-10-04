@@ -222,7 +222,7 @@ export default async function CategoryPage({ params }) {
               </div>
               <div className="text space-y-1">
                 <h3 className="text-sm font-bold text-text-main group-hover:text-brand transition-colors line-clamp-2 leading-snug">
-                  {post.title}
+                  {cleanText(post.title)}
                 </h3>
                 <p className="text-xs text-text-muted line-clamp-2">
                   {truncateText(cleanText(post.excerpt || ""), 100)}

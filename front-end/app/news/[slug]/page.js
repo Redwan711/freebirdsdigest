@@ -34,7 +34,7 @@ import { parseFaqs } from "@/lib/faq-parser";
 import { syncPostAuthor } from "@/lib/authors";
 import { getPostImageObjects } from "@/lib/parse-images";
 import { parseHeadingsAndInjectIds } from "@/lib/toc";
-import { isPostHidden, filterVisiblePosts } from "@/lib/post-filter";
+import { isPostHidden, filterVisiblePosts, sanitizePost } from "@/lib/post-filter";
 import { BEST_VPNS_USA_POST } from "@/lib/posts/5-best-vpns-usa";
 
 export const revalidate = 3600;
@@ -746,7 +746,7 @@ const fetchPost = cache(async (postSlug, postId) => {
     return null;
   }
 
-  return post;
+  return sanitizePost(post);
 });
 
 const fetchRecommendedPosts = cache(
@@ -787,7 +787,7 @@ const fetchRecommendedPosts = cache(
       }
     }
 
-    return recommendedNodes.slice(0, 3);
+    return recommendedNodes.slice(0, 3).map(sanitizePost);
   }
 );
 
@@ -812,26 +812,28 @@ export async function generateMetadata({ params, searchParams }) {
 
   // Fallback chains
   const pageTitle = seo.title
-    ? { absolute: seo.title }
+    ? { absolute: cleanHtml(seo.title) }
     : cleanedTitle || siteName;
   const metaDescription =
-    seo.metaDesc || seo.opengraphDescription || cleanedExcerpt || defaultDescription;
+    cleanHtml(seo.metaDesc || seo.opengraphDescription || cleanedExcerpt || defaultDescription);
   const canonicalPath = `${siteUrl}/news/${post.slug}`;
 
   // Open Graph fallbacks
-  const ogTitle = seo.opengraphTitle || seo.title || cleanedTitle || siteName;
-  const ogDesc = seo.opengraphDescription || seo.metaDesc || cleanedExcerpt || defaultDescription;
+  const ogTitle = cleanHtml(seo.opengraphTitle || seo.title || cleanedTitle || siteName);
+  const ogDesc = cleanHtml(seo.opengraphDescription || seo.metaDesc || cleanedExcerpt || defaultDescription);
   const ogImage = seo.opengraphImage?.sourceUrl || featuredImageUrl;
 
   // Twitter Card fallbacks
-  const twitterTitle =
-    seo.twitterTitle || seo.opengraphTitle || seo.title || cleanedTitle || siteName;
-  const twitterDesc =
+  const twitterTitle = cleanHtml(
+    seo.twitterTitle || seo.opengraphTitle || seo.title || cleanedTitle || siteName
+  );
+  const twitterDesc = cleanHtml(
     seo.twitterDescription ||
     seo.opengraphDescription ||
     seo.metaDesc ||
     cleanedExcerpt ||
-    defaultDescription;
+    defaultDescription
+  );
   const twitterImage =
     seo.twitterImage?.sourceUrl || seo.opengraphImage?.sourceUrl || featuredImageUrl;
 
@@ -1084,7 +1086,7 @@ export default async function PostPage({ params, searchParams }) {
           <span>Back to Articles</span>
         </Link>
 
-        <ArticleActions title={post.title} />
+        <ArticleActions title={cleanHtml(post.title)} />
       </div>
 
       {/* Main 3-Column Responsive Layout */}
@@ -1259,7 +1261,7 @@ export default async function PostPage({ params, searchParams }) {
 
             {/* Article Title */}
             <h1 className="text-2xl font-bold tracking-tight text-text-main sm:text-3xl lg:text-4xl leading-tight font-jakarta">
-              {post.title}
+              {cleanHtml(post.title)}
             </h1>
 
             {/* ACF Field: Subheading */}
@@ -1539,7 +1541,7 @@ export default async function PostPage({ params, searchParams }) {
                 ))}
               </div>
 
-              <ArticleActions title={post.title} />
+              <ArticleActions title={cleanHtml(post.title)} />
             </div>
 
             {/* 3 Recommended News Articles */}

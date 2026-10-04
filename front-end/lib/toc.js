@@ -1,3 +1,5 @@
+import { replaceEmDashes } from "./text-utils";
+
 export function parseHeadingsAndInjectIds(html = "") {
   if (!html) return { modifiedHtml: "", headings: [] };
 
@@ -12,14 +14,17 @@ export function parseHeadingsAndInjectIds(html = "") {
       const level = Number.parseInt(levelStr, 10);
       const rawText = innerContent
         .replace(/<[^>]*>/g, "")
-        .replace(/\s*(?:&mdash;|&#8212;|—)\s*/gi, ": ")
-        .replace(/\s*(?:&ndash;|&#8211;|–)\s*/gi, " - ")
+        .replace(/\s*(?:&mdash;|&#8212;|&#x2014;|—)\s*/gi, ": ")
+        .replace(/\s*(?:&ndash;|&#8211;|&#x2013;|–)\s*/gi, " - ")
         .replace(/&nbsp;/gi, " ")
         .replace(/&amp;/gi, "&")
         .replace(/&quot;/gi, '"')
         .replace(/&#039;/gi, "'")
         .replace(/&lt;/gi, "<")
         .replace(/&gt;/gi, ">")
+        .replace(/:\s*:/g, ":")
+        .replace(/^[\s:]+/, "")
+        .replace(/[\s:]+$/, "")
         .replace(/\s+/g, " ")
         .trim();
 
@@ -50,7 +55,8 @@ export function parseHeadingsAndInjectIds(html = "") {
       }
 
       headings.push({ id, text: rawText, level });
-      return `<h${level}${attrs}>${innerContent}</h${level}>`;
+      const cleanedInnerContent = replaceEmDashes(innerContent);
+      return `<h${level}${attrs}>${cleanedInnerContent}</h${level}>`;
     }
   );
 

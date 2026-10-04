@@ -11,7 +11,7 @@
  * @param {string|Array<{question: string, answer: string}>} input
  * @returns {Array<{question: string, answer: string}>}
  */
-import { cleanText, decodeHtmlEntities } from "./text-utils";
+import { cleanText, decodeHtmlEntities, replaceEmDashes } from "./text-utils";
 
 export function parseFaqs(input) {
   if (!input) return [];
@@ -29,7 +29,7 @@ export function parseFaqs(input) {
       )
       .map((item) => ({
         question: cleanText(item.question),
-        answer: decodeHtmlEntities(item.answer).trim(),
+        answer: replaceEmDashes(decodeHtmlEntities(item.answer)).trim(),
       }));
   }
 
@@ -75,7 +75,7 @@ export function parseFaqs(input) {
       // Save previous FAQ if complete
       if (currentQ && currentA.length > 0) {
         const q = cleanText(currentQ);
-        const a = currentA.join("\n").trim();
+        const a = replaceEmDashes(currentA.join("\n")).trim();
         if (q && a) {
           results.push({
             question: q,
@@ -99,7 +99,7 @@ export function parseFaqs(input) {
   // Push last item
   if (currentQ && currentA.length > 0) {
     const q = cleanText(currentQ);
-    const a = currentA.join("\n").trim();
+    const a = replaceEmDashes(currentA.join("\n")).trim();
     if (q && a) {
       results.push({
         question: q,

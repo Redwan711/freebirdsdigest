@@ -55,7 +55,7 @@ export default function RecentNewsFeed({ posts = [] }) {
             <span className="text-xs font-bold uppercase tracking-wider text-brand">Latest Story</span>
             <h3 className="text-xl font-extrabold text-text-main md:text-2xl leading-snug hover:text-brand transition-colors">
               <Link href={`/news/${featuredStory.slug}`}>
-                {featuredStory.title}
+                {cleanText(featuredStory.title)}
               </Link>
             </h3>
             <p className="text-sm leading-relaxed text-text-muted">
@@ -89,7 +89,7 @@ export default function RecentNewsFeed({ posts = [] }) {
                 <div className="text space-y-1.5">
                   <h3 className="text-base font-bold text-text-main hover:text-brand transition-colors line-clamp-2">
                     <Link href={`/news/${splitStories[0].slug}`}>
-                      {splitStories[0]?.title}
+                      {cleanText(splitStories[0]?.title)}
                     </Link>
                   </h3>
                   <p className="text-xs text-text-muted line-clamp-2">
@@ -121,7 +121,7 @@ export default function RecentNewsFeed({ posts = [] }) {
                 <div className="text space-y-1.5">
                   <h3 className="text-base font-bold text-text-main hover:text-brand transition-colors line-clamp-2">
                     <Link href={`/news/${splitStories[1].slug}`}>
-                      {splitStories[1]?.title}
+                      {cleanText(splitStories[1]?.title)}
                     </Link>
                   </h3>
                   <p className="text-xs text-text-muted line-clamp-2">
@@ -157,7 +157,7 @@ export default function RecentNewsFeed({ posts = [] }) {
               </div>
               <div className="text space-y-1">
                 <h3 className="text-sm font-bold text-text-main group-hover:text-brand transition-colors line-clamp-2 leading-snug">
-                  {story?.title}
+                  {cleanText(story?.title)}
                 </h3>
                 <p className="text-xs text-text-muted line-clamp-2">
                   {truncateText(cleanText(story?.excerpt || ""), 100)}

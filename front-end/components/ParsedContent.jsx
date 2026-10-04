@@ -26,13 +26,9 @@ const isInsideNotProse = (html, imgIndex) => {
   return false;
 };
 
-/**
- * Normalizes HTML entities without destructively replacing valid punctuation like em-dashes.
- */
-export function replaceEmDashes(html) {
-  if (!html) return "";
-  return html;
-}
+import { replaceEmDashes } from "@/lib/text-utils";
+
+export { replaceEmDashes };
 
 /**
  * Process HTML string by transforming editorial <img> tags to styled responsive image elements,
@@ -41,7 +37,7 @@ export function replaceEmDashes(html) {
 export function processArticleHtml(html) {
   if (!html) return "";
 
-  const cleanHtml = html;
+  const cleanHtml = replaceEmDashes(html);
   const imgRegex = /<img\s+([^>]*)\/?>/gi;
   let result = "";
   let lastIndex = 0;

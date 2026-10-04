@@ -6,6 +6,7 @@ import { Search, X, Loader2, ArrowRight, Calendar } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { cleanText } from '@/lib/text-utils';
 
 export default function SearchModal({ isOpen, onClose }) {
   const [query, setQuery] = useState('');
@@ -189,7 +190,7 @@ export default function SearchModal({ isOpen, onClose }) {
                           )}
                         </div>
                         <h4 className="text-sm font-bold text-text-main line-clamp-1 group-hover:text-brand transition-colors">
-                          {post.title}
+                          {cleanText(post.title)}
                         </h4>
                       </div>
 

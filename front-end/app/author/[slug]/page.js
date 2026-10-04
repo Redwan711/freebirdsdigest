@@ -416,7 +416,7 @@ export default async function AuthorProfilePage({ params }) {
                     )}
 
                     <h3 className="text-base font-extrabold text-text-main leading-snug font-jakarta line-clamp-2 transition-colors group-hover:text-brand">
-                      {post.title}
+                      {cleanHtml(post.title)}
                     </h3>
 
                     {cleanExcerpt && (

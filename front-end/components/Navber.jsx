@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { fetchNavigationCategories, fetchReviewSubcategories } from '@/lib/categories';
 import { fetchHeaderNews } from '@/lib/headerNews';
 import { getHeaderLogoClass } from '@/lib/logoTheme';
+import { cleanText } from '@/lib/text-utils';
 import BottomHeader from './BottomHeader';
 import MobileNav from './MobileNav';
 import ThemeToggle from './ThemeToggle';
@@ -35,7 +36,7 @@ const Navber = async () => {
                     className='flex items-center font-inter text-text-muted hover:text-brand transition-colors gap-3 group'
                   >
                     <h3 className='line-clamp-2 max-w-[170px] text-xs font-semibold leading-snug group-hover:text-brand transition-colors'>
-                      {post.title}
+                      {cleanText(post.title)}
                     </h3>
                     <div className="relative overflow-hidden rounded-lg w-[65px] h-[50px] bg-bg-subtle flex-shrink-0 border border-brandborder">
                       <Image
@@ -78,7 +79,7 @@ const Navber = async () => {
                 className='flex items-center justify-start gap-2.5 font-inter text-text-muted hover:text-brand transition-colors group min-w-0'
               >
                 <h3 className='line-clamp-2 text-[11px] sm:text-xs font-semibold leading-tight group-hover:text-brand transition-colors max-w-[150px] sm:max-w-[240px]'>
-                  {post.title}
+                  {cleanText(post.title)}
                 </h3>
                 <div className="relative overflow-hidden rounded-md w-[45px] h-[36px] sm:w-[52px] sm:h-[40px] bg-bg-subtle shrink-0 border border-brandborder">
                   <Image

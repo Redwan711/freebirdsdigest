@@ -56,7 +56,7 @@ const LeftSideNewsPnl = async ({ posts: initialPosts }) => {
                                     <div className="flex min-w-0 flex-col justify-between gap-1 py-0.5">
                                         <div className="space-y-1">
                                             <h4 className="line-clamp-2 text-xs font-bold leading-snug text-text-main group-hover:text-brand transition-colors">
-                                                {post.title}
+                                                {cleanText(post.title)}
                                             </h4>
                                             <p className="line-clamp-1 text-xs text-text-muted">
                                                 {truncateText(cleanText(post.excerpt || ""), 80)}
