@@ -31,7 +31,14 @@ export const VPN_PROVIDERS = {
       advanced: "Includes power-user tools like Double VPN multi-hop, Dark Web Monitor, and custom Kill Switch.",
       always_on_audit: "Undergoes rigorous independent third-party no-logs audits verified by Deloitte.",
       security: "Panama jurisdiction keeps your browsing history completely outside 14-Eyes surveillance alliances.",
+      privacy: "Strict verified Deloitte zero-logs audit and privacy-friendly Panama jurisdiction.",
+      p2p: "Dedicated high-speed P2P servers with optimized routing for torrenting and downloads.",
+      travel: "Double VPN encryption and automated public Wi-Fi security safeguard you while traveling.",
       hydra_speed: "NordLynx protocol delivers industry-leading connection speeds and reliable bandwidth.",
+      premium: "Industry-leading premium feature suite with NordLynx protocol and Threat Protection Pro.",
+      budget_longterm: "Exceptional long-term value on 2-year subscriptions including bonus warranty.",
+      many_devices: "Supports 10 simultaneous ultra-fast device connections under one account.",
+      single_device: "Lightweight, ultra-fast 1-click connect desktop and mobile applications.",
     },
   },
   privadovpn: {
@@ -60,11 +67,17 @@ export const VPN_PROVIDERS = {
     reasonTemplates: {
       free_tier: "PrivadoVPN provides a generous 10GB/month 100% Free Tier with full server speed and no speed throttling.",
       swiss: "Headquartered in Switzerland, offering the strongest statutory consumer privacy protections outside 14-Eyes.",
+      privacy: "Strict Swiss jurisdiction and zero-logging architecture keep your personal traffic fully private.",
       budget_longterm: "Delivers top-tier budget value starting at just $1.11/month on the 2-year plan.",
       p2p: "Built-in SOCKS5 proxy support provides maximum throughput and IP masking for P2P/torrenting.",
       port_forwarding: "Optimized SOCKS5 proxy and dedicated P2P server locations support fast, secure torrenting.",
       malware_blocker: "Control Tower ad-blocker filters intrusive popups, telemetry trackers, and dangerous malware domains.",
       simple: "Features an intuitive, clutter-free 1-click connect interface across mobile and desktop.",
+      streaming: "Reliable unblocking for popular global streaming services with zero bandwidth throttling.",
+      gaming: "Low-latency Swiss routing and WireGuard protocol support for smooth online gameplay.",
+      travel: "Automatic public Wi-Fi security and kill switch keep connections secure while traveling.",
+      many_devices: "Supports 10 simultaneous connections across Windows, Mac, iOS, Android, and TV apps.",
+      single_device: "Clean, streamlined lightweight app that connects in under 2 seconds.",
     },
   },
   hideme: {
@@ -98,6 +111,12 @@ export const VPN_PROVIDERS = {
       privacy: "Strict zero-logs policy certified by independent cybersecurity auditors Securitum.",
       budget_longterm: "Affordable long-term tier with full access to 2,600+ high-speed servers in 90+ countries.",
       malware_blocker: "SmartGuard feature blocks web trackers, malicious domains, and intrusive ads.",
+      streaming: "High-speed 10Gbps server network optimized for buffer-free 4K streaming.",
+      gaming: "Ultra-low latency server routing and custom WireGuard configuration for gaming.",
+      travel: "Stealth Guard app-level kill switch completely stops data leakage on untrusted networks.",
+      p2p: "Optimized P2P servers with dynamic port forwarding for maximum seeding & download speeds.",
+      many_devices: "Supports 10 simultaneous device connections on desktop, mobile, and router.",
+      single_device: "Fast, unobtrusive connection with instant one-tap server selection.",
     },
   },
   purevpn: {
@@ -334,150 +353,73 @@ export function calculateRecommendation(userAnswers) {
     }
   });
 
-  const scores = {
-    nordvpn: 0,
-    privadovpn: 0,
-    hideme: 0,
-    purevpn: 0,
-    hotspotshield: 0,
-  };
+  // =========================================================================
+  // STEP 1: Determine #1 Top Recommendation
+  // Priority Distribution:
+  // - NordVPN: 50%
+  // - hide.me VPN: 30%
+  // - PrivadoVPN: 20%
+  // =========================================================================
+  const topRoll = Math.random();
+  let topProviderId;
 
-  // Question 1: Use Cases
-  if (selectedOptionIds.includes("streaming")) {
-    scores.hotspotshield += 16;
-    scores.nordvpn += 14;
-    scores.privadovpn += 10;
-    scores.purevpn += 9;
-    scores.hideme += 7;
-  }
-
-  if (selectedOptionIds.includes("privacy")) {
-    scores.privadovpn += 15;
-    scores.nordvpn += 14;
-    scores.hideme += 13;
-    scores.purevpn += 12;
-    scores.hotspotshield += 6;
+  if (topRoll < 0.50) {
+    topProviderId = "nordvpn";
+  } else if (topRoll < 0.80) {
+    topProviderId = "hideme";
+  } else {
+    topProviderId = "privadovpn";
   }
 
-  if (selectedOptionIds.includes("p2p")) {
-    scores.hideme += 16;
-    scores.privadovpn += 15;
-    scores.purevpn += 13;
-    scores.nordvpn += 11;
-    scores.hotspotshield += 7;
-  }
+  // =========================================================================
+  // STEP 2: Determine #2 Runner-Up
+  // Target Overall Distribution across all quizzes:
+  // - NordVPN: 50% (Whenever hide.me or Privado is #1, Nord is ALWAYS runner-up: 30% + 20% = 50%)
+  // - hide.me VPN: 15% (30% of Nord's runner-up pool = 15% overall)
+  // - PrivadoVPN: 15% (30% of Nord's runner-up pool = 15% overall)
+  // - PureVPN: 10% (20% of Nord's runner-up pool = 10% overall)
+  // - Hotspot Shield: 10% (20% of Nord's runner-up pool = 10% overall)
+  // =========================================================================
+  let runnerUpId;
 
-  if (selectedOptionIds.includes("gaming")) {
-    scores.hotspotshield += 18;
-    scores.nordvpn += 15;
-    scores.hideme += 10;
-    scores.purevpn += 8;
-    scores.privadovpn += 7;
+  if (topProviderId === "hideme" || topProviderId === "privadovpn") {
+    runnerUpId = "nordvpn";
+  } else {
+    const runnerRoll = Math.random();
+    if (runnerRoll < 0.30) {
+      runnerUpId = "hideme";
+    } else if (runnerRoll < 0.60) {
+      runnerUpId = "privadovpn";
+    } else if (runnerRoll < 0.80) {
+      runnerUpId = "purevpn";
+    } else {
+      runnerUpId = "hotspotshield";
+    }
   }
-
-  if (selectedOptionIds.includes("travel")) {
-    scores.hotspotshield += 14;
-    scores.nordvpn += 13;
-    scores.privadovpn += 11;
-    scores.hideme += 10;
-    scores.purevpn += 9;
-  }
-
-  // Question 2: Device Count
-  if (selectedOptionIds.includes("many_devices")) {
-    scores.hotspotshield += 12;
-    scores.nordvpn += 10;
-    scores.purevpn += 10;
-    scores.privadovpn += 10;
-    scores.hideme += 10;
-  } else if (selectedOptionIds.includes("single_device")) {
-    scores.hideme += 5;
-    scores.privadovpn += 5;
-    scores.hotspotshield += 5;
-  }
-
-  // Question 3: Budget & Subscription Preference
-  if (selectedOptionIds.includes("free_unlimited")) {
-    scores.hideme += 45; // Decisive boost for hide.me unlimited data free tier
-  }
-  if (selectedOptionIds.includes("free_tier")) {
-    scores.privadovpn += 45; // Decisive boost for PrivadoVPN 10GB free tier
-    scores.hideme += 18;
-    scores.hotspotshield += 12;
-  }
-  if (selectedOptionIds.includes("budget_longterm")) {
-    scores.privadovpn += 20; // $1.11/mo
-    scores.purevpn += 18;    // $2.14/mo
-    scores.hideme += 14;     // $2.69/mo
-    scores.hotspotshield += 12;
-    scores.nordvpn += 10;
-  }
-  if (selectedOptionIds.includes("premium")) {
-    scores.nordvpn += 25; // Premium all-rounder
-    scores.hotspotshield += 12;
-  }
-
-  // Question 4: Technical & Privacy Features
-  if (selectedOptionIds.includes("swiss")) {
-    scores.privadovpn += 40; // Decisive boost for Swiss jurisdiction
-  }
-  if (selectedOptionIds.includes("always_on_audit")) {
-    scores.purevpn += 40; // Decisive boost for PureVPN Always-On KPMG audit
-    scores.nordvpn += 15;
-    scores.hideme += 12;
-  }
-  if (selectedOptionIds.includes("port_forwarding")) {
-    scores.hideme += 30; // Decisive boost for hide.me dynamic port forwarding
-    scores.privadovpn += 20;
-    scores.purevpn += 15;
-  }
-  if (selectedOptionIds.includes("hydra_speed")) {
-    scores.hotspotshield += 35; // Decisive boost for Hotspot Shield Hydra protocol
-    scores.nordvpn += 20;
-  }
-  if (selectedOptionIds.includes("malware_blocker")) {
-    scores.nordvpn += 18; // Threat Protection Pro
-    scores.privadovpn += 14; // Control Tower
-    scores.hideme += 12; // SmartGuard
-  }
-
-  // Question 5: Experience & Interface
-  if (selectedOptionIds.includes("simple")) {
-    scores.hotspotshield += 10;
-    scores.privadovpn += 9;
-  }
-  if (selectedOptionIds.includes("advanced")) {
-    scores.hideme += 12;
-    scores.nordvpn += 10;
-    scores.purevpn += 10;
-  }
-
-  // Sort providers by raw score descending
-  const sorted = Object.keys(scores).sort((a, b) => scores[b] - scores[a]);
-  const topProviderId = sorted[0];
-  const runnerUpId = sorted[1];
 
   const topProvider = VPN_PROVIDERS[topProviderId];
   const runnerUp = VPN_PROVIDERS[runnerUpId];
 
-  // Calculate dynamic match percentages (bounded between 78% and 99%)
-  const maxScore = Math.max(...Object.values(scores), 1);
-  const topMatchPercent = Math.min(99, Math.max(88, Math.round((scores[topProviderId] / maxScore) * 98)));
-  const runnerUpMatchPercent = Math.min(topMatchPercent - 4, Math.max(78, Math.round((scores[runnerUpId] / maxScore) * 94)));
+  // Dynamic realistic match percentages (Top: 95%-99%, Runner-up: 88%-92%)
+  const topMatchPercent = 95 + Math.floor(Math.random() * 5);
+  const runnerUpMatchPercent = Math.min(topMatchPercent - 4, 88 + Math.floor(Math.random() * 5));
 
-  // Generate dynamic "Why this matches you" reasons based on user's selected choices
+  // Dynamic "Why this matches you" reasons matching the user's specific answers
   const matchedReasons = [];
 
   selectedOptionIds.forEach((choiceId) => {
     if (topProvider.reasonTemplates && topProvider.reasonTemplates[choiceId]) {
-      matchedReasons.push(topProvider.reasonTemplates[choiceId]);
+      const reasonText = topProvider.reasonTemplates[choiceId];
+      if (!matchedReasons.includes(reasonText)) {
+        matchedReasons.push(reasonText);
+      }
     }
   });
 
-  // If few specific reasons matched, add default top provider feature points
-  if (matchedReasons.length < 2) {
-    topProvider.keyFeatures.slice(0, 3).forEach((feature) => {
-      if (!matchedReasons.includes(feature)) {
+  // If fewer than 3 specific reasons matched, populate with top provider's key features
+  if (matchedReasons.length < 3 && topProvider.keyFeatures) {
+    topProvider.keyFeatures.forEach((feature) => {
+      if (matchedReasons.length < 4 && !matchedReasons.includes(feature)) {
         matchedReasons.push(feature);
       }
     });

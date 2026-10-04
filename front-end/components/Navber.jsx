@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link';
+import { ShieldCheck } from 'lucide-react';
 import { fetchNavigationCategories, fetchReviewSubcategories } from '@/lib/categories';
 import { fetchHeaderNews } from '@/lib/headerNews';
 import { getHeaderLogoClass } from '@/lib/logoTheme';
@@ -57,6 +58,16 @@ const Navber = async () => {
 
             {/* Mobile & Tablet Menu Controls — Right Top on Non-Desktop Screens */}
             <div className="flex lg:hidden items-center gap-1 sm:gap-1.5">
+              <Link
+                href="/vpn-finder"
+                className="inline-flex items-center gap-1 px-2 py-1.5 sm:px-2.5 rounded-lg bg-teal-500/10 text-teal-600 dark:text-teal-400 hover:bg-teal-500/20 border border-teal-500/20 text-xs font-bold transition-colors"
+                title="VPN Finder Tool"
+                aria-label="VPN Finder Tool"
+              >
+                <ShieldCheck className="w-3.5 h-3.5 shrink-0" />
+                <span className="hidden sm:inline">VPN Finder</span>
+                <span className="sm:hidden text-[11px]">Tool</span>
+              </Link>
               <SearchButton variant="icon" />
               <ThemeToggle />
               <MobileNav categories={activeCategories} reviewSubcategories={reviewSubcategories} />

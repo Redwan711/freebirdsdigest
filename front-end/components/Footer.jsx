@@ -81,11 +81,23 @@ const Footer = async () => {
                                 ))}
                                 <li>
                                     <Link
-                                        href="/reviews"
+                                        href="/vpn-reviews"
                                         className="hover:text-brand transition-colors flex items-center gap-1.5 group"
                                     >
                                         <span className="w-1.5 h-1.5 rounded-full bg-slate-700 group-hover:bg-brand transition-colors" />
-                                        Reviews
+                                        VPN Reviews
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link
+                                        href="/vpn-finder"
+                                        className="text-teal-400 hover:text-teal-300 transition-colors flex items-center gap-1.5 group font-medium"
+                                    >
+                                        <span className="w-1.5 h-1.5 rounded-full bg-teal-500 group-hover:scale-125 transition-transform" />
+                                        VPN Finder
+                                        <span className="px-1.5 py-0.5 rounded bg-teal-500/20 text-teal-300 text-[9px] font-bold uppercase border border-teal-500/30">
+                                            Tool
+                                        </span>
                                     </Link>
                                 </li>
                             </ul>

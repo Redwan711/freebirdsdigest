@@ -68,6 +68,17 @@ export default function HomeBrandHero() {
             </Link>
 
             <Link
+              href="/vpn-finder"
+              className="inline-flex items-center gap-1.5 rounded-full border border-teal-500/30 bg-teal-500/10 px-3 py-1.5 text-teal-700 dark:text-teal-300 hover:bg-teal-500/20 transition-colors"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400" />
+              <span>VPN Finder</span>
+              <span className="rounded-full bg-teal-500/20 px-1.5 py-0.5 text-[9px] font-extrabold uppercase text-teal-700 dark:text-teal-300">
+                Tool
+              </span>
+            </Link>
+
+            <Link
               href="/lifestyle"
               className="inline-flex items-center gap-1.5 rounded-full border border-brandborder bg-bg-surface px-3 py-1.5 text-text-main hover:border-brand/40 hover:text-brand transition-colors"
             >

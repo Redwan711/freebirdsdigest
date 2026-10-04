@@ -94,25 +94,25 @@ export default function VpnFinderPage() {
   );
 
   return (
-    <main className="min-h-screen bg-bg-base text-text-main py-12 px-4 sm:px-6 lg:px-8 font-inter">
+    <main className="min-h-screen bg-bg-base text-text-main py-6 sm:py-12 px-4 sm:px-6 lg:px-8 font-inter">
       <div className="max-w-3xl mx-auto">
         {/* Header Badge */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand/10 border border-brand/20 text-brand text-xs font-bold uppercase tracking-wider mb-4">
+        <div className="text-center mb-6 sm:mb-8">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand/10 border border-brand/20 text-brand text-xs font-bold uppercase tracking-wider mb-3 sm:mb-4">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Smart Recommendation Engine</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-text-main tracking-tight mb-3 font-heading">
+          <h1 className="text-2xl sm:text-4xl font-extrabold text-text-main tracking-tight mb-2 sm:mb-3 font-heading">
             Find Your Best VPN Match
           </h1>
-          <p className="text-text-muted text-sm sm:text-base max-w-xl mx-auto">
+          <p className="text-text-muted text-xs sm:text-base max-w-xl mx-auto">
             Answer a few quick questions about your streaming, privacy, and device requirements to get a personalized VPN recommendation.
           </p>
         </div>
 
         {/* Wizard View */}
         {!isResultsPage && currentQuestion && (
-          <div className="bg-bg-surface backdrop-blur border border-brandborder rounded-3xl p-6 sm:p-8 shadow-xl">
+          <div className="bg-bg-surface backdrop-blur border border-brandborder rounded-3xl p-5 sm:p-8 shadow-xl">
             {/* Progress Bar Header */}
             <div className="mb-6">
               <div className="flex justify-between items-center text-xs font-medium text-text-muted mb-2">
@@ -265,10 +265,10 @@ export default function VpnFinderPage() {
             </div>
 
             {/* #1 BEST MATCH CARD */}
-            <div className="relative bg-bg-surface border-2 border-brand rounded-3xl p-6 sm:p-8 shadow-xl shadow-brand/10">
+            <div className="relative bg-bg-surface border-2 border-brand rounded-3xl p-5 sm:p-8 shadow-xl shadow-brand/10">
               {/* Ribbon Badge */}
-              <div className="absolute -top-3.5 left-6 bg-brand text-white px-4 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider flex items-center gap-1.5 shadow-md">
-                <Star className="w-3.5 h-3.5 fill-white" />
+              <div className="absolute -top-3.5 left-4 sm:left-6 bg-brand text-white px-3 sm:px-4 py-1 rounded-full text-[11px] sm:text-xs font-extrabold uppercase tracking-wider flex items-center gap-1.5 shadow-md">
+                <Star className="w-3.5 h-3.5 fill-white shrink-0" />
                 <span>🏆 #1 Best Match ({recommendationResult.topMatch.matchPercentage}%)</span>
               </div>
 

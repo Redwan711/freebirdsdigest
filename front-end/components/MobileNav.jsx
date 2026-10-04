@@ -1,6 +1,6 @@
 "use client";
 
-import { Home, Menu, X, /* ChevronDown, */ Search } from "lucide-react";
+import { Home, Menu, X, /* ChevronDown, */ Search, ShieldCheck, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import ThemeToggle from "./ThemeToggle";
@@ -68,6 +68,21 @@ export default function MobileNav({ categories = [], reviewSubcategories = [] })
               <Search size={18} /> Search Articles
             </Link>
 
+            {/* Mobile VPN Finder Featured Banner */}
+            <Link
+              href="/vpn-finder"
+              onClick={closeMenu}
+              className="flex items-center justify-between rounded-xl px-3.5 py-2.5 mb-2 font-poppins text-sm font-semibold text-teal-700 dark:text-teal-300 bg-teal-500/10 border border-teal-500/30 hover:bg-teal-500/20 transition-colors shadow-2xs"
+            >
+              <div className="flex items-center gap-2.5">
+                <Sparkles size={18} className="text-teal-600 dark:text-teal-400" />
+                <span>Smart VPN Finder</span>
+              </div>
+              <span className="px-2 py-0.5 rounded-md bg-teal-500/20 text-teal-700 dark:text-teal-300 text-[10px] font-bold uppercase tracking-wide border border-teal-500/30">
+                Tool
+              </span>
+            </Link>
+
             <Link
               href="/"
               onClick={closeMenu}
@@ -93,6 +108,21 @@ export default function MobileNav({ categories = [], reviewSubcategories = [] })
               className="block rounded-xl px-3.5 py-3 font-poppins text-sm font-semibold text-text-main hover:bg-brand/10 hover:text-brand transition-colors"
             >
               VPN Reviews
+            </Link>
+
+            {/* VPN Finder Interactive Tool Link */}
+            <Link
+              href="/vpn-finder"
+              onClick={closeMenu}
+              className="flex items-center justify-between rounded-xl px-3.5 py-3 font-poppins text-sm font-semibold text-text-main hover:bg-teal-500/10 hover:text-teal-600 dark:hover:text-teal-400 transition-colors"
+            >
+              <span className="flex items-center gap-2.5">
+                <ShieldCheck size={18} className="text-teal-600 dark:text-teal-400" />
+                <span>VPN Finder</span>
+              </span>
+              <span className="px-2 py-0.5 rounded-md bg-teal-500/10 text-teal-600 dark:text-teal-400 text-[10px] font-bold uppercase border border-teal-500/20">
+                Tool
+              </span>
             </Link>
 
             {/* TEMPORARILY DISABLED: Mobile Reviews Section with Subcategories dropdown
