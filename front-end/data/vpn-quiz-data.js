@@ -31,6 +31,7 @@ export const VPN_PROVIDERS = {
       advanced: "Includes power-user tools like Double VPN multi-hop, Dark Web Monitor, and custom Kill Switch.",
       always_on_audit: "Undergoes rigorous independent third-party no-logs audits verified by Deloitte.",
       security: "Panama jurisdiction keeps your browsing history completely outside 14-Eyes surveillance alliances.",
+      swiss: "Panama jurisdiction keeps your browsing history completely outside 14-Eyes surveillance alliances.",
       privacy: "Strict verified Deloitte zero-logs audit and privacy-friendly Panama jurisdiction.",
       p2p: "Dedicated high-speed P2P servers with optimized routing for torrenting and downloads.",
       travel: "Double VPN encryption and automated public Wi-Fi security safeguard you while traveling.",
@@ -108,6 +109,7 @@ export const VPN_PROVIDERS = {
       free_unlimited: "hide.me is one of the only reputable VPNs offering truly unlimited data transfer on its free tier.",
       free_tier: "Features a permanent 100% Free Plan with unlimited monthly bandwidth.",
       free_trial: "Provides a permanent 100% Free Plan with unlimited monthly bandwidth plus a 30-day money-back guarantee.",
+      swiss: "Headquartered in Malaysia, safely outside 14-Eyes intelligence surveillance alliances.",
       advanced: "Equipped with power-user features including dynamic port forwarding, Stealth Guard, and multi-hop routing.",
       port_forwarding: "Dynamic Port Forwarding enables optimized peer connections and maximum seeding speeds for P2P.",
       privacy: "Strict zero-logs policy certified by independent cybersecurity auditors Securitum.",
@@ -286,9 +288,9 @@ export const QUIZ_QUESTIONS = [
     options: [
       {
         id: "swiss",
-        label: "Swiss Jurisdiction (Strict Data Privacy Laws)",
-        icon: "🇨🇭",
-        description: "Protected by strict Swiss Federal Data Protection outside 14-Eyes",
+        label: "Privacy-Friendly Jurisdiction (Outside 14-Eyes)",
+        icon: "⚖️",
+        description: "Headquartered outside 5/9/14-Eyes surveillance alliances with strict statutory privacy laws",
       },
       {
         id: "always_on_audit",

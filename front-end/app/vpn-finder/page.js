@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import {
   QUIZ_QUESTIONS,
@@ -29,9 +29,36 @@ export default function VpnFinderPage() {
   });
   const [recommendationResult, setRecommendationResult] = useState(null);
 
+  const quizCardRef = useRef(null);
+  const isFirstMount = useRef(true);
+
   const currentQuestion = QUIZ_QUESTIONS[currentStep];
   const isLastQuestion = currentStep === QUIZ_QUESTIONS.length - 1;
   const isResultsPage = currentStep >= QUIZ_QUESTIONS.length;
+
+  const scrollToTop = () => {
+    if (typeof window !== "undefined") {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+      if (document.documentElement) {
+        document.documentElement.scrollTo({ top: 0, behavior: "smooth" });
+      }
+      if (document.body) {
+        document.body.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (isFirstMount.current) {
+      isFirstMount.current = false;
+      return;
+    }
+    scrollToTop();
+  }, [currentStep]);
 
   // Toggle multi-select checkmark option
   const toggleMultiSelectOption = (questionId, optionId) => {
@@ -69,11 +96,13 @@ export default function VpnFinderPage() {
     } else {
       setCurrentStep((prev) => prev + 1);
     }
+    scrollToTop();
   };
 
   const handleBack = () => {
     if (currentStep > 0) {
       setCurrentStep((prev) => prev - 1);
+      scrollToTop();
     }
   };
 
@@ -87,6 +116,7 @@ export default function VpnFinderPage() {
     });
     setRecommendationResult(null);
     setCurrentStep(0);
+    scrollToTop();
   };
 
   const progressPercent = Math.round(
@@ -112,7 +142,10 @@ export default function VpnFinderPage() {
 
         {/* Wizard View */}
         {!isResultsPage && currentQuestion && (
-          <div className="bg-bg-surface backdrop-blur border border-brandborder rounded-3xl p-5 sm:p-8 shadow-xl">
+          <div
+            ref={quizCardRef}
+            className="bg-bg-surface backdrop-blur border border-brandborder rounded-3xl p-5 sm:p-8 shadow-xl"
+          >
             {/* Progress Bar Header */}
             <div className="mb-6">
               <div className="flex justify-between items-center text-xs font-medium text-text-muted mb-2">
@@ -247,7 +280,10 @@ export default function VpnFinderPage() {
 
         {/* Results View */}
         {isResultsPage && recommendationResult && (
-          <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+          <div
+            ref={quizCardRef}
+            className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500"
+          >
             {/* Action Bar */}
             <div className="flex justify-between items-center">
               <h2 className="text-2xl font-bold text-text-main flex items-center gap-2 font-heading">
