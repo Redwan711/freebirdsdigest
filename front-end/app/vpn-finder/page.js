@@ -1,22 +1,20 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import Image from "next/image";
 import {
-  QUIZ_QUESTIONS,
-  calculateRecommendation,
-} from "@/data/vpn-quiz-data";
-import {
+  Award,
   Check,
-  ChevronRight,
+  CheckCircle2,
   ChevronLeft,
+  ChevronRight,
+  ExternalLink,
   RotateCcw,
   Sparkles,
-  ExternalLink,
-  Award,
   Star,
-  CheckCircle2,
 } from "lucide-react";
+import Image from "next/image";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { sendVpnQuizResultEmail } from "@/app/actions";
+import { calculateRecommendation, QUIZ_QUESTIONS } from "@/data/vpn-quiz-data";
 
 export default function VpnFinderPage() {
   const [currentStep, setCurrentStep] = useState(0);
@@ -31,12 +29,13 @@ export default function VpnFinderPage() {
 
   const quizCardRef = useRef(null);
   const isFirstMount = useRef(true);
+  const hasSentEmailRef = useRef(false);
 
   const currentQuestion = QUIZ_QUESTIONS[currentStep];
   const isLastQuestion = currentStep === QUIZ_QUESTIONS.length - 1;
   const isResultsPage = currentStep >= QUIZ_QUESTIONS.length;
 
-  const scrollToTop = () => {
+  const scrollToTop = useCallback(() => {
     if (typeof window !== "undefined") {
       window.scrollTo({
         top: 0,
@@ -50,15 +49,16 @@ export default function VpnFinderPage() {
         document.body.scrollTo({ top: 0, behavior: "smooth" });
       }
     }
-  };
+  }, []);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: scroll to top whenever currentStep advances
   useEffect(() => {
     if (isFirstMount.current) {
       isFirstMount.current = false;
       return;
     }
     scrollToTop();
-  }, [currentStep]);
+  }, [currentStep, scrollToTop]);
 
   // Toggle multi-select checkmark option
   const toggleMultiSelectOption = (questionId, optionId) => {
@@ -93,6 +93,14 @@ export default function VpnFinderPage() {
       const result = calculateRecommendation(answers);
       setRecommendationResult(result);
       setCurrentStep(QUIZ_QUESTIONS.length);
+
+      // Asynchronously trigger telemetry email dispatch in the background (fire-and-forget)
+      if (!hasSentEmailRef.current) {
+        hasSentEmailRef.current = true;
+        sendVpnQuizResultEmail({ answers, result }).catch((err) => {
+          console.error("VPN quiz result telemetry dispatch failed:", err);
+        });
+      }
     } else {
       setCurrentStep((prev) => prev + 1);
     }
@@ -107,6 +115,7 @@ export default function VpnFinderPage() {
   };
 
   const handleReset = () => {
+    hasSentEmailRef.current = false;
     setAnswers({
       q1: [],
       q2: "",
@@ -120,7 +129,7 @@ export default function VpnFinderPage() {
   };
 
   const progressPercent = Math.round(
-    ((currentStep + 1) / QUIZ_QUESTIONS.length) * 100
+    ((currentStep + 1) / QUIZ_QUESTIONS.length) * 100,
   );
 
   return (
@@ -136,7 +145,8 @@ export default function VpnFinderPage() {
             Find Your Best VPN Match
           </h1>
           <p className="text-text-muted text-xs sm:text-base max-w-xl mx-auto">
-            Answer a few quick questions about your streaming, privacy, and device requirements to get a personalized VPN recommendation.
+            Answer a few quick questions about your streaming, privacy, and
+            device requirements to get a personalized VPN recommendation.
           </p>
         </div>
 
@@ -183,7 +193,8 @@ export default function VpnFinderPage() {
                 const isMulti = currentQuestion.multiSelect;
                 const currentAnswer = answers[currentQuestion.id];
                 const isSelected = isMulti
-                  ? Array.isArray(currentAnswer) && currentAnswer.includes(option.id)
+                  ? Array.isArray(currentAnswer) &&
+                    currentAnswer.includes(option.id)
                   : currentAnswer === option.id;
 
                 return (
@@ -202,7 +213,9 @@ export default function VpnFinderPage() {
                     }`}
                   >
                     {/* Icon Container */}
-                    <div className="text-2xl pt-0.5 shrink-0">{option.icon}</div>
+                    <div className="text-2xl pt-0.5 shrink-0">
+                      {option.icon}
+                    </div>
 
                     {/* Content */}
                     <div className="flex-1 min-w-0">
@@ -216,29 +229,29 @@ export default function VpnFinderPage() {
 
                     {/* Radio / Checkbox Indicator */}
                     <div className="pt-1 shrink-0">
-                      {isMulti ? (
-                        <div
-                          className={`w-5 h-5 rounded-md border flex items-center justify-center transition-all ${
-                            isSelected
-                              ? "bg-brand border-brand text-white"
-                              : "border-brandborder bg-bg-surface"
-                          }`}
-                        >
-                          {isSelected && <Check className="w-3.5 h-3.5 stroke-[3]" />}
-                        </div>
-                      ) : (
-                        <div
-                          className={`w-5 h-5 rounded-full border flex items-center justify-center transition-all ${
-                            isSelected
-                              ? "border-brand bg-brand/20"
-                              : "border-brandborder bg-bg-surface"
-                          }`}
-                        >
-                          {isSelected && (
-                            <div className="w-2.5 h-2.5 rounded-full bg-brand" />
-                          )}
-                        </div>
-                      )}
+                      {isMulti
+                        ? <div
+                            className={`w-5 h-5 rounded-md border flex items-center justify-center transition-all ${
+                              isSelected
+                                ? "bg-brand border-brand text-white"
+                                : "border-brandborder bg-bg-surface"
+                            }`}
+                          >
+                            {isSelected && (
+                              <Check className="w-3.5 h-3.5 stroke-[3]" />
+                            )}
+                          </div>
+                        : <div
+                            className={`w-5 h-5 rounded-full border flex items-center justify-center transition-all ${
+                              isSelected
+                                ? "border-brand bg-brand/20"
+                                : "border-brandborder bg-bg-surface"
+                            }`}
+                          >
+                            {isSelected && (
+                              <div className="w-2.5 h-2.5 rounded-full bg-brand" />
+                            )}
+                          </div>}
                     </div>
                   </button>
                 );
@@ -271,7 +284,9 @@ export default function VpnFinderPage() {
                     : "bg-bg-subtle text-text-muted cursor-not-allowed border border-brandborder"
                 }`}
               >
-                <span>{isLastQuestion ? "See My Recommendation" : "Next Question"}</span>
+                <span>
+                  {isLastQuestion ? "See My Recommendation" : "Next Question"}
+                </span>
                 <ChevronRight className="w-4 h-4" />
               </button>
             </div>
@@ -305,7 +320,10 @@ export default function VpnFinderPage() {
               {/* Ribbon Badge */}
               <div className="absolute -top-3.5 left-4 sm:left-6 bg-brand text-white px-3 sm:px-4 py-1 rounded-full text-[11px] sm:text-xs font-extrabold uppercase tracking-wider flex items-center gap-1.5 shadow-md">
                 <Star className="w-3.5 h-3.5 fill-white shrink-0" />
-                <span>🏆 #1 Best Match ({recommendationResult.topMatch.matchPercentage}%)</span>
+                <span>
+                  🏆 #1 Best Match (
+                  {recommendationResult.topMatch.matchPercentage}%)
+                </span>
               </div>
 
               {/* Provider Main Info */}
@@ -362,9 +380,9 @@ export default function VpnFinderPage() {
                   <span>Why This Is Best For You:</span>
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {recommendationResult.topMatch.reasons.map((reason, idx) => (
+                  {recommendationResult.topMatch.reasons.map((reason) => (
                     <div
-                      key={idx}
+                      key={reason}
                       className="p-3.5 rounded-xl bg-brand/5 border border-brand/15 text-xs sm:text-sm text-text-main flex items-start gap-2.5"
                     >
                       <Check className="w-4 h-4 text-brand shrink-0 mt-0.5 stroke-[2.5]" />
@@ -380,8 +398,8 @@ export default function VpnFinderPage() {
                   Included Features & Highlights:
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-text-main">
-                  {recommendationResult.topMatch.keyFeatures.map((feat, idx) => (
-                    <div key={idx} className="flex items-center gap-2">
+                  {recommendationResult.topMatch.keyFeatures.map((feat) => (
+                    <div key={feat} className="flex items-center gap-2">
                       <div className="w-1.5 h-1.5 rounded-full bg-brand shrink-0" />
                       <span>{feat}</span>
                     </div>
@@ -407,14 +425,17 @@ export default function VpnFinderPage() {
                     <div>
                       <div className="flex items-center gap-2">
                         <span className="text-xs font-bold text-text-muted">
-                          🥈 Runner-Up ({recommendationResult.runnerUp.matchPercentage}% Match)
+                          🥈 Runner-Up (
+                          {recommendationResult.runnerUp.matchPercentage}%
+                          Match)
                         </span>
                       </div>
                       <h4 className="text-lg font-bold text-text-main font-heading">
                         {recommendationResult.runnerUp.name}
                       </h4>
                       <div className="text-xs text-text-muted">
-                        {recommendationResult.runnerUp.badge} • {recommendationResult.runnerUp.price}
+                        {recommendationResult.runnerUp.badge} •{" "}
+                        {recommendationResult.runnerUp.price}
                       </div>
                     </div>
                   </div>
