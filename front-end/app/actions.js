@@ -395,23 +395,12 @@ export async function sendVpnQuizResultEmail({ answers, result }) {
       return opt ? `${opt.icon || ""} ${opt.label}` : String(val);
     };
 
-    const q1Text =
-      Array.isArray(answers?.q1) && answers.q1.length > 0
-        ? answers.q1.map((id) => formatOption("q1", id)).join("<br/>• ")
-        : "None selected";
-
     const q2Text = answers?.q2
       ? formatOption("q2", answers.q2)
       : "Not answered";
     const q3Text = answers?.q3
       ? formatOption("q3", answers.q3)
       : "Not answered";
-
-    const q4Text =
-      Array.isArray(answers?.q4) && answers.q4.length > 0
-        ? answers.q4.map((id) => formatOption("q4", id)).join("<br/>• ")
-        : "None selected";
-
     const q5Text = answers?.q5
       ? formatOption("q5", answers.q5)
       : "Not answered";
@@ -420,171 +409,131 @@ export async function sendVpnQuizResultEmail({ answers, result }) {
     const topMatch = result?.topMatch;
     const runnerUp = result?.runnerUp;
 
-    const reasonsList =
-      Array.isArray(topMatch?.reasons) && topMatch.reasons.length > 0
-        ? topMatch.reasons
-            .map((r) => `<li style="margin-bottom: 4px;">${r}</li>`)
-            .join("")
-        : "";
+    // 5. Construct Structured Payload for WordPress
+    const cleanQ1 = Array.isArray(answers?.q1)
+      ? answers.q1.map((id) => formatOption("q1", id)).join("\n• ")
+      : "";
+    const cleanQ4 = Array.isArray(answers?.q4)
+      ? answers.q4.map((id) => formatOption("q4", id)).join("\n• ")
+      : "";
 
-    const timestamp = new Date().toLocaleString("en-US", {
-      timeZone: timezone !== "UTC" ? timezone : undefined,
-      dateStyle: "medium",
-      timeStyle: "short",
-    });
+    const leadPayload = {
+      telemetry: {
+        clientIp,
+        country: country || "",
+        city: city || "",
+        region: region || "",
+        timezone: timezone || "UTC",
+        coordinates: coordinates || "",
+        userAgent,
+      },
+      result: {
+        topMatch: {
+          name: topMatch?.name || "NordVPN",
+          matchPercentage: topMatch?.matchPercentage || 95,
+          price: topMatch?.price || "",
+          billingInfo: topMatch?.billingInfo || "",
+          reasons: topMatch?.reasons || [],
+        },
+        runnerUp: runnerUp
+          ? {
+              name: runnerUp.name,
+              matchPercentage: runnerUp.matchPercentage,
+              price: runnerUp.price,
+            }
+          : null,
+      },
+      answers,
+      formattedAnswers: {
+        q1Text: cleanQ1 ? `• ${cleanQ1}` : "None selected",
+        q2Text,
+        q3Text,
+        q4Text: cleanQ4 ? `• ${cleanQ4}` : "None selected",
+        q5Text,
+      },
+    };
 
-    const subjectTag = country
-      ? `[${city ? `${city}, ` : ""}${country}]`
-      : `[${locationString}]`;
+    // 6. Push Lead Directly to WordPress Backend
+    const wpBase = (
+      process.env.NEXT_PUBLIC_WORDPRESS_API_URL ||
+      "https://server.freebirdsdigest.com/graphql"
+    ).replace(/\/graphql\/?$/, "");
 
-    const data = await sendViaResend({
-      from: "FreeBirds Digest <no-reply@mail.asthacreatives.com>",
-      to: ["contact@redmun.com", "shahidul1920shakil@gmail.com"],
-      subject: `🎯 VPN Finder Lead: ${topMatch?.name || "Match"} ${subjectTag}`,
-      html: `
-        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden; color: #0f172a;">
-          
-          <div style="background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%); padding: 22px 24px; border-bottom: 3px solid #2B59FF;">
-            <div style="color: #38bdf8; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 4px;">
-              FreeBirds Digest • Lead Intelligence
+    const wpEndpoint =
+      process.env.WP_VPN_LEADS_URL || `${wpBase}/wp-json/freebirds/v1/vpn-lead`;
+    const leadSecret =
+      process.env.WP_VPN_LEADS_SECRET || "freebirds_vpn_lead_secret_2026";
+
+    let wpResult = null;
+    try {
+      const wpRes = await fetch(wpEndpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-VPN-Lead-Secret": leadSecret,
+        },
+        body: JSON.stringify(leadPayload),
+      });
+
+      if (wpRes.ok) {
+        wpResult = await wpRes.json();
+        console.log("✅ WordPress VPN Lead Recorded Successfully:", wpResult);
+      } else {
+        const errorText = await wpRes.text();
+        console.warn(
+          `⚠️ WordPress Lead API returned HTTP ${wpRes.status}:`,
+          errorText.slice(0, 150),
+        );
+      }
+    } catch (wpErr) {
+      console.error("❌ Failed to push lead to WordPress:", wpErr.message);
+    }
+
+    // 7. Optional Email Notification (Disabled by default per client request; enable via SEND_VPN_QUIZ_EMAILS=true)
+    let emailData = null;
+    if (process.env.SEND_VPN_QUIZ_EMAILS === "true") {
+      const subjectTag = country
+        ? `[${city ? `${city}, ` : ""}${country}]`
+        : `[${locationString}]`;
+
+      emailData = await sendViaResend({
+        from: "FreeBirds Digest <no-reply@mail.asthacreatives.com>",
+        to: ["contact@redmun.com", "shahidul1920shakil@gmail.com"],
+        subject: `🎯 VPN Finder Lead: ${topMatch?.name || "Match"} ${subjectTag}`,
+        html: `
+          <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden; color: #0f172a;">
+            <div style="background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%); padding: 22px 24px; border-bottom: 3px solid #2B59FF;">
+              <div style="color: #38bdf8; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 4px;">
+                FreeBirds Digest • Lead Intelligence
+              </div>
+              <h2 style="color: #ffffff; font-size: 19px; font-weight: 800; margin: 0;">
+                🎯 New VPN Recommendation Generated
+              </h2>
+              <div style="color: #94a3b8; font-size: 12px; margin-top: 4px;">
+                A visitor just completed the VPN Finder quiz and received match recommendations.
+              </div>
             </div>
-            <h2 style="color: #ffffff; font-size: 19px; font-weight: 800; margin: 0;">
-              🎯 New VPN Recommendation Generated
-            </h2>
-            <div style="color: #94a3b8; font-size: 12px; margin-top: 4px;">
-              A visitor just completed the VPN Finder quiz and received match recommendations.
+            <div style="padding: 22px 24px;">
+              <p><strong>Top Match:</strong> ${topMatch?.name || "NordVPN"} (${topMatch?.matchPercentage || 95}%)</p>
+              <p><strong>Location:</strong> ${locationString}</p>
+              <p><strong>IP:</strong> ${clientIp}</p>
             </div>
           </div>
+        `,
+      });
+    }
 
-          <div style="padding: 22px 24px;">
-
-            <!-- Telemetry Box -->
-            <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px 16px; margin-bottom: 20px;">
-              <div style="font-size: 11px; font-weight: 700; color: #475569; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">
-                📍 Visitor & Location Telemetry (Vercel)
-              </div>
-              <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
-                <tr>
-                  <td style="padding: 3px 0; color: #64748b; width: 115px;"><strong>IP Address:</strong></td>
-                  <td style="padding: 3px 0; color: #0f172a; font-family: monospace;">${clientIp}</td>
-                </tr>
-                <tr>
-                  <td style="padding: 3px 0; color: #64748b;"><strong>Location:</strong></td>
-                  <td style="padding: 3px 0; color: #0f172a; font-weight: 700;">${locationString}</td>
-                </tr>
-                ${
-                  coordinates
-                    ? `
-                <tr>
-                  <td style="padding: 3px 0; color: #64748b;"><strong>Coordinates:</strong></td>
-                  <td style="padding: 3px 0; color: #0f172a; font-size: 12px;">
-                    ${coordinates}
-                    <a href="https://www.google.com/maps?q=${encodeURIComponent(coordinates)}" target="_blank" style="color: #2B59FF; text-decoration: underline; margin-left: 6px; font-size: 11px;">View Map ↗</a>
-                  </td>
-                </tr>`
-                    : ""
-                }
-                <tr>
-                  <td style="padding: 3px 0; color: #64748b;"><strong>Timezone:</strong></td>
-                  <td style="padding: 3px 0; color: #0f172a;">${timezone}</td>
-                </tr>
-                <tr>
-                  <td style="padding: 3px 0; color: #64748b;"><strong>Timestamp:</strong></td>
-                  <td style="padding: 3px 0; color: #0f172a;">${timestamp}</td>
-                </tr>
-                <tr>
-                  <td style="padding: 3px 0; color: #64748b; vertical-align: top;"><strong>User Agent:</strong></td>
-                  <td style="padding: 3px 0; color: #64748b; font-size: 11px; word-break: break-all;">${userAgent}</td>
-                </tr>
-              </table>
-            </div>
-
-            <!-- Recommendations Box -->
-            <div style="margin-bottom: 22px;">
-              <div style="font-size: 11px; font-weight: 700; color: #475569; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">
-                🏆 Matches Shown to Visitor
-              </div>
-              
-              <div style="border: 2px solid #2B59FF; background-color: #f0f7ff; border-radius: 10px; padding: 14px 16px; margin-bottom: 10px;">
-                <div style="font-size: 11px; font-weight: 800; color: #2B59FF; text-transform: uppercase;">
-                  🥇 #1 Best Match (${topMatch?.matchPercentage || 95}% Match)
-                </div>
-                <div style="font-size: 18px; font-weight: 800; color: #0f172a; margin-top: 3px;">
-                  ${topMatch?.name || "NordVPN"}
-                  <span style="font-size: 14px; font-weight: 600; color: #2B59FF; margin-left: 8px;">${topMatch?.price || ""}</span>
-                </div>
-                <div style="font-size: 12px; color: #64748b; margin-top: 2px;">
-                  ${topMatch?.billingInfo || ""}
-                </div>
-                ${reasonsList ? `<ul style="margin: 10px 0 0 0; padding-left: 18px; font-size: 12px; color: #334155;">${reasonsList}</ul>` : ""}
-              </div>
-
-              ${
-                runnerUp
-                  ? `
-              <div style="border: 1px solid #cbd5e1; background-color: #f8fafc; border-radius: 10px; padding: 12px 16px;">
-                <div style="font-size: 11px; font-weight: 700; color: #64748b; text-transform: uppercase;">
-                  🥈 Runner-Up (${runnerUp.matchPercentage || 88}% Match)
-                </div>
-                <div style="font-size: 15px; font-weight: 700; color: #0f172a; margin-top: 2px;">
-                  ${runnerUp.name}
-                  <span style="font-size: 13px; font-weight: 500; color: #64748b; margin-left: 6px;">${runnerUp.price}</span>
-                </div>
-                <div style="font-size: 11px; color: #64748b;">
-                  ${runnerUp.billingInfo || ""}
-                </div>
-              </div>`
-                  : ""
-              }
-            </div>
-
-            <!-- Quiz Selections Breakdown -->
-            <div style="border-top: 1px solid #e2e8f0; padding-top: 16px;">
-              <div style="font-size: 11px; font-weight: 700; color: #475569; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px;">
-                📋 Exact User Options Selected
-              </div>
-
-              <div style="margin-bottom: 10px; background-color: #f8fafc; padding: 10px 12px; border-radius: 8px; border: 1px solid #f1f5f9;">
-                <div style="font-size: 11px; font-weight: 700; color: #64748b; text-transform: uppercase;">Q1: Primary Use Case(s)</div>
-                <div style="font-size: 13px; font-weight: 600; color: #0f172a; margin-top: 3px;">• ${q1Text}</div>
-              </div>
-
-              <div style="margin-bottom: 10px; background-color: #f8fafc; padding: 10px 12px; border-radius: 8px; border: 1px solid #f1f5f9;">
-                <div style="font-size: 11px; font-weight: 700; color: #64748b; text-transform: uppercase;">Q2: Device Count</div>
-                <div style="font-size: 13px; font-weight: 600; color: #0f172a; margin-top: 3px;">${q2Text}</div>
-              </div>
-
-              <div style="margin-bottom: 10px; background-color: #f8fafc; padding: 10px 12px; border-radius: 8px; border: 1px solid #f1f5f9;">
-                <div style="font-size: 11px; font-weight: 700; color: #64748b; text-transform: uppercase;">Q3: Budget & Subscription Tier</div>
-                <div style="font-size: 13px; font-weight: 600; color: #0f172a; margin-top: 3px;">${q3Text}</div>
-              </div>
-
-              <div style="margin-bottom: 10px; background-color: #f8fafc; padding: 10px 12px; border-radius: 8px; border: 1px solid #f1f5f9;">
-                <div style="font-size: 11px; font-weight: 700; color: #64748b; text-transform: uppercase;">Q4: Privacy & Security Requirements</div>
-                <div style="font-size: 13px; font-weight: 600; color: #0f172a; margin-top: 3px;">• ${q4Text}</div>
-              </div>
-
-              <div style="background-color: #f8fafc; padding: 10px 12px; border-radius: 8px; border: 1px solid #f1f5f9;">
-                <div style="font-size: 11px; font-weight: 700; color: #64748b; text-transform: uppercase;">Q5: App Interface Preference</div>
-                <div style="font-size: 13px; font-weight: 600; color: #0f172a; margin-top: 3px;">${q5Text}</div>
-              </div>
-            </div>
-
-          </div>
-
-          <div style="background-color: #f8fafc; padding: 12px 24px; text-align: center; border-top: 1px solid #e2e8f0; font-size: 11px; color: #94a3b8;">
-            FreeBirds Digest Automated VPN Lead & Telemetry Engine • Vercel Hosted
-          </div>
-        </div>
-      `,
-    });
-
-    return { success: true, data };
+    return { success: true, wpResult, emailData };
   } catch (error) {
-    console.error("❌ RESEND VPN QUIZ TELEMETRY ERROR:", error);
+    console.error("❌ VPN QUIZ TELEMETRY ERROR:", error);
     return {
       success: false,
-      error: error.message || "Failed to dispatch quiz result email.",
+      error: error.message || "Failed to dispatch quiz result lead.",
     };
   }
 }
+
+/**
+ * Descriptive alias for sendVpnQuizResultEmail
+ */
+export const recordVpnQuizLead = sendVpnQuizResultEmail;
