@@ -343,7 +343,7 @@ export default function VpnFinderPage() {
                       {recommendationResult.topMatch.name}
                     </h3>
                     <div className="flex items-center gap-2 mt-1">
-                      <span className="px-2.5 py-0.5 rounded-md bg-brand/10 border border-brand/20 text-brand text-xs font-bold">
+                      <span className="px-2.5 py-0.5 rounded-md bg-teal-500/10 border border-teal-500/20 text-teal-600 dark:text-teal-400 text-xs font-bold">
                         {recommendationResult.topMatch.badge}
                       </span>
                       <span className="text-xs text-amber-500 font-bold flex items-center gap-1">
@@ -365,7 +365,7 @@ export default function VpnFinderPage() {
                     href={recommendationResult.topMatch.affiliateUrl}
                     target="_blank"
                     rel="nofollow sponsored noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 rounded-xl bg-brand hover:bg-brand-dark text-white font-bold text-sm transition shadow-lg shadow-brand/25"
+                    className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold text-sm transition shadow-lg shadow-teal-600/25"
                   >
                     <span>Get {recommendationResult.topMatch.name}</span>
                     <ExternalLink className="w-4 h-4" />
@@ -434,8 +434,10 @@ export default function VpnFinderPage() {
                         {recommendationResult.runnerUp.name}
                       </h4>
                       <div className="text-xs text-text-muted">
-                        {recommendationResult.runnerUp.badge} •{" "}
-                        {recommendationResult.runnerUp.price}
+                        <span className="text-teal-600 dark:text-teal-400 font-semibold">
+                          {recommendationResult.runnerUp.badge}
+                        </span>{" "}
+                        • {recommendationResult.runnerUp.price}
                       </div>
                     </div>
                   </div>
