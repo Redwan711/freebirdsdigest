@@ -329,13 +329,14 @@ export default function VpnFinderPage() {
               {/* Provider Main Info */}
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pt-2 pb-6 border-b border-brandborder">
                 <div className="flex items-center gap-4">
-                  <div className="w-20 h-20 relative bg-white p-3 rounded-2xl shrink-0 flex items-center justify-center border border-slate-200 shadow-sm">
+                  <div className="w-20 h-20 sm:w-24 sm:h-24 relative bg-white p-2 sm:p-2.5 rounded-2xl sm:rounded-3xl shrink-0 flex items-center justify-center border border-slate-200/90 shadow-md">
                     <Image
                       src={recommendationResult.topMatch.logo}
                       alt={recommendationResult.topMatch.name}
-                      width={70}
-                      height={70}
-                      className="object-contain max-h-14"
+                      width={96}
+                      height={96}
+                      priority
+                      className="w-full h-full object-contain"
                     />
                   </div>
                   <div>
@@ -413,13 +414,13 @@ export default function VpnFinderPage() {
               <div className="bg-bg-surface border border-brandborder rounded-3xl p-6 shadow-md">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                   <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 relative bg-white p-2 rounded-xl shrink-0 flex items-center justify-center border border-slate-200">
+                    <div className="w-14 h-14 sm:w-16 sm:h-16 relative bg-white p-1.5 sm:p-2 rounded-xl sm:rounded-2xl shrink-0 flex items-center justify-center border border-slate-200/90 shadow-sm">
                       <Image
                         src={recommendationResult.runnerUp.logo}
                         alt={recommendationResult.runnerUp.name}
-                        width={50}
-                        height={50}
-                        className="object-contain max-h-10"
+                        width={64}
+                        height={64}
+                        className="w-full h-full object-contain"
                       />
                     </div>
                     <div>
