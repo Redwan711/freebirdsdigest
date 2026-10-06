@@ -368,7 +368,7 @@ export default function VpnFinderPage() {
                     rel="nofollow sponsored noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold text-sm transition shadow-lg shadow-teal-600/25"
                   >
-                    <span>Get {recommendationResult.topMatch.name}</span>
+                    <span>Explore Deal</span>
                     <ExternalLink className="w-4 h-4" />
                   </a>
                 </div>
